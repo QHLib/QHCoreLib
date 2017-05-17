@@ -7,10 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00DF6FA7BD8C6FE4F782565A /* Pods_QHCoreLibTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F75C0F1D4E587187C68A3DCA /* Pods_QHCoreLibTests.framework */; };
+		BB0603B2C0EC113EE8B50F06 /* Pods_QHCoreLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20880F98F069B407D7B9CECD /* Pods_QHCoreLib.framework */; };
 		EA3C04F11ECC2B7E00C54472 /* QHCoreLib.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3C04F01ECC2B7E00C54472 /* QHCoreLib.m */; };
 		EA3C04F21ECC2B7E00C54472 /* QHCoreLib.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EA3C04EF1ECC2B7E00C54472 /* QHCoreLib.h */; };
 		EA3C04FF1ECC2BA800C54472 /* QHCoreLibTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3C04FE1ECC2BA800C54472 /* QHCoreLibTests.m */; };
 		EA3C05011ECC2BA800C54472 /* libQHCoreLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3C04EC1ECC2B7E00C54472 /* libQHCoreLib.a */; };
+		EA3C05341ECC2CBE00C54472 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3C05241ECC2CBE00C54472 /* DDFileLogger.m */; };
+		EA3C05351ECC2CBE00C54472 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3C05261ECC2CBE00C54472 /* DDLog.m */; };
+		EA3C05361ECC2CBE00C54472 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3C05281ECC2CBE00C54472 /* DDTTYLogger.m */; };
+		EA3C05371ECC2CBE00C54472 /* QHLogUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3C052A1ECC2CBE00C54472 /* QHLogUtil.m */; };
+		EA3C05391ECC2D0E00C54472 /* QHCoreLibLogTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3C05381ECC2D0E00C54472 /* QHCoreLibLogTests.m */; };
+		EA3C053B1ECC378300C54472 /* QHCoreLibDefinesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3C053A1ECC378300C54472 /* QHCoreLibDefinesTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,12 +45,29 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0BF5B35E29ACCBA6610B6542 /* Pods-QHCoreLibTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QHCoreLibTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QHCoreLibTests/Pods-QHCoreLibTests.debug.xcconfig"; sourceTree = "<group>"; };
+		20880F98F069B407D7B9CECD /* Pods_QHCoreLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QHCoreLib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7851078F08662E6B8192606E /* Pods-QHCoreLib.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QHCoreLib.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QHCoreLib/Pods-QHCoreLib.debug.xcconfig"; sourceTree = "<group>"; };
+		938ABA409DE2D52EBFB8B765 /* Pods-QHCoreLib.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QHCoreLib.release.xcconfig"; path = "Pods/Target Support Files/Pods-QHCoreLib/Pods-QHCoreLib.release.xcconfig"; sourceTree = "<group>"; };
+		A4FB93821E521314C7F610C2 /* Pods-QHCoreLibTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QHCoreLibTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-QHCoreLibTests/Pods-QHCoreLibTests.release.xcconfig"; sourceTree = "<group>"; };
 		EA3C04EC1ECC2B7E00C54472 /* libQHCoreLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libQHCoreLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA3C04EF1ECC2B7E00C54472 /* QHCoreLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHCoreLib.h; sourceTree = "<group>"; };
 		EA3C04F01ECC2B7E00C54472 /* QHCoreLib.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHCoreLib.m; sourceTree = "<group>"; };
 		EA3C04FC1ECC2BA800C54472 /* QHCoreLibTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QHCoreLibTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA3C04FE1ECC2BA800C54472 /* QHCoreLibTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHCoreLibTests.m; sourceTree = "<group>"; };
 		EA3C05001ECC2BA800C54472 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EA3C05201ECC2CBE00C54472 /* QHDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHDefines.h; sourceTree = "<group>"; };
+		EA3C05231ECC2CBE00C54472 /* DDFileLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDFileLogger.h; sourceTree = "<group>"; };
+		EA3C05241ECC2CBE00C54472 /* DDFileLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFileLogger.m; sourceTree = "<group>"; };
+		EA3C05251ECC2CBE00C54472 /* DDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLog.h; sourceTree = "<group>"; };
+		EA3C05261ECC2CBE00C54472 /* DDLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLog.m; sourceTree = "<group>"; };
+		EA3C05271ECC2CBE00C54472 /* DDTTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDTTYLogger.h; sourceTree = "<group>"; };
+		EA3C05281ECC2CBE00C54472 /* DDTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDTTYLogger.m; sourceTree = "<group>"; };
+		EA3C05291ECC2CBE00C54472 /* QHLogUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHLogUtil.h; sourceTree = "<group>"; };
+		EA3C052A1ECC2CBE00C54472 /* QHLogUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHLogUtil.m; sourceTree = "<group>"; };
+		EA3C05381ECC2D0E00C54472 /* QHCoreLibLogTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHCoreLibLogTests.m; sourceTree = "<group>"; };
+		EA3C053A1ECC378300C54472 /* QHCoreLibDefinesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHCoreLibDefinesTests.m; sourceTree = "<group>"; };
+		F75C0F1D4E587187C68A3DCA /* Pods_QHCoreLibTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QHCoreLibTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB0603B2C0EC113EE8B50F06 /* Pods_QHCoreLib.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,18 +84,42 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA3C05011ECC2BA800C54472 /* libQHCoreLib.a in Frameworks */,
+				00DF6FA7BD8C6FE4F782565A /* Pods_QHCoreLibTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00E5F898274EC58F22420238 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				20880F98F069B407D7B9CECD /* Pods_QHCoreLib.framework */,
+				F75C0F1D4E587187C68A3DCA /* Pods_QHCoreLibTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E077182D48057D0493B1DD2C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7851078F08662E6B8192606E /* Pods-QHCoreLib.debug.xcconfig */,
+				938ABA409DE2D52EBFB8B765 /* Pods-QHCoreLib.release.xcconfig */,
+				0BF5B35E29ACCBA6610B6542 /* Pods-QHCoreLibTests.debug.xcconfig */,
+				A4FB93821E521314C7F610C2 /* Pods-QHCoreLibTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		EA3C04E31ECC2B7E00C54472 = {
 			isa = PBXGroup;
 			children = (
+				EA3C05071ECC2CBE00C54472 /* Classes */,
 				EA3C04EE1ECC2B7E00C54472 /* QHCoreLib */,
 				EA3C04FD1ECC2BA800C54472 /* QHCoreLibTests */,
 				EA3C04ED1ECC2B7E00C54472 /* Products */,
+				E077182D48057D0493B1DD2C /* Pods */,
+				00E5F898274EC58F22420238 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -95,9 +145,51 @@
 			isa = PBXGroup;
 			children = (
 				EA3C04FE1ECC2BA800C54472 /* QHCoreLibTests.m */,
+				EA3C053A1ECC378300C54472 /* QHCoreLibDefinesTests.m */,
+				EA3C05381ECC2D0E00C54472 /* QHCoreLibLogTests.m */,
 				EA3C05001ECC2BA800C54472 /* Info.plist */,
 			);
 			path = QHCoreLibTests;
+			sourceTree = "<group>";
+		};
+		EA3C05071ECC2CBE00C54472 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				EA3C05081ECC2CBE00C54472 /* Defines */,
+				EA3C05211ECC2CBE00C54472 /* Log */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		EA3C05081ECC2CBE00C54472 /* Defines */ = {
+			isa = PBXGroup;
+			children = (
+				EA3C05201ECC2CBE00C54472 /* QHDefines.h */,
+			);
+			path = Defines;
+			sourceTree = "<group>";
+		};
+		EA3C05211ECC2CBE00C54472 /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				EA3C05221ECC2CBE00C54472 /* Lumberjack */,
+				EA3C05291ECC2CBE00C54472 /* QHLogUtil.h */,
+				EA3C052A1ECC2CBE00C54472 /* QHLogUtil.m */,
+			);
+			path = Log;
+			sourceTree = "<group>";
+		};
+		EA3C05221ECC2CBE00C54472 /* Lumberjack */ = {
+			isa = PBXGroup;
+			children = (
+				EA3C05231ECC2CBE00C54472 /* DDFileLogger.h */,
+				EA3C05241ECC2CBE00C54472 /* DDFileLogger.m */,
+				EA3C05251ECC2CBE00C54472 /* DDLog.h */,
+				EA3C05261ECC2CBE00C54472 /* DDLog.m */,
+				EA3C05271ECC2CBE00C54472 /* DDTTYLogger.h */,
+				EA3C05281ECC2CBE00C54472 /* DDTTYLogger.m */,
+			);
+			path = Lumberjack;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -107,9 +199,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EA3C04F51ECC2B7E00C54472 /* Build configuration list for PBXNativeTarget "QHCoreLib" */;
 			buildPhases = (
+				CFA899CAD0023CFA5CB0BD12 /* [CP] Check Pods Manifest.lock */,
 				EA3C04E81ECC2B7E00C54472 /* Sources */,
 				EA3C04E91ECC2B7E00C54472 /* Frameworks */,
 				EA3C04EA1ECC2B7E00C54472 /* CopyFiles */,
+				1AAFE81E50B9230F2BF618EB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -124,9 +218,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EA3C05041ECC2BA800C54472 /* Build configuration list for PBXNativeTarget "QHCoreLibTests" */;
 			buildPhases = (
+				98C7340BC31A577975F3C413 /* [CP] Check Pods Manifest.lock */,
 				EA3C04F81ECC2BA800C54472 /* Sources */,
 				EA3C04F91ECC2BA800C54472 /* Frameworks */,
 				EA3C04FA1ECC2BA800C54472 /* Resources */,
+				8D267E1A96CA22F022F50BA8 /* [CP] Embed Pods Frameworks */,
+				0BB00A361DF272E517762364 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -187,12 +284,94 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0BB00A361DF272E517762364 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QHCoreLibTests/Pods-QHCoreLibTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1AAFE81E50B9230F2BF618EB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QHCoreLib/Pods-QHCoreLib-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8D267E1A96CA22F022F50BA8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QHCoreLibTests/Pods-QHCoreLibTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		98C7340BC31A577975F3C413 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CFA899CAD0023CFA5CB0BD12 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		EA3C04E81ECC2B7E00C54472 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA3C05351ECC2CBE00C54472 /* DDLog.m in Sources */,
+				EA3C05341ECC2CBE00C54472 /* DDFileLogger.m in Sources */,
+				EA3C05371ECC2CBE00C54472 /* QHLogUtil.m in Sources */,
 				EA3C04F11ECC2B7E00C54472 /* QHCoreLib.m in Sources */,
+				EA3C05361ECC2CBE00C54472 /* DDTTYLogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,7 +379,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA3C05391ECC2D0E00C54472 /* QHCoreLibLogTests.m in Sources */,
 				EA3C04FF1ECC2BA800C54472 /* QHCoreLibTests.m in Sources */,
+				EA3C053B1ECC378300C54472 /* QHCoreLibDefinesTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,7 +437,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -298,7 +479,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -307,9 +488,13 @@
 		};
 		EA3C04F61ECC2B7E00C54472 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7851078F08662E6B8192606E /* Pods-QHCoreLib.debug.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_TEAM = XD4G683TDY;
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -317,9 +502,13 @@
 		};
 		EA3C04F71ECC2B7E00C54472 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 938ABA409DE2D52EBFB8B765 /* Pods-QHCoreLib.release.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_TEAM = XD4G683TDY;
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -327,6 +516,7 @@
 		};
 		EA3C05051ECC2BA800C54472 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0BF5B35E29ACCBA6610B6542 /* Pods-QHCoreLibTests.debug.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_TEAM = XD4G683TDY;
 				INFOPLIST_FILE = QHCoreLibTests/Info.plist;
@@ -338,6 +528,7 @@
 		};
 		EA3C05061ECC2BA800C54472 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A4FB93821E521314C7F610C2 /* Pods-QHCoreLibTests.release.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_TEAM = XD4G683TDY;
 				INFOPLIST_FILE = QHCoreLibTests/Info.plist;
@@ -366,6 +557,7 @@
 				EA3C04F71ECC2B7E00C54472 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EA3C05041ECC2BA800C54472 /* Build configuration list for PBXNativeTarget "QHCoreLibTests" */ = {
 			isa = XCConfigurationList;
@@ -374,6 +566,7 @@
 				EA3C05061ECC2BA800C54472 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

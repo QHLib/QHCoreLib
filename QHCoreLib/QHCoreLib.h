@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+#import "QHDefines.h"
+
+#import "QHLogUtil.h"
+
+
 @interface QHCoreLib : NSObject
 
 @end
