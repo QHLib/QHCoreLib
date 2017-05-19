@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "QHDefines.h"
+#import "QHAsserts.h"
 
 #import "QHLogUtil.h"
 

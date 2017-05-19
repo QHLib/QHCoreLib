@@ -19,6 +19,12 @@
 		EA3C05371ECC2CBE00C54472 /* QHLogUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3C052A1ECC2CBE00C54472 /* QHLogUtil.m */; };
 		EA3C05391ECC2D0E00C54472 /* QHCoreLibLogTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3C05381ECC2D0E00C54472 /* QHCoreLibLogTests.m */; };
 		EA3C053B1ECC378300C54472 /* QHCoreLibDefinesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3C053A1ECC378300C54472 /* QHCoreLibDefinesTests.m */; };
+		EA3C054F1ECDB35100C54472 /* QHAsserts.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3C054E1ECDB35100C54472 /* QHAsserts.m */; };
+		EA3C05551ECDC5CA00C54472 /* QHCoreLibExternCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3C05541ECDC5CA00C54472 /* QHCoreLibExternCTests.m */; };
+		EA3C05571ECDC5D500C54472 /* QHCoreLibExternCppTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = EA3C05561ECDC5D500C54472 /* QHCoreLibExternCppTests.mm */; };
+		EA3C055A1ECED93300C54472 /* QHUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3C05591ECED93300C54472 /* QHUtil.m */; };
+		EA3C055E1ECEE35500C54472 /* QHCoreLibUtilTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3C055D1ECEE35500C54472 /* QHCoreLibUtilTests.m */; };
+		EA3C05601ECEE36400C54472 /* QHCoreLibAssertsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3C055F1ECEE36400C54472 /* QHCoreLibAssertsTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +62,6 @@
 		EA3C04FC1ECC2BA800C54472 /* QHCoreLibTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QHCoreLibTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA3C04FE1ECC2BA800C54472 /* QHCoreLibTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHCoreLibTests.m; sourceTree = "<group>"; };
 		EA3C05001ECC2BA800C54472 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EA3C05201ECC2CBE00C54472 /* QHDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHDefines.h; sourceTree = "<group>"; };
 		EA3C05231ECC2CBE00C54472 /* DDFileLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDFileLogger.h; sourceTree = "<group>"; };
 		EA3C05241ECC2CBE00C54472 /* DDFileLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFileLogger.m; sourceTree = "<group>"; };
 		EA3C05251ECC2CBE00C54472 /* DDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLog.h; sourceTree = "<group>"; };
@@ -67,6 +72,16 @@
 		EA3C052A1ECC2CBE00C54472 /* QHLogUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHLogUtil.m; sourceTree = "<group>"; };
 		EA3C05381ECC2D0E00C54472 /* QHCoreLibLogTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHCoreLibLogTests.m; sourceTree = "<group>"; };
 		EA3C053A1ECC378300C54472 /* QHCoreLibDefinesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHCoreLibDefinesTests.m; sourceTree = "<group>"; };
+		EA3C054B1ECDB1E600C54472 /* QHDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHDefines.h; sourceTree = "<group>"; };
+		EA3C054D1ECDB35100C54472 /* QHAsserts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHAsserts.h; sourceTree = "<group>"; };
+		EA3C054E1ECDB35100C54472 /* QHAsserts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHAsserts.m; sourceTree = "<group>"; };
+		EA3C05531ECDC59300C54472 /* QHCoreLibExternTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHCoreLibExternTest.h; sourceTree = "<group>"; };
+		EA3C05541ECDC5CA00C54472 /* QHCoreLibExternCTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHCoreLibExternCTests.m; sourceTree = "<group>"; };
+		EA3C05561ECDC5D500C54472 /* QHCoreLibExternCppTests.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = QHCoreLibExternCppTests.mm; sourceTree = "<group>"; };
+		EA3C05581ECED93300C54472 /* QHUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHUtil.h; sourceTree = "<group>"; };
+		EA3C05591ECED93300C54472 /* QHUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHUtil.m; sourceTree = "<group>"; };
+		EA3C055D1ECEE35500C54472 /* QHCoreLibUtilTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHCoreLibUtilTests.m; sourceTree = "<group>"; };
+		EA3C055F1ECEE36400C54472 /* QHCoreLibAssertsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHCoreLibAssertsTests.m; sourceTree = "<group>"; };
 		F75C0F1D4E587187C68A3DCA /* Pods_QHCoreLibTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QHCoreLibTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -145,7 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				EA3C04FE1ECC2BA800C54472 /* QHCoreLibTests.m */,
-				EA3C053A1ECC378300C54472 /* QHCoreLibDefinesTests.m */,
+				EA3C055C1ECEE32B00C54472 /* Base */,
 				EA3C05381ECC2D0E00C54472 /* QHCoreLibLogTests.m */,
 				EA3C05001ECC2BA800C54472 /* Info.plist */,
 			);
@@ -155,18 +170,10 @@
 		EA3C05071ECC2CBE00C54472 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				EA3C05081ECC2CBE00C54472 /* Defines */,
+				EA3C054A1ECDB1E600C54472 /* Base */,
 				EA3C05211ECC2CBE00C54472 /* Log */,
 			);
 			path = Classes;
-			sourceTree = "<group>";
-		};
-		EA3C05081ECC2CBE00C54472 /* Defines */ = {
-			isa = PBXGroup;
-			children = (
-				EA3C05201ECC2CBE00C54472 /* QHDefines.h */,
-			);
-			path = Defines;
 			sourceTree = "<group>";
 		};
 		EA3C05211ECC2CBE00C54472 /* Log */ = {
@@ -190,6 +197,31 @@
 				EA3C05281ECC2CBE00C54472 /* DDTTYLogger.m */,
 			);
 			path = Lumberjack;
+			sourceTree = "<group>";
+		};
+		EA3C054A1ECDB1E600C54472 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				EA3C054B1ECDB1E600C54472 /* QHDefines.h */,
+				EA3C054D1ECDB35100C54472 /* QHAsserts.h */,
+				EA3C054E1ECDB35100C54472 /* QHAsserts.m */,
+				EA3C05581ECED93300C54472 /* QHUtil.h */,
+				EA3C05591ECED93300C54472 /* QHUtil.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		EA3C055C1ECEE32B00C54472 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				EA3C053A1ECC378300C54472 /* QHCoreLibDefinesTests.m */,
+				EA3C05531ECDC59300C54472 /* QHCoreLibExternTest.h */,
+				EA3C05541ECDC5CA00C54472 /* QHCoreLibExternCTests.m */,
+				EA3C05561ECDC5D500C54472 /* QHCoreLibExternCppTests.mm */,
+				EA3C055F1ECEE36400C54472 /* QHCoreLibAssertsTests.m */,
+				EA3C055D1ECEE35500C54472 /* QHCoreLibUtilTests.m */,
+			);
+			name = Base;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -371,6 +403,8 @@
 				EA3C05341ECC2CBE00C54472 /* DDFileLogger.m in Sources */,
 				EA3C05371ECC2CBE00C54472 /* QHLogUtil.m in Sources */,
 				EA3C04F11ECC2B7E00C54472 /* QHCoreLib.m in Sources */,
+				EA3C054F1ECDB35100C54472 /* QHAsserts.m in Sources */,
+				EA3C055A1ECED93300C54472 /* QHUtil.m in Sources */,
 				EA3C05361ECC2CBE00C54472 /* DDTTYLogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -380,7 +414,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA3C05391ECC2D0E00C54472 /* QHCoreLibLogTests.m in Sources */,
+				EA3C05551ECDC5CA00C54472 /* QHCoreLibExternCTests.m in Sources */,
+				EA3C05571ECDC5D500C54472 /* QHCoreLibExternCppTests.mm in Sources */,
+				EA3C055E1ECEE35500C54472 /* QHCoreLibUtilTests.m in Sources */,
 				EA3C04FF1ECC2BA800C54472 /* QHCoreLibTests.m in Sources */,
+				EA3C05601ECEE36400C54472 /* QHCoreLibAssertsTests.m in Sources */,
 				EA3C053B1ECC378300C54472 /* QHCoreLibDefinesTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

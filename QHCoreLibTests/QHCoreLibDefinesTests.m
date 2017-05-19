@@ -101,6 +101,20 @@ QH_IMP_SINGLETON
                  enforceOrder:NO];
 }
 
+- (void)testConcat
+{
+#define A aaa
+#define B bbb
+
+    int aaabbb = 0;
+    // expanded
+    XCTAssert(QH_CONCAT(A, B) == 0);
+
+    int AB = 1;
+    // not expand
+    XCTAssert(_QH_CONCAT(A, B) == 1);
+}
+
 - (void)testPerformSelectorLeakWarning
 {
     SEL selector = NSSelectorFromString(@"description");

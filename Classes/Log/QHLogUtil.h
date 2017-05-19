@@ -8,15 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+#import "QHDefines.h"
+
 #import "DDLog.h"
 
-CF_EXTERN_C_BEGIN
 
-CF_EXPORT DDLogLevel QHLogLevel;
-CF_EXPORT void QHSetLogLevel(DDLogLevel logLevel);
-
-CF_EXTERN_C_END
-
+QH_EXTERN DDLogLevel QHLogLevel;
+QH_EXTERN void QHSetLogLevel(DDLogLevel logLevel);
 
 #define _LOG_MACRO(isAsynchronous, lvl, flg, ctx, atag, fnct, frmt, ...)    \
 [DDLog log : isAsynchronous                                                 \

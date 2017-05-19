@@ -14,6 +14,23 @@
 #import <libextobjc/extobjc.h>
 #import <MustOverride/MustOverride.h>
 
+#ifndef QH_DEBUG
+#   if DEBUG
+#       define QH_DEBUG 1
+#   else
+#       define QH_DEBUG 0
+#   endif
+#endif
+
+#if defined(__cplusplus)
+#   define QH_EXTERN           extern "C"
+#   define QH_EXTERN_C_BEGIN   extern "C" {
+#   define QH_EXTERN_C_END     }
+#else
+#   define QH_EXTERN           extern
+#   define QH_EXTERN_C_BEGIN
+#   define QH_EXTERN_C_END
+#endif
 
 #define QH_UNUSED_VAR(var) ((void)(var))
 
@@ -51,7 +68,7 @@
     __strong __typeof__(VAR) metamacro_concat(VAR, _retain_) = VAR; \
     __strong __typeof__(VAR) VAR = metamacro_concat(VAR, _retain_);
 
-#if DEBUG
+#if QH_DEBUG
 #   define QH_SUBCLASS_MUST_OVERRIDE  SUBCLASS_MUST_OVERRIDE
 #else
 #   define QH_SUBCLASS_MUST_OVERRIDE
@@ -62,6 +79,14 @@
 #else
 #   define QH_DEPRECATED(_msg)
 #endif
+
+/**
+ * Concat two literals. Supports macro expansions,
+ * e.g. QH_CONCAT(foo, __FILE__).
+ */
+#define _QH_CONCAT(A, B)    A ## B
+#define QH_CONCAT(A, B)     _QH_CONCAT(A, B)
+
 
 #define QH_SUPPRESS_PERFORM_SELECTOR_LEAK_WARNING_BEGIN \
 do { \

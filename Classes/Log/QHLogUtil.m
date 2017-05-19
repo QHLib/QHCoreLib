@@ -83,7 +83,7 @@ static DDFileLogger *fileLogger = nil;
 + (void)doSetup
 {
     // console log
-#if DEBUG && 0
+#if QH_DEBUG && 0
     // not used any more since Xcode does not support
     setenv("XcodeColors", "YES", 1);
     [[DDTTYLogger sharedInstance] setColorsEnabled:YES];
@@ -113,7 +113,7 @@ static DDFileLogger *fileLogger = nil;
     fileLogger.maximumFileSize = 1024 * 1024;
     [DDLog addLogger:fileLogger withLevel:DDLogLevelInfo];
 
-#if DEBUG
+#if QH_DEBUG
     QHLogLevel = DDLogLevelVerbose;
 #else
     QHLogLevel = DDLogLevelInfo;

@@ -18,8 +18,8 @@ Pod::Spec.new do |s|
 
   s.requires_arc = true
 
-  s.subspec 'QHDefines' do |ss|
-    ss.source_files = "Classes/Defines/**/*.{h,m}"
+  s.subspec 'QHBase' do |ss|
+    ss.source_files = "Classes/Base/**/*.{h,m}"
     ss.framework = "Foundation"
     ss.dependency "libextobjc", '0.4.1'
     ss.dependency 'MustOverride', '1.1'
@@ -28,8 +28,9 @@ Pod::Spec.new do |s|
   s.subspec 'QHLog' do |ss|
     ss.source_files = "Classes/Log/**/*.{h,m}"
     ss.framework = "Foundation"
+    ss.dependency "QHCoreLib/QHBase"
   end
 
-  s.default_subspecs = 'QHDefines', 'QHLog'
+  s.default_subspecs = 'QHBase', 'QHLog'
 
 end
