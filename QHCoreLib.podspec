@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
 
   s.source       = { :git => "http://git.code.oa.com/QHLib/QHCoreLib.git", :tag => s.version }
 
-  s.source_files  = "QHCoreLib/QHCoreLib.h"
+  s.source_files  = "QHCoreLib/QHCoreLib.{h,m}"
   s.public_header_files = "QHCoreLib/QHCoreLib.h"
   s.prefix_header_contents = <<-EOS
                              EOS
