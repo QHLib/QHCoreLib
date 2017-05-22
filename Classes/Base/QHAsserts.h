@@ -50,6 +50,21 @@ QH_EXTERN BOOL QHIsMainQueue();
 #define QHAssertParam(name) QHAssert(name, \
     @"'%s' is a required parameter", #name)
 
+#define QHAssertReturnVoidOnFailure(_cond, ...) \
+do { \
+    QHAssert((_cond), __VA_ARGS__); \
+    if (!(_cond)) { \
+        return; \
+    } \
+} while(0)
+
+#define QHAssertReturnValueOnFailure(_value, _cond, ...) \
+do { \
+    QHAssert((_cond), __VA_ARGS__); \
+    if (!(_cond)) { \
+        return (_value); \
+    } \
+} while(0)
 
 #define QH_NOT_IMPLEMENTED(method) \
 _Pragma("clang diagnostic push") \
