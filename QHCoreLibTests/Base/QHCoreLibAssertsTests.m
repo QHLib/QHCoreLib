@@ -35,15 +35,15 @@
     });
 }
 
-- (void)p_clearAssertFunction
+- (void)tearDown
 {
     QHSetAssertFunction(nil);
+
+    [super tearDown];
 }
 
 - (void)testAssert
 {
-    [self p_clearAssertFunction];
-
     {
         dispatch_block_t block = ^{
             QHAssert(0 == 0, @"assert 0 == 0 will not throw");
@@ -72,8 +72,6 @@
 
 - (void)testAssertXXX
 {
-    [self p_clearAssertFunction];
-
     QHAssertMainQueue();
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         QHAssertNotMainQueue();
@@ -115,8 +113,6 @@ QH_NOT_IMPLEMENTED(- (void)not_implemented)
 
 - (void)testNotImplemented
 {
-    [self p_clearAssertFunction];
-    
     XCTAssertThrows([self performSelector:@selector(not_implemented)]);
 }
 

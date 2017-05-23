@@ -26,3 +26,44 @@ BOOL QHIsMainThread()
 {
     return [NSThread currentThread].isMainThread;
 }
+
+void QHDispatchSyncMainSafe(dispatch_block_t block)
+{
+    if (block == nil) return;
+
+    if (QHIsMainQueue()) {
+        block();
+    }
+    else if (QHIsMainThread()) {
+        // prefer to ensure 'sync' than 'main queue' when currently
+        // running on 'background queue on main thread'
+        QHCoreLibWarn(@"can't assure main queue for dispatch sync main, because we are"
+                      @"currently on background queue that running on main thread!\n%@",
+                      QHCallStackShort());
+        block();
+    }
+    else {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            block();
+        });
+    }
+}
+
+void QHDispatchAsyncMain(dispatch_block_t block)
+{
+    if (block == nil) return;
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        block();
+    });
+}
+
+void QHDispatchAsyncDefault(dispatch_block_t block)
+{
+    if (block == nil) return;
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        block();
+    });
+}
+

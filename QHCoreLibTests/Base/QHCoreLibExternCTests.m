@@ -24,4 +24,9 @@ void another_extern_function() {}
 
 @implementation QHCoreLibExternCTests
 
+- (void)test
+{
+
+}
+
 @end

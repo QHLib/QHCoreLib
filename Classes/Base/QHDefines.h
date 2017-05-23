@@ -22,6 +22,14 @@
 #   endif
 #endif
 
+//define QHCoreLibFatal if needed
+
+#if QH_DEBUG
+#   define QHCoreLibWarn(...) NSLog(@"QHCoreLibWarn: " __VA_ARGS__)
+#else
+#   define QHCoreLibWarn
+#endif
+
 #if defined(__cplusplus)
 #   define QH_EXTERN           extern "C"
 #   define QH_EXTERN_C_BEGIN   extern "C" {
@@ -45,10 +53,16 @@
 
 #define QH_AS(obj, cls, var)                            cls *var = nil; if (QH_IS(obj, cls)) var = (cls *)obj;
 
-#define QH_DEF_SINGLETON \
+#define QH_DUMMY_CLASS(_name) \
+@interface QHDummyClass ## _name : NSObject \
+@end \
+@implementation QHDummyClass ## _name \
+@end
+
+#define QH_SINGLETON_DEF \
 + (instancetype)sharedInstance;
 
-#define QH_IMP_SINGLETON \
+#define QH_SINGLETON_IMP \
 + (instancetype)sharedInstance \
 { \
     static dispatch_once_t once; \

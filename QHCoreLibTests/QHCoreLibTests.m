@@ -14,4 +14,9 @@
 
 @implementation QHCoreLibTests
 
+- (void)test
+{
+    
+}
+
 @end

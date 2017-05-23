@@ -18,5 +18,9 @@
 
 @implementation QHCoreLibExternCppTests
 
+- (void)test
+{
+
+}
 
 @end

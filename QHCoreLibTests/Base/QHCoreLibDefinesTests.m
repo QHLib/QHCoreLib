@@ -11,11 +11,11 @@
 #import "QHDefines.h"
 
 @interface __singleton : NSObject
-QH_DEF_SINGLETON
+QH_SINGLETON_DEF
 @end
 
 @implementation __singleton
-QH_IMP_SINGLETON
+QH_SINGLETON_IMP
 @end
 
 
