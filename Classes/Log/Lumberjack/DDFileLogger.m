@@ -1140,7 +1140,8 @@ static int exception_count = 0;
 
 - (NSDictionary *)fileAttributes {
     if (_fileAttributes == nil) {
-        _fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil];
+        NSError *error = nil;
+        _fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:&error];
     }
 
     return _fileAttributes;

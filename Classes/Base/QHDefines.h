@@ -27,7 +27,7 @@
 #if QH_DEBUG
 #   define QHCoreLibWarn(...) NSLog(@"QHCoreLibWarn: " __VA_ARGS__)
 #else
-#   define QHCoreLibWarn
+#   define QHCoreLibWarn(...)
 #endif
 
 #if defined(__cplusplus)
