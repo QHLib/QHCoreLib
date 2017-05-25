@@ -15,8 +15,3 @@
 
 
 #import "QHLogUtil.h"
-
-
-@interface QHCoreLib : NSObject
-
-@end
