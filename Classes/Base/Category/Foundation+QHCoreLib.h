@@ -23,6 +23,22 @@
 
 @end
 
+@interface NSArray (QHCoreLibDefaultValue)
+
+- (BOOL)qh_boolAtIndex:(NSUInteger)index;
+
+- (NSInteger)qh_integerAtIndex:(NSUInteger)index;
+
+- (double)qh_doubleAtIndex:(NSUInteger)index;
+
+- (NSString *)qh_stringAtIndex:(NSUInteger)index;
+
+- (NSArray *)qh_arrayAtIndex:(NSUInteger)index;
+
+- (NSDictionary *)qh_dictionaryAtIndex:(NSUInteger)index;
+
+@end
+
 @interface NSMutableArray (QHCoreLib)
 
 - (void)qh_addObject:(id)anObject;
@@ -36,6 +52,22 @@
 @interface NSDictionary (QHCoreLib)
 
 - (NSDictionary *)qh_mappedDictionaryWithBlock:(id (^)(id key, id obj))block;
+
+@end
+
+@interface NSDictionary (QHCoreLibDefaultValue)
+
+- (BOOL)qh_boolForKey:(id<NSCopying>)key;
+
+- (NSInteger)qh_integerForKey:(id<NSCopying>)key;
+
+- (double)qh_doubleForKey:(id<NSCopying>)key;
+
+- (NSString *)qh_stringForKey:(id<NSCopying>)key;
+
+- (NSArray *)qh_arrayForKey:(id<NSCopying>)key;
+
+- (NSDictionary *)qh_dictionaryForKey:(id<NSCopying>)key;
 
 @end
 

@@ -11,6 +11,7 @@
 #import "QHDefines.h"
 #import "QHAsserts.h"
 #import "QHUtil.h"
+#import "QHDefaultValue.h"
 
 
 QH_DUMMY_CLASS(FoudationQHCoreLib)
@@ -101,6 +102,40 @@ QH_DUMMY_CLASS(FoudationQHCoreLib)
 
 @end
 
+@implementation NSArray (QHCoreLibDefaultValue)
+
+- (BOOL)qh_boolAtIndex:(NSUInteger)index
+{
+    return QHBool([self qh_objectAtIndex:index], NO);
+}
+
+- (NSInteger)qh_integerAtIndex:(NSUInteger)index
+{
+    return QHInteger([self qh_objectAtIndex:index], 0);
+}
+
+- (double)qh_doubleAtIndex:(NSUInteger)index
+{
+    return QHDouble([self qh_objectAtIndex:index], 0.0);
+}
+
+- (NSString *)qh_stringAtIndex:(NSUInteger)index
+{
+    return QHString([self qh_objectAtIndex:index], @"");
+}
+
+- (NSArray *)qh_arrayAtIndex:(NSUInteger)index
+{
+    return QHArray([self qh_objectAtIndex:index], @[]);
+}
+
+- (NSDictionary *)qh_dictionaryAtIndex:(NSUInteger)index
+{
+    return QHDictionary([self qh_objectAtIndex:index], @{});
+}
+
+@end
+
 @implementation NSMutableArray (QQHouseUtil)
 
 - (void)qh_addObject:(id)anObject
@@ -157,6 +192,40 @@ QH_DUMMY_CLASS(FoudationQHCoreLib)
                       QHCallStackShort());
         return [NSDictionary dictionaryWithDictionary:self];
     }
+}
+
+@end
+
+@implementation NSDictionary (QHCoreLibDefaultValue)
+
+- (BOOL)qh_boolForKey:(id<NSCopying>)key
+{
+    return QHBool([self objectForKey:key], NO);
+}
+
+- (NSInteger)qh_integerForKey:(id<NSCopying>)key
+{
+    return QHInteger([self objectForKey:key], 0);
+}
+
+- (double)qh_doubleForKey:(id<NSCopying>)key
+{
+    return QHDouble([self objectForKey:key], 0.0);
+}
+
+- (NSString *)qh_stringForKey:(id<NSCopying>)key
+{
+    return QHString([self objectForKey:key], @"");
+}
+
+- (NSArray *)qh_arrayForKey:(id<NSCopying>)key
+{
+    return QHArray([self objectForKey:key], @[]);
+}
+
+- (NSDictionary *)qh_dictionaryForKey:(id<NSCopying>)key
+{
+    return QHDictionary([self objectForKey:key], @{});
 }
 
 @end
