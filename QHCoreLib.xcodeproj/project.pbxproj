@@ -108,6 +108,7 @@
 		EA01104A1ED3D75400617196 /* QHNetworkApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHNetworkApi.h; sourceTree = "<group>"; };
 		EA01104B1ED3D75400617196 /* QHNetworkApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHNetworkApi.m; sourceTree = "<group>"; };
 		EA01104D1ED3D77100617196 /* QHNetworkApi+internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QHNetworkApi+internal.h"; sourceTree = "<group>"; };
+		EA1D42EE1ED6E32D002177BF /* QHCoreLibCategories.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHCoreLibCategories.h; sourceTree = "<group>"; };
 		EA3C04EC1ECC2B7E00C54472 /* libQHCoreLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libQHCoreLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA3C04EF1ECC2B7E00C54472 /* QHCoreLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHCoreLib.h; sourceTree = "<group>"; };
 		EA3C04F01ECC2B7E00C54472 /* QHCoreLib.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHCoreLib.m; sourceTree = "<group>"; };
@@ -345,6 +346,7 @@
 		EA50F03B1ED58701002A71BC /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				EA1D42EE1ED6E32D002177BF /* QHCoreLibCategories.h */,
 				EA50F03C1ED58701002A71BC /* Foundation+QHCoreLib.h */,
 				EA50F03D1ED58701002A71BC /* Foundation+QHCoreLib.m */,
 			);
