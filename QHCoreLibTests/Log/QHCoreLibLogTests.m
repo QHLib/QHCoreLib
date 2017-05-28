@@ -8,7 +8,7 @@
 
 #import <XCTest/XCTest.h>
 
-#import "QHLogUtil.h"
+@import QHCoreLib.QHLog;
 
 
 @interface QHCoreLibLogTests : XCTestCase

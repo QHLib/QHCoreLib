@@ -1,0 +1,29 @@
+framework module QHCoreLib {
+
+    umbrella header "QHCoreLib.h"
+    module * { export * }
+    export *
+
+    explicit module QHLog {
+        header "QHLogUtil.h"
+        export *
+    }
+
+    explicit module QHProfiler {
+        header "QHClockEntry.h"
+        export *
+    }
+
+    explicit module QHNetwork {
+        header "QHNetwork.h"
+        header "QHNetworkUtil.h"
+        header "QHNetworkRequest.h"
+        header "QHNetworkResponse.h"
+        header "QHNetworkWorker.h"
+        header "QHNetworkApi.h"
+        header "QHNetworkApi+internal.h"
+        export *
+        export QHLog
+        export QHProfiler
+    }
+}

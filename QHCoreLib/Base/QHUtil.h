@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import "QHDefines.h"
-#import "Foundation+QHCoreLib.h"
+#import <QHCoreLib/QHDefines.h>
+#import <QHCoreLib/Foundation+QHCoreLib.h>
+
 
 // check if currently on the main queue
 QH_EXTERN BOOL QHIsMainQueue(void);

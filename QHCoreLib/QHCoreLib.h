@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-#import "QHDefines.h"
-#import "QHAsserts.h"
-#import "QHUtil.h"
-#import "QHCoreLibCategories.h"
+//! Project version number for QHCoreLib.
+FOUNDATION_EXPORT double QHCoreLibVersionNumber;
 
+//! Project version string for QHCoreLib.
+FOUNDATION_EXPORT const unsigned char QHCoreLibVersionString[];
 
-#import "QHLogUtil.h"
+#import "QHBase.h"

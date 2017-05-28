@@ -8,7 +8,7 @@
 
 #import <XCTest/XCTest.h>
 
-#import "Foundation+QHCoreLib.h"
+@import QHCoreLib;
 
 
 @interface QHCoreLibFoundationTests : XCTestCase

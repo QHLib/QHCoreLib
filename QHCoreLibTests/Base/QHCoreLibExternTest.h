@@ -9,7 +9,7 @@
 #ifndef QHCoreLibExternTest_h
 #define QHCoreLibExternTest_h
 
-#import "QHDefines.h"
+#import <QHCoreLib/QHDefines.h>
 
 QH_EXTERN int extern_var;
 QH_EXTERN void extern_function();

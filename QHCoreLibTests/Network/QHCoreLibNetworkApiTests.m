@@ -8,7 +8,8 @@
 
 #import <XCTest/XCTest.h>
 
-#import "QHNetworkApi.h"
+@import QHCoreLib.QHNetwork;
+
 
 @class QHNetworkTestApiResult;
 

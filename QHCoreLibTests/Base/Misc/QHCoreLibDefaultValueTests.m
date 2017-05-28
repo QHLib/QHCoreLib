@@ -8,7 +8,7 @@
 
 #import <XCTest/XCTest.h>
 
-#import "QHDefaultValue.h"
+@import QHCoreLib;
 
 
 @interface QHCoreLibDefaultValueTests : XCTestCase
