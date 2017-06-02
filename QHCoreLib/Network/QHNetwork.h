@@ -53,4 +53,3 @@ QH_SINGLETON_DEF
 #import "QHNetworkResponse.h"
 #import "QHNetworkWorker.h"
 #import "QHNetworkApi.h"
-#import "QHNetworkApi+internal.h"
