@@ -1,7 +1,7 @@
 # coding: utf-8
 Pod::Spec.new do |s|
   s.name         = "QHCoreLib"
-  s.version      = "0.0.5"
+  s.version      = "0.0.6"
   s.summary      = "QHCoreLib inlucdes some macros and util classes."
   s.homepage     = "https://github.com/QHLib/QHCoreLib.git"
   s.license      = "MIT"
@@ -18,6 +18,13 @@ Pod::Spec.new do |s|
   s.prefix_header_contents = <<-EOS
                              EOS
   #s.module_map = "QHCoreLib/QHCoreLib.modulemap"
+
+  s.subspec 'All' do |ss|
+    ss.dependency 'QHCoreLib/QHBase'
+    ss.dependency 'QHCoreLib/QHLog'
+    ss.dependency 'QHCoreLib/QHProfiler'
+    ss.dependency 'QHCoreLib/QHNetwork'
+  end
 
   s.subspec 'QHBase' do |ss|
     ss.source_files = "QHCoreLib/Base/**/*.{h,m}"
