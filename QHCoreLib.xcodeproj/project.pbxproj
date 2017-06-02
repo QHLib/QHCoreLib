@@ -166,6 +166,7 @@
 		EAAA79E81ED9639A008135BE /* QHCoreLibClockEntryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHCoreLibClockEntryTests.m; sourceTree = "<group>"; };
 		EAE3C7A21EE12A0F00A93456 /* QHProfiler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHProfiler.h; sourceTree = "<group>"; };
 		EAE3C7A31EE12A4F00A93456 /* QHLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHLog.h; sourceTree = "<group>"; };
+		EAE3C7B51EE155A600A93456 /* QHCoreLib+All.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QHCoreLib+All.h"; sourceTree = "<group>"; };
 		F2B4A6B4945BFE0B2872201F /* Pods_QHCoreLibTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QHCoreLibTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -437,6 +438,7 @@
 			children = (
 				EA1D42FA1ED70BA2002177BF /* Info.plist */,
 				EA1D42F91ED70BA2002177BF /* QHCoreLib.h */,
+				EAE3C7B51EE155A600A93456 /* QHCoreLib+All.h */,
 				EA1D442B1ED92ED9002177BF /* QHCoreLib.modulemap */,
 			);
 			name = "Support files";
