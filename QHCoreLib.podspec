@@ -1,7 +1,7 @@
 # coding: utf-8
 Pod::Spec.new do |s|
   s.name         = "QHCoreLib"
-  s.version      = "0.0.6"
+  s.version      = "0.0.7"
   s.summary      = "QHCoreLib inlucdes some macros and util classes."
   s.homepage     = "https://github.com/QHLib/QHCoreLib.git"
   s.license      = "MIT"
@@ -36,7 +36,8 @@ Pod::Spec.new do |s|
 
   s.subspec 'QHLog' do |ss|
     ss.source_files = "QHCoreLib/Log/**/*.{h,m}"
-    ss.public_header_files = "QHCoreLib/Log/QHLogUtil.h", "QHCoreLib/Log/Lumberjack/DDLog.h"
+    ss.public_header_files = "QHCoreLib/Log/**/*.h"
+    ss.private_header_files = "QHCoreLib/Log/Lumberjack/**/*.h"
     ss.frameworks = "Foundation"
     ss.dependency "QHCoreLib/QHBase"
   end

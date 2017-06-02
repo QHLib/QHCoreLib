@@ -21,7 +21,6 @@
 		EA1D436F1ED70CE3002177BF /* QHUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = EA1D43371ED70CE3002177BF /* QHUtil.m */; };
 		EA1D43701ED70CE3002177BF /* DDFileLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = EA1D433A1ED70CE3002177BF /* DDFileLogger.h */; };
 		EA1D43711ED70CE3002177BF /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = EA1D433B1ED70CE3002177BF /* DDFileLogger.m */; };
-		EA1D43721ED70CE3002177BF /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = EA1D433C1ED70CE3002177BF /* DDLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA1D43731ED70CE3002177BF /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = EA1D433D1ED70CE3002177BF /* DDLog.m */; };
 		EA1D43741ED70CE3002177BF /* DDTTYLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = EA1D433E1ED70CE3002177BF /* DDTTYLogger.h */; };
 		EA1D43751ED70CE3002177BF /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = EA1D433F1ED70CE3002177BF /* DDTTYLogger.m */; };
@@ -75,6 +74,7 @@
 		EAAE57671ED973850084FA69 /* QHCoreLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA1D42F71ED70BA2002177BF /* QHCoreLib.framework */; };
 		EAE3C7A41EE12A8C00A93456 /* QHLog.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE3C7A31EE12A4F00A93456 /* QHLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAE3C7A51EE12A9000A93456 /* QHProfiler.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE3C7A21EE12A0F00A93456 /* QHProfiler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EAE3C7B41EE153A400A93456 /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = EA1D433C1ED70CE3002177BF /* DDLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F06443AE55B201F94A964E1C /* Pods_QHCoreLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BFD5D802EAE749D3FCD8FC /* Pods_QHCoreLib.framework */; };
 /* End PBXBuildFile section */
 
@@ -322,6 +322,7 @@
 				EAE3C7A31EE12A4F00A93456 /* QHLog.h */,
 				EA1D43401ED70CE3002177BF /* QHLogUtil.h */,
 				EA1D43411ED70CE3002177BF /* QHLogUtil.m */,
+				EA1D433C1ED70CE3002177BF /* DDLog.h */,
 				EA1D43391ED70CE3002177BF /* Lumberjack */,
 			);
 			path = Log;
@@ -330,7 +331,6 @@
 		EA1D43391ED70CE3002177BF /* Lumberjack */ = {
 			isa = PBXGroup;
 			children = (
-				EA1D433C1ED70CE3002177BF /* DDLog.h */,
 				EA1D433D1ED70CE3002177BF /* DDLog.m */,
 				EA1D433E1ED70CE3002177BF /* DDTTYLogger.h */,
 				EA1D433F1ED70CE3002177BF /* DDTTYLogger.m */,
@@ -459,12 +459,12 @@
 				EA1D43811ED70CE3002177BF /* QHNetworkUtil.h in Headers */,
 				EA1D43781ED70CE3002177BF /* QHNetwork.h in Headers */,
 				EA1D43641ED70CE3002177BF /* Foundation+QHCoreLib.h in Headers */,
-				EA1D43721ED70CE3002177BF /* DDLog.h in Headers */,
 				EA1D43691ED70CE3002177BF /* QHDefaultValue.h in Headers */,
 				EA1D43661ED70CE3002177BF /* QHCoreLibCategories.h in Headers */,
 				EA1D43761ED70CE3002177BF /* QHLogUtil.h in Headers */,
 				EA1D436D1ED70CE3002177BF /* QHDefines.h in Headers */,
 				EA1D437A1ED70CE3002177BF /* QHNetworkApi+internal.h in Headers */,
+				EAE3C7B41EE153A400A93456 /* DDLog.h in Headers */,
 				EA1D43931ED70CE3002177BF /* AFURLRequestSerialization.h in Headers */,
 				EA1D43701ED70CE3002177BF /* DDFileLogger.h in Headers */,
 				EAE3C7A41EE12A8C00A93456 /* QHLog.h in Headers */,
