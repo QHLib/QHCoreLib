@@ -8,7 +8,7 @@
 
 #import <XCTest/XCTest.h>
 
-@import QHCoreLib;
+#import <QHCoreLib/QHDefines.h>
 
 
 @interface __singleton : NSObject

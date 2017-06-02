@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "QHDefines.h"
+#import <QHCoreLib/QHDefines.h>
 
 
 QH_EXTERN NSString * const QHNetworkStatusChangedNotification;
@@ -46,3 +46,11 @@ QH_SINGLETON_DEF
 - (void)stopMonitoring;
 
 @end
+
+
+#import "QHNetworkUtil.h"
+#import "QHNetworkRequest.h"
+#import "QHNetworkResponse.h"
+#import "QHNetworkWorker.h"
+#import "QHNetworkApi.h"
+#import "QHNetworkApi+internal.h"

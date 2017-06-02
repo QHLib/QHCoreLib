@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "QHDefines.h"
+#import <QHCoreLib/QHDefines.h>
 
 
 QH_EXTERN BOOL QHBool(id value, BOOL defaultValue);

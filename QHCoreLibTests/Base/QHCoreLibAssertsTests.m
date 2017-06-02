@@ -8,8 +8,8 @@
 
 #import <XCTest/XCTest.h>
 
-@import QHCoreLib;
-@import QHCoreLib.QHLog;
+#import <QHCoreLib/QHAsserts.h>
+#import <QHCoreLib/QHLogUtil.h>
 
 
 @interface QHCoreLibAssertsTests : XCTestCase

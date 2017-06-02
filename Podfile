@@ -1,4 +1,6 @@
 source 'https://github.com/CocoaPods/Specs.git'
+source 'https://github.com/QHLib/QHLibSpecs.git'
+
 platform :ios, '8.0'
 
 target 'QHCoreLib' do

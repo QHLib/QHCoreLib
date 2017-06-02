@@ -12,7 +12,13 @@
 #import <Foundation/Foundation.h>
 
 #import <libextobjc/extobjc.h>
-#import <MustOverride/MustOverride.h>
+
+#if __has_include(<MustOverride/MustOverride.h>)
+#   import <MustOverride/MustOverride.h>
+#else
+#   warning Please add 'MustOverride' via pod or manually
+#   define SUBCLASS_MUST_OVERRIDE
+#endif
 
 
 #ifndef QH_DEBUG

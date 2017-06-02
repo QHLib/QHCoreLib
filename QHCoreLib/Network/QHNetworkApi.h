@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-#import "QHDefines.h"
+#import <QHCoreLib/QHDefines.h>
 
-#import "QHNetworkRequest.h"
-#import "QHNetworkResponse.h"
+#import <QHCoreLib/QHNetworkRequest.h>
+#import <QHCoreLib/QHNetworkResponse.h>
 
 
 QH_EXTERN NSString * const QHNetworkApiErrorDomain;

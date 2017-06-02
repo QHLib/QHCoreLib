@@ -5,11 +5,13 @@ framework module QHCoreLib {
     export *
 
     explicit module QHLog {
+        header "QHLog.h"
         header "QHLogUtil.h"
         export *
     }
 
     explicit module QHProfiler {
+        header "QHProfiler.h"
         header "QHClockEntry.h"
         export *
     }

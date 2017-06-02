@@ -9,7 +9,7 @@
 #ifndef _QHNetworkWorker_subclass_h
 #define _QHNetworkWorker_subclass_h
 
-#import "QHNetworkWorker.h"
+#import <QHCoreLib/QHNetworkWorker.h>
 
 
 typedef NS_ENUM(NSUInteger, QHNetworkWorkerState) {

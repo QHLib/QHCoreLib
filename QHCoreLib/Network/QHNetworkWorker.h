@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import "QHNetworkRequest.h"
-#import "QHNetworkResponse.h"
+#import <QHCoreLib/QHNetworkRequest.h>
+#import <QHCoreLib/QHNetworkResponse.h>
 
 
 @class QHNetworkWorker;

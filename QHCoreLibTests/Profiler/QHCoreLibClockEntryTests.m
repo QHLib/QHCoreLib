@@ -8,8 +8,8 @@
 
 #import <XCTest/XCTest.h>
 
-@import QHCoreLib;
-@import QHCoreLib.QHProfiler;
+#import <QHCoreLib/QHAsserts.h>
+#import <QHCoreLib/QHClockEntry.h>
 
 
 @interface QHCoreLibClockEntryTests : XCTestCase

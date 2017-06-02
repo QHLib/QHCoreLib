@@ -9,8 +9,8 @@
 #ifndef QHCoreLibCategories_h
 #define QHCoreLibCategories_h
 
-#import "QHDefaultValue.h"
-#import "Foundation+QHCoreLib.h"
+#import <QHCoreLib/QHDefaultValue.h>
+#import <QHCoreLib/Foundation+QHCoreLib.h>
 
 
 #endif /* QHCoreLibCategories_h */

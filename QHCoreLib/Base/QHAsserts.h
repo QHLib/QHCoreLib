@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "QHDefines.h"
+#import <QHCoreLib/QHDefines.h>
 
 
 #ifndef NS_BLOCK_ASSERTIONS

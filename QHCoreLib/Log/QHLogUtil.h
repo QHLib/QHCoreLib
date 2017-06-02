@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import "QHDefines.h"
+#import <QHCoreLib/QHDefines.h>
 
-#import "DDLog.h"
+#import <QHCoreLib/DDLog.h>
 
 
 QH_EXTERN DDLogLevel QHLogLevel;

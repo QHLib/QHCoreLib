@@ -32,7 +32,7 @@
 #endif
 
 // qhhack by changtang
-#import "QHClockEntry.h"
+#import <QHCoreLib/QHClockEntry.h>
 // qhhack end
 
 typedef NS_ENUM(NSInteger, AFOperationState) {

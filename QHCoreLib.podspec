@@ -1,15 +1,15 @@
 # coding: utf-8
 Pod::Spec.new do |s|
   s.name         = "QHCoreLib"
-  s.version      = "0.0.4"
+  s.version      = "0.0.5"
   s.summary      = "QHCoreLib inlucdes some macros and util classes."
-  s.homepage     = "http://git.code.oa.com/QHLib/QHCoreLib.git"
+  s.homepage     = "https://github.com/QHLib/QHCoreLib.git"
   s.license      = "MIT"
   s.author       = { "changtang(唐畅)" => "changtang@tencent.com" }
 
   s.platform     = :ios, "8.0"
 
-  s.source       = { :git => "http://git.code.oa.com/QHLib/QHCoreLib.git", :tag => s.version }
+  s.source       = { :git => "https://github.com/QHLib/QHCoreLib.git", :tag => s.version }
 
   s.requires_arc = true
 
@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.public_header_files = "QHCoreLib/QHCoreLib*.h"
   s.prefix_header_contents = <<-EOS
                              EOS
-  s.module_map = "QHCoreLib/QHCoreLib.modulemap"
+  #s.module_map = "QHCoreLib/QHCoreLib.modulemap"
 
   s.subspec 'QHBase' do |ss|
     ss.source_files = "QHCoreLib/Base/**/*.{h,m}"

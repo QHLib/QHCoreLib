@@ -9,8 +9,8 @@
 #ifndef QHNetworkApi_internal_h
 #define QHNetworkApi_internal_h
 
-#import "QHNetworkApi.h"
-#import "QHNetworkWorker.h"
+#import <QHCoreLib/QHNetworkApi.h>
+#import <QHCoreLib/QHNetworkWorker.h>
 
 
 @interface QHNetworkApi ()
