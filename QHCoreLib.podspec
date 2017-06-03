@@ -1,7 +1,7 @@
 # coding: utf-8
 Pod::Spec.new do |s|
   s.name         = "QHCoreLib"
-  s.version      = "0.0.7"
+  s.version      = "0.0.8"
   s.summary      = "QHCoreLib inlucdes some macros and util classes."
   s.homepage     = "https://github.com/QHLib/QHCoreLib.git"
   s.license      = "MIT"
@@ -13,20 +13,13 @@ Pod::Spec.new do |s|
 
   s.requires_arc = true
 
-  s.source_files  = "QHCoreLib/QHCoreLib.h"
-  s.public_header_files = "QHCoreLib/QHCoreLib.h"
+  s.source_files  = "QHCoreLib/QHCoreLib.h", "QHCoreLib/QHCoreLib+All.h"
+  s.public_header_files = "QHCoreLib/QHCoreLib.h", "QHCoreLib/QHCoreLib+All.h"
   s.prefix_header_contents = <<-EOS
                              EOS
-  #s.module_map = "QHCoreLib/QHCoreLib.modulemap"
-
-  s.subspec 'All' do |ss|
-    ss.source_files  = "QHCoreLib/QHCoreLib+All.h"
-    ss.public_header_files = "QHCoreLib/QHCoreLib+All.h"
-    ss.dependency 'QHCoreLib/QHBase'
-    ss.dependency 'QHCoreLib/QHLog'
-    ss.dependency 'QHCoreLib/QHProfiler'
-    ss.dependency 'QHCoreLib/QHNetwork'
-  end
+  s.xcconfig = {
+    "OTHER_LDFLAGS" => "-ObjC",
+  }
 
   s.subspec 'QHBase' do |ss|
     ss.source_files = "QHCoreLib/Base/**/*.{h,m}"

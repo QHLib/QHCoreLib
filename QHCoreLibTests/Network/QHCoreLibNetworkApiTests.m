@@ -71,9 +71,9 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
 
 - (void)testLoadSucceed
 {
-    XCTestExpectation *expect = [[XCTestExpectation alloc] initWithDescription:@"load 'http://tctony.github.io/test_json'"];
+    XCTestExpectation *expect = [[XCTestExpectation alloc] initWithDescription:@"load 'http://http.tctony.xyz/test_json'"];
 
-    QHNetworkTestApi *api = [[QHNetworkTestApi alloc] initWithUrl:@"http://tctony.github.io/test_json"];
+    QHNetworkTestApi *api = [[QHNetworkTestApi alloc] initWithUrl:@"http://http.tctony.xyz/test_json"];
     [api loadWithSuccess:^(QHNetworkTestApi *api, QHNetworkTestApiResult *result) {
         [expect fulfill];
     } fail:^(QHNetworkTestApi *api, NSError *error) {

@@ -5,18 +5,21 @@ framework module QHCoreLib {
     export *
 
     explicit module All {
+        header "QHCoreLib+All.h"
         export *
         export QHLog
         export QHProfiler
-        export QHNetwork
+        export QHNetwork 
     }
 
     explicit module QHLog {
+        header "QHLog.h"
         header "QHLogUtil.h"
         export *
     }
 
     explicit module QHProfiler {
+        header "QHProfiler.h"
         header "QHClockEntry.h"
         export *
     }
