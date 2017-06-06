@@ -118,4 +118,13 @@ do { \
     _Pragma("clang diagnostic pop") \
 } while (0);
 
+
+#define QH_msgSendFunc_void_void(_name) QH_msgSendFunc_void_object(_name, void)
+#define QH_msgSendFunc_void_object(_name, _returnType) \
+_returnType(*_name)(id, SEL) = (_returnType(*)(id, SEL))objc_msgSend
+
+#define QH_msgSendFunc_params_void(_name, ...) QH_msgSendFunc_params_object(_name, void, __VA_ARGS__)
+#define QH_msgSendFunc_params_object(_name, _returnType, ...) \
+_returnType(*_name)(id, SEL, __VA_ARGS__) = (_returnType(*)(id, SEL, __VA_ARGS__))objc_msgSend
+
 #endif /* QHDefines_h */

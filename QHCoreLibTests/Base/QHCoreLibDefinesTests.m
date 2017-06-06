@@ -9,7 +9,7 @@
 #import <XCTest/XCTest.h>
 
 #import <QHCoreLib/QHDefines.h>
-
+#import <objc/message.h>
 
 @interface __singleton : NSObject
 QH_SINGLETON_DEF
@@ -127,5 +127,50 @@ QH_SINGLETON_IMP
         [self performSelector:selector withObject:nil];
     } QH_SUPPRESS_PERFORM_SELECTOR_LEAK_WARNING_END;
 }
+
+
+- (void)testMsgSend
+{
+    QH_msgSendFunc_void_void(f0);
+    f0(self, @checkselector0(self, void_void));
+
+    QH_msgSendFunc_void_object(f1, NSString *);
+    NSString *str = f1(self, @checkselector0(self, void_object));
+    XCTAssertTrue(QH_IS_STRING(str));
+
+    QH_msgSendFunc_void_object(desc, NSString *);
+    XCTAssertEqualObjects(desc(self, @selector(description)), [self description]);
+
+    QH_msgSendFunc_params_void(f4, NSString *, int);
+    f4(self, @checkselector(self, params_void:, int:) , @"", 0);
+
+    QH_msgSendFunc_params_object(f5, NSString *, NSString *, id, int);
+    str = f5(self, @checkselector(self, params_object:, obj:, int:), @"", nil, 0);
+    XCTAssertEqualObjects(@"", str);
+}
+
+- (void)void_void
+{
+    XCTAssertTrue(YES);
+}
+
+- (NSString *)void_object
+{
+    XCTAssertTrue(YES);
+    return [NSString new];
+}
+
+- (void)params_void:(NSString *)str int:(int)i
+{
+    XCTAssertTrue(YES);
+}
+
+- (NSString *)params_object:(NSString *)str obj:(id)obj int:(int)i
+{
+    XCTAssertTrue(YES);
+    return @"";
+}
+
+
 
 @end
