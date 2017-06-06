@@ -32,7 +32,7 @@ void QHDispatchSyncMainSafe(dispatch_block_t block)
     if (block == nil) return;
 
     if (QHIsMainQueue()) {
-        block();
+        QHBlockInvoke(block, NULL, 0);
     }
     else if (QHIsMainThread()) {
         // prefer to ensure 'sync' than 'main queue' when currently
@@ -40,11 +40,11 @@ void QHDispatchSyncMainSafe(dispatch_block_t block)
         QHCoreLibWarn(@"can't assure main queue for dispatch sync main, because we are"
                       @"currently on background queue that running on main thread!\n%@",
                       QHCallStackShort());
-        block();
+        QHBlockInvoke(block, NULL, 0);
     }
     else {
         dispatch_sync(dispatch_get_main_queue(), ^{
-            block();
+            QHBlockInvoke(block, NULL, 0);
         });
     }
 }
@@ -54,7 +54,7 @@ void QHDispatchAsyncMain(dispatch_block_t block)
     if (block == nil) return;
 
     dispatch_async(dispatch_get_main_queue(), ^{
-        block();
+        QHBlockInvoke(block, NULL, 0);
     });
 }
 
@@ -63,7 +63,41 @@ void QHDispatchAsyncDefault(dispatch_block_t block)
     if (block == nil) return;
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        block();
+        QHBlockInvoke(block, NULL, 0);
     });
 }
 
+BOOL QHBlockInvoke(dispatch_block_t block, const char *filePath, int line)
+{
+    if (block == nil) {
+        return NO;
+    }
+
+#if DEBUG
+    block();
+    return YES;
+#else
+    @try {
+        block();
+
+        return YES;
+    }
+    @catch(NSException *exception) {
+        if (filePath != NULL) {
+            QHCoreLibWarn(@"(%@:%d) %@ throws exception: %@\n%@",
+                          [[NSString stringWithFormat:@"%s", filePath] lastPathComponent],
+                          line,
+                          block,
+                          [exception qh_description],
+                          QHCallStackShort());
+        }
+        else {
+            QHCoreLibWarn(@"%@ throws exception: %@\n%@",
+                          block,
+                          [exception qh_description],
+                          QHCallStackShort());
+        }
+        return NO;
+    }
+#endif
+}

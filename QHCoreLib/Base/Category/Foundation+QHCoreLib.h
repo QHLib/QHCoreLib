@@ -76,3 +76,9 @@
 - (void)qh_setObject:(id)anObject forKey:(id<NSCopying>)aKey;
 
 @end
+
+@interface NSException (QHCoreLib)
+
+- (NSString *)qh_description;
+
+@end

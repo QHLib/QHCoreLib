@@ -166,6 +166,7 @@
 		EA1D44331ED95FBC002177BF /* QHClockEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHClockEntry.h; sourceTree = "<group>"; };
 		EA1D44341ED95FBC002177BF /* QHClockEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHClockEntry.m; sourceTree = "<group>"; };
 		EAAA79E81ED9639A008135BE /* QHCoreLibClockEntryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHCoreLibClockEntryTests.m; sourceTree = "<group>"; };
+		EAAE58E21EE6B5780084FA69 /* QHCoreLibTests.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHCoreLibTests.pch; sourceTree = "<group>"; };
 		EAE3C7A21EE12A0F00A93456 /* QHProfiler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHProfiler.h; sourceTree = "<group>"; };
 		EAE3C7A31EE12A4F00A93456 /* QHLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHLog.h; sourceTree = "<group>"; };
 		F2B4A6B4945BFE0B2872201F /* Pods_QHCoreLibTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QHCoreLibTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -229,6 +230,7 @@
 			children = (
 				EA1D43061ED70BA3002177BF /* Info.plist */,
 				EA1D43041ED70BA3002177BF /* QHCoreLibTests.m */,
+				EAAE58E21EE6B5780084FA69 /* QHCoreLibTests.pch */,
 				EA1D430E1ED70C7B002177BF /* Base */,
 				EA1D431A1ED70C7B002177BF /* Log */,
 				EAAA79E71ED9639A008135BE /* Profiler */,
@@ -779,6 +781,7 @@
 			baseConfigurationReference = 0BF5B35E29ACCBA6610B6542 /* Pods-QHCoreLibTests.debug.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_TEAM = XD4G683TDY;
+				GCC_PREFIX_HEADER = QHCoreLibTests/QHCoreLibTests.pch;
 				INFOPLIST_FILE = QHCoreLibTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tencent.QHLib.QHCoreLibTests;
@@ -791,6 +794,7 @@
 			baseConfigurationReference = A4FB93821E521314C7F610C2 /* Pods-QHCoreLibTests.release.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_TEAM = XD4G683TDY;
+				GCC_PREFIX_HEADER = QHCoreLibTests/QHCoreLibTests.pch;
 				INFOPLIST_FILE = QHCoreLibTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tencent.QHLib.QHCoreLibTests;

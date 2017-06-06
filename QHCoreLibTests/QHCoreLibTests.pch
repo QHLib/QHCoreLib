@@ -1,0 +1,21 @@
+//
+//  QHCoreLibTests.pch
+//  QHCoreLib
+//
+//  Created by changtang on 2017/6/6.
+//  Copyright © 2017年 Tencent. All rights reserved.
+//
+
+#ifndef QHCoreLibTests_pch
+#define QHCoreLibTests_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#if DEBUG
+#   define QH_XCTAssertThrows_DEBUG XCTAssertThrows
+#else
+#   define QH_XCTAssertThrows_DEBUG XCTAssertNoThrow
+#endif
+
+#endif /* QHCoreLibTests_pch */

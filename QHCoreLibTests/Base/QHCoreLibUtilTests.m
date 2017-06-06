@@ -120,4 +120,19 @@
                       timeout:1.0];
 }
 
+- (void)testBlockInvoke
+{
+    dispatch_block_t block = ^{
+        @throw [NSException exceptionWithName:@"ShouldThrow"
+                                       reason:@"Unittest"
+                                     userInfo:nil];
+    };
+
+#if DEBUG
+    XCTAssertThrows(QH_BLOCK_INVOKE(block));
+#else
+    XCTAssertFalse(QH_BLOCK_INVOKE(block));
+#endif
+}
+
 @end

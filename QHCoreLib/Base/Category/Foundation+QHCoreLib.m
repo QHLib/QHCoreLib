@@ -244,3 +244,16 @@ QH_DUMMY_CLASS(FoudationQHCoreLib)
 }
 
 @end
+
+@implementation NSException (QHCoreLib)
+
+- (NSString *)qh_description
+{
+    return [NSString stringWithFormat:@"(%@, %@, %@, %@)",
+            NSStringFromClass([self class]),
+            self.name,
+            self.reason,
+            self.userInfo];
+}
+
+@end

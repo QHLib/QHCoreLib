@@ -25,7 +25,12 @@ QH_EXTERN void QHDispatchSyncMainSafe(dispatch_block_t block);
 QH_EXTERN void QHDispatchAsyncMain(dispatch_block_t block);
 QH_EXTERN void QHDispatchAsyncDefault(dispatch_block_t block);
 
-
 #define QHCallStackShort() QHCallStackSlice(0, 6)
 #define QHCallStackSlice(_start, _length) \
     [[NSThread callStackSymbols] qh_sliceFromStart:_start length:_length]
+
+
+// safe invoke block
+// return YES if no error occurs while executing the block
+QH_EXTERN BOOL QHBlockInvoke(dispatch_block_t block, const char *filePath, int line);
+#define QH_BLOCK_INVOKE(block) QHBlockInvoke(block, __FILE__, __LINE__)

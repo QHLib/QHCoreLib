@@ -42,15 +42,15 @@
 
     QHClockEntry *clock = [[QHClockEntry alloc] init];
 
-    XCTAssertThrows([clock end]);
-    XCTAssertThrows([clock elapsedTimeInMiliseconds]);
-    XCTAssertThrows([clock spentTimeInMiliseconds]);
+    QH_XCTAssertThrows_DEBUG([clock end]);
+    QH_XCTAssertThrows_DEBUG([clock elapsedTimeInMiliseconds]);
+    QH_XCTAssertThrows_DEBUG([clock spentTimeInMiliseconds]);
 
     [clock start];
 
-    XCTAssertThrows([clock start]);
+    QH_XCTAssertThrows_DEBUG([clock start]);
     XCTAssertNoThrow([clock elapsedTimeInMiliseconds]);
-    XCTAssertThrows([clock spentTimeInMiliseconds]);
+    QH_XCTAssertThrows_DEBUG([clock spentTimeInMiliseconds]);
 
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 

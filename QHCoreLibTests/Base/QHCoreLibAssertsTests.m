@@ -56,8 +56,7 @@
             QHAssert(0 == 1, @"assert 0 == 1 will throw");
         };
 
-        //block();
-        XCTAssertThrows(block());
+        QH_XCTAssertThrows_DEBUG(block());
     }
 }
 
@@ -76,11 +75,11 @@
         QHAssertNotMainQueue();
     });
 
-    id obj = nil;
-    dispatch_block_t block = ^{
+    void (^block)(id) = ^(id obj){
         QHAssertParam(obj);
     };
-    XCTAssertThrows(block());
+
+    QH_XCTAssertThrows_DEBUG(block(nil));
 }
 
 - (void)testAssertReturnVoid
