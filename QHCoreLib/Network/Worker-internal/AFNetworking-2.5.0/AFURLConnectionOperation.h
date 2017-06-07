@@ -27,6 +27,10 @@
 #import "AFURLResponseSerialization.h"
 #import "AFSecurityPolicy.h"
 
+#ifndef AF_APP_EXTENSIONS
+#define AF_APP_EXTENSIONS
+#endif
+
 /**
  `AFURLConnectionOperation` is a subclass of `NSOperation` that implements `NSURLConnection` delegate methods.
 
