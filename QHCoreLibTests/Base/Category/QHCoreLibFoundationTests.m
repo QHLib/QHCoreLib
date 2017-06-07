@@ -135,4 +135,9 @@
     XCTAssertEqualObjects(@2, dict[@1]);
 }
 
+- (void)testUserDefaults
+{
+    XCTAssertNoThrow([[NSUserDefaults standardUserDefaults] qh_setObject:@{ @1: @1 } forKey:@"anykey"]);
+}
+
 @end

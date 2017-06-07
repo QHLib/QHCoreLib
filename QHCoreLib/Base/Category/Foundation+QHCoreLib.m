@@ -245,6 +245,24 @@ QH_DUMMY_CLASS(FoudationQHCoreLib)
 
 @end
 
+@implementation NSUserDefaults (QHCoreLib)
+
+- (void)qh_setObject:(id)object forKey:(NSString *)key
+{
+    @try {
+        [self setObject:object forKey:key];
+    }
+    @catch (NSException *exception) {
+        QHCoreLibWarn(@"set object(%@) for key(%@) in %@ failed: %@\n%@",
+                      object, key, self,
+                      [exception qh_description],
+                      QHCallStackShort());
+    }
+    @finally {}
+}
+
+@end
+
 @implementation NSException (QHCoreLib)
 
 - (NSString *)qh_description

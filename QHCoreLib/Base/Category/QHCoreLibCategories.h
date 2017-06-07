@@ -11,6 +11,7 @@
 
 #import <QHCoreLib/QHDefaultValue.h>
 #import <QHCoreLib/Foundation+QHCoreLib.h>
+#import <QHCoreLib/NSObject+QHUserDefaultsProperty.h>
 
 
 #endif /* QHCoreLibCategories_h */

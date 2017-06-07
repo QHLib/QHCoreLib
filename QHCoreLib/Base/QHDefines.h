@@ -31,10 +31,12 @@
 
 //define QHCoreLibFatal if needed
 
+#define QHCoreLibWarn(...) NSLog(@"QHCoreLibWarn: " __VA_ARGS__)
+
 #if QH_DEBUG
-#   define QHCoreLibWarn(...) NSLog(@"QHCoreLibWarn: " __VA_ARGS__)
+#   define QHCoreLibDebug(...) NSLog(@"QHCoreLibDebug: " __VA_ARGS__)
 #else
-#   define QHCoreLibWarn(...)
+#   define QHCoreLibDebug(...)
 #endif
 
 #if defined(__cplusplus)

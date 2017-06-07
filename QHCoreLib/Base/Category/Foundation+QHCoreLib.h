@@ -77,8 +77,15 @@
 
 @end
 
+@interface NSUserDefaults (QHCoreLib)
+
+- (void)qh_setObject:(id)object forKey:(NSString *)key;
+
+@end
+
 @interface NSException (QHCoreLib)
 
 - (NSString *)qh_description;
 
 @end
+
