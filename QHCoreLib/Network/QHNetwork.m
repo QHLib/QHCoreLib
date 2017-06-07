@@ -89,16 +89,6 @@ QH_SINGLETON_IMP
     [manager startMonitoring];
 }
 
-- (void)startMonitoring
-{
-    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
-}
-
-- (void)stopMonitoring
-{
-    [[AFNetworkReachabilityManager sharedManager] stopMonitoring];
-}
-
 - (void)reloadProxyStatus
 {
     CFDictionaryRef settingsRef = CFNetworkCopySystemProxySettings();
@@ -205,6 +195,21 @@ QH_SINGLETON_IMP
 - (BOOL)isEnableProxy
 {
     return self.hasProxySettings;
+}
+
+- (void)startMonitoring
+{
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+}
+
+- (void)stopMonitoring
+{
+    [[AFNetworkReachabilityManager sharedManager] stopMonitoring];
+}
+
+- (void)cancelAll
+{
+    [QHNetworkWorker cancelAll];
 }
 
 @end

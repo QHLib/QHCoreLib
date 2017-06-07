@@ -45,6 +45,8 @@ QH_SINGLETON_DEF
 - (void)startMonitoring;
 - (void)stopMonitoring;
 
+- (void)cancelAll;
+
 @end
 
 
