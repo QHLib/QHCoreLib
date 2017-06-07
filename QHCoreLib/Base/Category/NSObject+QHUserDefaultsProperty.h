@@ -10,7 +10,9 @@
 #import <Foundation/Foundation.h>
 
 
-@interface NSObject (QHStandardUserDefaultsProperty)
+@interface NSObject (QHUserDefaultsProperty)
+
++ (NSString *)qh_userDefaultsKeyForProperty:(NSString *)propertyName;
 
 + (void)qh_synthesizeBOOLProperty:(NSString *)propertyName
                            forKey:(NSString *)userDefaultsKey

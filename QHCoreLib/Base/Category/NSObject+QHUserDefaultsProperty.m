@@ -24,7 +24,14 @@
 #endif
 
 
-@implementation NSObject (QHStandardUserDefaultsProperty)
+@implementation NSObject (QHUserDefaultsProperty)
+
++ (NSString *)qh_userDefaultsKeyForProperty:(NSString *)propertyName
+{
+    return [NSString stringWithFormat:@"QHUserDefaultPropertyKey-%@-%@",
+            NSStringFromClass([self class]),
+            propertyName];
+}
 
 + (void)qh_synthesizeBOOLProperty:(NSString *)propertyName
                            forKey:(NSString *)userDefaultsKey

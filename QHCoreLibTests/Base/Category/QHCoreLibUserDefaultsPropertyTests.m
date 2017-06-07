@@ -110,4 +110,13 @@
                                                         userDefaults:testUserDefaults]);
 }
 
+- (void)testKey
+{
+    NSString *key = [NSString stringWithFormat:@"QHUserDefaultPropertyKey-%@-%@",
+                     NSStringFromClass([self class]),
+                     @"testProperty"];
+    XCTAssertEqualObjects([[self class] qh_userDefaultsKeyForProperty:@"testProperty"],
+                          key);
+}
+
 @end
