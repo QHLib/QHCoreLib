@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 
+#import <QHCoreLib/QHDefines.h>
 #import <QHCoreLib/NSObject+QHUserDefaultsProperty.h>
 
 
@@ -114,8 +115,8 @@
 {
     NSString *key = [NSString stringWithFormat:@"QHUserDefaultPropertyKey-%@-%@",
                      NSStringFromClass([self class]),
-                     @"testProperty"];
-    XCTAssertEqualObjects([[self class] qh_userDefaultsKeyForProperty:@"testProperty"],
+                     QH_PROPETY_NAME(testBool)];
+    XCTAssertEqualObjects([[self class] qh_userDefaultsKeyForProperty:QH_PROPETY_NAME(testBool)],
                           key);
 }
 

@@ -129,4 +129,8 @@ _returnType(*_name)(id, SEL) = (_returnType(*)(id, SEL))objc_msgSend
 #define QH_msgSendFunc_params_object(_name, _returnType, ...) \
 _returnType(*_name)(id, SEL, __VA_ARGS__) = (_returnType(*)(id, SEL, __VA_ARGS__))objc_msgSend
 
+
+#define QH_PROPETY_NAME(_property) NSStringFromSelector(@selector(_property))
+
+
 #endif /* QHDefines_h */
