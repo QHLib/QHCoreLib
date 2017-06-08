@@ -103,7 +103,7 @@
     XCTAssertEqualObjects(self.testDict, @{ @"1": @1 });
     XCTAssertEqualObjects([testUserDefaults dictionaryForKey:@"testDict"], @{ @"1": @1 });
 
-    XCTAssertNoThrow(self.testDict = @{ @1: @2 });
+    QH_XCTAssertThrows_DEBUG(self.testDict = @{ @1: @2 });
 
     QH_XCTAssertThrows_DEBUG([[self class] qh_synthesizeBOOLProperty:@"testBool"
                                                               forKey:@"testBool"

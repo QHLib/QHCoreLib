@@ -265,10 +265,10 @@ QH_DUMMY_CLASS(FoudationQHCoreLib)
         [self setObject:object forKey:key];
     }
     @catch (NSException *exception) {
-        QHCoreLibWarn(@"set object(%@) for key(%@) in %@ failed: %@\n%@",
-                      object, key, self,
-                      [exception qh_description],
-                      QHCallStackShort());
+        QHCoreLibFatal(@"set object(%@) for key(%@) in %@ failed: %@\n%@",
+                       object, key, self,
+                       [exception qh_description],
+                       QHCallStackShort());
     }
     @finally {}
 }

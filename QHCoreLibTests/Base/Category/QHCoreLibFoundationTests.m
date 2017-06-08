@@ -137,7 +137,7 @@
 
 - (void)testUserDefaults
 {
-    XCTAssertNoThrow([[NSUserDefaults standardUserDefaults] qh_setObject:@{ @1: @1 } forKey:@"anykey"]);
+    QH_XCTAssertThrows_DEBUG([[NSUserDefaults standardUserDefaults] qh_setObject:@{ @1: @1 } forKey:@"anykey"]);
 }
 
 @end

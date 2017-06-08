@@ -7,6 +7,7 @@
 //
 
 #import "QHUtil.h"
+#import "QHAsserts.h"
 
 
 BOOL QHIsMainQueue()
@@ -73,10 +74,6 @@ BOOL QHBlockInvoke(dispatch_block_t block, const char *filePath, int line)
         return NO;
     }
 
-#if DEBUG
-    block();
-    return YES;
-#else
     @try {
         block();
 
@@ -84,20 +81,19 @@ BOOL QHBlockInvoke(dispatch_block_t block, const char *filePath, int line)
     }
     @catch(NSException *exception) {
         if (filePath != NULL) {
-            QHCoreLibWarn(@"(%@:%d) %@ throws exception: %@\n%@",
-                          [[NSString stringWithFormat:@"%s", filePath] lastPathComponent],
-                          line,
-                          block,
-                          [exception qh_description],
-                          QHCallStackShort());
+            QHCoreLibFatal(@"(%@:%d) %@ throws exception: %@\n%@",
+                           [[NSString stringWithFormat:@"%s", filePath] lastPathComponent],
+                           line,
+                           block,
+                           [exception qh_description],
+                           QHCallStackShort());
         }
         else {
-            QHCoreLibWarn(@"%@ throws exception: %@\n%@",
-                          block,
-                          [exception qh_description],
-                          QHCallStackShort());
+            QHCoreLibFatal(@"%@ throws exception: %@\n%@",
+                           block,
+                           [exception qh_description],
+                           QHCallStackShort());
         }
         return NO;
     }
-#endif
 }

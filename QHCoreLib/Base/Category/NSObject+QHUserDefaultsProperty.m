@@ -62,9 +62,10 @@
             @encode(SEL)[0],
         };
         IMP old_imp = class_replaceMethod(self, sel, imp, encoding);
-        QHAssert(old_imp == nil, @"get method already exist: %@", NSStringFromSelector(sel));
         if (old_imp) {
-            QHCoreLibWarn(@"overwriting get method: %@ in %@", NSStringFromSelector(sel), NSStringFromClass(self));
+            QHCoreLibFatal(@"duplicate synthesize user defaults property getter: %@ in %@",
+                           NSStringFromSelector(sel),
+                           NSStringFromClass(self));
         }
     }
 
@@ -85,9 +86,10 @@
             @encode(BOOL)[0],
         };
         IMP old_imp = class_replaceMethod(self, sel, imp, encoding);
-        QHAssert(old_imp==nil, @"set method already exist: %@", NSStringFromSelector(sel));
         if (old_imp) {
-            QHCoreLibWarn(@"overwriting set method: %@ in %@", NSStringFromSelector(sel), NSStringFromClass(self));
+            QHCoreLibFatal(@"duplicate synthesize user defaults property setter: %@ in %@",
+                           NSStringFromSelector(sel),
+                           NSStringFromClass(self));
         }
     }
 }
@@ -121,9 +123,10 @@
             @encode(SEL)[0],
         };
         IMP old_imp = class_replaceMethod(self, sel, imp, encoding);
-        QHAssert(old_imp == nil, @"get method already exist: %@", NSStringFromSelector(sel));
         if (old_imp) {
-            QHCoreLibWarn(@"overwriting get method: %@ in %@", NSStringFromSelector(sel), NSStringFromClass(self));
+            QHCoreLibFatal(@"duplicate synthesize user defaults property getter: %@ in %@",
+                           NSStringFromSelector(sel),
+                           NSStringFromClass(self));
         }
     }
 
@@ -144,9 +147,10 @@
             @encode(NSInteger)[0],
         };
         IMP old_imp = class_replaceMethod(self, sel, imp, encoding);
-        QHAssert(old_imp==nil, @"set method already exist: %@", NSStringFromSelector(sel));
         if (old_imp) {
-            QHCoreLibWarn(@"overwriting set method: %@ in %@", NSStringFromSelector(sel), NSStringFromClass(self));
+            QHCoreLibFatal(@"duplicate synthesize user defaults property setter: %@ in %@",
+                           NSStringFromSelector(sel),
+                           NSStringFromClass(self));
         }
     }
 }
@@ -180,9 +184,10 @@
             @encode(SEL)[0],
         };
         IMP old_imp = class_replaceMethod(self, sel, imp, encoding);
-        QHAssert(old_imp == nil, @"get method already exist: %@", NSStringFromSelector(sel));
         if (old_imp) {
-            QHCoreLibWarn(@"overwriting get method: %@ in %@", NSStringFromSelector(sel), NSStringFromClass(self));
+            QHCoreLibFatal(@"duplicate synthesize user defaults property getter: %@ in %@",
+                           NSStringFromSelector(sel),
+                           NSStringFromClass(self));
         }
     }
 
@@ -203,9 +208,10 @@
             @encode(NSInteger)[0],
         };
         IMP old_imp = class_replaceMethod(self, sel, imp, encoding);
-        QHAssert(old_imp==nil, @"set method already exist: %@", NSStringFromSelector(sel));
         if (old_imp) {
-            QHCoreLibWarn(@"overwriting set method: %@ in %@", NSStringFromSelector(sel), NSStringFromClass(self));
+            QHCoreLibFatal(@"duplicate synthesize user defaults property setter: %@ in %@",
+                           NSStringFromSelector(sel),
+                           NSStringFromClass(self));
         }
     }
 }
@@ -239,9 +245,10 @@
             @encode(SEL)[0],
         };
         IMP old_imp = class_replaceMethod(self, sel, imp, encoding);
-        QHAssert(old_imp == nil, @"get method already exist: %@", NSStringFromSelector(sel));
         if (old_imp) {
-            QHCoreLibWarn(@"overwriting get method: %@ in %@", NSStringFromSelector(sel), NSStringFromClass(self));
+            QHCoreLibFatal(@"duplicate synthesize user defaults property getter: %@ in %@",
+                           NSStringFromSelector(sel),
+                           NSStringFromClass(self));
         }
     }
 
@@ -263,9 +270,10 @@
             @encode(NSString *)[0],
         };
         IMP old_imp = class_replaceMethod(self, sel, imp, encoding);
-        QHAssert(old_imp==nil, @"set method already exist: %@", NSStringFromSelector(sel));
         if (old_imp) {
-            QHCoreLibWarn(@"overwriting set method: %@ in %@", NSStringFromSelector(sel), NSStringFromClass(self));
+            QHCoreLibFatal(@"duplicate synthesize user defaults property setter: %@ in %@",
+                           NSStringFromSelector(sel),
+                           NSStringFromClass(self));
         }
     }
 }
@@ -299,9 +307,10 @@
             @encode(SEL)[0],
         };
         IMP old_imp = class_replaceMethod(self, sel, imp, encoding);
-        QHAssert(old_imp == nil, @"get method already exist: %@", NSStringFromSelector(sel));
         if (old_imp) {
-            QHCoreLibWarn(@"overwriting get method: %@ in %@", NSStringFromSelector(sel), NSStringFromClass(self));
+            QHCoreLibFatal(@"duplicate synthesize user defaults property getter: %@ in %@",
+                           NSStringFromSelector(sel),
+                           NSStringFromClass(self));
         }
     }
 
@@ -323,9 +332,10 @@
             @encode(NSArray *)[0],
         };
         IMP old_imp = class_replaceMethod(self, sel, imp, encoding);
-        QHAssert(old_imp==nil, @"set method already exist: %@", NSStringFromSelector(sel));
         if (old_imp) {
-            QHCoreLibWarn(@"overwriting set method: %@ in %@", NSStringFromSelector(sel), NSStringFromClass(self));
+            QHCoreLibFatal(@"duplicate synthesize user defaults property setter: %@ in %@",
+                           NSStringFromSelector(sel),
+                           NSStringFromClass(self));
         }
     }
 }
@@ -359,9 +369,10 @@
             @encode(SEL)[0],
         };
         IMP old_imp = class_replaceMethod(self, sel, imp, encoding);
-        QHAssert(old_imp == nil, @"get method already exist %@", NSStringFromSelector(sel));
         if (old_imp) {
-            QHCoreLibWarn(@"overwriting get method: %@ in %@", NSStringFromSelector(sel), NSStringFromClass(self));
+            QHCoreLibFatal(@"duplicate synthesize user defaults property getter: %@ in %@",
+                           NSStringFromSelector(sel),
+                           NSStringFromClass(self));
         }
     }
 
@@ -383,9 +394,10 @@
             @encode(NSDictionary *)[0],
         };
         IMP old_imp = class_replaceMethod(self, sel, imp, encoding);
-        QHAssert(old_imp==nil, @"set method already exist: %@", NSStringFromSelector(sel));
         if (old_imp) {
-            QHCoreLibWarn(@"overwriting set method: %@ in %@", NSStringFromSelector(sel), NSStringFromClass(self));
+            QHCoreLibFatal(@"duplicate synthesize user defaults property setter: %@ in %@",
+                           NSStringFromSelector(sel),
+                           NSStringFromClass(self));
         }
     }
 }
