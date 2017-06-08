@@ -30,16 +30,6 @@
 #endif
 
 
-#define QHCoreLibFatal(...)         NSLog(@"QHCoreLibFatal: " __VA_ARGS__); QHAssert(NO, @"Fatal error occurs, see above!!!")
-
-#define QHCoreLibWarn(...)          NSLog(@"QHCoreLibWarn: " __VA_ARGS__)
-
-#if QH_DEBUG
-#   define QHCoreLibDebug(...)      NSLog(@"QHCoreLibDebug: " __VA_ARGS__)
-#else
-#   define QHCoreLibDebug(...)
-#endif
-
 #if defined(__cplusplus)
 #   define QH_EXTERN           extern "C"
 #   define QH_EXTERN_C_BEGIN   extern "C" {

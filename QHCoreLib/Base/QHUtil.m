@@ -7,7 +7,8 @@
 //
 
 #import "QHUtil.h"
-#import "QHAsserts.h"
+
+#import "QHMacros.h"
 
 
 BOOL QHIsMainQueue()

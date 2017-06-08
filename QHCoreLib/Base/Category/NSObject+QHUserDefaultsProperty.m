@@ -11,8 +11,7 @@
 
 #import <objc/runtime.h>
 
-#import "QHDefines.h"
-#import "QHAsserts.h"
+#import "QHMacros.h"
 #import "Foundation+QHCoreLib.h"
 
 

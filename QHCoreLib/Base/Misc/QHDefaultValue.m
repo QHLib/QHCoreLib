@@ -8,7 +8,7 @@
 
 #import "QHDefaultValue.h"
 
-#import "QHDefines.h"
+#import "QHMacros.h"
 
 
 #define CHECK_NIL_OR_NULL() \
