@@ -105,33 +105,39 @@ QH_DUMMY_CLASS(FoudationQHCoreLib)
 @implementation NSArray (QHCoreLibDefaultValue)
 
 - (BOOL)qh_boolAtIndex:(NSUInteger)index
+          defaultValue:(BOOL)defaultValue
 {
-    return QHBool([self qh_objectAtIndex:index], NO);
+    return QHBool([self qh_objectAtIndex:index], defaultValue);
 }
 
 - (NSInteger)qh_integerAtIndex:(NSUInteger)index
+                  defaultValue:(NSInteger)defaultValue
 {
-    return QHInteger([self qh_objectAtIndex:index], 0);
+    return QHInteger([self qh_objectAtIndex:index], defaultValue);
 }
 
 - (double)qh_doubleAtIndex:(NSUInteger)index
+              defaultValue:(double)defaultValue
 {
-    return QHDouble([self qh_objectAtIndex:index], 0.0);
+    return QHDouble([self qh_objectAtIndex:index], defaultValue);
 }
 
 - (NSString *)qh_stringAtIndex:(NSUInteger)index
+                  defaultValue:(NSString *)defaultValue
 {
-    return QHString([self qh_objectAtIndex:index], @"");
+    return QHString([self qh_objectAtIndex:index], defaultValue);
 }
 
 - (NSArray *)qh_arrayAtIndex:(NSUInteger)index
+                defaultValue:(NSArray *)defaultValue
 {
-    return QHArray([self qh_objectAtIndex:index], @[]);
+    return QHArray([self qh_objectAtIndex:index], defaultValue);
 }
 
 - (NSDictionary *)qh_dictionaryAtIndex:(NSUInteger)index
+                          defaultValue:(NSDictionary *)defaultValue
 {
-    return QHDictionary([self qh_objectAtIndex:index], @{});
+    return QHDictionary([self qh_objectAtIndex:index], defaultValue);
 }
 
 @end
@@ -199,33 +205,39 @@ QH_DUMMY_CLASS(FoudationQHCoreLib)
 @implementation NSDictionary (QHCoreLibDefaultValue)
 
 - (BOOL)qh_boolForKey:(id<NSCopying>)key
+         defaultValue:(BOOL)defaultValue
 {
-    return QHBool([self objectForKey:key], NO);
+    return QHBool([self objectForKey:key], defaultValue);
 }
 
 - (NSInteger)qh_integerForKey:(id<NSCopying>)key
+                 defaultValue:(NSInteger)defaultValue
 {
-    return QHInteger([self objectForKey:key], 0);
+    return QHInteger([self objectForKey:key], defaultValue);
 }
 
 - (double)qh_doubleForKey:(id<NSCopying>)key
+             defaultValue:(double)defaultValue
 {
-    return QHDouble([self objectForKey:key], 0.0);
+    return QHDouble([self objectForKey:key], defaultValue);
 }
 
 - (NSString *)qh_stringForKey:(id<NSCopying>)key
+                 defaultValue:(NSString *)defaultValue
 {
-    return QHString([self objectForKey:key], @"");
+    return QHString([self objectForKey:key], defaultValue);
 }
 
 - (NSArray *)qh_arrayForKey:(id<NSCopying>)key
+               defaultValue:(NSArray *)defaultValue
 {
-    return QHArray([self objectForKey:key], @[]);
+    return QHArray([self objectForKey:key], defaultValue);
 }
 
 - (NSDictionary *)qh_dictionaryForKey:(id<NSCopying>)key
+                         defaultValue:(NSDictionary *)defaultValue
 {
-    return QHDictionary([self objectForKey:key], @{});
+    return QHDictionary([self objectForKey:key], defaultValue);
 }
 
 @end

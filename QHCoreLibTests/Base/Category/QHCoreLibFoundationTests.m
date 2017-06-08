@@ -52,23 +52,23 @@
 {
     NSArray *array = @[ [NSObject new], @YES, @1, @1.0, @"1", @[ @1 ], @{ @1: @1 } ];
 
-    XCTAssertEqual([array qh_boolAtIndex:0], NO);
-    XCTAssertEqual([array qh_boolAtIndex:1], YES);
+    XCTAssertEqual([array qh_boolAtIndex:0 defaultValue:NO], NO);
+    XCTAssertEqual([array qh_boolAtIndex:1 defaultValue:NO], YES);
 
-    XCTAssertEqual([array qh_integerAtIndex:0], 0);
-    XCTAssertEqual([array qh_integerAtIndex:2], 1);
+    XCTAssertEqual([array qh_integerAtIndex:0 defaultValue:0], 0);
+    XCTAssertEqual([array qh_integerAtIndex:2 defaultValue:-1], 1);
 
-    XCTAssertEqual([array qh_doubleAtIndex:0], 0.0);
-    XCTAssertEqual([array qh_doubleAtIndex:3], 1.0);
+    XCTAssertEqual([array qh_doubleAtIndex:0 defaultValue:0.0], 0.0);
+    XCTAssertEqual([array qh_doubleAtIndex:3 defaultValue:-1.0], 1.0);
 
-    XCTAssertEqualObjects([array qh_stringAtIndex:0], @"");
-    XCTAssertEqualObjects([array qh_stringAtIndex:4], @"1");
+    XCTAssertEqualObjects([array qh_stringAtIndex:0 defaultValue:@""], @"");
+    XCTAssertEqualObjects([array qh_stringAtIndex:4 defaultValue:@""], @"1");
 
-    XCTAssertEqualObjects([array qh_arrayAtIndex:0], @[]);
-    XCTAssertEqualObjects([array qh_arrayAtIndex:5], @[ @1 ]);
+    XCTAssertEqualObjects([array qh_arrayAtIndex:0 defaultValue:@[]], @[]);
+    XCTAssertEqualObjects([array qh_arrayAtIndex:5 defaultValue:@[]], @[ @1 ]);
 
-    XCTAssertEqualObjects([array qh_dictionaryAtIndex:0], @{});
-    XCTAssertEqualObjects([array qh_dictionaryAtIndex:6], @{ @1: @1 });
+    XCTAssertEqualObjects([array qh_dictionaryAtIndex:0 defaultValue:@{}], @{});
+    XCTAssertEqualObjects([array qh_dictionaryAtIndex:6 defaultValue:@{}], @{ @1: @1 });
 }
 
 - (void)testNSMutableArray
@@ -105,23 +105,23 @@
                             @4: @"1",
                             @5: @[ @1 ],
                             @6: @{ @1: @1 } };
-    XCTAssertEqual([dict qh_boolForKey:@0], NO);
-    XCTAssertEqual([dict qh_boolForKey:@1], YES);
+    XCTAssertEqual([dict qh_boolForKey:@0 defaultValue:NO], NO);
+    XCTAssertEqual([dict qh_boolForKey:@1 defaultValue:NO], YES);
 
-    XCTAssertEqual([dict qh_integerForKey:@0], 0);
-    XCTAssertEqual([dict qh_integerForKey:@2], 1);
+    XCTAssertEqual([dict qh_integerForKey:@0 defaultValue:0], 0);
+    XCTAssertEqual([dict qh_integerForKey:@2 defaultValue:0], 1);
 
-    XCTAssertEqual([dict qh_doubleForKey:@0], 0.0);
-    XCTAssertEqual([dict qh_doubleForKey:@3], 1.0);
+    XCTAssertEqual([dict qh_doubleForKey:@0 defaultValue:0.0], 0.0);
+    XCTAssertEqual([dict qh_doubleForKey:@3 defaultValue:0.0], 1.0);
 
-    XCTAssertEqualObjects([dict qh_stringForKey:@0], @"");
-    XCTAssertEqualObjects([dict qh_stringForKey:@4], @"1");
+    XCTAssertEqualObjects([dict qh_stringForKey:@0 defaultValue:@""], @"");
+    XCTAssertEqualObjects([dict qh_stringForKey:@4 defaultValue:@""], @"1");
 
-    XCTAssertEqualObjects([dict qh_arrayForKey:@0], @[]);
-    XCTAssertEqualObjects([dict qh_arrayForKey:@5], @[ @1 ]);
+    XCTAssertEqualObjects([dict qh_arrayForKey:@0 defaultValue:@[]], @[]);
+    XCTAssertEqualObjects([dict qh_arrayForKey:@5 defaultValue:@[]], @[ @1 ]);
 
-    XCTAssertEqualObjects([dict qh_dictionaryForKey:@0], @{});
-    XCTAssertEqualObjects([dict qh_dictionaryForKey:@6], @{ @1: @1 });
+    XCTAssertEqualObjects([dict qh_dictionaryForKey:@0 defaultValue:@{}], @{});
+    XCTAssertEqualObjects([dict qh_dictionaryForKey:@6 defaultValue:@{}], @{ @1: @1 });
 }
 
 - (void)testNSMutableDictionary

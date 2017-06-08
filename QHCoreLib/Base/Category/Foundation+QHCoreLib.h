@@ -25,17 +25,23 @@
 
 @interface NSArray (QHCoreLibDefaultValue)
 
-- (BOOL)qh_boolAtIndex:(NSUInteger)index;
+- (BOOL)qh_boolAtIndex:(NSUInteger)index
+          defaultValue:(BOOL)defaultValue;
 
-- (NSInteger)qh_integerAtIndex:(NSUInteger)index;
+- (NSInteger)qh_integerAtIndex:(NSUInteger)index
+                  defaultValue:(NSInteger)defaultValue;
 
-- (double)qh_doubleAtIndex:(NSUInteger)index;
+- (double)qh_doubleAtIndex:(NSUInteger)index
+              defaultValue:(double)defaultValue;
 
-- (NSString *)qh_stringAtIndex:(NSUInteger)index;
+- (NSString *)qh_stringAtIndex:(NSUInteger)index
+                  defaultValue:(NSString *)defaultValue;
 
-- (NSArray *)qh_arrayAtIndex:(NSUInteger)index;
+- (NSArray *)qh_arrayAtIndex:(NSUInteger)index
+                defaultValue:(NSArray *)defaultValue;
 
-- (NSDictionary *)qh_dictionaryAtIndex:(NSUInteger)index;
+- (NSDictionary *)qh_dictionaryAtIndex:(NSUInteger)index
+                          defaultValue:(NSDictionary *)defaultValue;
 
 @end
 
@@ -57,17 +63,23 @@
 
 @interface NSDictionary (QHCoreLibDefaultValue)
 
-- (BOOL)qh_boolForKey:(id<NSCopying>)key;
+- (BOOL)qh_boolForKey:(id<NSCopying>)key
+         defaultValue:(BOOL)defaultValue;
 
-- (NSInteger)qh_integerForKey:(id<NSCopying>)key;
+- (NSInteger)qh_integerForKey:(id<NSCopying>)key
+                 defaultValue:(NSInteger)defaultValue;
 
-- (double)qh_doubleForKey:(id<NSCopying>)key;
+- (double)qh_doubleForKey:(id<NSCopying>)key
+             defaultValue:(double)defaultValue;
 
-- (NSString *)qh_stringForKey:(id<NSCopying>)key;
+- (NSString *)qh_stringForKey:(id<NSCopying>)key
+                 defaultValue:(NSString *)defaultValue;
 
-- (NSArray *)qh_arrayForKey:(id<NSCopying>)key;
+- (NSArray *)qh_arrayForKey:(id<NSCopying>)key
+               defaultValue:(NSArray *)defaultValue;
 
-- (NSDictionary *)qh_dictionaryForKey:(id<NSCopying>)key;
+- (NSDictionary *)qh_dictionaryForKey:(id<NSCopying>)key
+                         defaultValue:(NSDictionary *)defaultValue;
 
 @end
 
