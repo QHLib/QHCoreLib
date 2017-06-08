@@ -11,7 +11,7 @@ bump:
 
 tag:
 	git tag "`podspec-bump --dump-version`"
-	git push --tags
+	git push --tags origin master
 
 push:
 	pod repo push qhlib --verbose
