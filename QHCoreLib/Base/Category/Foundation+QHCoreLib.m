@@ -17,6 +17,35 @@
 QH_DUMMY_CLASS(FoudationQHCoreLib)
 
 
+@implementation NSObject (QHCoreLib)
+
++ (instancetype)qh_cast:(id)obj
+{
+    return [self qh_cast:obj warnOnFailure:YES];
+}
+
++ (instancetype)qh_cast:(id)obj warnOnFailure:(BOOL)warnOnFailure
+{
+    if (obj == nil) return nil;
+
+    if ([obj isKindOfClass:self]) {
+        return obj;
+    }
+    else {
+        if (warnOnFailure == YES) {
+            QHCoreLibWarn(@"cast %@{%@} to %@ failed\n%@",
+                          NSStringFromClass([obj class]),
+                          obj,
+                          NSStringFromClass(self),
+                          QHCallStackShort());
+        }
+        return nil;
+    }
+}
+
+@end
+
+
 @implementation NSArray (QHCoreLib)
 
 - (NSArray *)qh_sliceFromStart:(NSUInteger)start length:(NSUInteger)length

@@ -9,6 +9,15 @@
 #import <Foundation/Foundation.h>
 
 
+@interface NSObject (QHCoreLib)
+
++ (instancetype)qh_cast:(id)obj; // warnOnFailure:YES
+
++ (instancetype)qh_cast:(id)obj warnOnFailure:(BOOL)warnOnFailure;
+
+@end
+
+
 @interface NSArray (QHCoreLib)
 
 - (NSArray *)qh_sliceFromStart:(NSUInteger)start length:(NSUInteger)length;

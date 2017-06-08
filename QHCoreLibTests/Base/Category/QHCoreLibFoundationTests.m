@@ -17,6 +17,20 @@
 
 @implementation QHCoreLibFoundationTests
 
+- (void)testNSObject
+{
+    id str = @"1";
+    id num = @1;
+
+    XCTAssertEqual([NSString qh_cast:str], str);
+    XCTAssertNil([NSString qh_cast:num]); // warn
+    XCTAssertNil([NSString qh_cast:num warnOnFailure:NO]); // no warn
+
+    XCTAssertEqual([NSNumber qh_cast:num], num);
+    XCTAssertNil([NSNumber qh_cast:str]); // warn
+    XCTAssertNil([NSNumber qh_cast:str warnOnFailure:NO]); // no warn
+}
+
 - (void)testNSArray
 {
     NSArray *array = @[ @1, @2, @3 ];
