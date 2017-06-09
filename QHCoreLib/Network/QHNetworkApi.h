@@ -26,12 +26,15 @@ typedef void (^QHNetworkApiFailBlock)(QHNetworkApi *api, NSError *error);
 \
 - (Class)resultClass; \
 
-#define QH_NETWORK_API_IMPL(API_TYPE, RESULT_TYPE) \
+#define QH_NETWORK_API_IMPL_DIRECT(API_TYPE, RESULT_TYPE) \
+QH_NETWORK_API_IMPL_INDIRECT(API_TYPE, RESULT_TYPE, QHNetworkApi, QHNetworkApiResult)
+
+#define QH_NETWORK_API_IMPL_INDIRECT(API_TYPE, RESULT_TYPE, SUPER_API_TYPE, SUPER_RESULT_TYPE) \
 - (void)loadWithSuccess:(void (^)(API_TYPE *api, RESULT_TYPE *result))success \
                    fail:(void (^)(API_TYPE *api, NSError *error))fail; \
 { \
-    [super loadWithSuccess:(QHNetworkApiSuccessBlock)success \
-                      fail:(QHNetworkApiFailBlock)fail]; \
+    [super loadWithSuccess:(void (^)(SUPER_API_TYPE *api, SUPER_RESULT_TYPE *result))success \
+                      fail:(void (^)(SUPER_API_TYPE *api, NSError *error))fail]; \
 } \
 \
 - (Class)resultClass \
@@ -79,6 +82,6 @@ NS_REQUIRES_SUPER;
 
 QH_NETWORK_API_RESULT_DECL(QHNetworkApi, QHNetworkApiResult);
 
-@property (nonatomic, strong) QHNetworkResponse *response;
+@property (nonatomic, readonly) QHNetworkResponse *response;
 
 @end

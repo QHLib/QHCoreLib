@@ -50,8 +50,12 @@ QH_SINGLETON_DEF
 @end
 
 
-#import "QHNetworkUtil.h"
-#import "QHNetworkRequest.h"
-#import "QHNetworkResponse.h"
-#import "QHNetworkWorker.h"
-#import "QHNetworkApi.h"
+#import <QHCoreLib/QHNetworkUtil.h>
+#import <QHCoreLib/QHNetworkRequest.h>
+#import <QHCoreLib/QHNetworkResponse.h>
+#import <QHCoreLib/QHNetworkWorker.h>
+#import <QHCoreLib/QHNetworkApi.h>
+#import <QHCoreLib/QHNetworkHttpApi.h>
+#import <QHCoreLib/QHNetworkHtmlApi.h>
+#import <QHCoreLib/QHNetworkJsonApi.h>
+#import <QHCoreLib/QHNetworkImageApi.h>

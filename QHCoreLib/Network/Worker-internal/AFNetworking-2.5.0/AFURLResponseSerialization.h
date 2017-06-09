@@ -101,6 +101,12 @@
 
 #pragma mark -
 
+@interface AFHTMLResponseSerializer : AFHTTPResponseSerializer
+
+@end
+
+#pragma mark -
+
 
 /**
  `AFJSONResponseSerializer` is a subclass of `AFHTTPResponseSerializer` that validates and decodes JSON responses.

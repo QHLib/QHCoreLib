@@ -10,6 +10,14 @@
 		B298B0272BD7D105205BBBCD /* Pods_QHCoreLibTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B4A6B4945BFE0B2872201F /* Pods_QHCoreLibTests.framework */; };
 		EA19CC5B1EE24F5C00C18853 /* QHLog.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE3C7A31EE12A4F00A93456 /* QHLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA19CC5D1EE2539600C18853 /* QHCoreLib+All.h in Headers */ = {isa = PBXBuildFile; fileRef = EA19CC5C1EE2539500C18853 /* QHCoreLib+All.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA19CC611EE9969000C18853 /* QHNetworkHttpApi.h in Headers */ = {isa = PBXBuildFile; fileRef = EA19CC5F1EE9969000C18853 /* QHNetworkHttpApi.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA19CC621EE9969000C18853 /* QHNetworkHttpApi.m in Sources */ = {isa = PBXBuildFile; fileRef = EA19CC601EE9969000C18853 /* QHNetworkHttpApi.m */; };
+		EA19CC651EE99C8300C18853 /* QHNetworkJsonApi.h in Headers */ = {isa = PBXBuildFile; fileRef = EA19CC631EE99C8300C18853 /* QHNetworkJsonApi.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA19CC661EE99C8300C18853 /* QHNetworkJsonApi.m in Sources */ = {isa = PBXBuildFile; fileRef = EA19CC641EE99C8300C18853 /* QHNetworkJsonApi.m */; };
+		EA19CC691EE99C9600C18853 /* QHNetworkImageApi.h in Headers */ = {isa = PBXBuildFile; fileRef = EA19CC671EE99C9600C18853 /* QHNetworkImageApi.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA19CC6A1EE99C9600C18853 /* QHNetworkImageApi.m in Sources */ = {isa = PBXBuildFile; fileRef = EA19CC681EE99C9600C18853 /* QHNetworkImageApi.m */; };
+		EA19CC6D1EEA57D900C18853 /* QHNetworkHtmlApi.h in Headers */ = {isa = PBXBuildFile; fileRef = EA19CC6B1EEA57D900C18853 /* QHNetworkHtmlApi.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA19CC6E1EEA57D900C18853 /* QHNetworkHtmlApi.m in Sources */ = {isa = PBXBuildFile; fileRef = EA19CC6C1EEA57D900C18853 /* QHNetworkHtmlApi.m */; };
 		EA1D43051ED70BA3002177BF /* QHCoreLibTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA1D43041ED70BA3002177BF /* QHCoreLibTests.m */; };
 		EA1D43071ED70BA3002177BF /* QHCoreLib.h in Headers */ = {isa = PBXBuildFile; fileRef = EA1D42F91ED70BA2002177BF /* QHCoreLib.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA1D43641ED70CE3002177BF /* Foundation+QHCoreLib.h in Headers */ = {isa = PBXBuildFile; fileRef = EA1D432B1ED70CE3002177BF /* Foundation+QHCoreLib.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -100,6 +108,14 @@
 		938ABA409DE2D52EBFB8B765 /* Pods-QHCoreLib.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QHCoreLib.release.xcconfig"; path = "Pods/Target Support Files/Pods-QHCoreLib/Pods-QHCoreLib.release.xcconfig"; sourceTree = "<group>"; };
 		A4FB93821E521314C7F610C2 /* Pods-QHCoreLibTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QHCoreLibTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-QHCoreLibTests/Pods-QHCoreLibTests.release.xcconfig"; sourceTree = "<group>"; };
 		EA19CC5C1EE2539500C18853 /* QHCoreLib+All.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QHCoreLib+All.h"; sourceTree = "<group>"; };
+		EA19CC5F1EE9969000C18853 /* QHNetworkHttpApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHNetworkHttpApi.h; sourceTree = "<group>"; };
+		EA19CC601EE9969000C18853 /* QHNetworkHttpApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHNetworkHttpApi.m; sourceTree = "<group>"; };
+		EA19CC631EE99C8300C18853 /* QHNetworkJsonApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHNetworkJsonApi.h; sourceTree = "<group>"; };
+		EA19CC641EE99C8300C18853 /* QHNetworkJsonApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHNetworkJsonApi.m; sourceTree = "<group>"; };
+		EA19CC671EE99C9600C18853 /* QHNetworkImageApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHNetworkImageApi.h; sourceTree = "<group>"; };
+		EA19CC681EE99C9600C18853 /* QHNetworkImageApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHNetworkImageApi.m; sourceTree = "<group>"; };
+		EA19CC6B1EEA57D900C18853 /* QHNetworkHtmlApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHNetworkHtmlApi.h; sourceTree = "<group>"; };
+		EA19CC6C1EEA57D900C18853 /* QHNetworkHtmlApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHNetworkHtmlApi.m; sourceTree = "<group>"; };
 		EA1D42F71ED70BA2002177BF /* QHCoreLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QHCoreLib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA1D42F91ED70BA2002177BF /* QHCoreLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHCoreLib.h; sourceTree = "<group>"; };
 		EA1D42FA1ED70BA2002177BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -373,6 +389,14 @@
 				EA1D43461ED70CE3002177BF /* QHNetworkApi.h */,
 				EA1D43451ED70CE3002177BF /* QHNetworkApi+internal.h */,
 				EA1D43471ED70CE3002177BF /* QHNetworkApi.m */,
+				EA19CC5F1EE9969000C18853 /* QHNetworkHttpApi.h */,
+				EA19CC601EE9969000C18853 /* QHNetworkHttpApi.m */,
+				EA19CC6B1EEA57D900C18853 /* QHNetworkHtmlApi.h */,
+				EA19CC6C1EEA57D900C18853 /* QHNetworkHtmlApi.m */,
+				EA19CC631EE99C8300C18853 /* QHNetworkJsonApi.h */,
+				EA19CC641EE99C8300C18853 /* QHNetworkJsonApi.m */,
+				EA19CC671EE99C9600C18853 /* QHNetworkImageApi.h */,
+				EA19CC681EE99C9600C18853 /* QHNetworkImageApi.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -484,6 +508,7 @@
 				EA1D43811ED70CE3002177BF /* QHNetworkUtil.h in Headers */,
 				EA1D43781ED70CE3002177BF /* QHNetwork.h in Headers */,
 				EA1D43641ED70CE3002177BF /* Foundation+QHCoreLib.h in Headers */,
+				EA19CC6D1EEA57D900C18853 /* QHNetworkHtmlApi.h in Headers */,
 				EA1D43691ED70CE3002177BF /* QHDefaultValue.h in Headers */,
 				EA1D43661ED70CE3002177BF /* QHCoreLibCategories.h in Headers */,
 				EA19CC5D1EE2539600C18853 /* QHCoreLib+All.h in Headers */,
@@ -494,6 +519,7 @@
 				EA1D43931ED70CE3002177BF /* AFURLRequestSerialization.h in Headers */,
 				EA1D43701ED70CE3002177BF /* DDFileLogger.h in Headers */,
 				EAE3C7A51EE12A9000A93456 /* QHProfiler.h in Headers */,
+				EA19CC691EE99C9600C18853 /* QHNetworkImageApi.h in Headers */,
 				EA1D438A1ED70CE3002177BF /* AFHTTPRequestOperationManager.h in Headers */,
 				EA1D43851ED70CE3002177BF /* _QHNetworkWorker+subclass.h in Headers */,
 				EA1D43951ED70CE3002177BF /* AFURLResponseSerialization.h in Headers */,
@@ -506,6 +532,8 @@
 				EAAE5AF91EE94EC00084FA69 /* QHMacros.h in Headers */,
 				EA1D43861ED70CE3002177BF /* _QHNetworkWorkerAFHTTPRequestOperation.h in Headers */,
 				EA1D43911ED70CE3002177BF /* AFURLConnectionOperation.h in Headers */,
+				EA19CC651EE99C8300C18853 /* QHNetworkJsonApi.h in Headers */,
+				EA19CC611EE9969000C18853 /* QHNetworkHttpApi.h in Headers */,
 				EAAE59141EE7DD940084FA69 /* NSObject+QHUserDefaultsProperty.h in Headers */,
 				EA1D43071ED70BA3002177BF /* QHCoreLib.h in Headers */,
 				EA1D43881ED70CE3002177BF /* AFHTTPRequestOperation.h in Headers */,
@@ -707,18 +735,22 @@
 				EAAA79EB1ED96871008135BE /* QHAsserts.m in Sources */,
 				EA1D43921ED70CE3002177BF /* AFURLConnectionOperation.m in Sources */,
 				EA1D436F1ED70CE3002177BF /* QHUtil.m in Sources */,
+				EA19CC661EE99C8300C18853 /* QHNetworkJsonApi.m in Sources */,
 				EA1D43711ED70CE3002177BF /* DDFileLogger.m in Sources */,
 				EA1D438B1ED70CE3002177BF /* AFHTTPRequestOperationManager.m in Sources */,
 				EA1D437E1ED70CE3002177BF /* QHNetworkRequest.m in Sources */,
+				EA19CC6A1EE99C9600C18853 /* QHNetworkImageApi.m in Sources */,
 				EA1D44361ED95FBC002177BF /* QHClockEntry.m in Sources */,
 				EA1D43771ED70CE3002177BF /* QHLogUtil.m in Sources */,
 				EA1D43791ED70CE3002177BF /* QHNetwork.m in Sources */,
 				EA1D43651ED70CE3002177BF /* Foundation+QHCoreLib.m in Sources */,
 				EA1D43901ED70CE3002177BF /* AFSecurityPolicy.m in Sources */,
 				EA1D436A1ED70CE3002177BF /* QHDefaultValue.m in Sources */,
+				EA19CC621EE9969000C18853 /* QHNetworkHttpApi.m in Sources */,
 				EA1D43891ED70CE3002177BF /* AFHTTPRequestOperation.m in Sources */,
 				EA1D43821ED70CE3002177BF /* QHNetworkUtil.m in Sources */,
 				EA1D43961ED70CE3002177BF /* AFURLResponseSerialization.m in Sources */,
+				EA19CC6E1EEA57D900C18853 /* QHNetworkHtmlApi.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

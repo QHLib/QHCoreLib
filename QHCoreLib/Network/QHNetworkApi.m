@@ -14,7 +14,15 @@
 #import "QHLogUtil.h"
 
 
+@interface QHNetworkApiResult ()
+
+@property (nonatomic, strong, readwrite) QHNetworkResponse *response;
+
+@end
+
+
 NSString * const QHNetworkApiErrorDomain = @"QHNetworkApiErrorDomain";
+
 
 @implementation QHNetworkApi
 

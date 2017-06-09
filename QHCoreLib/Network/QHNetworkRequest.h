@@ -17,6 +17,7 @@ typedef NS_ENUM(NSUInteger, QHNetworkRequestPriority) {
 
 typedef NS_ENUM(NSUInteger, QHNetworkResourceType) {
     QHNetworkResourceHTTP,
+    QHNetworkResourceHTML,
     QHNetworkResourceJSON,
     QHNetworkResourceImage,
 };

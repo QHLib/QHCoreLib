@@ -25,7 +25,8 @@ QH_EXTERN void QHDispatchSyncMainSafe(dispatch_block_t block);
 QH_EXTERN void QHDispatchAsyncMain(dispatch_block_t block);
 QH_EXTERN void QHDispatchAsyncDefault(dispatch_block_t block);
 
-#define QHCallStackShort() QHCallStackSlice(0, 6)
+
+#define QHCallStackShort() QHCallStackSlice(0, 10)
 #define QHCallStackSlice(_start, _length) \
     [[NSThread callStackSymbols] qh_sliceFromStart:_start length:_length]
 

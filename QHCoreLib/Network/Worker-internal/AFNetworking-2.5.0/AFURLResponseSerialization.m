@@ -201,6 +201,61 @@ static id AFJSONObjectByRemovingKeysWithNullValues(id JSONObject, NSJSONReadingO
 
 #pragma mark -
 
+@implementation AFHTMLResponseSerializer
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.acceptableContentTypes = [NSSet setWithObjects:@"text/html", nil];
+    }
+    return self;
+}
+
+- (id)responseObjectForResponse:(NSURLResponse *)response
+                           data:(NSData *)data
+                          error:(NSError *__autoreleasing *)error
+{
+    if (![self validateResponse:(NSHTTPURLResponse *)response data:data error:error]) {
+        if (!error || AFErrorOrUnderlyingErrorHasCodeInDomain(*error, NSURLErrorCannotDecodeContentData, AFURLResponseSerializationErrorDomain)) {
+            return nil;
+        }
+    }
+    
+    // Workaround for behavior of Rails to return a single space for `head :ok` (a workaround for a bug in Safari), which is not interpreted as valid input by NSJSONSerialization.
+    // See https://github.com/rails/rails/issues/1742
+    NSStringEncoding stringEncoding = self.stringEncoding;
+    if (response.textEncodingName) {
+        CFStringEncoding encoding = CFStringConvertIANACharSetNameToEncoding((CFStringRef)response.textEncodingName);
+        if (encoding != kCFStringEncodingInvalidId) {
+            stringEncoding = CFStringConvertEncodingToNSStringEncoding(encoding);
+        }
+    }
+    
+    NSString *responseString = [[NSString alloc] initWithData:data encoding:stringEncoding];
+    
+    if (responseString == nil) {
+        NSDictionary *userInfo = @{
+                                   NSLocalizedDescriptionKey: NSLocalizedStringFromTable(@"Data failed decoding as a UTF-8 string", @"AFNetworking", nil),
+                                   NSLocalizedFailureReasonErrorKey: NSLocalizedStringFromTable(@"Data failed decoding as a UTF-8 string", @"AFNetworking", nil)
+                                   };
+        
+        NSError *decodeError = [NSError errorWithDomain:AFURLResponseSerializationErrorDomain
+                                                   code:NSURLErrorCannotDecodeContentData
+                                               userInfo:userInfo];
+        
+        if (error) {
+            *error = AFErrorWithUnderlyingError(decodeError, *error);
+        }
+    }
+    
+    return responseString;
+}
+
+@end
+
+#pragma mark -
+
 @implementation AFJSONResponseSerializer
 
 + (instancetype)serializer {
@@ -220,7 +275,7 @@ static id AFJSONObjectByRemovingKeysWithNullValues(id JSONObject, NSJSONReadingO
         return nil;
     }
 
-    self.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", nil];
+    self.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", nil];
 
     return self;
 }

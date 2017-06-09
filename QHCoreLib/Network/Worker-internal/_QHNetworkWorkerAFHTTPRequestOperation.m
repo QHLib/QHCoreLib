@@ -16,6 +16,7 @@
 
 
 static AFHTTPRequestOperationManager *httpManager = nil;
+static AFHTTPRequestOperationManager *htmlManager = nil;
 static AFHTTPRequestOperationManager *jsonManager = nil;
 static AFHTTPRequestOperationManager *imageManager = nil;
 
@@ -46,16 +47,15 @@ static AFHTTPRequestOperationManager *imageManager = nil;
         httpManager.operationQueue = [self sharedNetworkQueue];
         httpManager.responseSerializer = [AFHTTPResponseSerializer serializer];
         httpManager.securityPolicy = securityPolicy;
+        
+        htmlManager = [AFHTTPRequestOperationManager manager];
+        htmlManager.operationQueue = [self sharedNetworkQueue];
+        htmlManager.responseSerializer = [AFHTMLResponseSerializer serializer];
+        htmlManager.securityPolicy = securityPolicy;
 
         jsonManager = [AFHTTPRequestOperationManager manager];
         jsonManager.operationQueue = [self sharedNetworkQueue];
-        jsonManager.responseSerializer = ({
-            AFJSONResponseSerializer *jsonParser = [[AFJSONResponseSerializer alloc] init];
-            NSMutableSet *contentTypes = [jsonParser.acceptableContentTypes mutableCopy];
-            [contentTypes addObject:@"text/html"];
-            jsonParser.acceptableContentTypes = contentTypes;
-            jsonParser;
-        });
+        jsonManager.responseSerializer = [AFJSONResponseSerializer serializer];
         jsonManager.securityPolicy = securityPolicy;
 
         imageManager = [AFHTTPRequestOperationManager manager];
@@ -84,6 +84,9 @@ static AFHTTPRequestOperationManager *imageManager = nil;
     switch (self.request.resourceType) {
         case QHNetworkResourceHTTP:
             return httpManager;
+            
+        case QHNetworkResourceHTML:
+            return htmlManager;
 
         case QHNetworkResourceJSON:
             return jsonManager;
