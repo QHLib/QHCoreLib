@@ -149,6 +149,14 @@
     XCTAssertEqualObjects(@2, dict[@1]);
 }
 
+- (void)testMutableSet
+{
+    NSMutableSet *set = [NSMutableSet setWithObjects:@"1", @"2", @"3", nil];
+    XCTAssertNoThrow([set qh_addObject:nil]);
+    [set qh_addObject:@"0"];
+    XCTAssertEqual(set.count, 4);
+}
+
 - (void)testUserDefaults
 {
     QH_XCTAssertThrows_DEBUG([[NSUserDefaults standardUserDefaults] qh_setObject:@{ @1: @1 } forKey:@"anykey"]);

@@ -98,6 +98,12 @@
 
 @end
 
+@interface NSMutableSet (QHCoreLib)
+
+- (void)qh_addObject:(id)object;
+
+@end
+
 @interface NSUserDefaults (QHCoreLib)
 
 - (void)qh_setObject:(id)object forKey:(NSString *)key;

@@ -285,6 +285,21 @@ QH_DUMMY_CLASS(FoudationQHCoreLib)
 
 @end
 
+@implementation NSMutableSet (QHCoreLib)
+
+- (void)qh_addObject:(id)object
+{
+    if (object != nil) {
+        [self addObject:object];
+    }
+    else {
+        QHCoreLibWarn(@"add nil object to set: %@",
+                      QHCallStackShort());
+    }
+}
+
+@end
+
 @implementation NSUserDefaults (QHCoreLib)
 
 - (void)qh_setObject:(id)object forKey:(NSString *)key
