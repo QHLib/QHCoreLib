@@ -32,6 +32,10 @@ framework module QHCoreLib {
         header "QHNetworkWorker.h"
         header "QHNetworkApi.h"
         header "QHNetworkApi+internal.h"
+        header "QHNetworkHttpApi.h"
+        header "QHNetworkHtmlApi.h"
+        header "QHNetworkJsonApi.h"
+        header "QHNetworkImageApi.h"
         export *
         export QHLog
         export QHProfiler
