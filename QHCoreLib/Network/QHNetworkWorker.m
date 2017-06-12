@@ -38,6 +38,7 @@
     dispatch_once(&onceToken, ^{
         networkQueue = [[NSOperationQueue alloc] init];
         networkQueue.name = @"com.tencent.QHLib.QHCoreLib.networkqueue";
+        networkQueue.maxConcurrentOperationCount = 4;
     });
     return networkQueue;
 }
