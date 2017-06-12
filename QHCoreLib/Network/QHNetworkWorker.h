@@ -26,6 +26,9 @@ typedef void(^QHNetworkWorkerCompletionHandler)(QHNetworkWorker *worker, QHNetwo
 
 @property (nonatomic, strong, readonly) QHNetworkRequest *request;
 
+// main queue if it is nil
+@property (nonatomic, strong) dispatch_queue_t completionQueue;
+
 - (void)startWithCompletionHandler:(QHNetworkWorkerCompletionHandler)completionHandler;
 
 @property (nonatomic, readonly) BOOL isLoading;

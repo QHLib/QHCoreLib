@@ -17,13 +17,19 @@
 #import "_QHNetworkWorker+subclass.h"
 
 
-@interface QHNetworkWorker ()
+@interface QHNetworkWorker () {
+    @private
+    dispatch_semaphore_t stateLock;
+    NSRecursiveLock *actionLock;
+}
 
 @property (nonatomic, copy) QHNetworkWorkerCompletionHandler completionHandler;
 
 @end
 
 @implementation QHNetworkWorker
+
+@synthesize state=_state;
 
 + (NSOperationQueue *)sharedNetworkQueue
 {
@@ -51,54 +57,73 @@
     self = [super init];
     if (self) {
         self.request = request;
+        stateLock = dispatch_semaphore_create(1);
+        actionLock = [[NSRecursiveLock alloc] init];
+        self.state = QHNetworkWorkerStateNone;
     }
     return self;
 }
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@(%p), request: %@>",
+    return [NSString stringWithFormat:@"<%@(%p), request: %@, state: %lu>",
             NSStringFromClass([self class]),
             self,
-            self.request];
+            self.request,
+            (unsigned long)self.state];
+}
+
+- (QHNetworkWorkerState)state
+{
+    __block QHNetworkWorkerState state = QHNetworkWorkerStateNone;
+
+    QHDispatchSemaphoreLock(stateLock, ^{
+        state = self->_state;
+    });
+
+    return state;
+}
+
+- (void)setState:(QHNetworkWorkerState)state
+{
+    QHDispatchSemaphoreLock(stateLock, ^{
+        self->_state = state;
+    });
 }
 
 - (void)startWithCompletionHandler:(QHNetworkWorkerCompletionHandler)completionHandler
 {
-    QHAssertMainQueue();
-    QHAssertReturnVoidOnFailure(self.state == QHNetworkWorkerStateNone,
-                                @"reuse of worker is not supported, call stack: %@",
-                                QHCallStackShort());
-    
-    self.state = QHNetworkWorkerStateLoading;
+    QHNSLock(actionLock, ^{
+        QHAssertReturnVoidOnFailure(self.state == QHNetworkWorkerStateNone,
+                                    @"reuse of worker is not supported, call stack: %@",
+                                    QHCallStackShort());
 
-    self.completionHandler = completionHandler;
+        self.state = QHNetworkWorkerStateLoading;
 
-    [self p_doStart];
+        self.completionHandler = completionHandler;
+        
+        [self p_doStart];
+    });
 }
 
 - (void)cancel
 {
-    QHAssertMainQueue();
+    QHNSLock(actionLock, ^{
+        self.state = QHNetworkWorkerStateCancelled;
 
-    self.state = QHNetworkWorkerStateCancelled;
+        self.completionHandler = nil;
 
-    self.completionHandler = nil;
-
-    [self p_doCancel];
+        [self p_doCancel];
+    });
 }
 
 - (BOOL)isLoading
 {
-    QHAssertMainQueue();
-
     return (self.state == QHNetworkWorkerStateLoading);
 }
 
 - (BOOL)isCancelled
 {
-    QHAssertMainQueue();
-    
     return (self.state == QHNetworkWorkerStateCancelled);
 }
 
@@ -116,17 +141,19 @@
 
 - (void)p_doCompletion:(QHNetworkWorker *)worker response:(QHNetworkResponse *)response error:(NSError *)error
 {
-    QHAssertMainQueue();
+    dispatch_async(self.completionQueue ?: dispatch_get_main_queue(), ^{
+        QHNSLock(actionLock, ^{
+            self.state = QHNetworkWorkerStateFinished;
 
-    self.state = QHNetworkWorkerStateFinished;
+            [self p_checkSlowRequest];
 
-    [self p_checkSlowRequest];
+            if (self.completionHandler) {
+                self.completionHandler(worker, response, error);
 
-    if (self.completionHandler) {
-        self.completionHandler(worker, response, error);
-
-        self.completionHandler = nil;
-    }
+                self.completionHandler = nil;
+            }
+        });
+    });
 }
 
 - (int)connectCost

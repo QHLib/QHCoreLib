@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 
+#import <QHCoreLib/QHUtil.h>
 #import <QHCoreLib/QHNetwork.h>
 #import <QHCoreLib/QHNetworkApi+internal.h>
 
@@ -82,6 +83,25 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
         XCTAssert(NO, @"should not be here");
         [expect fulfill];
     }];
+
+    [self waitForExpectations:@[ expect ]
+                      timeout:api.worker.request.urlRequest.timeoutInterval + 0.1];
+}
+
+- (void)testLoadOnNonMainThread
+{
+    XCTestExpectation *expect = [[XCTestExpectation alloc] initWithDescription:@"load 'https://httpbin.org/ip'"];
+
+    QHNetworkTestApi *api = [[QHNetworkTestApi alloc] initWithUrl:@"https://httpbin.org/ip"];
+    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [api loadWithSuccess:^(QHNetworkTestApi *api, QHNetworkTestApiResult *result) {
+            [expect fulfill];
+        } fail:^(QHNetworkTestApi *api, NSError *error) {
+            NSLog(@"error: %@", error);
+            XCTAssert(NO, @"should not be here");
+            [expect fulfill];
+        }];
+    });
 
     [self waitForExpectations:@[ expect ]
                       timeout:api.worker.request.urlRequest.timeoutInterval + 0.1];

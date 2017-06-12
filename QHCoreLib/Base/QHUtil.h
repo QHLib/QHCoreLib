@@ -35,3 +35,20 @@ QH_EXTERN void QHDispatchAsyncDefault(dispatch_block_t block);
 // return YES if no error occurs while executing the block
 QH_EXTERN BOOL QHBlockInvoke(dispatch_block_t block, const char *filePath, int line);
 #define QH_BLOCK_INVOKE(block) QHBlockInvoke(block, __FILE__, __LINE__)
+
+
+static inline void QHDispatchSemaphoreLock(dispatch_semaphore_t lock, dispatch_block_t block) {
+    if (block == nil) return;
+
+    dispatch_semaphore_wait(lock, DISPATCH_TIME_FOREVER);
+    QH_BLOCK_INVOKE(block);
+    dispatch_semaphore_signal(lock);
+}
+
+static inline void QHNSLock(id<NSLocking> lock, dispatch_block_t block) {
+    if (block == nil) return;
+
+    [lock lock];
+    QH_BLOCK_INVOKE(block);
+    [lock unlock];
+}

@@ -153,11 +153,9 @@ static AFHTTPRequestOperationManager *imageManager = nil;
                                                            reponseLength:operation.responseData.length
                                                           responseObject:responseObject];
 
-        QHDispatchSyncMainSafe(^{
-            [self p_doCompletion:self
-                        response:response
-                           error:nil];
-        });
+        [self p_doCompletion:self
+                    response:response
+                       error:nil];
     };
 }
 
@@ -180,38 +178,24 @@ static AFHTTPRequestOperationManager *imageManager = nil;
                                                            reponseLength:operation.responseData.length
                                                           responseObject:nil];
 
-        QHDispatchSyncMainSafe(^{
-            [self p_doCompletion:self
-                        response:response
-                           error:error];
-        });
+        [self p_doCompletion:self
+                    response:response
+                       error:error];
     };
 }
 
 - (int)connectCost
 {
-    QHAssertReturnValueOnFailure(0,
-                                 self.state == QHNetworkWorkerStateFinished,
-                                 @"getting cost before worker finish may not want you want");
-
     return self.operation.getConnectTimeInMiliseconds;
 }
 
 - (int)transportCost
 {
-    QHAssertReturnValueOnFailure(0,
-                                 self.state == QHNetworkWorkerStateFinished,
-                                 @"getting cost before worker finish may not want you want");
-
     return self.operation.getTransportTimeInMiliseconds;
 }
 
 - (int)requestCost
 {
-    QHAssertReturnValueOnFailure(0,
-                                 self.state == QHNetworkWorkerStateFinished,
-                                 @"getting cost before worker finish may not want you want");
-
     return self.operation.getRequestTimeInMiliseconds;
 }
 
