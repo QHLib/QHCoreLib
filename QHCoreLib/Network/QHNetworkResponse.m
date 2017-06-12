@@ -11,12 +11,12 @@
 
 @interface QHNetworkResponse ()
 
-@property (nonatomic, assign, readwrite) NSURL  *url;
+@property (nonatomic,   copy, readwrite) NSURL  *url;
 
 @property (nonatomic, assign, readwrite) NSInteger statusCode;
-@property (nonatomic, assign, readwrite) NSDictionary *responseHeaders;
+@property (nonatomic,   copy, readwrite) NSDictionary *responseHeaders;
 @property (nonatomic, assign, readwrite) NSUInteger responseLength;
-@property (nonatomic, assign, readwrite) id responseObject;
+@property (nonatomic, strong, readwrite) id responseObject;
 
 @end
 

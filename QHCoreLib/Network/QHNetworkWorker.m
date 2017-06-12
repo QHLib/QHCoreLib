@@ -8,6 +8,7 @@
 
 #import "QHNetworkWorker.h"
 
+#import "QHDefines.h"
 #import "QHUtil.h"
 #import "QHAsserts.h"
 #import "QHLogUtil.h"
@@ -79,6 +80,7 @@
     __block QHNetworkWorkerState state = QHNetworkWorkerStateNone;
 
     QHDispatchSemaphoreLock(stateLock, ^{
+        @retainify(self);
         state = self->_state;
     });
 
@@ -88,6 +90,7 @@
 - (void)setState:(QHNetworkWorkerState)state
 {
     QHDispatchSemaphoreLock(stateLock, ^{
+        @retainify(self);
         self->_state = state;
     });
 }
@@ -95,6 +98,8 @@
 - (void)startWithCompletionHandler:(QHNetworkWorkerCompletionHandler)completionHandler
 {
     QHNSLock(actionLock, ^{
+        @retainify(self);
+
         QHAssertReturnVoidOnFailure(self.state == QHNetworkWorkerStateNone,
                                     @"reuse of worker is not supported, call stack: %@",
                                     QHCallStackShort());
@@ -110,6 +115,8 @@
 - (void)cancel
 {
     QHNSLock(actionLock, ^{
+        @retainify(self);
+
         self.state = QHNetworkWorkerStateCancelled;
 
         self.completionHandler = nil;
@@ -144,6 +151,8 @@
 {
     dispatch_async(self.completionQueue ?: dispatch_get_main_queue(), ^{
         QHNSLock(actionLock, ^{
+            @retainify(self);
+
             self.state = QHNetworkWorkerStateFinished;
 
             [self p_checkSlowRequest];
