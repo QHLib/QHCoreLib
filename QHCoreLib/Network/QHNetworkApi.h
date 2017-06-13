@@ -31,7 +31,7 @@ QH_NETWORK_API_IMPL_INDIRECT(API_TYPE, RESULT_TYPE, QHNetworkApi, QHNetworkApiRe
 
 #define QH_NETWORK_API_IMPL_INDIRECT(API_TYPE, RESULT_TYPE, SUPER_API_TYPE, SUPER_RESULT_TYPE) \
 - (void)loadWithSuccess:(void (^)(API_TYPE *api, RESULT_TYPE *result))success \
-                   fail:(void (^)(API_TYPE *api, NSError *error))fail; \
+                   fail:(void (^)(API_TYPE *api, NSError *error))fail \
 { \
     [super loadWithSuccess:(void (^)(SUPER_API_TYPE *api, SUPER_RESULT_TYPE *result))success \
                       fail:(void (^)(SUPER_API_TYPE *api, NSError *error))fail]; \
