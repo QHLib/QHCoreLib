@@ -85,7 +85,7 @@
 		EAAE59141EE7DD940084FA69 /* NSObject+QHUserDefaultsProperty.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAE59121EE7DD940084FA69 /* NSObject+QHUserDefaultsProperty.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAAE59151EE7DD940084FA69 /* NSObject+QHUserDefaultsProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = EAAE59131EE7DD940084FA69 /* NSObject+QHUserDefaultsProperty.m */; };
 		EAAE59171EE7E62A0084FA69 /* QHCoreLibUserDefaultsPropertyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAAE59161EE7E62A0084FA69 /* QHCoreLibUserDefaultsPropertyTests.m */; };
-		EAAE5AF91EE94EC00084FA69 /* QHMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAE5AF81EE94EC00084FA69 /* QHMacros.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		EAAE5AF91EE94EC00084FA69 /* QHMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAE5AF81EE94EC00084FA69 /* QHMacros.h */; };
 		EAE3C7A51EE12A9000A93456 /* QHProfiler.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE3C7A21EE12A0F00A93456 /* QHProfiler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAE3C7B41EE153A400A93456 /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = EA1D433C1ED70CE3002177BF /* DDLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F06443AE55B201F94A964E1C /* Pods_QHCoreLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BFD5D802EAE749D3FCD8FC /* Pods_QHCoreLib.framework */; };
@@ -838,6 +838,10 @@
 			buildSettings = {
 				DEVELOPMENT_TEAM = XD4G683TDY;
 				GCC_PREFIX_HEADER = QHCoreLibTests/QHCoreLibTests.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+				);
 				INFOPLIST_FILE = QHCoreLibTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tencent.QHLib.QHCoreLibTests;
@@ -890,8 +894,9 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
 					"$(inherited)",
+					"DEBUG=1",
+					"_QHCoreLibFatalAction=1",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -937,6 +942,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "_QHCoreLibFatalAction=1";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;

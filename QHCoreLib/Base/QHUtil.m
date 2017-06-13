@@ -87,13 +87,13 @@ BOOL QHBlockInvoke(dispatch_block_t block, const char *filePath, int line)
                            line,
                            block,
                            [exception qh_description],
-                           QHCallStackShort());
+                           [exception callStackSymbols]);
         }
         else {
             QHCoreLibFatal(@"%@ throws exception: %@\n%@",
                            block,
                            [exception qh_description],
-                           QHCallStackShort());
+                           [exception callStackSymbols]);
         }
         return NO;
     }

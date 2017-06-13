@@ -311,7 +311,7 @@ QH_DUMMY_CLASS(FoudationQHCoreLib)
         QHCoreLibFatal(@"set object(%@) for key(%@) in %@ failed: %@\n%@",
                        object, key, self,
                        [exception qh_description],
-                       QHCallStackShort());
+                       [exception callStackSymbols]);
     }
     @finally {}
 }
