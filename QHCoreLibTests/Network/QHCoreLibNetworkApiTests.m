@@ -46,7 +46,7 @@ QH_NETWORK_API_RESULT_DECL(QHNetworkTestApi, QHNetworkTestApiResult);
 {
     QHNetworkRequest *request = [[QHNetworkRequest alloc] init];
     request.urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:self.url]];
-    request.urlRequest.timeoutInterval = 3.0f;
+    request.urlRequest.timeoutInterval = 30.0f;
     request.resourceType = QHNetworkResourceJSON;
     return request;
 }
