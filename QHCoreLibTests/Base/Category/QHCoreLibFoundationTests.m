@@ -159,7 +159,8 @@
 
 - (void)testUserDefaults
 {
-    QH_XCTAssertThrows_DEBUG([[NSUserDefaults standardUserDefaults] qh_setObject:@{ @1: @1 } forKey:@"anykey"]);
+    NSUserDefaults *testUserDefaults = [[NSUserDefaults alloc] initWithSuiteName:@__FILE__];
+    QH_XCTAssertThrows_DEBUG([testUserDefaults qh_setObject:@{ @1: @1 } forKey:@"anykey"]);
 }
 
 @end
