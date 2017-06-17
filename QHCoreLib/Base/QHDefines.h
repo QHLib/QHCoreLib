@@ -83,9 +83,9 @@
     __strong __typeof__(VAR) VAR = metamacro_concat(VAR, _retain_);
 
 #if QH_DEBUG
-#   define QH_SUBCLASS_MUST_OVERRIDE  SUBCLASS_MUST_OVERRIDE
+#   define QH_SUBCLASS_MUST_OVERRIDE autoreleasepool{} SUBCLASS_MUST_OVERRIDE
 #else
-#   define QH_SUBCLASS_MUST_OVERRIDE
+#   define QH_SUBCLASS_MUST_OVERRIDE autoreleasepool{}
 #endif
 
 #if __has_attribute(deprecated)

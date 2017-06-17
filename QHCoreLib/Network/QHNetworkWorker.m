@@ -137,13 +137,13 @@
 
 - (void)p_doStart
 {
-    QH_SUBCLASS_MUST_OVERRIDE;
+    @QH_SUBCLASS_MUST_OVERRIDE;
     NSAssert(NO, @"subclass should implement");
 }
 
 - (void)p_doCancel
 {
-    QH_SUBCLASS_MUST_OVERRIDE;
+    @QH_SUBCLASS_MUST_OVERRIDE;
     NSAssert(NO, @"subclass should implement");
 }
 
@@ -168,21 +168,21 @@
 
 - (int)connectCost
 {
-    QH_SUBCLASS_MUST_OVERRIDE;
+    @QH_SUBCLASS_MUST_OVERRIDE;
     NSAssert(NO, @"subclass should implement");
     return 0;
 }
 
 - (int)transportCost
 {
-    QH_SUBCLASS_MUST_OVERRIDE;
+    @QH_SUBCLASS_MUST_OVERRIDE;
     NSAssert(NO, @"subclass should implement");
     return 0;
 }
 
 - (int)requestCost
 {
-    QH_SUBCLASS_MUST_OVERRIDE;
+    @QH_SUBCLASS_MUST_OVERRIDE;
     NSAssert(NO, @"subclass should implement");
     return 0;
 }
