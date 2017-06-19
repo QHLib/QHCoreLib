@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.summary      = "QHCoreLib inlucdes some macros and util classes."
   s.homepage     = "https://github.com/QHLib/QHCoreLib.git"
   s.license      = "MIT"
-  s.author       = { "changtang(唐畅)" => "changtang@tencent.com" }
+  s.author       = { "changtang(唐畅)" => "tangchang21@gmail.com" }
 
   s.platform     = :ios, "8.0"
 
@@ -24,6 +24,7 @@ Pod::Spec.new do |s|
   s.subspec 'QHBase' do |ss|
     ss.source_files = "QHCoreLib/Base/**/*.{h,m}"
     ss.public_header_files = "QHCoreLib/Base/**/*.h"
+    ss.private_header_files = "QHCoreLib/Base/Internal/**/*.h"
     ss.frameworks = "Foundation"
     ss.dependency "libextobjc", '0.4.1'
     ss.dependency 'MustOverride', '1.1'
@@ -44,6 +45,15 @@ Pod::Spec.new do |s|
     ss.dependency "QHCoreLib/QHBase"
   end
 
+  s.subspec 'QHAsync' do |ss|
+    ss.source_files = "QHCoreLib/Async/**/*.{h,m}"
+    ss.public_header_files = "QHCoreLib/Async/**/*.h"
+    ss.frameworks = "Foundation"
+    ss.dependency "QHCoreLib/QHBase"
+    ss.dependency "QHCoreLib/QHLog"
+    ss.dependency "QHCoreLib/QHProfiler"
+  end
+
   s.subspec 'QHNetwork' do |ss|
     ss.source_files = "QHCoreLib/Network/**/*.{h,m}"
     ss.public_header_files = "QHCoreLib/Network/**/*.h"
@@ -52,6 +62,7 @@ Pod::Spec.new do |s|
     ss.dependency "QHCoreLib/QHBase"
     ss.dependency "QHCoreLib/QHLog"
     ss.dependency "QHCoreLib/QHProfiler"
+    ss.dependency "QHCoreLib/QHAsync"
   end
 
 end

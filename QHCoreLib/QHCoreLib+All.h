@@ -12,6 +12,7 @@
 #import <QHCoreLib/QHBase.h>
 #import <QHCoreLib/QHLog.h>
 #import <QHCoreLib/QHProfiler.h>
+#import <QHCoreLib/QHAsync.h>
 #import <QHCoreLib/QHNetwork.h>
 
 #endif /* QHCoreLib_All_h */

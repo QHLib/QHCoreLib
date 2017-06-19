@@ -330,3 +330,39 @@ QH_DUMMY_CLASS(FoudationQHCoreLib)
 }
 
 @end
+
+@interface _QHError : NSError
+@end
+@implementation _QHError
+- (NSString *)description
+{
+    return $(@"<QHError: %@, %zd, %@>", self.domain, self.code, self.localizedDescription);
+}
+@end
+
+@implementation NSError (QHCoreLib)
+
++ (instancetype)qh_errorWithDomain:(NSErrorDomain)domain
+                              code:(NSInteger)code
+                           message:(NSString *)message
+                              info:(NSDictionary *)info
+                              file:(const char *)file
+                              line:(int)line
+{
+    NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+    
+    if (QH_IS_DICTIONARY(info)) {
+        [userInfo addEntriesFromDictionary:info];
+    }
+    
+    if (userInfo[NSLocalizedDescriptionKey]) {
+        NSString *fileName = [[[NSString alloc] initWithCString:file encoding:NSUTF8StringEncoding] lastPathComponent];
+        userInfo[NSLocalizedDescriptionKey] = $(@"*%@:%d, %@", fileName, line, message);
+    }
+    
+    return [_QHError errorWithDomain:domain
+                                code:code
+                            userInfo:userInfo];
+}
+
+@end

@@ -9,6 +9,7 @@ framework module QHCoreLib {
         export *
         export QHLog
         export QHProfiler
+        export QHAsync
         export QHNetwork 
     }
 
@@ -22,6 +23,14 @@ framework module QHCoreLib {
         header "QHProfiler.h"
         header "QHClockEntry.h"
         export *
+    }
+    
+    explicit module QHAsync {
+        header "QHAsync.h"
+        header "QHAsyncTask.h"
+        export *
+        export QHLog
+        export QHProfiler
     }
 
     explicit module QHNetwork {
@@ -39,5 +48,6 @@ framework module QHCoreLib {
         export *
         export QHLog
         export QHProfiler
+        export QHAsync
     }
 }

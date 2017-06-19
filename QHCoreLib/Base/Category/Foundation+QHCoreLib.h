@@ -116,3 +116,16 @@
 
 @end
 
+@interface NSError (QHCoreLib)
+
++ (instancetype)qh_errorWithDomain:(NSErrorDomain)domain
+                              code:(NSInteger)code
+                           message:(NSString *)message
+                              info:(NSDictionary *)info
+                              file:(const char *)file
+                              line:(int)line;
+@end
+
+#define QH_ERROR(_domain, _code, _message, _info) \
+[NSError qh_errorWithDomain:(_domain) code:(_code) message:(_message) info:(_info) file:__FILE__ line:__LINE__]
+
