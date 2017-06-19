@@ -9,20 +9,15 @@
 #import "QHNetworkApi.h"
 #import "QHNetworkApi+internal.h"
 
-#import "QHDefines.h"
-#import "QHAsserts.h"
-#import "QHLogUtil.h"
-
-
-@interface QHNetworkApiResult ()
-
-@property (nonatomic, strong, readwrite) QHNetworkResponse *response;
-
-@end
+#import "QHLog.h"
 
 
 NSString * const QHNetworkApiErrorDomain = @"QHNetworkApiErrorDomain";
 
+
+@interface QHNetworkApi ()
+
+@end
 
 @implementation QHNetworkApi
 
@@ -45,30 +40,32 @@ NSString * const QHNetworkApiErrorDomain = @"QHNetworkApiErrorDomain";
     return str;
 }
 
-- (void)loadWithSuccess:(void (^)(QHNetworkApi *, QHNetworkApiResult *))success
-                   fail:(void (^)(QHNetworkApi *, NSError *))fail
+- (void)startWithSuccess:(void (^)(QHNetworkApi *, QHNetworkApiResult *))success
+                    fail:(void (^)(QHNetworkApi *, NSError *))fail
 {
-    self.successBlock = success;
-    self.failBlock = fail;
-
     QHNetworkRequest *request = [self buildRequest];
 
-    QHAssertReturnVoidOnFailure(request != nil,
-                                @"invalid request: %@", request);
-
-    QHAssertReturnVoidOnFailure(self.worker == nil,
-                                @"reuse of api object (%@) is not supported", self);
+    QHAssertReturnVoidOnFailure(request != nil, @"build request for %@ failed", self);
 
     self.worker = [QHNetworkWorker workerFromRequest:request];
+    
+    [super startWithSuccess:(QHAsyncTaskSuccessBlock)success
+                       fail:(QHAsyncTaskFailBlock)fail];
+}
 
+- (Class)resultClass
+{
+    return [QHNetworkApiResult class];
+}
+
+- (void)p_doStart
+{
     @weakify(self);
     [self.worker startWithCompletionHandler:^(QHNetworkWorker *worker, QHNetworkResponse *response, NSError *error) {
-
         @strongify(self);
 
         if (self == nil || self.worker != worker || worker.isCancelled) {
-            [self disposeOnFinish];
-
+            QHLogDebug(@"ignore callback from a flying worker: %@", worker);
             return;
         }
 
@@ -77,56 +74,43 @@ NSString * const QHNetworkApiErrorDomain = @"QHNetworkApiErrorDomain";
 
             if (error == nil) {
                 QHLogDebug(@"request: %@\nsucceed: %@", self, response.responseObject);
-                if (self.successBlock != nil) {
-                    self.successBlock(self, result);
-                }
+                [self p_fireSuccess:result];
             }
             else {
-                QHLogDebug(@"request: %@\nfinished: %@", self, (error.localizedFailureReason ?: error.localizedDescription));
-                if (self.failBlock != nil) {
-                    self.failBlock(self, error);
-                }
+                QHLogDebug(@"request: %@\nfinished with error: %@", self, error);
+                [self p_fireSuccess:error];
             }
         }
         else {
-            QHLogDebug(@"request: %@\nfailed: %@", self, (error.localizedFailureReason ?: error.localizedDescription));
-            if (self.failBlock != nil) {
-                self.failBlock(self, error);
-            }
+            QHLogDebug(@"request: %@\nfailed: %@", self, [error description]);
+            [self p_fireFail:error];
         }
-
-        [self disposeOnFinish];
     }];
 }
 
-- (Class)resultClass
+- (void)p_doCancel
 {
-    return [QHNetworkApiResult class];
-}
-
-- (void)disposeOnFinish
-{
-    self.successBlock = nil;
-    self.failBlock = nil;
-    self.worker = nil;
-}
-
-- (void)cancel
-{
-    self.successBlock = nil;
-    self.failBlock = nil;
-
     [self.worker cancel];
-    self.worker = nil;
 }
 
-- (void)dealloc
+- (void)p_doCollect:(NSMutableArray *)releaseOnDisposeQueue
 {
-    [self cancel];
+    [super p_doCollect:releaseOnDisposeQueue];
+}
+
+- (void)p_doTeardown
+{
+    self.worker = nil;
 }
 
 @end
 
+
+@interface QHNetworkApiResult ()
+
+@property (nonatomic, strong, readwrite) QHNetworkResponse *response;
+
+@end
 
 @implementation QHNetworkApiResult
 

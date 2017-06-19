@@ -18,12 +18,11 @@ QH_ASYNC_TASK_IMPL_INDIRECT(TASK_TYPE, RESULT_TYPE, QHAsyncTask, NSObject)
 - (void)startWithSuccess:(void (^)(TASK_TYPE *task, RESULT_TYPE *result))success \
                     fail:(void (^)(TASK_TYPE *task, NSError *error))fail \
 { \
-    [super startWithSuccess:(void (^)(SUPER_TASK_TYPE *api, SUPER_RESULT_TYPE  *result))success \
+    [super startWithSuccess:(void (^)(SUPER_TASK_TYPE *api, SUPER_RESULT_TYPE *result))success \
                        fail:(void (^)(SUPER_TASK_TYPE *api, NSError *error))fail]; \
 } \
 - (Class)resultClass \
 { \
-    @QH_SUBCLASS_MUST_OVERRIDE; \
     return [RESULT_TYPE class]; \
 }
 

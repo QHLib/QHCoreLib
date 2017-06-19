@@ -7,6 +7,7 @@
 //
 
 #import "QHNetworkJsonApi.h"
+#import "QHNetworkApi+internal.h"
 
 #import "QHMacros.h"
 #import "QHUtil.h"

@@ -76,7 +76,7 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
     XCTestExpectation *expect = [[XCTestExpectation alloc] initWithDescription:@"load 'https://httpbin.org/ip'"];
 
     QHNetworkTestApi *api = [[QHNetworkTestApi alloc] initWithUrl:@"https://httpbin.org/ip"];
-    [api loadWithSuccess:^(QHNetworkTestApi *api, QHNetworkTestApiResult *result) {
+    [api startWithSuccess:^(QHNetworkTestApi *api, QHNetworkTestApiResult *result) {
         [expect fulfill];
     } fail:^(QHNetworkTestApi *api, NSError *error) {
         NSLog(@"error: %@", error);
@@ -94,7 +94,7 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
 
     QHNetworkTestApi *api = [[QHNetworkTestApi alloc] initWithUrl:@"https://httpbin.org/ip"];
     dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [api loadWithSuccess:^(QHNetworkTestApi *api, QHNetworkTestApiResult *result) {
+        [api startWithSuccess:^(QHNetworkTestApi *api, QHNetworkTestApiResult *result) {
             [expect fulfill];
         } fail:^(QHNetworkTestApi *api, NSError *error) {
             NSLog(@"error: %@", error);
@@ -112,7 +112,7 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
     XCTestExpectation *expect = [[XCTestExpectation alloc] initWithDescription:@"load 'http://some.where.on.mars/'"];
 
     QHNetworkTestApi *api = [[QHNetworkTestApi alloc] initWithUrl:@"http://some.where.on.mars/"];
-    [api loadWithSuccess:^(QHNetworkTestApi *api, QHNetworkTestApiResult *result) {
+    [api startWithSuccess:^(QHNetworkTestApi *api, QHNetworkTestApiResult *result) {
         XCTAssert(NO, @"should not be here");
         [expect fulfill];
     } fail:^(QHNetworkTestApi *api, NSError *error) {
@@ -129,7 +129,7 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
     XCTestExpectation *expect = [[XCTestExpectation alloc] initWithDescription:@"load 'http://httpbin.org/status/500'"];
     
     QHNetworkTestApi *api = [[QHNetworkTestApi alloc] initWithUrl:@"http://httpbin.org/status/500"];
-    [api loadWithSuccess:^(QHNetworkTestApi *api, QHNetworkTestApiResult *result) {
+    [api startWithSuccess:^(QHNetworkTestApi *api, QHNetworkTestApiResult *result) {
         XCTAssert(NO, @"should not be here");
         [expect fulfill];
     } fail:^(QHNetworkTestApi *api, NSError *error) {
@@ -146,7 +146,7 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
     XCTestExpectation *expect = [[XCTestExpectation alloc] initWithDescription:@"load 'http://tctony.github.io/index.html'"];
     
     QHNetworkHttpApi *api = [[QHNetworkHttpApi alloc] initWithUrl:@"http:/tctony.github.io/index.html"];
-    [api loadWithSuccess:^(QHNetworkHttpApi *api, QHNetworkHttpApiResult *result) {
+    [api startWithSuccess:^(QHNetworkHttpApi *api, QHNetworkHttpApiResult *result) {
         [expect fulfill];
     } fail:^(QHNetworkHttpApi *api, NSError *error) {
         NSLog(@"error: %@", error);
@@ -163,7 +163,7 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
     XCTestExpectation *expect = [[XCTestExpectation alloc] initWithDescription:@"load 'http://tctony.github.io/index.html'"];
     
     QHNetworkHtmlApi *api = [[QHNetworkHtmlApi alloc] initWithUrl:@"http://tctony.github.io/index.html"];
-    [api loadWithSuccess:^(QHNetworkHtmlApi *api, QHNetworkHtmlApiResult *result) {
+    [api startWithSuccess:^(QHNetworkHtmlApi *api, QHNetworkHtmlApiResult *result) {
         [expect fulfill];
     } fail:^(QHNetworkHtmlApi *api, NSError *error) {
         NSLog(@"error: %@", error);
@@ -180,7 +180,7 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
     XCTestExpectation *expect = [[XCTestExpectation alloc] initWithDescription:@"load 'http://httpbin.org/get'"];
     
     QHNetworkJsonApi *api = [[QHNetworkJsonApi alloc] initWithUrl:@"http://httpbin.org/get"];
-    [api loadWithSuccess:^(QHNetworkJsonApi *api, QHNetworkJsonApiResult *result) {
+    [api startWithSuccess:^(QHNetworkJsonApi *api, QHNetworkJsonApiResult *result) {
         [expect fulfill];
     } fail:^(QHNetworkJsonApi *api, NSError *error) {
         NSLog(@"error: %@", error);
@@ -198,7 +198,7 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
     
     QHNetworkJsonApi *api = [[QHNetworkJsonApi alloc] initWithUrl:@"http://httpbin.org/get"
                                                         queryDict:@{@"t": @"123"}];
-    [api loadWithSuccess:^(QHNetworkJsonApi *api, QHNetworkJsonApiResult *result) {
+    [api startWithSuccess:^(QHNetworkJsonApi *api, QHNetworkJsonApiResult *result) {
         [expect fulfill];
     } fail:^(QHNetworkJsonApi *api, NSError *error) {
         NSLog(@"error: %@", error);
@@ -217,7 +217,7 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
     QHNetworkJsonApi *api = [[QHNetworkJsonApi alloc] initWithUrl:@"http://httpbin.org/post"
                                                         queryDict:@{@"t": @"123"}
                                                          bodyDict:@{@"u": @"456"}];
-    [api loadWithSuccess:^(QHNetworkJsonApi *api, QHNetworkJsonApiResult *result) {
+    [api startWithSuccess:^(QHNetworkJsonApi *api, QHNetworkJsonApiResult *result) {
         [expect fulfill];
     } fail:^(QHNetworkJsonApi *api, NSError *error) {
         NSLog(@"error: %@", error);
@@ -234,7 +234,7 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
     XCTestExpectation *expect = [[XCTestExpectation alloc] initWithDescription:@"load 'http://tctony.github.io/favicon.ico'"];
     
     QHNetworkImageApi *api = [[QHNetworkImageApi alloc] initWithUrl:@"http://tctony.github.io/favicon.ico"];
-    [api loadWithSuccess:^(QHNetworkImageApi *api, QHNetworkImageApiResult *result) {
+    [api startWithSuccess:^(QHNetworkImageApi *api, QHNetworkImageApiResult *result) {
         [expect fulfill];
     } fail:^(QHNetworkImageApi *api, NSError *error) {
         NSLog(@"error: %@", error);

@@ -15,6 +15,7 @@
 NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 
 @interface QHAsyncTask () {
+@private
     QHAsyncTaskState _state;
     dispatch_semaphore_t _stateLock;
     NSRecursiveLock *_lock;

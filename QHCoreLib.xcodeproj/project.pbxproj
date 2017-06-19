@@ -82,6 +82,7 @@
 		EA1D44311ED9332F002177BF /* QHBase.h in Headers */ = {isa = PBXBuildFile; fileRef = EA1D442C1ED92EE7002177BF /* QHBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA1D44351ED95FBC002177BF /* QHClockEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = EA1D44331ED95FBC002177BF /* QHClockEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA1D44361ED95FBC002177BF /* QHClockEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = EA1D44341ED95FBC002177BF /* QHClockEntry.m */; };
+		EA38F8921EF76CD6000B566F /* QHAsyncTask+internal.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAC480F1EF527B80091759D /* QHAsyncTask+internal.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAAA79E91ED9639A008135BE /* QHCoreLibClockEntryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAAA79E81ED9639A008135BE /* QHCoreLibClockEntryTests.m */; };
 		EAAA79EB1ED96871008135BE /* QHAsserts.m in Sources */ = {isa = PBXBuildFile; fileRef = EA1D43341ED70CE3002177BF /* QHAsserts.m */; };
 		EAAE57671ED973850084FA69 /* QHCoreLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA1D42F71ED70BA2002177BF /* QHCoreLib.framework */; };
@@ -559,6 +560,7 @@
 				EA1D43851ED70CE3002177BF /* _QHNetworkWorker+subclass.h in Headers */,
 				EA1D43951ED70CE3002177BF /* AFURLResponseSerialization.h in Headers */,
 				EA1D438F1ED70CE3002177BF /* AFSecurityPolicy.h in Headers */,
+				EA38F8921EF76CD6000B566F /* QHAsyncTask+internal.h in Headers */,
 				EA19CC771EEEE36A00C18853 /* QHAsync.h in Headers */,
 				EA1D43741ED70CE3002177BF /* DDTTYLogger.h in Headers */,
 				EA19CC5B1EE24F5C00C18853 /* QHLog.h in Headers */,

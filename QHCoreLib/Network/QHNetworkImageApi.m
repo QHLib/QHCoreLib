@@ -7,6 +7,7 @@
 //
 
 #import "QHNetworkImageApi.h"
+#import "QHNetworkApi+internal.h"
 
 #import <UIKit/UIKit.h>
 

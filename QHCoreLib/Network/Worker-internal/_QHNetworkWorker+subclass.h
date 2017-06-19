@@ -27,7 +27,6 @@ typedef NS_ENUM(NSUInteger, QHNetworkWorkerState) {
 
 @property (nonatomic, strong, readwrite) QHNetworkRequest *request;
 
-@property (nonatomic, assign) QHNetworkWorkerState state;
 
 - (void)p_doStart;  // subclass imp
 

@@ -19,18 +19,20 @@
 
 
 @interface QHNetworkWorker () {
-    @private
-    dispatch_semaphore_t stateLock;
-    NSRecursiveLock *actionLock;
+@private
+    QHNetworkWorkerState _state;
+    dispatch_semaphore_t _stateLock;
+    NSRecursiveLock *_lock;
 }
+
+@property (nonatomic, assign, readwrite) QHNetworkWorkerState state;
+@property (nonatomic, readonly) NSRecursiveLock *lock;
 
 @property (nonatomic, copy) QHNetworkWorkerCompletionHandler completionHandler;
 
 @end
 
 @implementation QHNetworkWorker
-
-@synthesize state=_state;
 
 + (NSOperationQueue *)sharedNetworkQueue
 {
@@ -58,10 +60,11 @@
 {
     self = [super init];
     if (self) {
+        _state = QHNetworkWorkerStateNone;
+        _stateLock = dispatch_semaphore_create(1);
+        _lock = [[NSRecursiveLock alloc] init];
+
         self.request = request;
-        stateLock = dispatch_semaphore_create(1);
-        actionLock = [[NSRecursiveLock alloc] init];
-        self.state = QHNetworkWorkerStateNone;
     }
     return self;
 }
@@ -75,29 +78,34 @@
             (unsigned long)self.state];
 }
 
+@dynamic state;
+
 - (QHNetworkWorkerState)state
 {
     __block QHNetworkWorkerState state = QHNetworkWorkerStateNone;
-
-    QHDispatchSemaphoreLock(stateLock, ^{
-        @retainify(self);
-        state = self->_state;
+    QHDispatchSemaphoreLock(_stateLock, ^{
+        state = _state;
     });
-
     return state;
 }
 
 - (void)setState:(QHNetworkWorkerState)state
 {
-    QHDispatchSemaphoreLock(stateLock, ^{
-        @retainify(self);
-        self->_state = state;
+    QHDispatchSemaphoreLock(_stateLock, ^{
+        _state = state;
     });
+}
+
+@dynamic lock;
+
+- (NSRecursiveLock *)lock
+{
+    return _lock;
 }
 
 - (void)startWithCompletionHandler:(QHNetworkWorkerCompletionHandler)completionHandler
 {
-    QHNSLock(actionLock, ^{
+    QHNSLock(_lock, ^{
         @retainify(self);
 
         QHAssertReturnVoidOnFailure(self.state == QHNetworkWorkerStateNone,
@@ -114,7 +122,7 @@
 
 - (void)cancel
 {
-    QHNSLock(actionLock, ^{
+    QHNSLock(_lock, ^{
         @retainify(self);
 
         self.state = QHNetworkWorkerStateCancelled;
@@ -150,9 +158,9 @@
 - (void)p_doCompletion:(QHNetworkWorker *)worker response:(QHNetworkResponse *)response error:(NSError *)error
 {
     dispatch_async(self.completionQueue ?: dispatch_get_main_queue(), ^{
-        QHNSLock(actionLock, ^{
-            @retainify(self);
+        @retainify(self);
 
+        QHNSLock(self.lock, ^{
             self.state = QHNetworkWorkerStateFinished;
 
             [self p_checkSlowRequest];
