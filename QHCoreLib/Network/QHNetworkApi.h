@@ -67,7 +67,7 @@ QH_NETWORK_API_RESULT_DECL(QHNetworkApi, QHNetworkApiResult);
 @dynamic api; \
 \
 + (RESULT_TYPE *)parse:(QHNetworkResponse *)response \
-                 error:(NSError **)error \
+                 error:(NSError * __autoreleasing *)error \
                    api:(API_TYPE *)api \
 { \
     RESULT_TYPE *result = (RESULT_TYPE *)[super parse:response error:error api:api]; \
