@@ -84,7 +84,8 @@
 {
     __block QHNetworkWorkerState state = QHNetworkWorkerStateNone;
     QHDispatchSemaphoreLock(_stateLock, ^{
-        state = _state;
+        @retainify(self);
+        state = self->_state;
     });
     return state;
 }
@@ -92,7 +93,8 @@
 - (void)setState:(QHNetworkWorkerState)state
 {
     QHDispatchSemaphoreLock(_stateLock, ^{
-        _state = state;
+        @retainify(self);
+        self->_state = state;
     });
 }
 

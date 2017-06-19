@@ -55,7 +55,8 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 {
     __block QHAsyncTaskState state;
     QHDispatchSemaphoreLock(_stateLock, ^{
-        state = _state;
+        @retainify(self);
+        state = self->_state;
     });
     return state;
 }
@@ -63,7 +64,8 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 - (void)setState:(QHAsyncTaskState)state
 {
     QHDispatchSemaphoreLock(_stateLock, ^{
-        _state = state;
+        @retainify(self);
+        self->_state = state;
     });
 }
 
@@ -89,6 +91,7 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
             @weakify(self);
             [self p_asyncOnWorkQueue:^{
                 @strongify(self);
+
                 if (self.state != QHAsyncTaskStateCancelled) {
                     QHNSLock(self.lock, ^{
                         [self p_doStart];
@@ -245,6 +248,8 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
             
             if (success) {
                 [self p_asyncOnCompletionQueue:^{
+                    @retainify(self);
+
                     if ([self p_canInvokeCallback]) {
                         success(self, result);
                     }
@@ -254,6 +259,7 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
                     }];
                     
                     [self p_asyncOnWorkQueue:^{
+                        @retainify(self);
                         [self p_doTeardown];
                     }];
                 }];
@@ -290,6 +296,8 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
             
             if (fail) {
                 [self p_asyncOnCompletionQueue:^{
+                    @retainify(self);
+
                     if ([self p_canInvokeCallback]) {
                         fail(self, error);
                     }
@@ -299,6 +307,7 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
                     }];
                     
                     [self p_asyncOnWorkQueue:^{
+                        @retainify(self);
                         [self p_doTeardown];
                     }];
                 }];
