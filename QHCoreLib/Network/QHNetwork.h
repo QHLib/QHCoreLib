@@ -51,6 +51,7 @@ QH_SINGLETON_DEF
 
 
 #import <QHCoreLib/QHNetworkUtil.h>
+#import <QHCoreLib/QHNetworkMultipart.h>
 #import <QHCoreLib/QHNetworkRequest.h>
 #import <QHCoreLib/QHNetworkResponse.h>
 #import <QHCoreLib/QHNetworkWorker.h>

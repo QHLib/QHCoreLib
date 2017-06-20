@@ -8,23 +8,19 @@
 
 #import "QHNetworkUtil.h"
 
-#import "QHDefines.h"
-#import "QHAsserts.h"
-
 
 NSString * const QHNetWorkHttpMethodGet =   @"GET";
 NSString * const QHNetWorkHttpMethodPost =  @"POST";
 
-
 @implementation QHNetworkUtil
 
-+ (NSString *)appendQuery:(NSDictionary<NSString *,NSString *> *)dict
++ (NSString *)appendQuery:(NSDictionary<NSString *, NSString *> *)dict
                     toUrl:(NSString *)url
 {
     return [self appendQuery:dict toUrl:url sortByKey:QHNetworkQueryKeyOrderNone];
 }
 
-+ (NSString *)appendQuery:(NSDictionary<NSString *,NSString *> *)dict
++ (NSString *)appendQuery:(NSDictionary<NSString *, NSString *> *)dict
                     toUrl:(NSString *)url
                 sortByKey:(QHNetworkQueryKeyOrder)order
 {

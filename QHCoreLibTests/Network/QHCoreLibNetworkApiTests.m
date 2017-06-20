@@ -229,6 +229,35 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
                       timeout:api.worker.request.urlRequest.timeoutInterval + 0.1];
 }
 
+- (void)testLoadJsonWithMultipart
+{
+    XCTestExpectation *expect = [[XCTestExpectation alloc] initWithDescription:@"load 'http://httpbin.org/post?t=123' with body 'u=456' and file"];
+
+    NSString *tmpDir = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
+    NSURL *fileUrl = [NSURL fileURLWithPath:[tmpDir stringByAppendingPathComponent:[[NSUUID UUID] UUIDString]]];
+    [@"content of file" writeToURL:fileUrl atomically:YES encoding:NSUTF8StringEncoding error:nil];
+
+    NSMutableURLRequest *request = [QHNetworkMultipart requestFromUrl:@"http://httpbin.org/post"
+                                                            queryDict:@{@"t": @"123"}
+                                                             bodyDict:@{@"u": @"456"}
+                                                     multipartBuilder:^(id<QHNetworkMultipartBuilder> builder) {
+                                                         [builder appendPartWithFileUrl:fileUrl name:@"file" error:nil];
+                                                     }];
+
+    QHNetworkJsonApi *api = [[QHNetworkJsonApi alloc] initWithUrlRequest:request];
+
+    [api startWithSuccess:^(QHNetworkJsonApi *api, QHNetworkJsonApiResult *result) {
+        [expect fulfill];
+    } fail:^(QHNetworkJsonApi *api, NSError *error) {
+        NSLog(@"error: %@", error);
+        XCTAssert(NO, @"should not be here");
+        [expect fulfill];
+    }];
+
+    [self waitForExpectations:@[ expect ]
+                      timeout:api.worker.request.urlRequest.timeoutInterval + 0.1];
+}
+
 - (void)testLoadImage
 {
     XCTestExpectation *expect = [[XCTestExpectation alloc] initWithDescription:@"load 'http://tctony.github.io/favicon.ico'"];

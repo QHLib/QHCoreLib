@@ -135,4 +135,18 @@
 #endif
 }
 
+- (void)testQHRandom
+{
+    uint32_t r1 = QHRandomNumber();
+    uint32_t r2 = QHRandomNumber();
+    XCTAssertNotEqual(r1, r2);
+}
+
+- (void)testContentTypeOfExtension
+{
+    XCTAssertEqualObjects(QHContentTypeOfExtension(@"txt"), @"text/plain");
+    XCTAssertEqualObjects(QHContentTypeOfExtension(@"png"), @"image/png");
+    XCTAssertEqualObjects(QHContentTypeOfExtension(@"jpg"), @"image/jpeg");
+}
+
 @end

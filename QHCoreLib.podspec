@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
     ss.source_files = "QHCoreLib/Base/**/*.{h,m}"
     ss.public_header_files = "QHCoreLib/Base/**/*.h"
     ss.private_header_files = "QHCoreLib/Base/Internal/**/*.h"
-    ss.frameworks = "Foundation"
+    ss.frameworks = "Foundation", "Security", "MobileCoreServices"
     ss.dependency "libextobjc", '0.4.1'
     ss.dependency 'MustOverride', '1.1'
   end

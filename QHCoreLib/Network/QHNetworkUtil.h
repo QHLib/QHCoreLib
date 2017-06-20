@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import <QHCoreLib/QHDefines.h>
+#import <QHCoreLib/QHBase.h>
 
 
 QH_EXTERN NSString * const QHNetWorkHttpMethodGet;
@@ -29,7 +29,6 @@ typedef NS_ENUM(NSUInteger, QHNetworkQueryKeyOrder) {
 + (NSString *)appendQuery:(NSDictionary<NSString *, NSString *> *)dict
                     toUrl:(NSString *)url
                 sortByKey:(QHNetworkQueryKeyOrder)order;
-
 
 + (NSMutableURLRequest *)requestFromURL:(NSString *)urlString;
 

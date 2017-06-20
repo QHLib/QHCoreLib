@@ -30,6 +30,9 @@ QH_NETWORK_API_DECL(QHNetworkHttpApi, QHNetworkHttpApiResult);
 @property (nonatomic, readonly) NSDictionary *queryDict;
 @property (nonatomic, readonly) NSDictionary *bodyDict;
 
+
+- (instancetype)initWithUrlRequest:(NSURLRequest *)urlRequest;
+
 @end
 
 @interface QHNetworkHttpApiResult : QHNetworkApiResult

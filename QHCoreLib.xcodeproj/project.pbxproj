@@ -90,6 +90,8 @@
 		EAAE59151EE7DD940084FA69 /* NSObject+QHUserDefaultsProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = EAAE59131EE7DD940084FA69 /* NSObject+QHUserDefaultsProperty.m */; };
 		EAAE59171EE7E62A0084FA69 /* QHCoreLibUserDefaultsPropertyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAAE59161EE7E62A0084FA69 /* QHCoreLibUserDefaultsPropertyTests.m */; };
 		EAAE5AF91EE94EC00084FA69 /* QHMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAE5AF81EE94EC00084FA69 /* QHMacros.h */; };
+		EAB2EC921EF7B83400CDDF6D /* QHNetworkMultipart.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB2EC901EF7B83400CDDF6D /* QHNetworkMultipart.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EAB2EC931EF7B83400CDDF6D /* QHNetworkMultipart.m in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EC911EF7B83400CDDF6D /* QHNetworkMultipart.m */; };
 		EAE3C7A51EE12A9000A93456 /* QHProfiler.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE3C7A21EE12A0F00A93456 /* QHProfiler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAE3C7B41EE153A400A93456 /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = EA1D433C1ED70CE3002177BF /* DDLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F06443AE55B201F94A964E1C /* Pods_QHCoreLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BFD5D802EAE749D3FCD8FC /* Pods_QHCoreLib.framework */; };
@@ -199,6 +201,8 @@
 		EAAE59131EE7DD940084FA69 /* NSObject+QHUserDefaultsProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+QHUserDefaultsProperty.m"; sourceTree = "<group>"; };
 		EAAE59161EE7E62A0084FA69 /* QHCoreLibUserDefaultsPropertyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHCoreLibUserDefaultsPropertyTests.m; sourceTree = "<group>"; };
 		EAAE5AF81EE94EC00084FA69 /* QHMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHMacros.h; sourceTree = "<group>"; };
+		EAB2EC901EF7B83400CDDF6D /* QHNetworkMultipart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHNetworkMultipart.h; sourceTree = "<group>"; };
+		EAB2EC911EF7B83400CDDF6D /* QHNetworkMultipart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHNetworkMultipart.m; sourceTree = "<group>"; };
 		EAE3C7A21EE12A0F00A93456 /* QHProfiler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHProfiler.h; sourceTree = "<group>"; };
 		EAE3C7A31EE12A4F00A93456 /* QHLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHLog.h; sourceTree = "<group>"; };
 		F2B4A6B4945BFE0B2872201F /* Pods_QHCoreLibTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QHCoreLibTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -415,6 +419,8 @@
 				EA1D43441ED70CE3002177BF /* QHNetwork.m */,
 				EA1D434C1ED70CE3002177BF /* QHNetworkUtil.h */,
 				EA1D434D1ED70CE3002177BF /* QHNetworkUtil.m */,
+				EAB2EC901EF7B83400CDDF6D /* QHNetworkMultipart.h */,
+				EAB2EC911EF7B83400CDDF6D /* QHNetworkMultipart.m */,
 				EA1D43481ED70CE3002177BF /* QHNetworkRequest.h */,
 				EA1D43491ED70CE3002177BF /* QHNetworkRequest.m */,
 				EA1D434A1ED70CE3002177BF /* QHNetworkResponse.h */,
@@ -556,6 +562,7 @@
 				EA1D43701ED70CE3002177BF /* DDFileLogger.h in Headers */,
 				EAE3C7A51EE12A9000A93456 /* QHProfiler.h in Headers */,
 				EA19CC691EE99C9600C18853 /* QHNetworkImageApi.h in Headers */,
+				EAB2EC921EF7B83400CDDF6D /* QHNetworkMultipart.h in Headers */,
 				EA1D438A1ED70CE3002177BF /* AFHTTPRequestOperationManager.h in Headers */,
 				EA1D43851ED70CE3002177BF /* _QHNetworkWorker+subclass.h in Headers */,
 				EA1D43951ED70CE3002177BF /* AFURLResponseSerialization.h in Headers */,
@@ -770,6 +777,7 @@
 				EA1D43801ED70CE3002177BF /* QHNetworkResponse.m in Sources */,
 				EA1D437C1ED70CE3002177BF /* QHNetworkApi.m in Sources */,
 				EA1D438E1ED70CE3002177BF /* AFNetworkReachabilityManager.m in Sources */,
+				EAB2EC931EF7B83400CDDF6D /* QHNetworkMultipart.m in Sources */,
 				EA1D43751ED70CE3002177BF /* DDTTYLogger.m in Sources */,
 				EA1D43941ED70CE3002177BF /* AFURLRequestSerialization.m in Sources */,
 				EAAA79EB1ED96871008135BE /* QHAsserts.m in Sources */,

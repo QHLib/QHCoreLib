@@ -36,6 +36,7 @@ framework module QHCoreLib {
     explicit module QHNetwork {
         header "QHNetwork.h"
         header "QHNetworkUtil.h"
+        header "QHNetworkMultipart.h"
         header "QHNetworkRequest.h"
         header "QHNetworkResponse.h"
         header "QHNetworkWorker.h"

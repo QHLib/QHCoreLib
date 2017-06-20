@@ -52,3 +52,12 @@ static inline void QHNSLock(id<NSLocking> lock, dispatch_block_t block) {
     QH_BLOCK_INVOKE(block);
     [lock unlock];
 }
+
+
+QH_EXTERN NSData *QHRandomBytes(uint32_t length);
+
+QH_EXTERN uint32_t QHRandomNumber();
+
+
+// MIME type of 'ext'
+QH_EXTERN NSString *QHContentTypeOfExtension(NSString *ext);

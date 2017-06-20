@@ -8,6 +8,9 @@
 
 #import "QHUtil.h"
 
+#import <Security/Security.h>
+#import <MobileCoreServices/MobileCoreServices.h>
+
 #import "QHMacros.h"
 
 
@@ -97,4 +100,44 @@ BOOL QHBlockInvoke(dispatch_block_t block, const char *filePath, int line)
         }
         return NO;
     }
+}
+
+NSData *QHRandomBytes(uint32_t length)
+{
+    uint8_t *bytes = malloc(length);
+    if (bytes == NULL) {
+        QHCoreLibFatal(@"malloc(%d) failed", length);
+        return nil;
+    }
+
+    int code = SecRandomCopyBytes(nil, length, bytes);
+    if (code != 0) {
+        QHCoreLibWarn(@"SecRandomCopyBytes create random %d bytes failed with code %d",
+                      length, code);
+    }
+
+    return [NSData dataWithBytesNoCopy:bytes length:length];
+}
+
+uint32_t QHRandomNumber()
+{
+    NSData *fourBytes = QHRandomBytes(4);
+    return *((uint32_t *)fourBytes.bytes);
+}
+
+
+NSString *QHContentTypeOfExtension(NSString *ext)
+{
+#ifdef __UTTYPE__
+    NSString *UTI = (__bridge_transfer NSString *)UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (__bridge CFStringRef)ext, NULL);
+    NSString *contentType = (__bridge_transfer NSString *)UTTypeCopyPreferredTagWithClass((__bridge CFStringRef)UTI, kUTTagClassMIMEType);
+    if (!contentType) {
+        return @"application/octet-stream";
+    } else {
+        return contentType;
+    }
+#else
+#pragma unused (extension)
+    return @"application/octet-stream";
+#endif
 }

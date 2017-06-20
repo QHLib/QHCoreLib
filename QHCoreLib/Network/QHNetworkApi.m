@@ -34,7 +34,9 @@ NSString * const QHNetworkApiErrorDomain = @"QHNetworkApiErrorDomain";
     NSURLRequest *request = self.worker.request.urlRequest;
     [str appendFormat:@"\n    method: %@", request.HTTPMethod];
     [str appendFormat:@"\n    url   : %@", request.URL.absoluteString];
-    NSString *body = [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding];
+    NSString *body = (request.HTTPBodyStream ? [request.HTTPBodyStream description] :
+                      request.HTTPBody ? [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding] :
+                      @"");
     [str appendFormat:@"\n    body  : %@", body];
 
     return str;
