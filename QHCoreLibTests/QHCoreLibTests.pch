@@ -13,9 +13,9 @@
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
 #if DEBUG
-#   define QH_XCTAssertThrows_DEBUG XCTAssertThrows
+#   define QH_XCTAssertThrows_On_DEBUG XCTAssertThrows
 #else
-#   define QH_XCTAssertThrows_DEBUG XCTAssertNoThrow
+#   define QH_XCTAssertThrows_On_DEBUG XCTAssertNoThrow
 #endif
 
 #endif /* QHCoreLibTests_pch */

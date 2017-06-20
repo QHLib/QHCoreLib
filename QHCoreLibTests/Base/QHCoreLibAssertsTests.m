@@ -41,6 +41,15 @@
     [super tearDown];
 }
 
+- (void)testFatal
+{
+    dispatch_block_t block = ^{
+        QHFatal(@"some error...%@", @"");
+    };
+
+    QH_XCTAssertThrows_On_DEBUG(block());
+}
+
 - (void)testAssert
 {
     {
@@ -56,7 +65,7 @@
             QHAssert(0 == 1, @"assert 0 == 1 will throw");
         };
 
-        QH_XCTAssertThrows_DEBUG(block());
+        QH_XCTAssertThrows_On_DEBUG(block());
     }
 }
 
@@ -79,7 +88,7 @@
         QHAssertParam(obj);
     };
 
-    QH_XCTAssertThrows_DEBUG(block(nil));
+    QH_XCTAssertThrows_On_DEBUG(block(nil));
 }
 
 - (void)testAssertReturnVoid

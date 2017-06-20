@@ -10,6 +10,7 @@
 
 #import <QHCoreLib/QHDefines.h>
 
+#define QHFatal(...) QHAssert(NO, __VA_ARGS__)
 
 #ifndef NS_BLOCK_ASSERTIONS
 #   define QHAssert(condition, ...) \
