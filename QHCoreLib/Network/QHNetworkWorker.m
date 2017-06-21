@@ -18,6 +18,8 @@
 #import "_QHNetworkWorker+subclass.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface QHNetworkWorker () {
 @private
     QHNetworkWorkerState _state;
@@ -28,7 +30,7 @@
 @property (nonatomic, assign, readwrite) QHNetworkWorkerState state;
 @property (nonatomic, readonly) NSRecursiveLock *lock;
 
-@property (nonatomic, copy) QHNetworkWorkerCompletionHandler completionHandler;
+@property (nonatomic, copy) QHNetworkWorkerCompletionHandler _Nullable completionHandler;
 
 @end
 
@@ -157,7 +159,9 @@
     NSAssert(NO, @"subclass should implement");
 }
 
-- (void)p_doCompletion:(QHNetworkWorker *)worker response:(QHNetworkResponse *)response error:(NSError *)error
+- (void)p_doCompletion:(QHNetworkWorker *)worker
+              response:(QHNetworkResponse * _Nullable)response
+                 error:(NSError * _Nullable)error
 {
     dispatch_async(self.completionQueue ?: dispatch_get_main_queue(), ^{
         @retainify(self);
@@ -211,3 +215,5 @@
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

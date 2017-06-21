@@ -12,6 +12,8 @@
 #import "QHLog.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 
 @interface QHAsyncTask () {
@@ -24,8 +26,8 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 @property (nonatomic, assign, readwrite) QHAsyncTaskState state;
 @property (nonatomic, readonly) NSRecursiveLock *lock;
 
-@property (nonatomic, copy) QHAsyncTaskSuccessBlock successBlock;
-@property (nonatomic, copy) QHAsyncTaskFailBlock failBlock;
+@property (nonatomic, copy) QHAsyncTaskSuccessBlock _Nullable successBlock;
+@property (nonatomic, copy) QHAsyncTaskFailBlock _Nullable failBlock;
 
 @end
 
@@ -76,8 +78,8 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
     return _lock;
 }
 
-- (void)startWithSuccess:(void (^)(QHAsyncTask *, NSObject *))success
-                    fail:(void (^)(QHAsyncTask *, NSError *))fail
+- (void)startWithSuccess:(void (^ _Nullable)(QHAsyncTask *, NSObject * _Nullable))success
+                    fail:(void (^ _Nullable)(QHAsyncTask *, NSError *))fail
 {
     QHNSLock(_lock, ^{
         @retainify(self);
@@ -215,7 +217,7 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 
 #pragma mark -
 
-- (void)p_fireSuccess:(NSObject *)result
+- (void)p_fireSuccess:(NSObject * _Nullable)result
 {
     [self p_asyncOnWorkQueue:^{
         @retainify(self);
@@ -236,7 +238,7 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
     }];
 }
 
-- (void)locked_fireSuccess:(NSObject *)result
+- (void)locked_fireSuccess:(NSObject * _Nullable)result
 {
     QHNSLock(_lock, ^{
         @retainify(self);
@@ -320,3 +322,5 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

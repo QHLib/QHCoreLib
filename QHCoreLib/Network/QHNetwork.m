@@ -16,6 +16,8 @@
 #import "QHDefaultValue.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 NSString * const QHNetworkStatusChangedNotification = @"QHNetworkStatusChangedNotification";
 
 NSString * const kQHNetworkStatusStringNotReachable = @"NotReachable";
@@ -213,3 +215,5 @@ QH_SINGLETON_IMP
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

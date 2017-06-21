@@ -14,6 +14,8 @@
 #import "QHMacros.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 BOOL QHIsMainQueue()
 {
     static void *mainQueueKey = &mainQueueKey;
@@ -72,7 +74,7 @@ void QHDispatchAsyncDefault(dispatch_block_t block)
     });
 }
 
-BOOL QHBlockInvoke(dispatch_block_t block, const char *filePath, int line)
+BOOL QHBlockInvoke(dispatch_block_t block, const char * _Nullable filePath, int line)
 {
     if (block == nil) {
         return NO;
@@ -141,3 +143,5 @@ NSString *QHContentTypeOfExtension(NSString *ext)
     return @"application/octet-stream";
 #endif
 }
+
+NS_ASSUME_NONNULL_END

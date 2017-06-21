@@ -10,6 +10,9 @@
 
 #import <QHCoreLib/QHDefines.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
+
 #define QHFatal(...) QHAssert(NO, __VA_ARGS__)
 
 #ifndef NS_BLOCK_ASSERTIONS
@@ -36,7 +39,7 @@ typedef void (^QHAssertFunction)(NSString *condition,
                                  NSString *function,
                                  NSString *message);
 
-QH_EXTERN void QHSetAssertFunction(QHAssertFunction assertFunction);
+QH_EXTERN void QHSetAssertFunction(QHAssertFunction _Nullable assertFunction);
 QH_EXTERN QHAssertFunction QHGetAssertFunction();
 
 
@@ -74,3 +77,5 @@ _Pragma("clang diagnostic ignored \"-Wunused-parameter\"") \
 QH_EXTERN NSException *_QHNotImplementedException(SEL, Class); \
 method NS_UNAVAILABLE { @throw _QHNotImplementedException(_cmd, [self class]); } \
 _Pragma("clang diagnostic pop")
+
+NS_ASSUME_NONNULL_END

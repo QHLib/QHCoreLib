@@ -11,6 +11,9 @@
 
 #import <QHCoreLib/QHAsyncTask.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
+
 @interface QHAsyncTask ()
 
 - (void)p_asyncOnWorkQueue:(dispatch_block_t)block;
@@ -35,9 +38,11 @@
  */
 - (void)p_doTeardown;
                    
-- (void)p_fireSuccess:(NSObject *)result;
+- (void)p_fireSuccess:(NSObject * _Nullable)result;
 - (void)p_fireFail:(NSError *)error;
                    
 @end
+
+NS_ASSUME_NONNULL_END
 
 #endif /* QHAsyncTask_internal_h */

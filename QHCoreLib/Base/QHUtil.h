@@ -12,6 +12,8 @@
 #import <QHCoreLib/Foundation+QHCoreLib.h>
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 // check if currently on the main queue
 QH_EXTERN BOOL QHIsMainQueue(void);
 
@@ -33,7 +35,7 @@ QH_EXTERN void QHDispatchAsyncDefault(dispatch_block_t block);
 
 // safe invoke block
 // return YES if no error occurs while executing the block
-QH_EXTERN BOOL QHBlockInvoke(dispatch_block_t block, const char *filePath, int line);
+QH_EXTERN BOOL QHBlockInvoke(dispatch_block_t block, const char * _Nullable filePath, int line);
 #define QH_BLOCK_INVOKE(block) QHBlockInvoke(block, __FILE__, __LINE__)
 
 
@@ -61,3 +63,5 @@ QH_EXTERN uint32_t QHRandomNumber();
 
 // MIME type of 'ext'
 QH_EXTERN NSString *QHContentTypeOfExtension(NSString *ext);
+
+NS_ASSUME_NONNULL_END

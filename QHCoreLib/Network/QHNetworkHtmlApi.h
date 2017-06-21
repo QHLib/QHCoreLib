@@ -8,6 +8,9 @@
 
 #import <QHCoreLib/QHNetworkHttpApi.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
+
 @class QHNetworkHtmlApiResult;
 
 @interface QHNetworkHtmlApi : QHNetworkHttpApi
@@ -23,3 +26,5 @@ QH_NETWORK_API_RESULT_DECL(QHNetworkHtmlApi, QHNetworkHtmlApiResult);
 @property (nonatomic, readonly) NSString *html;
 
 @end
+
+NS_ASSUME_NONNULL_END

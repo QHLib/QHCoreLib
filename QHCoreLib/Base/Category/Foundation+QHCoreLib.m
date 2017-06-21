@@ -12,6 +12,7 @@
 #import "QHUtil.h"
 #import "QHDefaultValue.h"
 
+NS_ASSUME_NONNULL_BEGIN
 
 QH_DUMMY_CLASS(FoudationQHCoreLib)
 
@@ -344,8 +345,8 @@ QH_DUMMY_CLASS(FoudationQHCoreLib)
 
 + (instancetype)qh_errorWithDomain:(NSErrorDomain)domain
                               code:(NSInteger)code
-                           message:(NSString *)message
-                              info:(NSDictionary *)info
+                           message:(NSString * _Nullable)message
+                              info:(NSDictionary * _Nullable)info
                               file:(const char *)file
                               line:(int)line
 {
@@ -366,3 +367,5 @@ QH_DUMMY_CLASS(FoudationQHCoreLib)
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

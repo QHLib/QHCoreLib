@@ -89,10 +89,10 @@
 {
     NSMutableArray *array = [NSMutableArray array];
 
-    [array qh_addObject:nil];
+    [array qh_addObject:nilValue()];
     [array qh_addObject:@1];
 
-    [array qh_insertObject:nil atIndex:array.count];
+    [array qh_insertObject:nilValue() atIndex:array.count];
     [array qh_insertObject:@1 atIndex:array.count];
     [array qh_insertObject:@1 atIndex:array.count + 1];
 
@@ -142,9 +142,9 @@
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:@{ @1: @1, @2: @2 }];
 
-    [dict qh_setObject:nil forKey:nil];
-    [dict qh_setObject:nil forKey:@1];
-    [dict qh_setObject:@1 forKey:nil];
+    [dict qh_setObject:nilValue() forKey:nilValue()];
+    [dict qh_setObject:nilValue() forKey:@1];
+    [dict qh_setObject:@1 forKey:nilValue()];
     [dict qh_setObject:@2 forKey:@1];
     XCTAssertEqualObjects(@2, dict[@1]);
 }
@@ -152,7 +152,7 @@
 - (void)testMutableSet
 {
     NSMutableSet *set = [NSMutableSet setWithObjects:@"1", @"2", @"3", nil];
-    XCTAssertNoThrow([set qh_addObject:nil]);
+    XCTAssertNoThrow([set qh_addObject:nilValue()]);
     [set qh_addObject:@"0"];
     XCTAssertEqual(set.count, 4);
 }

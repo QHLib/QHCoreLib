@@ -13,6 +13,8 @@
 #import <QHCoreLib/DDLog.h>
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 QH_EXTERN DDLogLevel QHLogLevel;
 QH_EXTERN void QHSetLogLevel(DDLogLevel logLevel);
 
@@ -56,3 +58,5 @@ _LOG_MAYBE(YES, QHLogLevel, DDLogFlagVerbose, 0, nil, __PRETTY_FUNCTION__, frmt,
 + (NSString *)getLogFilePath;
 
 @end
+
+NS_ASSUME_NONNULL_END

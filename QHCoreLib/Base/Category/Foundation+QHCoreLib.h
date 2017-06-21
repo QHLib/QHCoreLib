@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+#import <QHCoreLib/QHDefines.h>
+
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface NSObject (QHCoreLib)
 
@@ -120,8 +124,8 @@
 
 + (instancetype)qh_errorWithDomain:(NSErrorDomain)domain
                               code:(NSInteger)code
-                           message:(NSString *)message
-                              info:(NSDictionary *)info
+                           message:(NSString * _Nullable)message
+                              info:(NSDictionary * _Nullable)info
                               file:(const char *)file
                               line:(int)line;
 @end
@@ -129,3 +133,4 @@
 #define QH_ERROR(_domain, _code, _message, _info) \
 [NSError qh_errorWithDomain:(_domain) code:(_code) message:(_message) info:(_info) file:__FILE__ line:__LINE__]
 
+NS_ASSUME_NONNULL_END

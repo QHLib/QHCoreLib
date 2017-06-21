@@ -8,6 +8,9 @@
 
 #import <QHCoreLib/QHNetworkApi.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
+
 @class QHNetworkHttpApiResult;
 
 @interface QHNetworkHttpApi : QHNetworkApi
@@ -40,3 +43,5 @@ QH_NETWORK_API_DECL(QHNetworkHttpApi, QHNetworkHttpApiResult);
 QH_NETWORK_API_RESULT_DECL(QHNetworkHttpApi, QHNetworkHttpApiResult);
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -9,6 +9,8 @@
 #import "QHNetworkUtil.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 NSString * const QHNetWorkHttpMethodGet =   @"GET";
 NSString * const QHNetWorkHttpMethodPost =  @"POST";
 
@@ -80,8 +82,8 @@ NSString * const QHNetWorkHttpMethodPost =  @"POST";
 
 + (NSMutableURLRequest *)requestFromMethod:(NSString *)method
                                        url:(NSString *)urlString
-                                 queryDict:(NSDictionary *)queryDict
-                                  bodyDict:(NSDictionary *)bodyDict
+                                 queryDict:(NSDictionary * _Nullable)queryDict
+                                  bodyDict:(NSDictionary * _Nullable)bodyDict
 {
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     request.HTTPMethod = method;
@@ -98,3 +100,5 @@ NSString * const QHNetWorkHttpMethodPost =  @"POST";
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -8,6 +8,8 @@
 
 #import <QHCoreLib/QHNetworkHttpApi.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class UIImage;
 @class QHNetworkImageApiResult;
 
@@ -21,6 +23,8 @@ QH_NETWORK_API_DECL(QHNetworkImageApi, QHNetworkImageApiResult);
 
 QH_NETWORK_API_RESULT_DECL(QHNetworkImageApi, QHNetworkImageApiResult);
 
-@property (nonatomic, readonly) UIImage *image;
+@property (nonatomic, readonly) UIImage * _Nullable image;
 
 @end
+
+NS_ASSUME_NONNULL_END

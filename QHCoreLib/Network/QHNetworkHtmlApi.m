@@ -13,6 +13,8 @@
 #import "QHUtil.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @implementation QHNetworkHtmlApi
 
 QH_NETWORK_API_IMPL_INDIRECT(QHNetworkHtmlApi, QHNetworkHtmlApiResult,
@@ -50,3 +52,5 @@ QH_NETWORK_API_RESULT_IMPL_SUPER(QHNetworkHtmlApi, QHNetworkHtmlApiResult) {
 QH_NETWORK_API_RESULT_IMPL_RETURN;
 
 @end
+
+NS_ASSUME_NONNULL_END

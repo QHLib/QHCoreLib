@@ -11,6 +11,8 @@
 #import <QHCoreLib/QHDefines.h>
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 QH_EXTERN NSString * const QHNetworkStatusChangedNotification;
 
 typedef NS_ENUM(NSInteger, QHNetworkStatus) {
@@ -49,6 +51,7 @@ QH_SINGLETON_DEF
 
 @end
 
+NS_ASSUME_NONNULL_END
 
 #import <QHCoreLib/QHNetworkUtil.h>
 #import <QHCoreLib/QHNetworkMultipart.h>

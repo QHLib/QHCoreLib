@@ -12,6 +12,8 @@
 #import "QHLog.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 NSString * const QHNetworkApiErrorDomain = @"QHNetworkApiErrorDomain";
 
 
@@ -42,8 +44,8 @@ NSString * const QHNetworkApiErrorDomain = @"QHNetworkApiErrorDomain";
     return str;
 }
 
-- (void)startWithSuccess:(void (^)(QHNetworkApi *, QHNetworkApiResult *))success
-                    fail:(void (^)(QHNetworkApi *, NSError *))fail
+- (void)startWithSuccess:(void (^ _Nullable)(QHNetworkApi *, QHNetworkApiResult *))success
+                    fail:(void (^ _Nullable)(QHNetworkApi *, NSError *))fail
 {
     QHNetworkRequest *request = [self buildRequest];
 
@@ -127,3 +129,5 @@ NSString * const QHNetworkApiErrorDomain = @"QHNetworkApiErrorDomain";
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -21,6 +21,8 @@
 #endif
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 #ifndef QH_DEBUG
 #   if DEBUG
 #       define QH_DEBUG 1
@@ -39,6 +41,7 @@
 #   define QH_EXTERN_C_BEGIN
 #   define QH_EXTERN_C_END
 #endif
+
 
 #define QH_UNUSED_VAR(var) ((void)(var))
 
@@ -127,5 +130,6 @@ _returnType(*_name)(id, SEL, __VA_ARGS__) = (_returnType(*)(id, SEL, __VA_ARGS__
 
 #define $(format, ...) [NSString stringWithFormat:format, ##__VA_ARGS__]
 
+NS_ASSUME_NONNULL_END
 
 #endif /* QHDefines_h */

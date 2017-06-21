@@ -15,6 +15,8 @@
 #import "Foundation+QHCoreLib.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 #define DISABLE_DEBUG_LOG 1
 
 #if (QH_DEBUG && DISABLE_DEBUG_LOG)
@@ -464,3 +466,5 @@
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

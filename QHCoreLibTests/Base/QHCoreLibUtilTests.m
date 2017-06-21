@@ -63,7 +63,8 @@
 
 - (void)testDispatchSyncMainSafe
 {
-    QHDispatchSyncMainSafe(nil);
+    
+    QHDispatchSyncMainSafe(nilValue());
 
     {
         __block id object = [NSObject new];
@@ -101,8 +102,8 @@
 
 - (void)testDispatchAsync
 {
-    QHDispatchAsyncMain(nil);
-    QHDispatchAsyncDefault(nil);
+    QHDispatchAsyncMain(nilValue());
+    QHDispatchAsyncDefault(nilValue());
 
     XCTestExpectation *expect1 = [[XCTestExpectation alloc] initWithDescription:@"AsyncMain"];
     QHDispatchAsyncMain(^{

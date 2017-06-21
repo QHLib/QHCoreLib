@@ -12,6 +12,8 @@
 #import <QHCoreLib/QHNetworkWorker.h>
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef NS_ENUM(NSUInteger, QHNetworkWorkerState) {
     QHNetworkWorkerStateNone,
     QHNetworkWorkerStateLoading,
@@ -33,10 +35,12 @@ typedef NS_ENUM(NSUInteger, QHNetworkWorkerState) {
 - (void)p_doCancel; // subclass imp
 
 - (void)p_doCompletion:(QHNetworkWorker *)worker
-              response:(QHNetworkResponse *)response
-                 error:(NSError *)error;
+              response:(QHNetworkResponse * _Nullable)response
+                 error:(NSError * _Nullable)error;
 
 @end
+
+NS_ASSUME_NONNULL_END
 
 #import "_QHNetworkWorkerAFHTTPRequestOperation.h"
 

@@ -11,6 +11,8 @@
 #import <QHCoreLib/QHBase.h>
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 QH_EXTERN NSString * const QHAsyncTaskErrorDomain;
 
 typedef NS_ENUM(NSUInteger, QHAsyncTaskError) {
@@ -25,12 +27,12 @@ typedef NS_ENUM(NSUInteger, QHAsyncTaskState) {
 };
 
 @class QHAsyncTask;
-typedef void (^QHAsyncTaskSuccessBlock)(QHAsyncTask *task, NSObject *result);
+typedef void (^QHAsyncTaskSuccessBlock)(QHAsyncTask *task, NSObject * _Nullable result);
 typedef void (^QHAsyncTaskFailBlock)(QHAsyncTask *task, NSError *error);
 
 #define QH_ASYNC_TASK_DECL(TASK_TYPE, RESULT_TYPE) \
-- (void)startWithSuccess:(void (^)(TASK_TYPE *task, RESULT_TYPE *result))success \
-                    fail:(void (^)(TASK_TYPE *task, NSError *error))fail; \
+- (void)startWithSuccess:(void (^ _Nullable)(TASK_TYPE *task, RESULT_TYPE * _Nullable result))success \
+                    fail:(void (^ _Nullable)(TASK_TYPE *task, NSError *error))fail; \
 - (Class)resultClass;
 
 @interface QHAsyncTask : NSObject
@@ -41,19 +43,19 @@ typedef void (^QHAsyncTaskFailBlock)(QHAsyncTask *task, NSError *error);
  * the queue to do the real job,
  * default `nil` which use global queue for `QOS_CLASS_DEFAULT`
  */
-@property (nonatomic, strong) dispatch_queue_t workQueue;
+@property (nonatomic, strong) dispatch_queue_t _Nullable workQueue;
 
 /**
  * the queue on which callback invoked,
  * default `nil` which use main queue
  */
-@property (nonatomic, strong) dispatch_queue_t completionQueue;
+@property (nonatomic, strong) dispatch_queue_t _Nullable completionQueue;
 
 /**
  * the queue on which the callback blocks disposed,
  * default `nil` which use main queue
  */
-@property (nonatomic, strong) dispatch_queue_t disposeQueue;
+@property (nonatomic, strong) dispatch_queue_t _Nullable disposeQueue;
 
 
 QH_ASYNC_TASK_DECL(QHAsyncTask, NSObject);
@@ -77,13 +79,15 @@ QH_ASYNC_TASK_DECL(QHAsyncTask, NSObject);
 QH_ASYNC_TASK_IMPL_INDIRECT(TASK_TYPE, RESULT_TYPE, QHAsyncTask, NSObject)
 
 #define QH_ASYNC_TASK_IMPL_INDIRECT(TASK_TYPE, RESULT_TYPE, SUPER_TASK_TYPE, SUPER_RESULT_TYPE) \
-- (void)startWithSuccess:(void (^)(TASK_TYPE *task, RESULT_TYPE *result))success \
-                    fail:(void (^)(TASK_TYPE *task, NSError *error))fail \
+- (void)startWithSuccess:(void (^ _Nullable)(TASK_TYPE *task, RESULT_TYPE * _Nullable result))success \
+                    fail:(void (^ _Nullable)(TASK_TYPE *task, NSError *error))fail \
 { \
-    [super startWithSuccess:(void (^)(SUPER_TASK_TYPE *api, SUPER_RESULT_TYPE *result))success \
-                       fail:(void (^)(SUPER_TASK_TYPE *api, NSError *error))fail]; \
+    [super startWithSuccess:(void (^ _Nullable)(SUPER_TASK_TYPE *task, SUPER_RESULT_TYPE * _Nullable result))success \
+                       fail:(void (^ _Nullable)(SUPER_TASK_TYPE *task, NSError *error))fail]; \
 } \
 - (Class)resultClass \
 { \
     return [RESULT_TYPE class]; \
 }
+
+NS_ASSUME_NONNULL_END

@@ -15,6 +15,8 @@
 #import "QHUtil.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @implementation QHNetworkImageApi
 
 - (QHNetworkRequest *)buildRequest
@@ -33,7 +35,7 @@ QH_NETWORK_API_IMPL_INDIRECT(QHNetworkImageApi, QHNetworkImageApiResult,
 
 @interface QHNetworkImageApiResult ()
 
-@property (nonatomic, strong, readwrite) UIImage *image;
+@property (nonatomic, strong, readwrite) UIImage * _Nullable image;
 
 @end
 
@@ -54,3 +56,5 @@ QH_NETWORK_API_RESULT_IMPL_SUPER(QHNetworkImageApi, QHNetworkImageApiResult) {
 QH_NETWORK_API_RESULT_IMPL_RETURN;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -10,6 +10,9 @@
 #import "DDTTYLogger.h"
 #import "DDFileLogger.h"
 
+
+NS_ASSUME_NONNULL_BEGIN
+
 DDLogLevel QHLogLevel = DDLogLevelAll;
 
 void QHSetLogLevel(DDLogLevel logLevel)
@@ -131,3 +134,5 @@ static DDFileLogger *fileLogger = nil;
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -11,14 +11,16 @@
 #import "QHNetworkUtil.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface QHNetworkHttpApi ()
 
-@property (nonatomic, strong) NSString *method;
+@property (nonatomic, copy) NSString *method;
 @property (nonatomic, copy, readwrite) NSString *url;
-@property (nonatomic, copy, readwrite) NSDictionary *queryDict;
-@property (nonatomic, copy, readwrite) NSDictionary *bodyDict;
+@property (nonatomic, copy, readwrite) NSDictionary * _Nullable queryDict;
+@property (nonatomic, copy, readwrite) NSDictionary * _Nullable bodyDict;
 
-@property (nonatomic, strong, readwrite) NSMutableURLRequest *urlRequest;
+@property (nonatomic, strong, readwrite) NSMutableURLRequest * _Nullable urlRequest;
 
 @end
 
@@ -65,11 +67,6 @@
 {
     self = [super init];
     if (self) {
-        self.method = nil;
-        self.url = nil;
-        self.queryDict = nil;
-        self.bodyDict = nil;
-
         self.urlRequest = [urlRequest mutableCopy];
     }
     return self;
@@ -107,3 +104,5 @@ QH_NETWORK_API_RESULT_IMPL_SUPER(QHNetworkHttpApi, QHNetworkHttpApiResult) {
 QH_NETWORK_API_RESULT_IMPL_RETURN;
 
 @end
+
+NS_ASSUME_NONNULL_END

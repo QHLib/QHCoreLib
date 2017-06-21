@@ -8,6 +8,9 @@
 
 #import <QHCoreLib/QHNetworkHttpApi.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
+
 @class QHNetworkJsonApiResult;
 
 @interface QHNetworkJsonApi : QHNetworkHttpApi
@@ -20,6 +23,8 @@ QH_NETWORK_API_DECL(QHNetworkJsonApi, QHNetworkJsonApiResult);
 
 QH_NETWORK_API_RESULT_DECL(QHNetworkJsonApi, QHNetworkJsonApiResult);
 
-@property (nonatomic, readonly) NSString *json;
+@property (nonatomic, readonly) NSString * _Nullable json;
 
 @end
+
+NS_ASSUME_NONNULL_END

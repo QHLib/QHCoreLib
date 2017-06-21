@@ -12,6 +12,8 @@
 #import <QHCoreLib/QHNetworkResponse.h>
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class QHNetworkWorker;
 
 typedef void(^QHNetworkWorkerCompletionHandler)(QHNetworkWorker *worker, QHNetworkResponse *response, NSError *error);
@@ -43,3 +45,5 @@ typedef void(^QHNetworkWorkerCompletionHandler)(QHNetworkWorker *worker, QHNetwo
 @property (nonatomic, readonly) int requestCost;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -11,6 +11,8 @@
 #import <QHCoreLib/QHDefines.h>
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 QH_EXTERN BOOL QHBool(id value, BOOL defaultValue);
 
 QH_EXTERN NSInteger QHInteger(id value, NSInteger defaultValue);
@@ -23,3 +25,4 @@ QH_EXTERN NSArray * QHArray(id value, NSArray *defaultValue);
 
 QH_EXTERN NSDictionary * QHDictionary(id value, NSDictionary *defaultValue);
 
+NS_ASSUME_NONNULL_END

@@ -9,21 +9,25 @@
 #import <Foundation/Foundation.h>
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface QHNetworkResponse : NSObject
 
-@property (nonatomic, readonly) NSURL  *url;
+@property (nonatomic, readonly) NSURL *url;
 
 @property (nonatomic, readonly) NSInteger statusCode;
-@property (nonatomic, readonly) NSDictionary *responseHeaders;
+@property (nonatomic, readonly) NSDictionary * _Nullable responseHeaders;
 @property (nonatomic, readonly) NSUInteger responseLength;
-@property (nonatomic, readonly) id responseObject;
+@property (nonatomic, readonly) id _Nullable responseObject;
 
 
 + (instancetype)responseWithURL:(NSURL *)url
                      statusCode:(NSInteger)statusCode
-                responseHeaders:(NSDictionary *)responseHeaders
+                responseHeaders:(NSDictionary * _Nullable)responseHeaders
                   reponseLength:(NSUInteger)responseLength
-                 responseObject:(id)responseObject;
+                 responseObject:(id _Nullable)responseObject;
 
 
 @end
+
+NS_ASSUME_NONNULL_END

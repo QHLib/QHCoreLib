@@ -9,14 +9,16 @@
 #import "QHNetworkResponse.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface QHNetworkResponse ()
 
-@property (nonatomic,   copy, readwrite) NSURL  *url;
+@property (nonatomic,   copy, readwrite) NSURL *url;
 
 @property (nonatomic, assign, readwrite) NSInteger statusCode;
-@property (nonatomic,   copy, readwrite) NSDictionary *responseHeaders;
+@property (nonatomic,   copy, readwrite) NSDictionary * _Nullable responseHeaders;
 @property (nonatomic, assign, readwrite) NSUInteger responseLength;
-@property (nonatomic, strong, readwrite) id responseObject;
+@property (nonatomic, strong, readwrite) id _Nullable responseObject;
 
 @end
 
@@ -24,9 +26,9 @@
 
 + (instancetype)responseWithURL:(NSURL *)url
                      statusCode:(NSInteger)statusCode
-                responseHeaders:(NSDictionary *)responseHeaders
+                responseHeaders:(NSDictionary * _Nullable)responseHeaders
                   reponseLength:(NSUInteger)responseLength
-                 responseObject:(id)responseObject
+                 responseObject:(id _Nullable)responseObject
 {
     QHNetworkResponse *response = [[QHNetworkResponse alloc] init];
 
@@ -52,3 +54,5 @@
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

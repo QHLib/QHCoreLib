@@ -9,13 +9,14 @@
 #import "QHNetworkRequest.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @implementation QHNetworkRequest
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        self.urlRequest = nil;
         self.priority = QHNetworkRequestPriorityDeafult;
         self.resourceType = QHNetworkResourceHTTP;
     }
@@ -23,3 +24,5 @@
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

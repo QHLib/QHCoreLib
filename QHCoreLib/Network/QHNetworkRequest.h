@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef NS_ENUM(NSUInteger, QHNetworkRequestPriority) {
     QHNetworkRequestPriorityDeafult = 0,
     QHNetworkRequestPriorityHigh,
@@ -31,3 +33,5 @@ typedef NS_ENUM(NSUInteger, QHNetworkResourceType) {
 @property (nonatomic, assign) QHNetworkResourceType resourceType;       // default QHNetworkResourceHTTP
 
 @end
+
+NS_ASSUME_NONNULL_END

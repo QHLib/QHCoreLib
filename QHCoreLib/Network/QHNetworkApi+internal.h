@@ -13,10 +13,14 @@
 #import <QHCoreLib/QHAsyncTask+internal.h>
 #import <QHCoreLib/QHNetworkWorker.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface QHNetworkApi ()
 
-@property (nonatomic, strong) QHNetworkWorker *worker;
+@property (nonatomic, strong) QHNetworkWorker * _Nullable worker;
 
 @end
+
+NS_ASSUME_NONNULL_END
 
 #endif /* QHNetworkApi_internal_h */

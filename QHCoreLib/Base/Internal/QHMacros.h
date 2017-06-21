@@ -13,6 +13,8 @@
 #import "QHAsserts.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 #define _QHCoreLibFatalActionAbort      0
 #define _QHCoreLibFatalActionThrow      1
 #define _QHCoreLibFatalActionContinue   2
@@ -45,5 +47,7 @@
 #else
 #   define QHCoreLibDebug(...)
 #endif
+
+NS_ASSUME_NONNULL_END
 
 #endif /* QHMacros_h */

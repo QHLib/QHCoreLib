@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+
+NS_ASSUME_NONNULL_BEGIN
+
 @interface QHClockEntry : NSObject
 
 - (void)start;
@@ -17,3 +20,5 @@
 - (int)spentTimeInMiliseconds;
 
 @end
+
+NS_ASSUME_NONNULL_END

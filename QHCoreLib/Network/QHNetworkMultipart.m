@@ -16,6 +16,8 @@
 #import "QHLog.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 static NSString * const QHHttpHeaderContentType = @"Content-Type";
 static NSString * const QHHttpHeaderContentLength = @"Content-Length";
 static NSString * const QHHttpHeaderContentDisposition = @"Content-Disposition";
@@ -34,8 +36,8 @@ static NSString * const QHHttpHeaderContentDisposition = @"Content-Disposition";
 @implementation QHNetworkMultipart
 
 + (NSMutableURLRequest *)requestFromUrl:(NSString *)urlString
-                              queryDict:(NSDictionary *)queryDict
-                               bodyDict:(NSDictionary *)bodyDict
+                              queryDict:(NSDictionary * _Nullable)queryDict
+                               bodyDict:(NSDictionary * _Nullable)bodyDict
                        multipartBuilder:(void (^)(id<QHNetworkMultipartBuilder>))builderBlock
 {
     NSMutableURLRequest *request = [QHNetworkUtil requestFromMethod:QHNetWorkHttpMethodPost
@@ -340,7 +342,7 @@ typedef NS_ENUM(NSUInteger, QHMultipartBodyPartSection) {
     return self;
 }
 
-- (instancetype)copyWithZone:(NSZone *)zone
+- (instancetype)copyWithZone:(NSZone * _Nullable)zone
 {
     QHMultipartBodyPart *bodyPart = [[[self class] allocWithZone:zone] init];
 
@@ -548,7 +550,7 @@ typedef NS_ENUM(NSUInteger, QHMultipartBodyPartSection) {
     return self;
 }
 
-- (instancetype)copyWithZone:(NSZone *)zone
+- (instancetype)copyWithZone:(NSZone * _Nullable)zone
 {
     QHMultipartBodyStream *bodyStream = [[[self class] allocWithZone:zone] initWithStringEncoding:self.stringEncoding];
 
@@ -625,7 +627,7 @@ typedef NS_ENUM(NSUInteger, QHMultipartBodyPartSection) {
     return nil;
 }
 
-- (BOOL)setProperty:(id)property forKey:(NSStreamPropertyKey)key
+- (BOOL)setProperty:(id _Nullable)property forKey:(NSStreamPropertyKey)key
 {
     return NO;
 }
@@ -684,3 +686,5 @@ typedef NS_ENUM(NSUInteger, QHMultipartBodyPartSection) {
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -13,6 +13,8 @@
 #import "QHUtil.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @implementation QHNetworkJsonApi
 
 - (QHNetworkRequest *)buildRequest
@@ -30,7 +32,7 @@ QH_NETWORK_API_IMPL_INDIRECT(QHNetworkJsonApi, QHNetworkJsonApiResult,
 
 @interface QHNetworkJsonApiResult ()
 
-@property (nonatomic, copy, readwrite) NSString *json;
+@property (nonatomic, copy, readwrite) NSString * _Nullable json;
 
 @end
 
@@ -51,3 +53,5 @@ QH_NETWORK_API_RESULT_IMPL_SUPER(QHNetworkJsonApi, QHNetworkJsonApiResult) {
 QH_NETWORK_API_RESULT_IMPL_RETURN;
 
 @end
+
+NS_ASSUME_NONNULL_END

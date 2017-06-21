@@ -9,6 +9,8 @@
 #import "QHAsserts.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 void _QHAssertFormat(const char *condition,
                      const char *fileName,
                      int lineNumber,
@@ -36,7 +38,7 @@ void _QHAssertFormat(const char *condition,
 
 static QHAssertFunction QHCurrentAssertFunction = nil;
 
-void QHSetAssertFunction(QHAssertFunction assertFunction)
+void QHSetAssertFunction(QHAssertFunction _Nullable assertFunction)
 {
     QHCurrentAssertFunction = assertFunction;
 }
@@ -53,3 +55,5 @@ NSException *_QHNotImplementedException(SEL cmd, Class cls)
     return [NSException exceptionWithName:@"RCTNotImplementedException"
                                    reason:msg userInfo:nil];
 }
+
+NS_ASSUME_NONNULL_END

@@ -8,14 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+#import <QHCoreLib/QHBase.h>
+
+
+NS_ASSUME_NONNULL_BEGIN
 
 @protocol QHNetworkMultipartBuilder;
 
 @interface QHNetworkMultipart : NSObject
 
 + (NSMutableURLRequest *)requestFromUrl:(NSString *)urlString
-                              queryDict:(NSDictionary *)queryDict
-                               bodyDict:(NSDictionary *)bodyDict
+                              queryDict:(NSDictionary * _Nullable)queryDict
+                               bodyDict:(NSDictionary * _Nullable)bodyDict
                        multipartBuilder:(void (^)(id<QHNetworkMultipartBuilder> builder))builderBlock;
 
 @end
@@ -52,3 +56,5 @@
                          mimeType:(NSString *)mimeType;
 
 @end
+
+NS_ASSUME_NONNULL_END

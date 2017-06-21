@@ -11,6 +11,8 @@
 #import "QHMacros.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 #define CHECK_NIL_OR_NULL() \
 if (value == nil || [value isKindOfClass:[NSNull class]]) {\
     return defaultValue;\
@@ -108,3 +110,5 @@ NSDictionary * QHDictionary(id value, NSDictionary *defaultValue)
 
     return defaultValue;
 }
+
+NS_ASSUME_NONNULL_END

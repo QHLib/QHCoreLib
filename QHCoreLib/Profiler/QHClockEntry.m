@@ -10,8 +10,10 @@
 
 #import "QHAsserts.h"
 
-
 @import QuartzCore;
+
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, QHClockEntryState) {
     QHClockEntryStateInited,
@@ -68,3 +70,5 @@ typedef NS_ENUM(NSUInteger, QHClockEntryState) {
 
 
 @end
+
+NS_ASSUME_NONNULL_END

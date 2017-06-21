@@ -11,6 +11,8 @@
 #import <QHCoreLib/QHBase.h>
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 QH_EXTERN NSString * const QHNetWorkHttpMethodGet;
 QH_EXTERN NSString * const QHNetWorkHttpMethodPost;
 
@@ -34,7 +36,9 @@ typedef NS_ENUM(NSUInteger, QHNetworkQueryKeyOrder) {
 
 + (NSMutableURLRequest *)requestFromMethod:(NSString *)method
                                        url:(NSString *)urlString
-                                 queryDict:(NSDictionary *)queryDict
-                                  bodyDict:(NSDictionary *)bodyDict;
+                                 queryDict:(NSDictionary * _Nullable)queryDict
+                                  bodyDict:(NSDictionary * _Nullable)bodyDict;
 
 @end
+
+NS_ASSUME_NONNULL_END

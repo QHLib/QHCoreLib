@@ -9,13 +9,17 @@
 #ifndef QHCoreLibTests_pch
 #define QHCoreLibTests_pch
 
-// Include any system framework and library headers here that should be included in all compilation units.
-// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import <Foundation/Foundation.h>
 
 #if DEBUG
 #   define QH_XCTAssertThrows_On_DEBUG XCTAssertThrows
 #else
 #   define QH_XCTAssertThrows_On_DEBUG XCTAssertNoThrow
 #endif
+
+// avoid non-null arguement warning
+static inline id nilValue() {
+    return nil;
+}
 
 #endif /* QHCoreLibTests_pch */

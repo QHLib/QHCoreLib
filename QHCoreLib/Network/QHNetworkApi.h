@@ -15,6 +15,8 @@
 #import <QHCoreLib/QHNetworkResponse.h>
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 QH_EXTERN NSString * const QHNetworkApiErrorDomain;
 
 typedef NS_ENUM(NSUInteger, QHNetworkApiError) {
@@ -27,7 +29,9 @@ typedef void (^QHNetworkApiSuccessBlock)(QHNetworkApi *api, QHNetworkApiResult *
 typedef void (^QHNetworkApiFailBlock)(QHNetworkApi *api, NSError *error);
 
 #define QH_NETWORK_API_DECL(API_TYPE, RESULT_TYPE) \
-QH_ASYNC_TASK_DECL(API_TYPE, RESULT_TYPE)
+- (void)startWithSuccess:(void (^ _Nullable)(API_TYPE *api, RESULT_TYPE *result))success \
+                    fail:(void (^ _Nullable)(API_TYPE *api, NSError *error))fail; \
+- (Class)resultClass;
 
 @interface QHNetworkApi : QHAsyncTask
 
@@ -42,7 +46,16 @@ QH_NETWORK_API_DECL(QHNetworkApi, QHNetworkApiResult);
 QH_NETWORK_API_IMPL_INDIRECT(API_TYPE, RESULT_TYPE, QHNetworkApi, QHNetworkApiResult)
 
 #define QH_NETWORK_API_IMPL_INDIRECT(API_TYPE, RESULT_TYPE, SUPER_API_TYPE, SUPER_RESULT_TYPE) \
-QH_ASYNC_TASK_IMPL_INDIRECT(API_TYPE, RESULT_TYPE, SUPER_API_TYPE, SUPER_RESULT_TYPE)
+- (void)startWithSuccess:(void (^ _Nullable)(API_TYPE *api, RESULT_TYPE *result))success \
+                    fail:(void (^ _Nullable)(API_TYPE *api, NSError *error))fail \
+{ \
+    [super startWithSuccess:(void (^ _Nullable)(SUPER_API_TYPE *api, SUPER_RESULT_TYPE *result))success \
+                       fail:(void (^ _Nullable)(SUPER_API_TYPE *api, NSError *error))fail]; \
+} \
+- (Class)resultClass \
+{ \
+    return [RESULT_TYPE class]; \
+}
 
 #pragma mark
 
@@ -85,3 +98,5 @@ QH_NETWORK_API_RESULT_DECL(QHNetworkApi, QHNetworkApiResult);
  }
  QH_NETWORK_API_RESULT_IMPL_RETURN;
 */
+
+NS_ASSUME_NONNULL_END
