@@ -8,8 +8,10 @@
 
 #import <XCTest/XCTest.h>
 
-#import <QHCoreLib/QHDefines.h>
 #import <objc/message.h>
+
+#import "QHDefines.h"
+
 
 @interface __singleton : NSObject
 QH_SINGLETON_DEF
@@ -71,7 +73,7 @@ QH_SINGLETON_IMP
 
 - (void)testWeakifyStrongifyRetainify
 {
-    XCTestExpectation *expect = [[XCTestExpectation alloc] initWithDescription:@""];
+    XCTestExpectation *expect = [self expectationWithDescription:@""];
     __block NSObject *obj = [[NSObject alloc] init];
     @weakify(obj);
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.03 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -97,9 +99,7 @@ QH_SINGLETON_IMP
         });
     }
 
-    [self waitForExpectations:@[ expect, expect2 ]
-                      timeout:0.11
-                 enforceOrder:NO];
+    [self waitForExpectationsWithTimeout:0.2 handler:nil];
 }
 
 - (void)testConcat

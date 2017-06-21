@@ -8,8 +8,8 @@
 
 #import <XCTest/XCTest.h>
 
-#import <QHCoreLib/QHAsserts.h>
-#import <QHCoreLib/QHClockEntry.h>
+#import "QHAsserts.h"
+#import "QHClockEntry.h"
 
 
 @interface QHCoreLibClockEntryTests : XCTestCase
@@ -34,7 +34,11 @@
 
 - (void)testClockEntryAbnormal
 {
-    QHSetAssertFunction(^(NSString *condition, NSString *fileName, NSNumber *lineNumber, NSString *function, NSString *message) {
+    QHSetAssertFunction(^(NSString *condition,
+                          NSString *fileName,
+                          NSNumber *lineNumber,
+                          NSString *function,
+                          NSString *message) {
         @throw [NSException exceptionWithName:@"AssertFailException"
                                        reason:message
                                      userInfo:nil];

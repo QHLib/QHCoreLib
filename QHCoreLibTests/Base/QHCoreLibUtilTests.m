@@ -8,7 +8,7 @@
 
 #import <XCTest/XCTest.h>
 
-#import <QHCoreLib/QHUtil.h>
+#import "QHUtil.h"
 
 
 @interface QHCoreLibUtilTests : XCTestCase
@@ -20,7 +20,7 @@
 - (void)testIsMainQueueAndIsMainThread
 {
 
-    XCTestExpectation *expect = [[XCTestExpectation alloc] initWithDescription:@""];
+    XCTestExpectation *expect = [self expectationWithDescription:@""];
 
     // main queue, main thread
     XCTAssertTrue(QHIsMainQueue());
@@ -49,7 +49,7 @@
         [expect fulfill];
     });
 
-    [self waitForExpectations:@[ expect ] timeout:1.0];
+    [self waitForExpectationsWithTimeout:1.0 handler:nil];
 }
 
 - (void)testCallStack
@@ -85,7 +85,7 @@
         XCTAssertNil(object);
     });
 
-    XCTestExpectation *expect = [[XCTestExpectation alloc] initWithDescription:@""];
+    XCTestExpectation *expect = [self expectationWithDescription:@""];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
         __block id object = [NSObject new];
@@ -96,8 +96,8 @@
 
         [expect fulfill];
     });
-    [self waitForExpectations:@[ expect ]
-                      timeout:1.0];
+
+    [self waitForExpectationsWithTimeout:1.0 handler:nil];
 }
 
 - (void)testDispatchAsync
@@ -105,20 +105,19 @@
     QHDispatchAsyncMain(nilValue());
     QHDispatchAsyncDefault(nilValue());
 
-    XCTestExpectation *expect1 = [[XCTestExpectation alloc] initWithDescription:@"AsyncMain"];
+    XCTestExpectation *expect1 = [self expectationWithDescription:@"AsyncMain"];
     QHDispatchAsyncMain(^{
         XCTAssertTrue(QHIsMainQueue());
         [expect1 fulfill];
     });
 
-    XCTestExpectation *expect2 = [[XCTestExpectation alloc] initWithDescription:@"AsyncDefault"];
+    XCTestExpectation *expect2 = [self expectationWithDescription:@"AsyncDefault"];
     QHDispatchAsyncDefault(^{
         XCTAssertTrue(!QHIsMainQueue());
         [expect2 fulfill];
     });
-
-    [self waitForExpectations:@[ expect1, expect2 ]
-                      timeout:1.0];
+    
+    [self waitForExpectationsWithTimeout:1.0 handler:nil];
 }
 
 - (void)testBlockInvoke

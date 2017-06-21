@@ -94,6 +94,7 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
             [self p_asyncOnWorkQueue:^{
                 @strongify(self);
 
+#warning check this lock for racing with cancel on different thread
                 if (self.state != QHAsyncTaskStateCancelled) {
                     QHNSLock(self.lock, ^{
                         [self p_doStart];

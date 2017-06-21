@@ -8,9 +8,9 @@
 
 #import <XCTest/XCTest.h>
 
-#import <QHCoreLib/QHUtil.h>
-#import <QHCoreLib/QHNetwork.h>
-#import <QHCoreLib/QHNetworkApi+internal.h>
+#import "QHUtil.h"
+#import "QHNetwork.h"
+#import "QHNetworkApi+internal.h"
 
 
 @class QHNetworkTestApiResult;
@@ -73,7 +73,7 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
 
 - (void)testLoadSucceed
 {
-    XCTestExpectation *expect = [[XCTestExpectation alloc] initWithDescription:@"load 'https://httpbin.org/ip'"];
+    XCTestExpectation *expect = [self expectationWithDescription:@"load 'https://httpbin.org/ip'"];
 
     QHNetworkTestApi *api = [[QHNetworkTestApi alloc] initWithUrl:@"https://httpbin.org/ip"];
     [api startWithSuccess:^(QHNetworkTestApi *api, QHNetworkTestApiResult *result) {
@@ -84,13 +84,13 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
         [expect fulfill];
     }];
 
-    [self waitForExpectations:@[ expect ]
-                      timeout:api.worker.request.urlRequest.timeoutInterval + 0.1];
+    [self waitForExpectationsWithTimeout:api.worker.request.urlRequest.timeoutInterval + 0.1
+                                 handler:nil];
 }
 
 - (void)testLoadOnNonMainThread
 {
-    XCTestExpectation *expect = [[XCTestExpectation alloc] initWithDescription:@"load 'https://httpbin.org/ip'"];
+    XCTestExpectation *expect = [self expectationWithDescription:@"load 'https://httpbin.org/ip'"];
 
     QHNetworkTestApi *api = [[QHNetworkTestApi alloc] initWithUrl:@"https://httpbin.org/ip"];
     dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -103,13 +103,13 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
         }];
     });
 
-    [self waitForExpectations:@[ expect ]
-                      timeout:api.worker.request.urlRequest.timeoutInterval + 0.1];
+    [self waitForExpectationsWithTimeout:api.worker.request.urlRequest.timeoutInterval + 0.1
+                                 handler:nil];
 }
 
 - (void)testLoadFailureAtClient
 {
-    XCTestExpectation *expect = [[XCTestExpectation alloc] initWithDescription:@"load 'http://some.where.on.mars/'"];
+    XCTestExpectation *expect = [self expectationWithDescription:@"load 'http://some.where.on.mars/'"];
 
     QHNetworkTestApi *api = [[QHNetworkTestApi alloc] initWithUrl:@"http://some.where.on.mars/"];
     [api startWithSuccess:^(QHNetworkTestApi *api, QHNetworkTestApiResult *result) {
@@ -120,13 +120,13 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
         [expect fulfill];
     }];
 
-    [self waitForExpectations:@[ expect ]
-                      timeout:api.worker.request.urlRequest.timeoutInterval + 0.1];
+    [self waitForExpectationsWithTimeout:api.worker.request.urlRequest.timeoutInterval + 0.1
+                                 handler:nil];
 }
 
 - (void)testLoadFailureAtServer
 {
-    XCTestExpectation *expect = [[XCTestExpectation alloc] initWithDescription:@"load 'http://httpbin.org/status/500'"];
+    XCTestExpectation *expect = [self expectationWithDescription:@"load 'http://httpbin.org/status/500'"];
     
     QHNetworkTestApi *api = [[QHNetworkTestApi alloc] initWithUrl:@"http://httpbin.org/status/500"];
     [api startWithSuccess:^(QHNetworkTestApi *api, QHNetworkTestApiResult *result) {
@@ -137,13 +137,13 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
         [expect fulfill];
     }];
     
-    [self waitForExpectations:@[ expect ]
-                      timeout:api.worker.request.urlRequest.timeoutInterval + 0.1];
+    [self waitForExpectationsWithTimeout:api.worker.request.urlRequest.timeoutInterval + 0.1
+                                 handler:nil];
 }
 
 - (void)testLoadHttp
 {
-    XCTestExpectation *expect = [[XCTestExpectation alloc] initWithDescription:@"load 'http://tctony.github.io/index.html'"];
+    XCTestExpectation *expect = [self expectationWithDescription:@"load 'http://tctony.github.io/index.html'"];
     
     QHNetworkHttpApi *api = [[QHNetworkHttpApi alloc] initWithUrl:@"http:/tctony.github.io/index.html"];
     [api startWithSuccess:^(QHNetworkHttpApi *api, QHNetworkHttpApiResult *result) {
@@ -154,13 +154,13 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
         [expect fulfill];
     }];
     
-    [self waitForExpectations:@[ expect ]
-                      timeout:api.worker.request.urlRequest.timeoutInterval + 0.1];
+    [self waitForExpectationsWithTimeout:api.worker.request.urlRequest.timeoutInterval + 0.1
+                                 handler:nil];
 }
 
 - (void)testLoadHtml
 {
-    XCTestExpectation *expect = [[XCTestExpectation alloc] initWithDescription:@"load 'http://tctony.github.io/index.html'"];
+    XCTestExpectation *expect = [self expectationWithDescription:@"load 'http://tctony.github.io/index.html'"];
     
     QHNetworkHtmlApi *api = [[QHNetworkHtmlApi alloc] initWithUrl:@"http://tctony.github.io/index.html"];
     [api startWithSuccess:^(QHNetworkHtmlApi *api, QHNetworkHtmlApiResult *result) {
@@ -171,13 +171,13 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
         [expect fulfill];
     }];
     
-    [self waitForExpectations:@[ expect ]
-                      timeout:api.worker.request.urlRequest.timeoutInterval + 0.1];
+    [self waitForExpectationsWithTimeout:api.worker.request.urlRequest.timeoutInterval + 0.1
+                                 handler:nil];
 }
 
 - (void)testLoadJson
 {
-    XCTestExpectation *expect = [[XCTestExpectation alloc] initWithDescription:@"load 'http://httpbin.org/get'"];
+    XCTestExpectation *expect = [self expectationWithDescription:@"load 'http://httpbin.org/get'"];
     
     QHNetworkJsonApi *api = [[QHNetworkJsonApi alloc] initWithUrl:@"http://httpbin.org/get"];
     [api startWithSuccess:^(QHNetworkJsonApi *api, QHNetworkJsonApiResult *result) {
@@ -188,13 +188,13 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
         [expect fulfill];
     }];
     
-    [self waitForExpectations:@[ expect ]
-                      timeout:api.worker.request.urlRequest.timeoutInterval + 0.1];
+    [self waitForExpectationsWithTimeout:api.worker.request.urlRequest.timeoutInterval + 0.1
+                                 handler:nil];
 }
 
 - (void)testLoadJsonWithQuery
 {
-    XCTestExpectation *expect = [[XCTestExpectation alloc] initWithDescription:@"load 'http://httpbin.org/get?t=123'"];
+    XCTestExpectation *expect = [self expectationWithDescription:@"load 'http://httpbin.org/get?t=123'"];
     
     QHNetworkJsonApi *api = [[QHNetworkJsonApi alloc] initWithUrl:@"http://httpbin.org/get"
                                                         queryDict:@{@"t": @"123"}];
@@ -206,13 +206,13 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
         [expect fulfill];
     }];
     
-    [self waitForExpectations:@[ expect ]
-                      timeout:api.worker.request.urlRequest.timeoutInterval + 0.1];
+    [self waitForExpectationsWithTimeout:api.worker.request.urlRequest.timeoutInterval + 0.1
+                                 handler:nil];
 }
 
 - (void)testLoadJsonWithQueryAndBody
 {
-    XCTestExpectation *expect = [[XCTestExpectation alloc] initWithDescription:@"load 'http://httpbin.org/post?t=123' with body 'u=456'"];
+    XCTestExpectation *expect = [self expectationWithDescription:@"load 'http://httpbin.org/post?t=123' with body 'u=456'"];
     
     QHNetworkJsonApi *api = [[QHNetworkJsonApi alloc] initWithUrl:@"http://httpbin.org/post"
                                                         queryDict:@{@"t": @"123"}
@@ -225,13 +225,13 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
         [expect fulfill];
     }];
     
-    [self waitForExpectations:@[ expect ]
-                      timeout:api.worker.request.urlRequest.timeoutInterval + 0.1];
+    [self waitForExpectationsWithTimeout:api.worker.request.urlRequest.timeoutInterval + 0.1
+                                 handler:nil];
 }
 
 - (void)testLoadJsonWithMultipart
 {
-    XCTestExpectation *expect = [[XCTestExpectation alloc] initWithDescription:@"load 'http://httpbin.org/post?t=123' with body 'u=456' and file"];
+    XCTestExpectation *expect = [self expectationWithDescription:@"load 'http://httpbin.org/post?t=123' with body 'u=456' and file"];
 
     NSString *tmpDir = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
     NSURL *fileUrl = [NSURL fileURLWithPath:[tmpDir stringByAppendingPathComponent:[[NSUUID UUID] UUIDString]]];
@@ -254,13 +254,13 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
         [expect fulfill];
     }];
 
-    [self waitForExpectations:@[ expect ]
-                      timeout:api.worker.request.urlRequest.timeoutInterval + 0.1];
+    [self waitForExpectationsWithTimeout:api.worker.request.urlRequest.timeoutInterval + 0.1
+                                 handler:nil];
 }
 
 - (void)testLoadImage
 {
-    XCTestExpectation *expect = [[XCTestExpectation alloc] initWithDescription:@"load 'http://tctony.github.io/favicon.ico'"];
+    XCTestExpectation *expect = [self expectationWithDescription:@"load 'http://tctony.github.io/favicon.ico'"];
     
     QHNetworkImageApi *api = [[QHNetworkImageApi alloc] initWithUrl:@"http://tctony.github.io/favicon.ico"];
     [api startWithSuccess:^(QHNetworkImageApi *api, QHNetworkImageApiResult *result) {
@@ -271,8 +271,8 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
         [expect fulfill];
     }];
     
-    [self waitForExpectations:@[ expect ]
-                      timeout:api.worker.request.urlRequest.timeoutInterval + 0.1];
+    [self waitForExpectationsWithTimeout:api.worker.request.urlRequest.timeoutInterval + 0.1
+                                 handler:nil];
 }
 
 @end

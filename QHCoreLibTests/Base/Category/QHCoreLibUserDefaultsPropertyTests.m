@@ -8,8 +8,8 @@
 
 #import <XCTest/XCTest.h>
 
-#import <QHCoreLib/QHDefines.h>
-#import <QHCoreLib/NSObject+QHUserDefaultsProperty.h>
+#import "QHDefines.h"
+#import "NSObject+QHUserDefaultsProperty.h"
 
 
 @interface QHCoreLibStandardUserDefaultsPropertyTests : XCTestCase

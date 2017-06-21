@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B298B0272BD7D105205BBBCD /* Pods_QHCoreLibTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B4A6B4945BFE0B2872201F /* Pods_QHCoreLibTests.framework */; };
 		EA1693741EFA9E2900BD9A25 /* QHMisc.h in Headers */ = {isa = PBXBuildFile; fileRef = EA1693731EFA9E2900BD9A25 /* QHMisc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA1693791EFABD4300BD9A25 /* QHAsyncTaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA1693781EFABD4300BD9A25 /* QHAsyncTaskTests.m */; };
 		EA19CC5B1EE24F5C00C18853 /* QHLog.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE3C7A31EE12A4F00A93456 /* QHLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA19CC5D1EE2539600C18853 /* QHCoreLib+All.h in Headers */ = {isa = PBXBuildFile; fileRef = EA19CC5C1EE2539500C18853 /* QHCoreLib+All.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA19CC611EE9969000C18853 /* QHNetworkHttpApi.h in Headers */ = {isa = PBXBuildFile; fileRef = EA19CC5F1EE9969000C18853 /* QHNetworkHttpApi.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -116,6 +117,7 @@
 		EA1693731EFA9E2900BD9A25 /* QHMisc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHMisc.h; sourceTree = "<group>"; };
 		EA1693751EFAB30100BD9A25 /* QHBase+internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QHBase+internal.h"; sourceTree = "<group>"; };
 		EA1693761EFAB3A800BD9A25 /* QHInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHInternal.h; sourceTree = "<group>"; };
+		EA1693781EFABD4300BD9A25 /* QHAsyncTaskTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHAsyncTaskTests.m; sourceTree = "<group>"; };
 		EA19CC5C1EE2539500C18853 /* QHCoreLib+All.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QHCoreLib+All.h"; sourceTree = "<group>"; };
 		EA19CC5F1EE9969000C18853 /* QHNetworkHttpApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHNetworkHttpApi.h; sourceTree = "<group>"; };
 		EA19CC601EE9969000C18853 /* QHNetworkHttpApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHNetworkHttpApi.m; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 		EA19CC701EEEE12000C18853 /* Async */ = {
 			isa = PBXGroup;
 			children = (
+				EA1693781EFABD4300BD9A25 /* QHAsyncTaskTests.m */,
 			);
 			path = Async;
 			sourceTree = "<group>";
@@ -299,8 +302,8 @@
 				EA1D430E1ED70C7B002177BF /* Base */,
 				EA1D431A1ED70C7B002177BF /* Log */,
 				EAAA79E71ED9639A008135BE /* Profiler */,
-				EA1D431C1ED70C7B002177BF /* Network */,
 				EA19CC701EEEE12000C18853 /* Async */,
+				EA1D431C1ED70C7B002177BF /* Network */,
 			);
 			path = QHCoreLibTests;
 			sourceTree = "<group>";
@@ -822,6 +825,7 @@
 				EA1D439F1ED70E4C002177BF /* QHCoreLibLogTests.m in Sources */,
 				EA1D43991ED70E38002177BF /* QHCoreLibExternCppTests.mm in Sources */,
 				EA1D439E1ED70E49002177BF /* QHCoreLibFoundationTests.m in Sources */,
+				EA1693791EFABD4300BD9A25 /* QHAsyncTaskTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
