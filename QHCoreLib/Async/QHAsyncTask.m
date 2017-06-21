@@ -244,7 +244,9 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
     QHNSLock(_lock, ^{
         @retainify(self);
         
-        if ([self p_canInvokeCallback]) {
+        if (self.state == QHAsyncTaskStateLoading) {
+            self.state = QHAsyncTaskStateFinished;
+
             __block QHAsyncTaskSuccessBlock success = self.successBlock;
             
             [self p_doClean];
@@ -253,7 +255,7 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
                 [self p_asyncOnCompletionQueue:^{
                     @retainify(self);
 
-                    if ([self p_canInvokeCallback]) {
+                    if (self.state == QHAsyncTaskStateFinished) {
                         success(self, result);
                     }
                     
@@ -274,11 +276,6 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
     });
 }
 
-- (BOOL)p_canInvokeCallback
-{
-    return self.state == QHAsyncTaskStateLoading || self.state == QHAsyncTaskStateFinished;
-}
-
 - (void)p_fireFail:(NSError *)error
 {
     [self p_asyncOnWorkQueue:^{
@@ -292,7 +289,9 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
     QHNSLock(_lock, ^{
         @retainify(self);
         
-        if ([self p_canInvokeCallback]) {
+        if (self.state == QHAsyncTaskStateLoading) {
+            self.state = QHAsyncTaskStateFinished;
+
             __block QHAsyncTaskFailBlock fail = self.failBlock;
             
             [self p_doClean];
@@ -301,7 +300,7 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
                 [self p_asyncOnCompletionQueue:^{
                     @retainify(self);
 
-                    if ([self p_canInvokeCallback]) {
+                    if (self.state == QHAsyncTaskStateFinished) {
                         fail(self, error);
                     }
                     
