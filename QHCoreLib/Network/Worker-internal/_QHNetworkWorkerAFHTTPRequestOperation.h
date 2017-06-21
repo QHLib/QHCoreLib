@@ -9,6 +9,10 @@
 #import "_QHNetworkWorker+subclass.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface QHNetworkWorkerAFHTTPRequestOperation : QHNetworkWorker
 
 @end
+
+NS_ASSUME_NONNULL_END

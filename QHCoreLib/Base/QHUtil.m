@@ -11,7 +11,7 @@
 #import <Security/Security.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 
-#import "QHMacros.h"
+#import "QHInternal.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

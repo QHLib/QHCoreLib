@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-#import <QHCoreLib/QHBase.h>
-
 
 NS_ASSUME_NONNULL_BEGIN
 

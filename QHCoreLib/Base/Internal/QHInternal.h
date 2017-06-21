@@ -1,17 +1,13 @@
 //
-//  QHMacros.h
+//  QHInternal.h
 //  QHCoreLib
 //
-//  Created by changtang on 2017/6/8.
+//  Created by Tony Tang on 2017/6/21.
 //  Copyright © 2017年 Tencent. All rights reserved.
 //
 
-#ifndef QHMacros_h
-#define QHMacros_h
-
-#import "QHDefines.h"
-#import "QHAsserts.h"
-
+#ifndef QHInternal_h
+#define QHInternal_h
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -33,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 #   define QHCoreLibFatal(...)      _QHCoreLibFatal(__VA_ARGS__); abort()
 #elif _QHCoreLibFatalAction == _QHCoreLibFatalActionThrow
 #   define QHCoreLibFatal(...)      _QHCoreLibFatal(__VA_ARGS__); \
-                                    @throw [NSException exceptionWithName:@"QHCoreLibFatal" reason:@"FATAL ERROR OCCURS" userInfo:nil]
+@throw [NSException exceptionWithName:@"QHCoreLibFatal" reason:@"FATAL ERROR OCCURS" userInfo:nil]
 #elif _QHCoreLibFatalAction == _QHCoreLibFatalActionContinue
 #   define QHCoreLibFatal(...)      _QHCoreLibFatal(__VA_ARGS__);
 #endif
@@ -50,4 +46,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#endif /* QHMacros_h */
+#endif /* QHInternal_h */

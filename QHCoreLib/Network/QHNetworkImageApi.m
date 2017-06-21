@@ -11,8 +11,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "QHMacros.h"
-#import "QHUtil.h"
+#import "QHBase+internal.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

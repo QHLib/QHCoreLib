@@ -9,8 +9,7 @@
 #import "QHNetworkHtmlApi.h"
 #import "QHNetworkApi+internal.h"
 
-#import "QHMacros.h"
-#import "QHUtil.h"
+#import "QHBase+internal.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -31,7 +30,7 @@ QH_NETWORK_API_IMPL_INDIRECT(QHNetworkHtmlApi, QHNetworkHtmlApiResult,
 
 @interface QHNetworkHtmlApiResult ()
 
-@property (nonatomic, copy, readwrite) NSString *html;
+@property (nonatomic, copy, readwrite) NSString * _Nullable html;
 
 @end
 

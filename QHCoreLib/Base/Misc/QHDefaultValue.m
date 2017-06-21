@@ -8,7 +8,7 @@
 
 #import "QHDefaultValue.h"
 
-#import "QHMacros.h"
+#import "QHInternal.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

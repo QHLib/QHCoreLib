@@ -10,20 +10,20 @@
 
 #import "AFHTTPRequestOperationManager.h"
 
-#import "QHDefines.h"
-#import "QHAsserts.h"
-#import "QHUtil.h"
+#import "QHBase+internal.h"
 
 
-static AFHTTPRequestOperationManager *httpManager = nil;
-static AFHTTPRequestOperationManager *htmlManager = nil;
-static AFHTTPRequestOperationManager *jsonManager = nil;
-static AFHTTPRequestOperationManager *imageManager = nil;
+NS_ASSUME_NONNULL_BEGIN
+
+static AFHTTPRequestOperationManager *httpManager;
+static AFHTTPRequestOperationManager *htmlManager;
+static AFHTTPRequestOperationManager *jsonManager;
+static AFHTTPRequestOperationManager *imageManager;
 
 
 @interface QHNetworkWorkerAFHTTPRequestOperation ()
 
-@property (nonatomic, strong) AFHTTPRequestOperation *operation;
+@property (nonatomic, strong) AFHTTPRequestOperation * _Nullable operation;
 
 @end
 
@@ -200,3 +200,5 @@ static AFHTTPRequestOperationManager *imageManager = nil;
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

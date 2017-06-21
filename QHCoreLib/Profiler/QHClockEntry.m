@@ -8,7 +8,7 @@
 
 #import "QHClockEntry.h"
 
-#import "QHAsserts.h"
+#import "QHBase+internal.h"
 
 @import QuartzCore;
 
@@ -44,30 +44,33 @@ typedef NS_ENUM(NSUInteger, QHClockEntryState) {
 
 - (void)start
 {
-    QHAssert(_state != QHClockEntryStateStarted, @"invalid calling start when entry is in started state");
+    QHAssert(_state != QHClockEntryStateStarted,
+             @"invalid calling start when entry is in started state");
     _state = QHClockEntryStateStarted;
     _startTime = CACurrentMediaTime();
 }
 
 - (void)end
 {
-    QHAssert(_state == QHClockEntryStateStarted, @"invalid calling stop when entry is not in started state");
+    QHAssert(_state == QHClockEntryStateStarted,
+             @"invalid calling stop when entry is not in started state");
     _state = QHClockEntryStateEnded;
     _endTime = CACurrentMediaTime();
 }
 
 - (int)elapsedTimeInMiliseconds
 {
-    QHAssert(_state == QHClockEntryStateStarted, @"invalid calling elapsed when entry is not in started state");
+    QHAssert(_state == QHClockEntryStateStarted,
+             @"invalid calling elapsed when entry is not in started state");
     return round((CACurrentMediaTime() - _startTime) * 1000);
 }
 
 - (int)spentTimeInMiliseconds
 {
-    QHAssert(_state == QHClockEntryStateEnded, @"invalid calling spent time when entry is not in ended state");
+    QHAssert(_state == QHClockEntryStateEnded,
+             @"invalid calling spent time when entry is not in ended state");
     return round((_endTime - _startTime) * 1000);
 }
-
 
 @end
 

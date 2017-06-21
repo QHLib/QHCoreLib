@@ -23,7 +23,7 @@ QH_NETWORK_API_DECL(QHNetworkHtmlApi, QHNetworkHtmlApiResult);
 
 QH_NETWORK_API_RESULT_DECL(QHNetworkHtmlApi, QHNetworkHtmlApiResult);
 
-@property (nonatomic, readonly) NSString *html;
+@property (nonatomic, readonly) NSString * _Nullable html;
 
 @end
 

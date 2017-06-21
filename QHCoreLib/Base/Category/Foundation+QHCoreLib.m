@@ -8,7 +8,7 @@
 
 #import "Foundation+QHCoreLib.h"
 
-#import "QHMacros.h"
+#import "QHInternal.h"
 #import "QHUtil.h"
 #import "QHDefaultValue.h"
 

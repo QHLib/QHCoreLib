@@ -10,10 +10,12 @@
 
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 
+#if DEBUG
+#warning TODO: remove this dependency
+#endif
 #import "AFNetworkReachabilityManager.h"
 
-#import "QHLogUtil.h"
-#import "QHDefaultValue.h"
+#import "QHLog.h"
 
 
 NS_ASSUME_NONNULL_BEGIN

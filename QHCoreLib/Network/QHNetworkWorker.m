@@ -8,10 +8,8 @@
 
 #import "QHNetworkWorker.h"
 
-#import "QHDefines.h"
-#import "QHUtil.h"
-#import "QHAsserts.h"
-#import "QHLogUtil.h"
+#import "QHBase+internal.h"
+#import "QHLog.h"
 
 #import "QHNetwork.h"
 
