@@ -9,7 +9,6 @@
 #ifndef QHCoreLibCategories_h
 #define QHCoreLibCategories_h
 
-#import <QHCoreLib/QHDefaultValue.h>
 #import <QHCoreLib/Foundation+QHCoreLib.h>
 #import <QHCoreLib/NSObject+QHUserDefaultsProperty.h>
 

@@ -13,5 +13,6 @@
 #import <QHCoreLib/QHAsserts.h>
 #import <QHCoreLib/QHUtil.h>
 #import <QHCoreLib/QHCoreLibCategories.h>
+#import <QHCoreLib/QHMisc.h>
 
 #endif /* QHBase_h */
