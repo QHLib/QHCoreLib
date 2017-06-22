@@ -69,7 +69,7 @@ double QHDouble(id value, double defaultValue)
     return defaultValue;
 }
 
-NSString * QHString(id value, NSString *defaultValue)
+NSString * QHString(id value, NSString * _Nullable defaultValue)
 {
     CHECK_NIL_OR_NULL();
 
@@ -85,7 +85,7 @@ NSString * QHString(id value, NSString *defaultValue)
     return defaultValue;
 }
 
-NSArray * QHArray(id value, NSArray *defaultValue)
+NSArray * QHArray(id value, NSArray * _Nullable defaultValue)
 {
     CHECK_NIL_OR_NULL();
 
@@ -98,7 +98,7 @@ NSArray * QHArray(id value, NSArray *defaultValue)
     return defaultValue;
 }
 
-NSDictionary * QHDictionary(id value, NSDictionary *defaultValue)
+NSDictionary * QHDictionary(id value, NSDictionary * _Nullable defaultValue)
 {
     CHECK_NIL_OR_NULL();
 

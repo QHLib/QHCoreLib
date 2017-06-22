@@ -219,7 +219,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)qh_synthesizeStringProperty:(NSString *)propertyName
                              forKey:(NSString *)userDefaultsKey
-                       defaultValue:(NSString *)defaultValue
+                       defaultValue:(NSString * _Nullable)defaultValue
                        userDefaults:(NSUserDefaults *)userDefaults
 {
     if (!QH_IS_STRING(propertyName)
@@ -281,7 +281,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)qh_synthesizeArrayProperty:(NSString *)propertyName
                             forKey:(NSString *)userDefaultsKey
-                      defaultValue:(NSArray *)defaultValue
+                      defaultValue:(NSArray * _Nullable)defaultValue
                       userDefaults:(NSUserDefaults *)userDefaults
 {
     if (!QH_IS_STRING(propertyName)
@@ -343,7 +343,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)qh_synthesizeDictionaryProperty:(NSString *)propertyName
                                  forKey:(NSString *)userDefaultsKey
-                           defaultValue:(NSDictionary *)defaultValue
+                           defaultValue:(NSDictionary * _Nullable)defaultValue
                            userDefaults:(NSUserDefaults *)userDefaults
 {
     if (!QH_IS_STRING(propertyName)
@@ -437,7 +437,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)qh_synthesizeStringProperty:(NSString *)propertyName
                              forKey:(NSString *)userDefaultsKey
-                       defaultValue:(NSString *)defaultValue
+                       defaultValue:(NSString * _Nullable)defaultValue
 {
     [self qh_synthesizeStringProperty:propertyName
                                forKey:userDefaultsKey
@@ -447,7 +447,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)qh_synthesizeArrayProperty:(NSString *)propertyName
                             forKey:(NSString *)userDefaultsKey
-                      defaultValue:(NSArray *)defaultValue
+                      defaultValue:(NSArray * _Nullable)defaultValue
 {
     [self qh_synthesizeArrayProperty:propertyName
                               forKey:userDefaultsKey
@@ -457,7 +457,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)qh_synthesizeDictionaryProperty:(NSString *)propertyName
                                  forKey:(NSString *)userDefaultsKey
-                           defaultValue:(NSDictionary *)defaultValue
+                           defaultValue:(NSDictionary * _Nullable)defaultValue
 {
     [self qh_synthesizeDictionaryProperty:propertyName
                                    forKey:userDefaultsKey

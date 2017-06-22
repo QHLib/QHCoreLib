@@ -48,13 +48,13 @@ NS_ASSUME_NONNULL_BEGIN
               defaultValue:(double)defaultValue;
 
 - (NSString *)qh_stringAtIndex:(NSUInteger)index
-                  defaultValue:(NSString *)defaultValue;
+                  defaultValue:(NSString * _Nullable)defaultValue;
 
 - (NSArray *)qh_arrayAtIndex:(NSUInteger)index
-                defaultValue:(NSArray *)defaultValue;
+                defaultValue:(NSArray * _Nullable)defaultValue;
 
 - (NSDictionary *)qh_dictionaryAtIndex:(NSUInteger)index
-                          defaultValue:(NSDictionary *)defaultValue;
+                          defaultValue:(NSDictionary * _Nullable)defaultValue;
 
 @end
 
@@ -86,13 +86,13 @@ NS_ASSUME_NONNULL_BEGIN
              defaultValue:(double)defaultValue;
 
 - (NSString *)qh_stringForKey:(id<NSCopying>)key
-                 defaultValue:(NSString *)defaultValue;
+                 defaultValue:(NSString * _Nullable)defaultValue;
 
 - (NSArray *)qh_arrayForKey:(id<NSCopying>)key
-               defaultValue:(NSArray *)defaultValue;
+               defaultValue:(NSArray * _Nullable)defaultValue;
 
 - (NSDictionary *)qh_dictionaryForKey:(id<NSCopying>)key
-                         defaultValue:(NSDictionary *)defaultValue;
+                         defaultValue:(NSDictionary * _Nullable)defaultValue;
 
 @end
 

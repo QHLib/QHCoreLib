@@ -32,17 +32,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)qh_synthesizeStringProperty:(NSString *)propertyName
                              forKey:(NSString *)userDefaultsKey
-                       defaultValue:(NSString *)defaultValue
+                       defaultValue:(NSString * _Nullable)defaultValue
                        userDefaults:(NSUserDefaults *)userDefaults;
 
 + (void)qh_synthesizeArrayProperty:(NSString *)propertyName
                             forKey:(NSString *)userDefaultsKey
-                      defaultValue:(NSArray *)defaultValue
+                      defaultValue:(NSArray * _Nullable)defaultValue
                       userDefaults:(NSUserDefaults *)userDefaults;
 
 + (void)qh_synthesizeDictionaryProperty:(NSString *)propertyName
                                  forKey:(NSString *)userDefaultsKey
-                           defaultValue:(NSDictionary *)defaultValue
+                           defaultValue:(NSDictionary * _Nullable)defaultValue
                            userDefaults:(NSUserDefaults *)userDefaults;
 
 
@@ -62,15 +62,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)qh_synthesizeStringProperty:(NSString *)propertyName
                              forKey:(NSString *)userDefaultsKey
-                       defaultValue:(NSString *)defaultValue;
+                       defaultValue:(NSString * _Nullable)defaultValue;
 
 + (void)qh_synthesizeArrayProperty:(NSString *)propertyName
                             forKey:(NSString *)userDefaultsKey
-                      defaultValue:(NSArray *)defaultValue;
+                      defaultValue:(NSArray * _Nullable)defaultValue;
 
 + (void)qh_synthesizeDictionaryProperty:(NSString *)propertyName
                                  forKey:(NSString *)userDefaultsKey
-                           defaultValue:(NSDictionary *)defaultValue;
+                           defaultValue:(NSDictionary * _Nullable)defaultValue;
 
 @end
 

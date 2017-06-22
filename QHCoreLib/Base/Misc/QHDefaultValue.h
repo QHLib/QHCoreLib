@@ -19,10 +19,10 @@ QH_EXTERN NSInteger QHInteger(id value, NSInteger defaultValue);
 
 QH_EXTERN double QHDouble(id value, double defaultValue);
 
-QH_EXTERN NSString * QHString(id value, NSString *defaultValue);
+QH_EXTERN NSString * QHString(id value, NSString * _Nullable defaultValue);
 
-QH_EXTERN NSArray * QHArray(id value, NSArray *defaultValue);
+QH_EXTERN NSArray * QHArray(id value, NSArray * _Nullable defaultValue);
 
-QH_EXTERN NSDictionary * QHDictionary(id value, NSDictionary *defaultValue);
+QH_EXTERN NSDictionary * QHDictionary(id value, NSDictionary * _Nullable defaultValue);
 
 NS_ASSUME_NONNULL_END
