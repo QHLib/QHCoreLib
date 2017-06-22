@@ -14,13 +14,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM(NSUInteger, QHNetworkWorkerState) {
-    QHNetworkWorkerStateNone,
-    QHNetworkWorkerStateLoading,
-    QHNetworkWorkerStateCancelled,
-    QHNetworkWorkerStateFinished,
-};
-
 @interface QHNetworkWorker ()
 
 + (NSOperationQueue *)sharedNetworkQueue;

@@ -14,30 +14,59 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSUInteger, QHAsyncTaskState) {
+    QHAsyncTaskStateInit = 0,
+
+    QHAsyncTaskStateStarted,
+    QHAsyncTaskStateLoading,
+    QHAsyncTaskStateCallingback,
+
+    QHAsyncTaskStateFinished,
+    QHAsyncTaskStateCancelled,
+};
+
 @interface QHAsyncTask ()
+
+@property (nonatomic, assign, readonly) QHAsyncTaskState state;
 
 - (void)p_asyncOnWorkQueue:(dispatch_block_t)block;
 - (void)p_asyncOnCompletionQueue:(dispatch_block_t)block;
 - (void)p_asyncOnDisposeQueue:(dispatch_block_t)block;
 
+
 /**
- * subclass implements; called on work queue
+ * Start the real job for task. Default implementation do nothing. Subclass
+ * implements detail base on needs.
+ * This method will be called on `workQueue` and guarded by lock. Make sure
+ * start the job did not take too long, because calling of `cancel` on another
+ * thread might be blocked.
  */
 - (void)p_doStart;
+
 /**
- * subclass implements; called on any queue
+ * Cancel the task. Default implementation do nothing. Subclass implements
+ * detail base on needs.
+ * This method could be called on any thread.
  */
 - (void)p_doCancel;
+
 /**
- * collect the resources need to be cleaned before invoking callback on work queue;
- * subclass implementation should call super
+ * Clean resources after task is finished or canncelled. Default implementation 
+ * collect resources by calling `p_doCollect:` and dispose the resources on 
+ * `dispostQueue`. Subclass implements must call super.
+ * This method will be called on `workQueue` if task is not cancelled somewhere,
+ * otherwise on any thread that calls `cancel`.
  */
-- (void)p_doCollect:(NSMutableArray *)releaseOnDisposeQueue NS_REQUIRES_SUPER;
+- (void)p_doClean NS_REQUIRES_SUPER;
+
 /**
- * subclass implements; called after success, fail or cancel on work quque
+ * Collect the resources need to be cleaned on `disposeQueue`. Default
+ * implementaion do nothing. Subclass implements detail base on needs
+ * This method will be called synchronously by `p_doClean`.
  */
-- (void)p_doTeardown;
-                   
+- (void)p_doCollect:(NSMutableArray *)releaseOnDisposeQueue;
+
+
 - (void)p_fireSuccess:(NSObject * _Nullable)result;
 - (void)p_fireFail:(NSError *)error;
                    

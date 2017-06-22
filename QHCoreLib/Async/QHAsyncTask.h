@@ -19,13 +19,6 @@ typedef NS_ENUM(NSUInteger, QHAsyncTaskError) {
     QHAsyncTaskErrorInvalidResult = 1000,
 };
 
-typedef NS_ENUM(NSUInteger, QHAsyncTaskState) {
-    QHAsyncTaskStateNone,
-    QHAsyncTaskStateLoading,
-    QHAsyncTaskStateFinished,
-    QHAsyncTaskStateCancelled,
-};
-
 @class QHAsyncTask;
 typedef void (^QHAsyncTaskSuccessBlock)(QHAsyncTask *task, NSObject * _Nullable result);
 typedef void (^QHAsyncTaskFailBlock)(QHAsyncTask *task, NSError *error);
@@ -36,8 +29,6 @@ typedef void (^QHAsyncTaskFailBlock)(QHAsyncTask *task, NSError *error);
 - (Class)resultClass;
 
 @interface QHAsyncTask : NSObject
-
-@property (nonatomic, assign, readonly) QHAsyncTaskState state;
 
 /**
  * the queue to do the real job,

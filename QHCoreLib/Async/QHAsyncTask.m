@@ -23,7 +23,6 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
     NSRecursiveLock *_lock;
 }
 
-@property (nonatomic, assign, readwrite) QHAsyncTaskState state;
 @property (nonatomic, readonly) NSRecursiveLock *lock;
 
 @property (nonatomic, copy) QHAsyncTaskSuccessBlock _Nullable successBlock;
@@ -37,6 +36,7 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 {
     self = [super init];
     if (self) {
+        _state = QHAsyncTaskStateInit;
         _stateLock = dispatch_semaphore_create(1);
         _lock = [[NSRecursiveLock alloc] init];
     }
@@ -45,10 +45,7 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 
 - (void)dealloc
 {
-    QHNSLock(_lock, ^{
-        @retainify(self);
-        [self p_doClean];
-    });
+    [self cancel];
 }
 
 @dynamic state;
@@ -84,8 +81,8 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
     QHNSLock(_lock, ^{
         @retainify(self);
         
-        if (self.state == QHAsyncTaskStateNone) {
-            self.state = QHAsyncTaskStateLoading;
+        if (self.state == QHAsyncTaskStateInit) {
+            self.state = QHAsyncTaskStateStarted;
             
             self.successBlock =  success;
             self.failBlock = fail;
@@ -94,10 +91,14 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
             [self p_asyncOnWorkQueue:^{
                 @strongify(self);
 
-#warning check this lock for racing with cancel on different thread
-                if (self.state != QHAsyncTaskStateCancelled) {
+                if (self.state == QHAsyncTaskStateStarted) {
                     QHNSLock(self.lock, ^{
-                        [self p_doStart];
+                        @retainify(self);
+
+                        if (self.state == QHAsyncTaskStateStarted) {
+                            self.state = QHAsyncTaskStateLoading;
+                            [self p_doStart];
+                        }
                     });
                 }
             }];
@@ -115,25 +116,51 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 
 - (BOOL)isLoading
 {
-    return self.state == QHAsyncTaskStateLoading;
+    QHAsyncTaskState state = self.state;
+    return (state != QHAsyncTaskStateInit &&
+            state != QHAsyncTaskStateCancelled &&
+            state != QHAsyncTaskStateFinished);
 }
 
 - (void)clear
 {
     QHNSLock(_lock, ^{
         @retainify(self);
-        [self p_doClean];
+        [self p_clearBlocks];
     });
+}
+
+- (void)p_clearBlocks
+{
+    __block QHAsyncTaskSuccessBlock success = self.successBlock;
+    self.successBlock = nil;
+
+    __block QHAsyncTaskFailBlock fail = self.failBlock;
+    self.failBlock =  nil;
+
+    if (success || fail) {
+        [self p_asyncOnDisposeQueue:^{
+            success = nil;
+            fail = nil;
+        }];
+    }
 }
 
 - (void)cancel
 {
+    if ([self isLoading] == NO) {
+        return;
+    }
+
     QHNSLock(_lock, ^{
         @retainify(self);
-        [self p_doClean];
-        [self p_doCancel];
-        self.state = QHAsyncTaskStateCancelled;
-        [self p_doTeardown];
+
+        if ([self isLoading]) {
+            self.state = QHAsyncTaskStateCancelled;
+            [self p_clearBlocks];
+            [self p_doCancel];
+            [self p_doClean];
+        }
     });
 }
 
@@ -200,19 +227,6 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 
 - (void)p_doCollect:(NSMutableArray *)releaseOnDisposeQueue
 {
-    if (self.successBlock) {
-        [releaseOnDisposeQueue qh_addObject:self.successBlock];
-        self.successBlock = nil;
-    }
-    
-    if (self.failBlock) {
-        [releaseOnDisposeQueue qh_addObject:self.failBlock];
-        self.failBlock = nil;
-    }
-}
-
-- (void)p_doTeardown
-{
     // subclass implements
 }
 
@@ -241,36 +255,44 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 
 - (void)locked_fireSuccess:(NSObject * _Nullable)result
 {
+    if (self.state != QHAsyncTaskStateLoading) {
+        return;
+    }
+
     QHNSLock(_lock, ^{
         @retainify(self);
         
         if (self.state == QHAsyncTaskStateLoading) {
-            self.state = QHAsyncTaskStateFinished;
+            self.state = QHAsyncTaskStateCallingback;
 
             __block QHAsyncTaskSuccessBlock success = self.successBlock;
-            
-            [self p_doClean];
-            
+
+            [self p_clearBlocks];
+
             if (success) {
                 [self p_asyncOnCompletionQueue:^{
                     @retainify(self);
 
-                    if (self.state == QHAsyncTaskStateFinished) {
+                    if (self.state == QHAsyncTaskStateCallingback) {
                         success(self, result);
+
+                        self.state = QHAsyncTaskStateFinished;
+
+                        [self p_asyncOnDisposeQueue:^{
+                            success = nil;
+                        }];
+
+                        [self p_asyncOnWorkQueue:^{
+                            @retainify(self);
+                            [self p_doClean];
+                        }];
                     }
-                    
-                    [self p_asyncOnDisposeQueue:^{
-                        success = nil;
-                    }];
-                    
-                    [self p_asyncOnWorkQueue:^{
-                        @retainify(self);
-                        [self p_doTeardown];
-                    }];
                 }];
             }
             else {
-                [self p_doTeardown];
+                self.state = QHAsyncTaskStateFinished;
+
+                [self p_doClean];
             }
         }
     });
@@ -290,32 +312,36 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
         @retainify(self);
         
         if (self.state == QHAsyncTaskStateLoading) {
-            self.state = QHAsyncTaskStateFinished;
+            self.state = QHAsyncTaskStateCallingback;
 
             __block QHAsyncTaskFailBlock fail = self.failBlock;
             
-            [self p_doClean];
+            [self p_clearBlocks];
             
             if (fail) {
                 [self p_asyncOnCompletionQueue:^{
                     @retainify(self);
 
-                    if (self.state == QHAsyncTaskStateFinished) {
+                    if (self.state == QHAsyncTaskStateCallingback) {
                         fail(self, error);
+
+                        self.state = QHAsyncTaskStateFinished;
+
+                        [self p_asyncOnDisposeQueue:^{
+                            fail = nil;
+                        }];
+
+                        [self p_asyncOnWorkQueue:^{
+                            @retainify(self);
+                            [self p_doClean];
+                        }];
                     }
-                    
-                    [self p_asyncOnDisposeQueue:^{
-                        fail = nil;
-                    }];
-                    
-                    [self p_asyncOnWorkQueue:^{
-                        @retainify(self);
-                        [self p_doTeardown];
-                    }];
                 }];
             }
             else {
-                [self p_doTeardown];
+                self.state = QHAsyncTaskStateFinished;
+
+                [self p_doClean];
             }
         }
     });
