@@ -51,6 +51,14 @@ QH_EXTERN BOOL QHIsMainQueue();
 #define QHAssertNotMainQueue() QHAssert(!QHIsMainQueue(), \
     @"this method must not be called on main queue")
 
+QH_EXTERN BOOL QHIsMainThread();
+
+#define QHAssertMainThread() QHAssert(QHIsMainThread(), \
+    @"this method must be called on main thread")
+
+#define QHAssertNotMainThread() QHAssert(!QHIsMainThread(), \
+    @"this method must not be called on main thread")
+
 #define QHAssertParam(name) QHAssert(name, \
     @"'%s' is a required parameter", #name)
 

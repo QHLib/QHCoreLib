@@ -130,6 +130,12 @@ _returnType(*_name)(id, SEL, __VA_ARGS__) = (_returnType(*)(id, SEL, __VA_ARGS__
 
 #define $(format, ...) [NSString stringWithFormat:format, ##__VA_ARGS__]
 
+#define QH_NSCODING_DECODE(_decoder, _type, _key) \
+((_type *)[_decoder decodeObjectOfClass:[_type class] forKey:(_key)])
+
+#define QH_NSCODING_ENCODE(_coder, _object, _key) \
+[_coder encodeObject:_object forKey:(_key)]
+
 NS_ASSUME_NONNULL_END
 
 #endif /* QHDefines_h */
