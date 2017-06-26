@@ -149,4 +149,26 @@
     XCTAssertEqualObjects(QHContentTypeOfExtension(@"jpg"), @"image/jpeg");
 }
 
+- (void)testSizeAspectFit
+{
+    XCTAssertTrue(CGSizeEqualToSize(QHSizeAspectFitInSize(CGSizeZero, CGSizeMake(1, 1), NO), CGSizeZero));
+
+    XCTAssertTrue(CGSizeEqualToSize(QHSizeAspectFitInSize(CGSizeMake(200, 400), CGSizeMake(100, 100), NO), CGSizeMake(50, 100)));
+
+    XCTAssertTrue(CGSizeEqualToSize(QHSizeAspectFitInSize(CGSizeMake(200, 400), CGSizeMake(800, 800), NO), CGSizeMake(200, 400)));
+
+    XCTAssertTrue(CGSizeEqualToSize(QHSizeAspectFitInSize(CGSizeMake(200, 400), CGSizeMake(800, 800),YES), CGSizeMake(400, 800)));
+}
+
+- (void)testSizeAspectFill
+{
+    XCTAssertTrue(CGSizeEqualToSize(QHSizeAspectFillInSize(CGSizeZero, CGSizeMake(1, 1), NO), CGSizeZero), @"");
+
+    XCTAssertTrue(CGSizeEqualToSize(QHSizeAspectFillInSize(CGSizeMake(200, 400), CGSizeMake(100, 100), NO), CGSizeMake(100, 200)));
+
+    XCTAssertTrue(CGSizeEqualToSize(QHSizeAspectFillInSize(CGSizeMake(200, 400), CGSizeMake(800, 800), NO), CGSizeMake(200, 400)));
+
+    XCTAssertTrue(CGSizeEqualToSize(QHSizeAspectFillInSize(CGSizeMake(200, 400), CGSizeMake(800, 800),YES), CGSizeMake(800, 1600)));
+}
+
 @end

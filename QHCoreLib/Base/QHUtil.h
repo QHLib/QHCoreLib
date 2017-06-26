@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreGraphics/CoreGraphics.h>
 
 #import <QHCoreLib/QHDefines.h>
 #import <QHCoreLib/Foundation+QHCoreLib.h>
@@ -63,5 +64,9 @@ QH_EXTERN uint32_t QHRandomNumber();
 
 // MIME type of 'ext'
 QH_EXTERN NSString *QHContentTypeOfExtension(NSString *ext);
+
+
+QH_EXTERN CGSize QHSizeAspectFitInSize(CGSize size, CGSize fitInSize, BOOL shouldEnlarge);
+QH_EXTERN CGSize QHSizeAspectFillInSize(CGSize size, CGSize fillInSize, BOOL shouldEnlarge);
 
 NS_ASSUME_NONNULL_END

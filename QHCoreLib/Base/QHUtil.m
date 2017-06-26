@@ -12,6 +12,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 
 #import "QHInternal.h"
+#import "QHAsserts.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -142,6 +143,42 @@ NSString *QHContentTypeOfExtension(NSString *ext)
 #pragma unused (extension)
     return @"application/octet-stream";
 #endif
+}
+
+CGSize QHSizeAspectFitInSize(CGSize size, CGSize fitInSize, BOOL shouldEnlarge)
+{
+    if (size.width == 0 || size.height == 0 || fitInSize.width == 0 || fitInSize.height == 0) {
+        return CGSizeZero;
+    }
+
+    if (shouldEnlarge == NO && fitInSize.width > size.width && fitInSize.height > size.height) {
+        return size;
+    }
+
+    CGFloat widthRatio = fitInSize.width / size.width;
+    CGFloat heightRatio = fitInSize.height / size.height;
+
+    CGFloat ratio = MIN(widthRatio, heightRatio);
+
+    return CGSizeMake(size.width * ratio, size.height * ratio);
+}
+
+CGSize QHSizeAspectFillInSize(CGSize size, CGSize fillInSize, BOOL shouldEnlarge)
+{
+    if (size.width == 0 || size.height == 0 || fillInSize.width == 0 || fillInSize.height == 0) {
+        return CGSizeZero;
+    }
+
+    if (shouldEnlarge == NO && fillInSize.width > size.width && fillInSize.height > size.height) {
+        return size;
+    }
+
+    CGFloat widthRatio = fillInSize.width / size.width;
+    CGFloat heightRatio = fillInSize.height / size.height;
+
+    CGFloat ratio = MAX(widthRatio, heightRatio);
+
+    return CGSizeMake(size.width * ratio, size.height * ratio);
 }
 
 NS_ASSUME_NONNULL_END
