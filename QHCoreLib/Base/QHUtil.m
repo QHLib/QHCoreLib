@@ -81,6 +81,11 @@ BOOL QHBlockInvoke(dispatch_block_t block, const char * _Nullable filePath, int 
         return NO;
     }
 
+#if DEBUG
+    block();
+
+    return YES;
+#else
     @try {
         block();
 
@@ -103,6 +108,7 @@ BOOL QHBlockInvoke(dispatch_block_t block, const char * _Nullable filePath, int 
         }
         return NO;
     }
+#endif
 }
 
 NSData *QHRandomBytes(uint32_t length)
