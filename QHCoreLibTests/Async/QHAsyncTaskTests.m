@@ -40,6 +40,16 @@
 }
 @end
 
+@interface QHCancelBlockByDoStartTask : QHAsyncTask
+@end
+@implementation QHCancelBlockByDoStartTask
+- (void)p_doStart
+{
+    [NSThread sleepForTimeInterval:1.0];
+    [self p_fireSuccess:nil];
+}
+@end
+
 @interface QHAsyncTask ()
 - (void)p_clearBlocks;
 @end
@@ -120,12 +130,11 @@
     [self waitForExpectationsWithTimeout:2.2 handler:nil];
 }
 
-#warning todo create another subclass for this test class
 - (void)testCancelBlockByDoStart
 {
     XCTestExpectation *expect = [self expectationWithDescription:@""];
 
-    QHSuccessTask *task = [[QHSuccessTask alloc] init];
+    QHCancelBlockByDoStartTask *task = [[QHCancelBlockByDoStartTask alloc] init];
 
     [task startWithSuccess:^(QHAsyncTask * _Nonnull task, NSObject * _Nullable result) {
         XCTAssert(NO, @"should not success");

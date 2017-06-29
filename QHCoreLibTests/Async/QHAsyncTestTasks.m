@@ -11,13 +11,32 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-#warning todo p_doStart should be quick
+@interface QHSuccessTask () {
+    NSTimeInterval _interval;
+}
+@end
+
 @implementation QHSuccessTask
+
+- (instancetype)init
+{
+    return [self initWithInterval:1.0];
+}
+
+- (instancetype)initWithInterval:(NSTimeInterval)interval
+{
+    self = [super init];
+    if (self) {
+        _interval = interval;
+    }
+    return self;
+}
 
 - (void)p_doStart
 {
-    [NSThread sleepForTimeInterval:1.0];
-    [self p_fireSuccess:nil];
+    QHDispatchDelayDefault(_interval, ^{
+        [self p_fireSuccess:nil];
+    });
 }
 
 @end
@@ -38,14 +57,17 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithInterval:(NSTimeInterval)interval
 {
     self = [super init];
-    if (self) { _interval = interval; }
+    if (self) {
+        _interval = interval;
+    }
     return self;
 }
 
 - (void)p_doStart
 {
-    [NSThread sleepForTimeInterval:_interval];
-    [self p_fireFail:[NSError errorWithDomain:@"" code:0 userInfo:nil]];
+    QHDispatchDelayDefault(_interval, ^{
+        [self p_fireFail:[NSError errorWithDomain:@"" code:0 userInfo:nil]];
+    });
 }
 
 @end

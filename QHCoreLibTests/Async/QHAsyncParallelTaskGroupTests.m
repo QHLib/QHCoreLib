@@ -61,7 +61,7 @@ QH_ASYNC_TASK_IMPL_DIRECT(QHParallelTaskGroup, NSString);
 
     QHAsyncParallelTaskGroup *taskGroup = [[QHAsyncParallelTaskGroup alloc] init];
     [taskGroup addTask:[QHSuccessTask new] withTaskId:@0];
-    [taskGroup addTask:[[QHFailTask alloc] initWithInterval:0.95] withTaskId:@1];
+    [taskGroup addTask:[[QHFailTask alloc] initWithInterval:0.8] withTaskId:@1];
 
     [taskGroup startWithSuccess:^(QHAsyncParallelTaskGroup * _Nonnull task, NSDictionary * _Nullable result) {
         XCTAssert(NO, @"should not success");
@@ -69,7 +69,7 @@ QH_ASYNC_TASK_IMPL_DIRECT(QHParallelTaskGroup, NSString);
         [expect fulfill];
     }];
 
-    [self waitForExpectationsWithTimeout:1.05 handler:nil];
+    [self waitForExpectationsWithTimeout:0.9 handler:nil];
 }
 
 - (void)testFail1

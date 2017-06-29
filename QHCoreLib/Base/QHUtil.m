@@ -61,18 +61,44 @@ void QHDispatchAsyncMain(dispatch_block_t block)
 {
     if (block == nil) return;
 
-    dispatch_async(dispatch_get_main_queue(), ^{
-        QHBlockInvoke(block, NULL, 0);
-    });
+    dispatch_async(dispatch_get_main_queue(),
+                   ^{
+                       QHBlockInvoke(block, NULL, 0);
+                   });
 }
 
 void QHDispatchAsyncDefault(dispatch_block_t block)
 {
     if (block == nil) return;
 
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        QHBlockInvoke(block, NULL, 0);
-    });
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
+                   ^{
+                       QHBlockInvoke(block, NULL, 0);
+                   });
+}
+
+void QHDispatchDelayMain(NSTimeInterval delay, dispatch_block_t block)
+{
+    if (block == nil) return;
+    
+    delay = MAX(0.0, delay);
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)),
+                   dispatch_get_main_queue(),
+                   ^{
+                       QHBlockInvoke(block, NULL, 0);
+                   });
+}
+
+void QHDispatchDelayDefault(NSTimeInterval delay, dispatch_block_t block)
+{
+    if (block == nil) return;
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW,(int64_t)(delay * NSEC_PER_SEC)),
+                   dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
+                   ^{
+                       QHBlockInvoke(block, NULL, 0);
+                   });
 }
 
 BOOL QHBlockInvoke(dispatch_block_t block, const char * _Nullable filePath, int line)

@@ -28,6 +28,9 @@ QH_EXTERN void QHDispatchSyncMainSafe(dispatch_block_t block);
 QH_EXTERN void QHDispatchAsyncMain(dispatch_block_t block);
 QH_EXTERN void QHDispatchAsyncDefault(dispatch_block_t block);
 
+QH_EXTERN void QHDispatchDelayMain(NSTimeInterval delay, dispatch_block_t block);
+QH_EXTERN void QHDispatchDelayDefault(NSTimeInterval delay, dispatch_block_t block);
+
 
 #define QHCallStackShort() QHCallStackSlice(0, 10)
 #define QHCallStackSlice(_start, _length) \

@@ -120,6 +120,30 @@
     [self waitForExpectationsWithTimeout:1.0 handler:nil];
 }
 
+- (void)testDispatchDelay
+{
+    QHDispatchDelayMain(0, nilValue());
+    QHDispatchDelayDefault(0, nilValue());
+    
+    CFAbsoluteTime start = CFAbsoluteTimeGetCurrent();
+    
+    XCTestExpectation *expect1 = [self expectationWithDescription:@"DelayMain"];
+    QHDispatchDelayMain(0.5, ^{
+        XCTAssertTrue(QHIsMainQueue());
+        XCTAssertTrue(CFAbsoluteTimeGetCurrent() - start > 0.5);
+        [expect1 fulfill];
+    });
+    
+    XCTestExpectation *expect2 = [self expectationWithDescription:@"DelayDefault"];
+    QHDispatchDelayDefault(0.5, ^{
+        XCTAssertTrue(!QHIsMainQueue());
+        XCTAssertTrue(CFAbsoluteTimeGetCurrent() - start > 0.5);
+        [expect2 fulfill];
+    });
+    
+    [self waitForExpectationsWithTimeout:0.6 handler:nil];
+}
+
 - (void)testBlockInvoke
 {
     dispatch_block_t block = ^{
