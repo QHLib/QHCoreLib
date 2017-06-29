@@ -203,12 +203,12 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 
 - (void)p_doStart
 {
-    // subclass implements
+    // do nothing, subclass implements detail
 }
 
 - (void)p_doCancel
 {
-    // subclass implements
+    // do nothing, subclass implements detail
 }
 
 - (void)p_doClean
@@ -227,7 +227,7 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 
 - (void)p_doCollect:(NSMutableArray *)releaseOnDisposeQueue
 {
-    // subclass implements
+    // do nothing, subclass implements detail
 }
 
 #pragma mark -
