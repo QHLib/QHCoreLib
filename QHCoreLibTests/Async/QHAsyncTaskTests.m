@@ -11,26 +11,8 @@
 #import "QHAsyncTask.h"
 #import "QHAsyncTask+internal.h"
 
+#import "QHAsyncTestTasks.h"
 
-@interface QHSuccessTask : QHAsyncTask
-@end
-@implementation QHSuccessTask
-- (void)p_doStart
-{
-    [NSThread sleepForTimeInterval:1.0];
-    [self p_fireSuccess:nil];
-}
-@end
-
-@interface QHFailTask : QHAsyncTask
-@end
-@implementation QHFailTask
-- (void)p_doStart
-{
-    [NSThread sleepForTimeInterval:1.0];
-    [self p_fireFail:[NSError errorWithDomain:@"" code:0 userInfo:nil]];
-}
-@end
 
 @interface QHCancelTask : QHAsyncTask
 @end
@@ -96,7 +78,6 @@
         [expect fulfill];
     } fail:^(QHAsyncTask * _Nonnull task, NSError * _Nonnull error) {
         XCTAssert(NO, @"should not fail");
-        [expect fulfill];
     }];
     
     [self waitForExpectationsWithTimeout:1.1 handler:nil];
@@ -109,7 +90,6 @@
     QHFailTask *task = [[QHFailTask alloc] init];
     [task startWithSuccess:^(QHAsyncTask * _Nonnull task, NSObject * _Nullable result) {
         XCTAssert(NO, @"should not success");
-        [expect fulfill];
     } fail:^(QHAsyncTask * _Nonnull task, NSError * _Nonnull error) {
         [expect fulfill];
     }];
@@ -140,6 +120,7 @@
     [self waitForExpectationsWithTimeout:2.2 handler:nil];
 }
 
+#warning todo create another subclass for this test class
 - (void)testCancelBlockByDoStart
 {
     XCTestExpectation *expect = [self expectationWithDescription:@""];

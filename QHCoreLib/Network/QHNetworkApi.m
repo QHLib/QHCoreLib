@@ -99,6 +99,8 @@ NSString * const QHNetworkApiErrorDomain = @"QHNetworkApiErrorDomain";
 
 - (void)p_doCollect:(NSMutableArray *)releaseOnDisposeQueue
 {
+    [super p_doCollect:releaseOnDisposeQueue];
+    
     if (self.worker) {
         [releaseOnDisposeQueue qh_addObject:self.worker];
     }

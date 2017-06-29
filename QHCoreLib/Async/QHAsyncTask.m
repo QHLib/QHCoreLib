@@ -310,7 +310,7 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 {
     QHNSLock(_lock, ^{
         @retainify(self);
-        
+
         if (self.state == QHAsyncTaskStateLoading) {
             self.state = QHAsyncTaskStateCallingback;
 

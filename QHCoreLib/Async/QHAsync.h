@@ -10,5 +10,6 @@
 #define QHAsync_h
 
 #import <QHCoreLib/QHAsyncTask.h>
+#import <QHCoreLib/QHAsyncParallelTaskGroup.h>
 
 #endif /* QHAsync_h */

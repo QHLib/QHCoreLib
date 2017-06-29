@@ -53,7 +53,7 @@ typedef NS_ENUM(NSUInteger, QHAsyncTaskState) {
 /**
  * Clean resources after task is finished or canncelled. Default implementation 
  * collect resources by calling `p_doCollect:` and dispose the resources on 
- * `dispostQueue`. Subclass implementation must call super.
+ * `dispostQueue`. Subclass implementation MUST call super.
  * This method will be called on `workQueue` if task is not cancelled somewhere,
  * otherwise on any thread that calls `cancel`.
  */
