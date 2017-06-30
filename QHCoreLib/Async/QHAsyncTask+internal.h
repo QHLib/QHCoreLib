@@ -44,6 +44,15 @@ typedef NS_ENUM(NSUInteger, QHAsyncTaskState) {
 - (void)p_doStart;
 
 /**
+ * Clear callback blocks. Default implementation clear 'successBlock' and
+ * 'failBlock' and dispose them on `disposeQueue`. Subclass implements detail 
+ * base on needs and MUST call super.
+ * This method will be called on `workQueue` if task is not cleared or cancelled 
+ * somewhere, otherwise on any thread that calls `clear` or `cancel`.
+ */
+- (void)p_doClear NS_REQUIRES_SUPER;
+
+/**
  * Cancel the task. Default implementation do nothing. Subclass implements
  * detail base on needs.
  * This method could be called on any thread.

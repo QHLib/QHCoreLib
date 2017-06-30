@@ -51,16 +51,16 @@
 @end
 
 @interface QHAsyncTask ()
-- (void)p_clearBlocks;
+- (void)_clearSuccessFailBlocks;
 @end
 @interface QHCancelOnCallingbackTask : QHCancelTask
 @end
 @implementation QHCancelOnCallingbackTask
-- (void)p_clearBlocks
+- (void)_clearSuccessFailBlocks
 {
     static BOOL cleared = NO;
 
-    [super p_clearBlocks];
+    [super _clearSuccessFailBlocks];
 
     if (cleared == YES) return;
 

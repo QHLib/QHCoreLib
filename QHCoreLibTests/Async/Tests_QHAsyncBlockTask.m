@@ -19,12 +19,14 @@
 {
     XCTestExpectation *expect = [self expectationWithDescription:@"block task success"];
     
-    QHAsyncBlockTask *task = [QHAsyncBlockTask<NSString *> taskWithBlock:
-                              ^(QHAsyncBlockTaskReporter<NSString *> * _Nonnull reporter) {
-                                  [reporter success:@"ok"];
-                              }];
-    
-    [task startWithSuccess:^(QHAsyncTask * _Nonnull task, NSObject * _Nullable result) {
+    QHAsyncBlockTask<NSString *> *task = ({
+        [QHAsyncBlockTask<NSString *> taskWithBlock:
+         ^(QHAsyncBlockTaskReporter<NSString *> * _Nonnull reporter) {
+             [reporter success:@"ok"];
+         }];
+    });
+
+    [task startWithSuccess:^(QHAsyncTask * _Nonnull task, NSString * _Nullable result) {
         XCTAssert(QH_IS_STRING(result));
         XCTAssert([(NSString *)result isEqualToString:@"ok"]);
         [expect fulfill];
@@ -39,14 +41,16 @@
 {
     XCTestExpectation *expect = [self expectationWithDescription:@"block task success"];
     
-    QHAsyncBlockTask *task = [QHAsyncBlockTask<NSString *> taskWithBlock:
-                              ^(QHAsyncBlockTaskReporter<NSString *> * _Nonnull reporter) {
-                                  QHDispatchDelayDefault(0.5, ^{
-                                      [reporter success:@"ok"];
-                                  });
-                              }];
-    
-    [task startWithSuccess:^(QHAsyncTask * _Nonnull task, NSObject * _Nullable result) {
+    QHAsyncBlockTask<NSString *> *task = ({
+        [QHAsyncBlockTask<NSString *> taskWithBlock:
+         ^(QHAsyncBlockTaskReporter<NSString *> * _Nonnull reporter) {
+             QHDispatchDelayDefault(0.5, ^{
+                 [reporter success:@"ok"];
+             });
+         }];
+    });
+
+    [task startWithSuccess:^(QHAsyncTask * _Nonnull task, NSString * _Nullable result) {
         XCTAssert(QH_IS_STRING(result));
         XCTAssert([(NSString *)result isEqualToString:@"ok"]);
         [expect fulfill];
@@ -61,12 +65,15 @@
 {
     XCTestExpectation *expect = [self expectationWithDescription:@"block task success"];
     
-    QHAsyncBlockTask *task = [QHAsyncBlockTask<NSString *> taskWithBlock:
-                              ^(QHAsyncBlockTaskReporter<NSString *> * _Nonnull reporter) {
-                                  NSError *error = QH_ERROR(@"", 0, nil, nil);
-                                  [reporter fail:error];
-                              }];
-    [task startWithSuccess:^(QHAsyncTask * _Nonnull task, NSObject * _Nullable result) {
+    QHAsyncBlockTask<NSString *> *task = ({
+        [QHAsyncBlockTask<NSString *> taskWithBlock:
+         ^(QHAsyncBlockTaskReporter<NSString *> * _Nonnull reporter) {
+             NSError *error = QH_ERROR(@"", 0, nil, nil);
+             [reporter fail:error];
+         }];
+    });
+
+    [task startWithSuccess:^(QHAsyncTask * _Nonnull task, NSString * _Nullable result) {
         XCTAssert(NO, @"should not success");
     } fail:^(QHAsyncTask * _Nonnull task, NSError * _Nonnull error) {
         [expect fulfill];

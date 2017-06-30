@@ -10,8 +10,6 @@
 #import "QHAsyncParallelTaskGroup+internal.h"
 #import "QHAsyncTask+internal.h"
 
-#import "QHLog.h"
-
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -28,8 +26,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableSet<QHAsyncTaskId> *succeedTasks;
 @property (nonatomic, strong) NSMutableSet<QHAsyncTaskId> *failedTasks;
 
-// result or error
+// value is the result or error of each task
 @property (nonatomic, strong) NSMutableDictionary<QHAsyncTaskId, id> *results;
+
+@property (nonatomic, copy) QHAsyncParallelTaskGroupReportProgressBlock _Nullable progressBlock;
+
+@property (nonatomic, copy) QHAsyncParallelTaskGroupAggregateResultBlock _Nullable aggregateBlock;
 
 @end
 
@@ -62,7 +64,24 @@ NS_ASSUME_NONNULL_BEGIN
     [self.tasks qh_setObject:task forKey:taskId];
 }
 
-QH_ASYNC_TASK_IMPL_DIRECT(QHAsyncParallelTaskGroup, NSObject);
+- (void)setReportProgressBlock:(QHAsyncParallelTaskGroupReportProgressBlock _Nullable)progressBlock
+{
+    self.progressBlock = progressBlock;
+}
+
+- (void)setAggregateResultBlock:(id _Nullable (^ _Nullable)
+                                 (
+                                     NSDictionary<QHAsyncTaskId,QHAsyncTask *> * _Nonnull,
+                                     NSSet<QHAsyncTaskId> * _Nonnull,
+                                     NSSet<QHAsyncTaskId> * _Nonnull,
+                                     NSDictionary<QHAsyncTaskId,id> * _Nonnull,
+                                     NSError * _Nullable __autoreleasing * _Nullable)
+                                 )aggregateBlock
+{
+    self.aggregateBlock = aggregateBlock;
+}
+
+#pragma mark -
 
 - (void)p_doStart
 {
@@ -103,15 +122,35 @@ QH_ASYNC_TASK_IMPL_DIRECT(QHAsyncParallelTaskGroup, NSObject);
             [self _tryStartNextTask];
 
             if (self.runningTasks.count == 0) {
+
+                __block QHAsyncParallelTaskGroupAggregateResultBlock aggregateBlockRef = self.aggregateBlock;
+
+                [self _clearProgressAggregateBlocks];
+
                 [self p_asyncOnWorkQueue:^{
                     @retainify(self);
 
                     NSError *error = nil;
-                    id result = [self p_doAggregateResult:self.tasks
-                                                  succeed:self.succeedTasks
-                                                   failed:self.failedTasks
-                                                  results:self.results
-                                                    error:&error];
+                    id result = nil;
+
+                    if (aggregateBlockRef) {
+                        result = aggregateBlockRef(self.tasks,
+                                                   self.succeedTasks,
+                                                   self.failedTasks,
+                                                   self.results,
+                                                   &error);
+
+                        [self p_asyncOnDisposeQueue:^{
+                            aggregateBlockRef = nil;
+                        }];
+                    }
+                    else {
+                        result = [self p_doAggregateResult:self.tasks
+                                                   succeed:self.succeedTasks
+                                                    failed:self.failedTasks
+                                                   results:self.results
+                                                     error:&error];
+                    }
 
                     if (error == nil) {
                         [self p_fireSuccess:result];
@@ -127,13 +166,13 @@ QH_ASYNC_TASK_IMPL_DIRECT(QHAsyncParallelTaskGroup, NSObject);
         QHNSLock(self->_taskLock, ^{
             @retainify(self);
 
-            QHLogDebug(@"[%@] %@ failed in %@", taskId, task, self);
-
             [self.runningTasks removeObject:taskId];
             [self.failedTasks qh_addObject:taskId];
             [self.results qh_setObject:error forKey:taskId];
 
             [self _reportOneFinished:task withTaskId:taskId];
+
+            [self _clearProgressAggregateBlocks];
 
             [self p_fireFail:error];
 
@@ -150,8 +189,25 @@ QH_ASYNC_TASK_IMPL_DIRECT(QHAsyncParallelTaskGroup, NSObject);
     NSMutableSet<QHAsyncTaskId> *failed  = [self.failedTasks copy];
     NSMutableDictionary<QHAsyncTaskId, id> *results = [self.results copy];
 
+    __block QHAsyncParallelTaskGroupReportProgressBlock progressBlockRef = self.progressBlock;
+
     [self p_asyncOnCompletionQueue:^{
         @retainify(self);
+
+        if (progressBlockRef) {
+            progressBlockRef(self.tasks,
+                             taskId,
+                             task,
+                             waiting,
+                             running,
+                             succeed,
+                             failed,
+                             results);
+
+            [self p_asyncOnDisposeQueue:^{
+                progressBlockRef = nil;
+            }];
+        }
 
         [self p_doReportProgress:self.tasks
                           taskId:taskId
@@ -179,11 +235,38 @@ QH_ASYNC_TASK_IMPL_DIRECT(QHAsyncParallelTaskGroup, NSObject);
     }
 }
 
+- (void)_clearProgressAggregateBlocks
+{
+    __block QHAsyncParallelTaskGroupReportProgressBlock progress = self.progressBlock;
+    self.progressBlock =  nil;
+
+    __block QHAsyncParallelTaskGroupAggregateResultBlock aggregate = self.aggregateBlock;
+    self.aggregateBlock = nil;
+
+    if (progress || aggregate) {
+        [self p_asyncOnDisposeQueue:^{
+            progress = nil;
+            aggregate = nil;
+        }];
+    }
+}
+
 - (void)_cancelAllTasks
 {
     [self.runningTasks enumerateObjectsUsingBlock:^(QHAsyncTaskId _Nonnull task, BOOL * _Nonnull stop) {
         [self.tasks[task] cancel];
     }];
+}
+
+- (void)p_doClear
+{
+    [super p_doClear];
+
+    QHNSLock(_taskLock, ^{
+        @retainify(self);
+
+        [self _clearProgressAggregateBlocks];
+    });
 }
 
 - (void)p_doCancel
@@ -217,16 +300,14 @@ QH_ASYNC_TASK_IMPL_DIRECT(QHAsyncParallelTaskGroup, NSObject);
                     failed:(NSSet<QHAsyncTaskId> *)failed
                    results:(NSDictionary<QHAsyncTaskId,id> *)results
 {
-    QHLogDebug(@"[%@] %@ finished in %@: A %d, W %d, R %d, S %d, F %d,",
-               taskId, task, self, (int)tasks.count, (int)waiting.count,
-               (int)running.count, (int)succeed.count, (int)failed.count);
+
 }
 
-- (id)p_doAggregateResult:(NSDictionary<QHAsyncTaskId,QHAsyncTask *> *)tasks
-                  succeed:(NSSet<QHAsyncTaskId> *)succeed
-                   failed:(NSSet<QHAsyncTaskId> *)failed
-                  results:(NSDictionary<QHAsyncTaskId, id> *)results
-                    error:(NSError *__autoreleasing *)error
+- (id _Nullable)p_doAggregateResult:(NSDictionary<QHAsyncTaskId,QHAsyncTask *> *)tasks
+                            succeed:(NSSet<QHAsyncTaskId> *)succeed
+                             failed:(NSSet<QHAsyncTaskId> *)failed
+                            results:(NSDictionary<QHAsyncTaskId, id> *)results
+                              error:(NSError *__autoreleasing *)error
 {
     return [_results copy];
 }

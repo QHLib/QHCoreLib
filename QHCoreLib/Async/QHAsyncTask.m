@@ -64,7 +64,7 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
     });
 }
 
-- (void)startWithSuccess:(void (^ _Nullable)(QHAsyncTask *, NSObject * _Nullable))success
+- (void)startWithSuccess:(void (^ _Nullable)(QHAsyncTask *, id _Nullable))success
                     fail:(void (^ _Nullable)(QHAsyncTask *, NSError *))fail
 {
     QHNSLock(_lock, ^{
@@ -115,24 +115,8 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 {
     QHNSLock(_lock, ^{
         @retainify(self);
-        [self p_clearBlocks];
+        [self p_doClear];
     });
-}
-
-- (void)p_clearBlocks
-{
-    __block QHAsyncTaskSuccessBlock success = self.successBlock;
-    self.successBlock = nil;
-
-    __block QHAsyncTaskFailBlock fail = self.failBlock;
-    self.failBlock =  nil;
-
-    if (success || fail) {
-        [self p_asyncOnDisposeQueue:^{
-            success = nil;
-            fail = nil;
-        }];
-    }
 }
 
 - (void)cancel
@@ -146,7 +130,7 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 
         if ([self isLoading]) {
             self.state = QHAsyncTaskStateCancelled;
-            [self p_clearBlocks];
+            [self p_doClear];
             [self p_doCancel];
             [self p_doClean];
         }
@@ -195,6 +179,11 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
     // do nothing, subclass implements detail
 }
 
+- (void)p_doClear
+{
+    [self _clearSuccessFailBlocks];
+}
+
 - (void)p_doCancel
 {
     // do nothing, subclass implements detail
@@ -220,6 +209,22 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 }
 
 #pragma mark -
+
+- (void)_clearSuccessFailBlocks
+{
+    __block QHAsyncTaskSuccessBlock success = self.successBlock;
+    self.successBlock = nil;
+
+    __block QHAsyncTaskFailBlock fail = self.failBlock;
+    self.failBlock =  nil;
+
+    if (success || fail) {
+        [self p_asyncOnDisposeQueue:^{
+            success = nil;
+            fail = nil;
+        }];
+    }
+}
 
 - (void)p_fireSuccess:(NSObject * _Nullable)result
 {
@@ -256,7 +261,7 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 
             __block QHAsyncTaskSuccessBlock success = self.successBlock;
 
-            [self p_clearBlocks];
+            [self _clearSuccessFailBlocks];
 
             if (success) {
                 [self p_asyncOnCompletionQueue:^{
@@ -305,7 +310,7 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 
             __block QHAsyncTaskFailBlock fail = self.failBlock;
             
-            [self p_clearBlocks];
+            [self _clearSuccessFailBlocks];
             
             if (fail) {
                 [self p_asyncOnCompletionQueue:^{

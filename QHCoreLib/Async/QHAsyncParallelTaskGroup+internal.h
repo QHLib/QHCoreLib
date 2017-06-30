@@ -11,11 +11,13 @@
 
 #import "QHAsyncParallelTaskGroup.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface QHAsyncParallelTaskGroup ()
 
 /*
  * Report porgress after each task succeed or failed. Default implementation
- * print running state of tasks.
+ * do nothing.
  * @param task the task that succeed or failed this time.
  * This mehtod will be called on `completionQueue`.
  */
@@ -33,13 +35,14 @@
  * returns an copy of `results`.
  * This method will be called on `workQueue`.
  */
-- (id)p_doAggregateResult:(NSDictionary<QHAsyncTaskId, QHAsyncTask *> *)tasks
-                  succeed:(NSSet<QHAsyncTaskId> *)succeed
-                   failed:(NSSet<QHAsyncTaskId> *)failed
-                  results:(NSDictionary<QHAsyncTaskId, id> *)results
-                    error:(NSError * __autoreleasing *)error;
+- (id _Nullable)p_doAggregateResult:(NSDictionary<QHAsyncTaskId, QHAsyncTask *> *)tasks
+                            succeed:(NSSet<QHAsyncTaskId> *)succeed
+                             failed:(NSSet<QHAsyncTaskId> *)failed
+                            results:(NSDictionary<QHAsyncTaskId, id> *)results
+                              error:(NSError * __autoreleasing *)error;
 
 @end
 
+NS_ASSUME_NONNULL_END
 
 #endif /* QHAsyncParallelTaskGroup_internal_h */

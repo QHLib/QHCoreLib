@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^QHAsyncBlockTaskBody)(QHAsyncBlockTaskReporter<id> *reporter);
 
-@interface QHAsyncBlockTask<RESULT_TYPE> : QHAsyncTask
+@interface QHAsyncBlockTask<RESULT_TYPE> : QHAsyncTask<RESULT_TYPE>
 
 + (instancetype)taskWithBlock:(void (^)(QHAsyncBlockTaskReporter<RESULT_TYPE> *reporter))block;
 

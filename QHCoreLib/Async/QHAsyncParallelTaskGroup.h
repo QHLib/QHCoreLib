@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*
  * Run several tasks parallelly and return result after all task have finished.
  */
-@interface QHAsyncParallelTaskGroup : QHAsyncTask
+@interface QHAsyncParallelTaskGroup<RESULT_TYPE> : QHAsyncTask<RESULT_TYPE>
 
 /*
  * Add the task to task group. Task should not be touched (start, clear and
@@ -27,7 +27,37 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, assign) NSUInteger maxConcurrentCount;
 
-QH_ASYNC_TASK_DECL(QHAsyncParallelTaskGroup, NSObject);
+typedef void (^QHAsyncParallelTaskGroupReportProgressBlock)
+(
+    NSDictionary<QHAsyncTaskId, QHAsyncTask *> * tasks,
+    QHAsyncTaskId taskId,
+    QHAsyncTask *task,
+    NSSet<QHAsyncTaskId> * waiting,
+    NSSet<QHAsyncTaskId> * running,
+    NSSet<QHAsyncTaskId> * succeed,
+    NSSet<QHAsyncTaskId> * failed,
+    NSDictionary<QHAsyncTaskId, id> * results
+);
+
+- (void)setReportProgressBlock:(QHAsyncParallelTaskGroupReportProgressBlock _Nullable)progressBlock;
+
+typedef id _Nullable (^QHAsyncParallelTaskGroupAggregateResultBlock)
+(
+    NSDictionary<QHAsyncTaskId, QHAsyncTask *> *tasks,
+    NSSet<QHAsyncTaskId> *succeed,
+    NSSet<QHAsyncTaskId> *failed,
+    NSDictionary<QHAsyncTaskId, id> *results,
+    NSError * __autoreleasing *error
+);
+
+- (void)setAggregateResultBlock:(RESULT_TYPE _Nullable (^ _Nullable)
+                                 (
+                                     NSDictionary<QHAsyncTaskId, QHAsyncTask *> *tasks,
+                                     NSSet<QHAsyncTaskId> *succeed,
+                                     NSSet<QHAsyncTaskId> *failed,
+                                     NSDictionary<QHAsyncTaskId, id> *results,
+                                     NSError * __autoreleasing *error)
+                                 )aggregateBlock;
 
 @end
 

@@ -20,15 +20,10 @@ typedef NS_ENUM(NSUInteger, QHAsyncTaskError) {
 };
 
 @class QHAsyncTask;
-typedef void (^QHAsyncTaskSuccessBlock)(QHAsyncTask *task, NSObject * _Nullable result);
+typedef void (^QHAsyncTaskSuccessBlock)(QHAsyncTask *task, id _Nullable result);
 typedef void (^QHAsyncTaskFailBlock)(QHAsyncTask *task, NSError *error);
 
-#define QH_ASYNC_TASK_DECL(TASK_TYPE, RESULT_TYPE) \
-- (void)startWithSuccess:(void (^ _Nullable)(TASK_TYPE *task, RESULT_TYPE * _Nullable result))success \
-                    fail:(void (^ _Nullable)(TASK_TYPE *task, NSError *error))fail; \
-- (Class)resultClass;
-
-@interface QHAsyncTask : NSObject
+@interface QHAsyncTask<RESULT_TYPE> : NSObject
 
 /**
  * the queue to do the real job,
@@ -49,7 +44,10 @@ typedef void (^QHAsyncTaskFailBlock)(QHAsyncTask *task, NSError *error);
 @property (nonatomic, strong) dispatch_queue_t _Nullable disposeQueue;
 
 
-QH_ASYNC_TASK_DECL(QHAsyncTask, NSObject);
+- (void)startWithSuccess:(void (^ _Nullable)(QHAsyncTask *task, RESULT_TYPE _Nullable result))success
+                    fail:(void (^ _Nullable)(QHAsyncTask *task, NSError *error))fail;
+
+- (Class)resultClass;
 
 
 - (BOOL)isLoading;
@@ -65,6 +63,12 @@ QH_ASYNC_TASK_DECL(QHAsyncTask, NSObject);
 - (void)cancel;
 
 @end
+
+// subclass macros
+#define QH_ASYNC_TASK_DECL(TASK_TYPE, RESULT_TYPE) \
+- (void)startWithSuccess:(void (^ _Nullable)(TASK_TYPE *task, RESULT_TYPE * _Nullable result))success \
+                    fail:(void (^ _Nullable)(TASK_TYPE *task, NSError *error))fail; \
+- (Class)resultClass;
 
 #define QH_ASYNC_TASK_IMPL_DIRECT(TASK_TYPE, RESULT_TYPE) \
 QH_ASYNC_TASK_IMPL_INDIRECT(TASK_TYPE, RESULT_TYPE, QHAsyncTask, NSObject)

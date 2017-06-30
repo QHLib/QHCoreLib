@@ -16,21 +16,33 @@
 #import "QHAsyncBlockTask.h"
 
 
-@interface QHAasyncParallelTaskGroupAggregateOk : QHAsyncParallelTaskGroup
+@interface QHAasyncParallelTaskGroupSubClassTester : QHAsyncParallelTaskGroup
 
-QH_ASYNC_TASK_DECL(QHAasyncParallelTaskGroupAggregateOk, NSString);
+QH_ASYNC_TASK_DECL(QHAasyncParallelTaskGroupSubClassTester, NSString);
 
 @end
 
-@implementation QHAasyncParallelTaskGroupAggregateOk
+@implementation QHAasyncParallelTaskGroupSubClassTester
 
-QH_ASYNC_TASK_IMPL_DIRECT(QHAasyncParallelTaskGroupAggregateOk, NSString);
+QH_ASYNC_TASK_IMPL_DIRECT(QHAasyncParallelTaskGroupSubClassTester, NSString);
 
-- (id)p_doAggregateResult:(NSDictionary<QHAsyncTaskId,QHAsyncTask *> *)tasks
-                  succeed:(NSSet<QHAsyncTaskId> *)succeed
-                   failed:(NSSet<QHAsyncTaskId> *)failed
-                  results:(NSDictionary<QHAsyncTaskId,id> *)results
-                    error:(NSError *__autoreleasing *)error
+- (void)p_doReportProgress:(NSDictionary<QHAsyncTaskId,QHAsyncTask *> *)tasks
+                    taskId:(QHAsyncTaskId)taskId
+                      task:(QHAsyncTask *)task
+                   waiting:(NSSet<QHAsyncTaskId> *)waiting
+                   running:(NSSet<QHAsyncTaskId> *)running
+                   succeed:(NSSet<QHAsyncTaskId> *)succeed
+                    failed:(NSSet<QHAsyncTaskId> *)failed
+                   results:(NSDictionary<QHAsyncTaskId,id> *)results
+{
+    NSLog(@"[%@] %@ result: %@", taskId, task, [results objectForKey:taskId]);
+}
+
+- (id _Nullable)p_doAggregateResult:(NSDictionary<QHAsyncTaskId,QHAsyncTask *> *)tasks
+                            succeed:(NSSet<QHAsyncTaskId> *)succeed
+                             failed:(NSSet<QHAsyncTaskId> *)failed
+                            results:(NSDictionary<QHAsyncTaskId,id> *)results
+                              error:(NSError *__autoreleasing *)error
 {
     return @"ok";
 }
@@ -52,9 +64,9 @@ QH_ASYNC_TASK_IMPL_DIRECT(QHAasyncParallelTaskGroupAggregateOk, NSString);
     [taskGroup addTask:[QHSuccessTask new] withTaskId:@0];
     [taskGroup addTask:[QHSuccessTask new] withTaskId:@1];
 
-    [taskGroup startWithSuccess:^(QHAsyncParallelTaskGroup * _Nonnull task, NSObject * _Nullable result) {
+    [taskGroup startWithSuccess:^(QHAsyncTask * _Nonnull task, id  _Nullable result) {
         [expect fulfill];
-    } fail:^(QHAsyncParallelTaskGroup * _Nonnull task, NSError * _Nonnull error) {
+    } fail:^(QHAsyncTask * _Nonnull task, NSError * _Nonnull error) {
         XCTAssert(NO, @"should not fail");
     }];
 
@@ -69,9 +81,9 @@ QH_ASYNC_TASK_IMPL_DIRECT(QHAasyncParallelTaskGroupAggregateOk, NSString);
     [taskGroup addTask:[QHSuccessTask new] withTaskId:@0];
     [taskGroup addTask:[[QHFailTask alloc] initWithInterval:0.8] withTaskId:@1];
 
-    [taskGroup startWithSuccess:^(QHAsyncParallelTaskGroup * _Nonnull task, NSObject * _Nullable result) {
+    [taskGroup startWithSuccess:^(QHAsyncTask * _Nonnull task, id  _Nullable result) {
         XCTAssert(NO, @"should not success");
-    } fail:^(QHAsyncParallelTaskGroup * _Nonnull task, NSError * _Nonnull error) {
+    } fail:^(QHAsyncTask * _Nonnull task, NSError * _Nonnull error) {
         [expect fulfill];
     }];
 
@@ -86,9 +98,9 @@ QH_ASYNC_TASK_IMPL_DIRECT(QHAasyncParallelTaskGroupAggregateOk, NSString);
     [taskGroup addTask:[QHSuccessTask new] withTaskId:@0];
     [taskGroup addTask:[[QHFailTask alloc] initWithInterval:1.1] withTaskId:@1];
 
-    [taskGroup startWithSuccess:^(QHAsyncParallelTaskGroup * _Nonnull task, NSObject * _Nullable result) {
+    [taskGroup startWithSuccess:^(QHAsyncTask * _Nonnull task, id  _Nullable result) {
         XCTAssert(NO, @"should not success");
-    } fail:^(QHAsyncParallelTaskGroup * _Nonnull task, NSError * _Nonnull error) {
+    } fail:^(QHAsyncTask * _Nonnull task, NSError * _Nonnull error) {
         [expect fulfill];
     }];
 
@@ -103,9 +115,9 @@ QH_ASYNC_TASK_IMPL_DIRECT(QHAasyncParallelTaskGroupAggregateOk, NSString);
     [taskGroup addTask:[QHSuccessTask new] withTaskId:@0];
     [taskGroup addTask:[QHSuccessTask new] withTaskId:@1];
 
-    [taskGroup startWithSuccess:^(QHAsyncParallelTaskGroup * _Nonnull task, NSObject * _Nullable result) {
+    [taskGroup startWithSuccess:^(QHAsyncTask * _Nonnull task, id  _Nullable result) {
         XCTAssert(NO, @"should not success");
-    } fail:^(QHAsyncParallelTaskGroup * _Nonnull task, NSError * _Nonnull error) {
+    } fail:^(QHAsyncTask * _Nonnull task, NSError * _Nonnull error) {
         XCTAssert(NO, @"should not fail");
     }];
 
@@ -129,9 +141,9 @@ QH_ASYNC_TASK_IMPL_DIRECT(QHAasyncParallelTaskGroupAggregateOk, NSString);
     [taskGroup addTask:[QHSuccessTask new] withTaskId:@0];
     [taskGroup addTask:[QHSuccessTask new] withTaskId:@1];
 
-    [taskGroup startWithSuccess:^(QHAsyncParallelTaskGroup * _Nonnull task, NSObject * _Nullable result) {
+    [taskGroup startWithSuccess:^(QHAsyncTask * _Nonnull task, id  _Nullable result) {
         [expect fulfill];
-    } fail:^(QHAsyncParallelTaskGroup * _Nonnull task, NSError * _Nonnull error) {
+    } fail:^(QHAsyncTask * _Nonnull task, NSError * _Nonnull error) {
         XCTAssert(NO, @"should not fail");
     }];
 
@@ -154,31 +166,94 @@ QH_ASYNC_TASK_IMPL_DIRECT(QHAasyncParallelTaskGroupAggregateOk, NSString);
         });
     }] withTaskId:@1];
 
-    [taskGroup startWithSuccess:^(QHAsyncParallelTaskGroup * _Nonnull task, NSObject * _Nullable result) {
+    [taskGroup startWithSuccess:^(QHAsyncTask * _Nonnull task, id  _Nullable result) {
         QH_AS(result, NSDictionary, dict);
         XCTAssertEqualObjects(dict[@0], @0);
         XCTAssertEqualObjects(dict[@1], @1);
         [expect fulfill];
-    } fail:^(QHAsyncParallelTaskGroup * _Nonnull task, NSError * _Nonnull error) {
+    } fail:^(QHAsyncTask * _Nonnull task, NSError * _Nonnull error) {
         XCTAssert(NO, @"should not faile");
     }];
 
     [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
-- (void)testSubclassAggregateResult
+- (void)testSubclass
 {
     XCTestExpectation *expect = [self expectationWithDescription:@""];
 
-    QHAasyncParallelTaskGroupAggregateOk *taskGroup = [[QHAasyncParallelTaskGroupAggregateOk alloc] init];
+    QHAasyncParallelTaskGroupSubClassTester *taskGroup = [[QHAasyncParallelTaskGroupSubClassTester alloc] init];
     [taskGroup addTask:[QHSuccessTask new] withTaskId:@0];
     [taskGroup addTask:[QHSuccessTask new] withTaskId:@1];
 
-    [taskGroup startWithSuccess:^(QHAasyncParallelTaskGroupAggregateOk *task, NSString * _Nullable result) {
+    [taskGroup startWithSuccess:^(QHAasyncParallelTaskGroupSubClassTester *task, NSString * _Nullable result) {
         XCTAssertEqualObjects(result, @"ok");
         [expect fulfill];
-    } fail:^(QHAasyncParallelTaskGroupAggregateOk *task, NSError *error) {
+    } fail:^(QHAasyncParallelTaskGroupSubClassTester *task, NSError *error) {
         XCTAssert(NO, @"should not fail");
+    }];
+
+    [self waitForExpectationsWithTimeout:1.1 handler:nil];
+}
+
+- (void)testBlockProgressAggregate
+{
+    XCTestExpectation *expect = [self expectationWithDescription:@""];
+
+    QHAsyncParallelTaskGroup<NSNumber *> *taskGroup = [[QHAsyncParallelTaskGroup alloc] init];
+    [taskGroup addTask:[QHSuccessTask new] withTaskId:@0];
+    [taskGroup addTask:[QHSuccessTask new] withTaskId:@1];
+
+    [taskGroup setReportProgressBlock:^(NSDictionary<QHAsyncTaskId,QHAsyncTask *> * _Nonnull tasks,
+                                        QHAsyncTaskId  _Nonnull taskId,
+                                        QHAsyncTask * _Nonnull task,
+                                        NSSet<QHAsyncTaskId> * _Nonnull waiting,
+                                        NSSet<QHAsyncTaskId> * _Nonnull running,
+                                        NSSet<QHAsyncTaskId> * _Nonnull succeed,
+                                        NSSet<QHAsyncTaskId> * _Nonnull failed,
+                                        NSDictionary<QHAsyncTaskId,id> * _Nonnull results) {
+        NSLog(@"[%@] %@ result: %@", taskId, task, [results objectForKey:taskId]);
+    }];
+
+    [taskGroup setAggregateResultBlock:^NSNumber * _Nullable(NSDictionary<QHAsyncTaskId,QHAsyncTask *> * _Nonnull tasks,
+                                                             NSSet<QHAsyncTaskId> * _Nonnull succeed,
+                                                             NSSet<QHAsyncTaskId> * _Nonnull failed,
+                                                             NSDictionary<QHAsyncTaskId,id> * _Nonnull results,
+                                                             NSError * _Nullable __autoreleasing * _Nullable error) {
+        return @3;
+    }];
+
+    [taskGroup startWithSuccess:^(QHAsyncTask * _Nonnull task, NSNumber * _Nullable result) {
+        XCTAssertEqualObjects(result, @3);
+        [expect fulfill];
+    } fail:^(QHAsyncTask * _Nonnull task, NSError * _Nonnull error) {
+        XCTAssert(NO, @"should not fail");
+    }];
+
+    [self waitForExpectationsWithTimeout:1.1 handler:nil];
+}
+
+- (void)testBlockAggregateFail
+{
+    XCTestExpectation *expect = [self expectationWithDescription:@""];
+
+    QHAsyncParallelTaskGroup<NSNumber *> *taskGroup = [[QHAsyncParallelTaskGroup alloc] init];
+    [taskGroup addTask:[QHSuccessTask new] withTaskId:@0];
+    [taskGroup addTask:[QHSuccessTask new] withTaskId:@1];
+
+    [taskGroup setAggregateResultBlock:^NSNumber * _Nullable(NSDictionary<QHAsyncTaskId,QHAsyncTask *> * _Nonnull tasks,
+                                                             NSSet<QHAsyncTaskId> * _Nonnull succeed,
+                                                             NSSet<QHAsyncTaskId> * _Nonnull failed,
+                                                             NSDictionary<QHAsyncTaskId,id> * _Nonnull results,
+                                                             NSError * _Nullable __autoreleasing * _Nullable error) {
+        *error = QH_ERROR(@"", 0, nil, nil);
+        return nil;
+    }];
+
+    [taskGroup startWithSuccess:^(QHAsyncTask * _Nonnull task, NSNumber * _Nullable result) {
+        XCTAssert(NO, @"should not success");
+    } fail:^(QHAsyncTask * _Nonnull task, NSError * _Nonnull error) {
+        [expect fulfill];
     }];
 
     [self waitForExpectationsWithTimeout:1.1 handler:nil];
