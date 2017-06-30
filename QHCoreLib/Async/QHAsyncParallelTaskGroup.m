@@ -119,45 +119,17 @@ NS_ASSUME_NONNULL_BEGIN
 
             [self _reportOneFinished:task withTaskId:taskId];
 
-            [self _tryStartNextTask];
+            if (self.successStrategy == QHAsyncParallelTaskGroupSuccessStrategyAny) {
+                [self _groupTaskSuccess];
 
-            if (self.runningTasks.count == 0) {
+                [self _cancelRunningTasks];
+            }
+            else {
+                [self _tryStartNextTask];
 
-                __block QHAsyncParallelTaskGroupAggregateResultBlock aggregateBlockRef = self.aggregateBlock;
-
-                [self _clearProgressAggregateBlocks];
-
-                [self p_asyncOnWorkQueue:^{
-                    @retainify(self);
-
-                    NSError *error = nil;
-                    id result = nil;
-
-                    if (aggregateBlockRef) {
-                        result = aggregateBlockRef(self.tasks,
-                                                   self.succeedTasks,
-                                                   self.failedTasks,
-                                                   self.results,
-                                                   &error);
-
-                        [self p_asyncOnDisposeQueue:^{
-                            aggregateBlockRef = nil;
-                        }];
-                    }
-                    else {
-                        result = [self p_doAggregateResult:self.tasks
-                                                   succeed:self.succeedTasks
-                                                    failed:self.failedTasks
-                                                   results:self.results
-                                                     error:&error];
-                    }
-
-                    if (error == nil) {
-                        [self p_fireSuccess:result];
-                    } else {
-                        [self p_fireFail:error];
-                    }
-                }];
+                if (self.runningTasks.count == 0) {
+                    [self _groupTaskSuccess];
+                }
             }
         });
     } fail:^(QHAsyncTask * _Nonnull task, NSError * _Nonnull error) {
@@ -172,11 +144,30 @@ NS_ASSUME_NONNULL_BEGIN
 
             [self _reportOneFinished:task withTaskId:taskId];
 
-            [self _clearProgressAggregateBlocks];
+            if (self.successStrategy == QHAsyncParallelTaskGroupSuccessStrategyAll) {
+                [self _groupTaskFail:error];
 
-            [self p_fireFail:error];
+                [self _cancelRunningTasks];
+            }
+            else {
+                [self _tryStartNextTask];
 
-            [self _cancelAllTasks];
+                if (self.runningTasks.count == 0) {
+
+                    if (self.successStrategy == QHAsyncParallelTaskGroupSuccessStrategyAlways
+                        || self.succeedTasks.count > 0) {
+                        [self _groupTaskSuccess];
+                    }
+                    else {
+                        NSString *message = $(@"all parallel tasks failed in %@", self);
+                        NSError *error = QH_ERROR(QHAsyncTaskErrorDomain,
+                                                  QHAsyncTaskErrorAllParallelTaskFailed,
+                                                  message,
+                                                  nil);
+                        [self _groupTaskFail:error];
+                    }
+                }
+            }
         });
     }];
 }
@@ -235,6 +226,52 @@ NS_ASSUME_NONNULL_BEGIN
     }
 }
 
+- (void)_groupTaskSuccess
+{
+    __block QHAsyncParallelTaskGroupAggregateResultBlock aggregateBlockRef = self.aggregateBlock;
+
+    [self _clearProgressAggregateBlocks];
+
+    [self p_asyncOnWorkQueue:^{
+        @retainify(self);
+
+        NSError *error = nil;
+        id result = nil;
+
+        if (aggregateBlockRef) {
+            result = aggregateBlockRef(self.tasks,
+                                       self.succeedTasks,
+                                       self.failedTasks,
+                                       self.results,
+                                       &error);
+
+            [self p_asyncOnDisposeQueue:^{
+                aggregateBlockRef = nil;
+            }];
+        }
+        else {
+            result = [self p_doAggregateResult:self.tasks
+                                       succeed:self.succeedTasks
+                                        failed:self.failedTasks
+                                       results:self.results
+                                         error:&error];
+        }
+
+        if (error == nil) {
+            [self p_fireSuccess:result];
+        } else {
+            [self p_fireFail:error];
+        }
+    }];
+}
+
+- (void)_groupTaskFail:(NSError *)error
+{
+    [self _clearProgressAggregateBlocks];
+
+    [self p_fireFail:error];
+}
+
 - (void)_clearProgressAggregateBlocks
 {
     __block QHAsyncParallelTaskGroupReportProgressBlock progress = self.progressBlock;
@@ -251,7 +288,7 @@ NS_ASSUME_NONNULL_BEGIN
     }
 }
 
-- (void)_cancelAllTasks
+- (void)_cancelRunningTasks
 {
     [self.runningTasks enumerateObjectsUsingBlock:^(QHAsyncTaskId _Nonnull task, BOOL * _Nonnull stop) {
         [self.tasks[task] cancel];
@@ -274,7 +311,7 @@ NS_ASSUME_NONNULL_BEGIN
     QHNSLock(_taskLock, ^{
         @retainify(self);
 
-        [self _cancelAllTasks];
+        [self _cancelRunningTasks];
     });
 }
 

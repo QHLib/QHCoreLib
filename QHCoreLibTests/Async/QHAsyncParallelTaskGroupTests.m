@@ -259,4 +259,80 @@ QH_ASYNC_TASK_IMPL_DIRECT(QHAasyncParallelTaskGroupSubClassTester, NSString);
     [self waitForExpectationsWithTimeout:1.1 handler:nil];
 }
 
+- (void)testStrategyAnySuccess
+{
+    XCTestExpectation *expect = [self expectationWithDescription:@""];
+
+    QHAsyncParallelTaskGroup *taskGroup = [[QHAsyncParallelTaskGroup alloc] init];
+    taskGroup.successStrategy = QHAsyncParallelTaskGroupSuccessStrategyAny;
+
+    [taskGroup addTask:[QHSuccessTask new] withTaskId:@0];
+    [taskGroup addTask:[[QHFailTask alloc] initWithInterval:0.8] withTaskId:@1];
+
+    [taskGroup startWithSuccess:^(QHAsyncTask * _Nonnull task, id  _Nullable result) {
+        [expect fulfill];
+    } fail:^(QHAsyncTask * _Nonnull task, NSError * _Nonnull error) {
+        XCTAssert(NO, @"should not fail");
+    }];
+
+    [self waitForExpectationsWithTimeout:1.1 handler:nil];
+}
+
+- (void)testStrategyAnyFail
+{
+    XCTestExpectation *expect = [self expectationWithDescription:@""];
+
+    QHAsyncParallelTaskGroup *taskGroup = [[QHAsyncParallelTaskGroup alloc] init];
+    taskGroup.successStrategy = QHAsyncParallelTaskGroupSuccessStrategyAny;
+
+    [taskGroup addTask:[QHFailTask new] withTaskId:@0];
+    [taskGroup addTask:[[QHFailTask alloc] initWithInterval:0.8] withTaskId:@1];
+
+    [taskGroup startWithSuccess:^(QHAsyncTask * _Nonnull task, id  _Nullable result) {
+        XCTAssert(NO, @"should not success");
+    } fail:^(QHAsyncTask * _Nonnull task, NSError * _Nonnull error) {
+        [expect fulfill];
+    }];
+
+    [self waitForExpectationsWithTimeout:1.1 handler:nil];
+}
+
+- (void)testStrategyAlwaysPartFail
+{
+    XCTestExpectation *expect = [self expectationWithDescription:@""];
+
+    QHAsyncParallelTaskGroup *taskGroup = [[QHAsyncParallelTaskGroup alloc] init];
+    taskGroup.successStrategy = QHAsyncParallelTaskGroupSuccessStrategyAlways;
+
+    [taskGroup addTask:[QHSuccessTask new] withTaskId:@0];
+    [taskGroup addTask:[[QHFailTask alloc] initWithInterval:0.8] withTaskId:@1];
+
+    [taskGroup startWithSuccess:^(QHAsyncTask * _Nonnull task, id  _Nullable result) {
+        [expect fulfill];
+    } fail:^(QHAsyncTask * _Nonnull task, NSError * _Nonnull error) {
+        XCTAssert(NO, @"should not fail");
+    }];
+
+    [self waitForExpectationsWithTimeout:1.1 handler:nil];
+}
+
+- (void)testStrategyAlwaysAllFail
+{
+    XCTestExpectation *expect = [self expectationWithDescription:@""];
+
+    QHAsyncParallelTaskGroup *taskGroup = [[QHAsyncParallelTaskGroup alloc] init];
+    taskGroup.successStrategy = QHAsyncParallelTaskGroupSuccessStrategyAlways;
+
+    [taskGroup addTask:[QHFailTask new] withTaskId:@0];
+    [taskGroup addTask:[[QHFailTask alloc] initWithInterval:0.8] withTaskId:@1];
+
+    [taskGroup startWithSuccess:^(QHAsyncTask * _Nonnull task, id  _Nullable result) {
+        [expect fulfill];
+    } fail:^(QHAsyncTask * _Nonnull task, NSError * _Nonnull error) {
+        XCTAssert(NO, @"should not fail");
+    }];
+
+    [self waitForExpectationsWithTimeout:1.1 handler:nil];
+}
+
 @end

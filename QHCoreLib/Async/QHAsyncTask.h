@@ -17,6 +17,8 @@ QH_EXTERN NSString * const QHAsyncTaskErrorDomain;
 
 typedef NS_ENUM(NSUInteger, QHAsyncTaskError) {
     QHAsyncTaskErrorInvalidResult = 1000,
+
+    QHAsyncTaskErrorAllParallelTaskFailed = 1200,
 };
 
 @class QHAsyncTask;

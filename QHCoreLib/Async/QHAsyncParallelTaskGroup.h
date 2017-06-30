@@ -11,6 +11,21 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSUInteger, QHAsyncParallelTaskGroupSuccessStrategy) {
+    /*
+     * Task group success if all tasks success.
+     */
+    QHAsyncParallelTaskGroupSuccessStrategyAll = 0,
+    /*
+     * Task group fail if all tasks fail.
+     */
+    QHAsyncParallelTaskGroupSuccessStrategyAny,
+    /*
+     * Task group success even all tasks fail.
+     */
+    QHAsyncParallelTaskGroupSuccessStrategyAlways,
+};
+
 /*
  * Run several tasks parallelly and return result after all task have finished.
  */
@@ -21,6 +36,12 @@ NS_ASSUME_NONNULL_BEGIN
  * cancel) after calling this message.
  */
 - (void)addTask:(QHAsyncTask *)task withTaskId:(QHAsyncTaskId)taskId;
+
+/*
+ * See `QHAsyncParallelTaskGroupSuccessStrategy`.
+ * Default is `QHAsyncParallelTaskGroupSuccessStrategyAll`.
+ */
+@property (nonatomic, assign) QHAsyncParallelTaskGroupSuccessStrategy successStrategy;
 
 /*
  * Maximum number of tasks running at the same time. Default is 5.
