@@ -33,7 +33,7 @@
 
 - (void)testNSArray
 {
-    NSArray *array = @[ @1, @2, @3 ];
+    NSArray<NSNumber *> *array = @[ @1, @2, @3 ];
 
     XCTAssertEqualObjects([array qh_sliceFromStart:1 length:2],
                           [array subarrayWithRange:NSMakeRange(1, 2)]);
@@ -87,7 +87,7 @@
 
 - (void)testNSMutableArray
 {
-    NSMutableArray *array = [NSMutableArray array];
+    NSMutableArray<NSNumber *> *array = [NSMutableArray array];
 
     [array qh_addObject:nilValue()];
     [array qh_addObject:@1];
@@ -102,10 +102,10 @@
 
 - (void)testNSDictionary
 {
-    NSDictionary *dict = @{ @1: @1, @2: @2 };
+    NSDictionary<NSNumber *, NSNumber *> *dict = @{ @1: @1, @2: @2 };
     NSDictionary *result = @{ @1: @2, @2: @4 };
 
-    XCTAssertEqualObjects([dict qh_mappedDictionaryWithBlock:^id(id key, id obj) {
+    XCTAssertEqualObjects([dict qh_mappedDictionaryWithBlock:^id _Nonnull(NSNumber * _Nonnull key, NSNumber * _Nonnull obj) {
         return @([obj integerValue] * 2);
     }], result);
 }

@@ -22,17 +22,17 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
-@interface NSArray (QHCoreLib)
+@interface NSArray<ObjectType> (QHCoreLib)
 
-- (NSArray *)qh_sliceFromStart:(NSUInteger)start length:(NSUInteger)length;
+- (NSArray<ObjectType> *)qh_sliceFromStart:(NSUInteger)start length:(NSUInteger)length;
 
-- (NSArray *)qh_filteredArrayWithBlock:(BOOL (^)(NSUInteger idx, id obj))block;
+- (NSArray<ObjectType> *)qh_filteredArrayWithBlock:(BOOL (^)(NSUInteger idx, ObjectType obj))block;
 
-- (NSArray *)qh_mappedArrayWithBlock:(id (^)(NSUInteger idx, id obj))block;
+- (NSArray<ObjectType> *)qh_mappedArrayWithBlock:(id (^)(NSUInteger idx, ObjectType obj))block;
 
-- (id)qh_objectAtIndex:(NSUInteger)index;
+- (ObjectType)qh_objectAtIndex:(NSUInteger)index;
 
-- (NSArray *)qh_objectsAtIndexes:(NSIndexSet *)indexes;
+- (NSArray<ObjectType> *)qh_objectsAtIndexes:(NSIndexSet *)indexes;
 
 @end
 
@@ -58,19 +58,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface NSMutableArray (QHCoreLib)
+@interface NSMutableArray<ObjectType> (QHCoreLib)
 
-- (void)qh_addObject:(id)anObject;
+- (void)qh_addObject:(ObjectType)anObject;
 
-- (void)qh_insertObject:(id)anObject atIndex:(NSUInteger)index;
+- (void)qh_insertObject:(ObjectType)anObject atIndex:(NSUInteger)index;
 
 - (void)qh_removeObjectAtIndex:(NSUInteger)index;
 
 @end
 
-@interface NSDictionary (QHCoreLib)
+@interface NSDictionary<KeyType, ObjectType> (QHCoreLib)
 
-- (NSDictionary *)qh_mappedDictionaryWithBlock:(id (^)(id key, id obj))block;
+- (NSDictionary<KeyType, id> *)qh_mappedDictionaryWithBlock:(id (^)(KeyType key, ObjectType obj))block;
 
 @end
 
@@ -96,15 +96,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface NSMutableDictionary (QHCoreLib)
+@interface NSMutableDictionary<KeyType, ObjectType> (QHCoreLib)
 
-- (void)qh_setObject:(id)anObject forKey:(id<NSCopying>)aKey;
+- (void)qh_setObject:(ObjectType)anObject forKey:(KeyType)aKey;
 
 @end
 
-@interface NSMutableSet (QHCoreLib)
+@interface NSMutableSet<ObjectType> (QHCoreLib)
 
-- (void)qh_addObject:(id)object;
+- (void)qh_addObject:(ObjectType)object;
 
 @end
 
