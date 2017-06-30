@@ -17,6 +17,11 @@
 
 @implementation QHCoreLibUtilTests
 
+- (void)testBundleId
+{
+    XCTAssertEqualObjects(QHCoreLibBundleId(), @"com.tencent.QHLib.QHCoreLib");
+}
+
 - (void)testIsMainQueueAndIsMainThread
 {
 

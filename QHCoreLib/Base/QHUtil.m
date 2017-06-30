@@ -17,6 +17,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+QH_DUMMY_CLASS(InQHCoreLibBundle);
+
+NSString *QHCoreLibBundleId()
+{
+    NSBundle *bundle = [NSBundle bundleForClass:[QHDummyClassInQHCoreLibBundle class]];
+    return [bundle bundleIdentifier];
+}
+
 BOOL QHIsMainQueue()
 {
     static void *mainQueueKey = &mainQueueKey;

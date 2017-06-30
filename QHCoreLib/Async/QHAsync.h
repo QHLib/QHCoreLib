@@ -9,7 +9,9 @@
 #ifndef QHAsync_h
 #define QHAsync_h
 
+#import <QHCoreLib/QHAsyncDefines.h>
 #import <QHCoreLib/QHAsyncTask.h>
+#import <QHCoreLib/QHAsyncBlockTask.h>
 #import <QHCoreLib/QHAsyncParallelTaskGroup.h>
 
 #endif /* QHAsync_h */

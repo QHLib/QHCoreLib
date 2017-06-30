@@ -9,8 +9,6 @@
 #import "QHAsyncTask.h"
 #import "QHAsyncTask+internal.h"
 
-#import "QHLog.h"
-
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,8 +20,6 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
     dispatch_semaphore_t _stateLock;
     NSRecursiveLock *_lock;
 }
-
-@property (nonatomic, readonly) NSRecursiveLock *lock;
 
 @property (nonatomic, copy) QHAsyncTaskSuccessBlock _Nullable successBlock;
 @property (nonatomic, copy) QHAsyncTaskFailBlock _Nullable failBlock;
@@ -68,13 +64,6 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
     });
 }
 
-@dynamic lock;
-
-- (NSRecursiveLock *)lock
-{
-    return _lock;
-}
-
 - (void)startWithSuccess:(void (^ _Nullable)(QHAsyncTask *, NSObject * _Nullable))success
                     fail:(void (^ _Nullable)(QHAsyncTask *, NSError *))fail
 {
@@ -92,7 +81,7 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
                 @strongify(self);
 
                 if (self.state == QHAsyncTaskStateStarted) {
-                    QHNSLock(self.lock, ^{
+                    QHNSLock(self->_lock, ^{
                         @retainify(self);
 
                         if (self.state == QHAsyncTaskStateStarted) {

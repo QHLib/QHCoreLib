@@ -15,6 +15,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+QH_EXTERN NSString *QHCoreLibBundleId();
+
 // check if currently on the main queue
 QH_EXTERN BOOL QHIsMainQueue(void);
 

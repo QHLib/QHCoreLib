@@ -13,16 +13,31 @@
 
 @interface QHAsyncParallelTaskGroup ()
 
-@property (nonatomic, strong) NSMutableDictionary<id<NSCopying>, QHAsyncTask *> *tasks;
-
-@property (nonatomic, strong) NSMutableDictionary<id<NSCopying>, id> *results;
+/*
+ * Report porgress after each task succeed or failed. Default implementation
+ * print running state of tasks.
+ * @param task the task that succeed or failed this time.
+ * This mehtod will be called on `completionQueue`.
+ */
+- (void)p_doReportProgress:(NSDictionary<QHAsyncTaskId, QHAsyncTask *> *)tasks
+                    taskId:(QHAsyncTaskId)taskId
+                      task:(QHAsyncTask *)task
+                   waiting:(NSSet<QHAsyncTaskId> *)waiting
+                   running:(NSSet<QHAsyncTaskId> *)running
+                   succeed:(NSSet<QHAsyncTaskId> *)succeed
+                    failed:(NSSet<QHAsyncTaskId> *)failed
+                   results:(NSDictionary<QHAsyncTaskId, id> *)results;
 
 /*
  * Generate final result from `results` of all `tasks`. Default implementation
  * returns an copy of `results`.
  * This method will be called on `workQueue`.
  */
-- (id)p_doAggregated:(NSError * __autoreleasing *)error;
+- (id)p_doAggregateResult:(NSDictionary<QHAsyncTaskId, QHAsyncTask *> *)tasks
+                  succeed:(NSSet<QHAsyncTaskId> *)succeed
+                   failed:(NSSet<QHAsyncTaskId> *)failed
+                  results:(NSDictionary<QHAsyncTaskId, id> *)results
+                    error:(NSError * __autoreleasing *)error;
 
 @end
 

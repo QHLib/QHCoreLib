@@ -27,7 +27,12 @@ framework module QHCoreLib {
     
     explicit module QHAsync {
         header "QHAsync.h"
+        header "QHAsyncDefines.h"
         header "QHAsyncTask.h"
+        header "QHAsyncTask+internal.h"
+        header "QHAsyncBlockTask.h"
+        header "QHAsyncParallelTaskGroup.h"
+        header "QHAsyncParallelTaskGroup+internal.h"
         export *
         export QHLog
         export QHProfiler

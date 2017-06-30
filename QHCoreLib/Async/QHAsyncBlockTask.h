@@ -6,7 +6,7 @@
 //  Copyright © 2017年 Tencent. All rights reserved.
 //
 
-#import <QHCoreLib/QHAsync.h>
+#import <QHCoreLib/QHAsyncTask.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

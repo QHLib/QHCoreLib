@@ -6,7 +6,8 @@
 //  Copyright © 2017年 Tencent. All rights reserved.
 //
 
-#import <QHCoreLib/QHAsync.h>
+#import <QHCoreLib/QHAsyncDefines.h>
+#import <QHCoreLib/QHAsyncTask.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,9 +16,18 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface QHAsyncParallelTaskGroup : QHAsyncTask
 
-- (void)addTask:(QHAsyncTask *)task withTaskId:(id<NSCopying>)taskId;
+/*
+ * Add the task to task group. Task should not be touched (start, clear and
+ * cancel) after calling this message.
+ */
+- (void)addTask:(QHAsyncTask *)task withTaskId:(QHAsyncTaskId)taskId;
 
-QH_ASYNC_TASK_DECL(QHAsyncParallelTaskGroup, NSDictionary);
+/*
+ * Maximum number of tasks running at the same time. Default is 5.
+ */
+@property (nonatomic, assign) NSUInteger maxConcurrentCount;
+
+QH_ASYNC_TASK_DECL(QHAsyncParallelTaskGroup, NSObject);
 
 @end
 
