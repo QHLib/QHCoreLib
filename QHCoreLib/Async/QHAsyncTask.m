@@ -235,19 +235,19 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
             Class resultClass = [self resultClass];
             if (resultClass && ![result isKindOfClass:resultClass]) {
                 NSString *message = $(@"invalid result: %@, should be kind of %@", result, NSStringFromClass(resultClass));
-                [self locked_fireFail:QH_ERROR(QHAsyncTaskErrorDomain,
-                                               QHAsyncTaskErrorInvalidResult,
-                                               message,
-                                               nil)];
+                [self _fireFail:QH_ERROR(QHAsyncTaskErrorDomain,
+                                         QHAsyncTaskErrorInvalidResult,
+                                         message,
+                                         nil)];
                 return;
             }
         }
         
-        [self locked_fireSuccess:result];
+        [self _fireSuccess:result];
     }];
 }
 
-- (void)locked_fireSuccess:(NSObject * _Nullable)result
+- (void)_fireSuccess:(NSObject * _Nullable)result
 {
     if (self.state != QHAsyncTaskStateLoading) {
         return;
@@ -296,11 +296,11 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 {
     [self p_asyncOnWorkQueue:^{
         @retainify(self);
-        [self locked_fireFail:error];
+        [self _fireFail:error];
     }];
 }
 
-- (void)locked_fireFail:(NSError *)error
+- (void)_fireFail:(NSError *)error
 {
     QHNSLock(_lock, ^{
         @retainify(self);
