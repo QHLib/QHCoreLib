@@ -1,5 +1,5 @@
 //
-//  Tests_QHAsyncBlockTask.m
+//  QHAsyncBlockTaskTests.m
 //  QHCoreLib
 //
 //  Created by Tony Tang on 2017/6/29.
@@ -9,11 +9,11 @@
 #import <XCTest/XCTest.h>
 #import "QHAsyncBlockTask.h"
 
-@interface Tests_QHAsyncBlockTask : XCTestCase
+@interface QHAsyncBlockTaskTests : XCTestCase
 
 @end
 
-@implementation Tests_QHAsyncBlockTask
+@implementation QHAsyncBlockTaskTests
 
 - (void)testSuccess
 {

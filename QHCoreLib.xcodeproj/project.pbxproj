@@ -12,7 +12,7 @@
 		EA1693791EFABD4300BD9A25 /* QHAsyncTaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA1693781EFABD4300BD9A25 /* QHAsyncTaskTests.m */; };
 		EA16937C1F05466900BD9A25 /* QHAsyncBlockTask.h in Headers */ = {isa = PBXBuildFile; fileRef = EA16937A1F05466900BD9A25 /* QHAsyncBlockTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA16937D1F05466900BD9A25 /* QHAsyncBlockTask.m in Sources */ = {isa = PBXBuildFile; fileRef = EA16937B1F05466900BD9A25 /* QHAsyncBlockTask.m */; };
-		EA16937F1F054BEF00BD9A25 /* Tests_QHAsyncBlockTask.m in Sources */ = {isa = PBXBuildFile; fileRef = EA16937E1F054BEF00BD9A25 /* Tests_QHAsyncBlockTask.m */; };
+		EA16937F1F054BEF00BD9A25 /* QHAsyncBlockTaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA16937E1F054BEF00BD9A25 /* QHAsyncBlockTaskTests.m */; };
 		EA19CC5B1EE24F5C00C18853 /* QHLog.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE3C7A31EE12A4F00A93456 /* QHLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA19CC5D1EE2539600C18853 /* QHCoreLib+All.h in Headers */ = {isa = PBXBuildFile; fileRef = EA19CC5C1EE2539500C18853 /* QHCoreLib+All.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA19CC611EE9969000C18853 /* QHNetworkHttpApi.h in Headers */ = {isa = PBXBuildFile; fileRef = EA19CC5F1EE9969000C18853 /* QHNetworkHttpApi.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -129,7 +129,7 @@
 		EA1693781EFABD4300BD9A25 /* QHAsyncTaskTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHAsyncTaskTests.m; sourceTree = "<group>"; };
 		EA16937A1F05466900BD9A25 /* QHAsyncBlockTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHAsyncBlockTask.h; sourceTree = "<group>"; };
 		EA16937B1F05466900BD9A25 /* QHAsyncBlockTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHAsyncBlockTask.m; sourceTree = "<group>"; };
-		EA16937E1F054BEF00BD9A25 /* Tests_QHAsyncBlockTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tests_QHAsyncBlockTask.m; sourceTree = "<group>"; };
+		EA16937E1F054BEF00BD9A25 /* QHAsyncBlockTaskTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHAsyncBlockTaskTests.m; sourceTree = "<group>"; };
 		EA19CC5C1EE2539500C18853 /* QHCoreLib+All.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QHCoreLib+All.h"; sourceTree = "<group>"; };
 		EA19CC5F1EE9969000C18853 /* QHNetworkHttpApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHNetworkHttpApi.h; sourceTree = "<group>"; };
 		EA19CC601EE9969000C18853 /* QHNetworkHttpApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHNetworkHttpApi.m; sourceTree = "<group>"; };
@@ -295,7 +295,7 @@
 				EA4FBA6F1F050ED4004A6FE5 /* QHAsyncTestTasks.h */,
 				EA4FBA701F050ED4004A6FE5 /* QHAsyncTestTasks.m */,
 				EA1693781EFABD4300BD9A25 /* QHAsyncTaskTests.m */,
-				EA16937E1F054BEF00BD9A25 /* Tests_QHAsyncBlockTask.m */,
+				EA16937E1F054BEF00BD9A25 /* QHAsyncBlockTaskTests.m */,
 				EA4FBA6D1F050BEF004A6FE5 /* QHAsyncParallelTaskGroupTests.m */,
 			);
 			path = Async;
@@ -858,7 +858,7 @@
 				EA1D43981ED70E35002177BF /* QHCoreLibDefinesTests.m in Sources */,
 				EAAA79E91ED9639A008135BE /* QHCoreLibClockEntryTests.m in Sources */,
 				EA1D439F1ED70E4C002177BF /* QHCoreLibLogTests.m in Sources */,
-				EA16937F1F054BEF00BD9A25 /* Tests_QHAsyncBlockTask.m in Sources */,
+				EA16937F1F054BEF00BD9A25 /* QHAsyncBlockTaskTests.m in Sources */,
 				EA4FBA711F050ED4004A6FE5 /* QHAsyncTestTasks.m in Sources */,
 				EA1D43991ED70E38002177BF /* QHCoreLibExternCppTests.mm in Sources */,
 				EA4FBA6E1F050BEF004A6FE5 /* QHAsyncParallelTaskGroupTests.m in Sources */,
