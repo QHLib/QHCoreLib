@@ -28,8 +28,9 @@ typedef NS_ENUM(NSUInteger, QHNetworkApiError) {
 typedef void (^QHNetworkApiSuccessBlock)(QHNetworkApi *api, QHNetworkApiResult *result);
 typedef void (^QHNetworkApiFailBlock)(QHNetworkApi *api, NSError *error);
 
+// redefined the macros here for paramter name 'api' not 'task'
 #define QH_NETWORK_API_DECL(API_TYPE, RESULT_TYPE) \
-- (void)startWithSuccess:(void (^ _Nullable)(API_TYPE *api, RESULT_TYPE * result))success \
+- (void)startWithSuccess:(void (^ _Nullable)(API_TYPE *api, RESULT_TYPE *result))success \
                     fail:(void (^ _Nullable)(API_TYPE *api, NSError *error))fail; \
 - (Class)resultClass;
 
@@ -43,22 +44,12 @@ QH_NETWORK_API_DECL(QHNetworkApi, QHNetworkApiResult);
 @end
 
 #define QH_NETWORK_API_IMPL_DIRECT(API_TYPE, RESULT_TYPE) \
-QH_NETWORK_API_IMPL_INDIRECT(API_TYPE, RESULT_TYPE, QHNetworkApi, QHNetworkApiResult)
+QH_ASYNC_TASK_IMPL_INDIRECT(API_TYPE, RESULT_TYPE, QHNetworkApi, QHNetworkApiResult);
 
 #define QH_NETWORK_API_IMPL_INDIRECT(API_TYPE, RESULT_TYPE, SUPER_API_TYPE, SUPER_RESULT_TYPE) \
-- (void)startWithSuccess:(void (^ _Nullable)(API_TYPE *api, RESULT_TYPE * _Nonnull result))success \
-                    fail:(void (^ _Nullable)(API_TYPE *api, NSError *error))fail \
-{ \
-    [super startWithSuccess:(void (^ _Nullable)(SUPER_API_TYPE *api, SUPER_RESULT_TYPE *result))success \
-                       fail:(void (^ _Nullable)(SUPER_API_TYPE *api, NSError *error))fail]; \
-} \
-- (Class)resultClass \
-{ \
-    return [RESULT_TYPE class]; \
-}
+QH_ASYNC_TASK_IMPL_INDIRECT(API_TYPE, RESULT_TYPE, SUPER_API_TYPE, SUPER_RESULT_TYPE);
 
-#pragma mark
-
+#pragma mark -
 
 #define QH_NETWORK_API_RESULT_DECL(API_TYPE, RESULT_TYPE) \
 @property (nonatomic, strong) API_TYPE *api; \

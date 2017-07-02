@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)p_doStart
 {
     QHDispatchDelayDefault(_interval, ^{
-        [self p_fireSuccess:nil];
+        [self p_fireSuccess:[NSNull null]];
     });
 }
 

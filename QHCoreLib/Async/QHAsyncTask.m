@@ -14,6 +14,35 @@ NS_ASSUME_NONNULL_BEGIN
 
 NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 
+@implementation QHAsyncTaskProgress
+
+@end
+
+@interface QHAsyncBlockTaskReporter ()
+
+@property (nonatomic, weak) QHAsyncTask *task;
+
+@end
+
+@implementation QHAsyncBlockTaskReporter
+
+- (void)success:(id)result
+{
+    [self.task p_fireSuccess:result];
+}
+
+- (void)progress:(id<QHAsyncTaskProgress>)progress
+{
+    [self.task p_fireProgress:progress];
+}
+
+- (void)fail:(NSError *)error
+{
+    [self.task p_fireFail:error];
+}
+
+@end
+
 @interface QHAsyncTask () {
 @private
     QHAsyncTaskState _state;
@@ -21,12 +50,25 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
     NSRecursiveLock *_lock;
 }
 
+@property (nonatomic, copy, setter=_setBodyBlock:) QHAsyncBlockTaskBody _Nullable bodyBlock;
+
+@property (nonatomic, copy, setter=_setProgressBlock:) QHAsyncTaskProgressBlock _Nullable progressBlock;
+
 @property (nonatomic, copy) QHAsyncTaskSuccessBlock _Nullable successBlock;
 @property (nonatomic, copy) QHAsyncTaskFailBlock _Nullable failBlock;
 
 @end
 
 @implementation QHAsyncTask
+
++ (instancetype)taskWithBlock:(QHAsyncBlockTaskBody)block
+{
+    QHAsyncTask *blockTask = [[QHAsyncTask alloc] init];
+
+    blockTask.bodyBlock = block;
+
+    return blockTask;
+}
 
 - (instancetype)init
 {
@@ -64,7 +106,23 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
     });
 }
 
-- (void)startWithSuccess:(void (^ _Nullable)(QHAsyncTask *, id _Nullable))success
+- (void)setBodyBlock:(QHAsyncBlockTaskBody)bodyBlock
+{
+    QHAssert(self.state == QHAsyncTaskStateInit,
+             @"progress block should be set before task started: %@", self);
+
+    self.bodyBlock = bodyBlock;
+}
+
+- (void)setProgressBlock:(QHAsyncTaskProgressBlock _Nullable)progressBlock
+{
+    QHAssert(self.state == QHAsyncTaskStateInit,
+             @"progress block should be set before task started: %@", self);
+
+    self.progressBlock = progressBlock;
+}
+
+- (void)startWithSuccess:(void (^ _Nullable)(QHAsyncTask *, id))success
                     fail:(void (^ _Nullable)(QHAsyncTask *, NSError *))fail
 {
     QHNSLock(_lock, ^{
@@ -73,7 +131,7 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
         if (self.state == QHAsyncTaskStateInit) {
             self.state = QHAsyncTaskStateStarted;
             
-            self.successBlock =  success;
+            self.successBlock = success;
             self.failBlock = fail;
             
             @weakify(self);
@@ -176,12 +234,21 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 
 - (void)p_doStart
 {
-    // do nothing, subclass implements detail
+    if (self.bodyBlock) {
+        QH_BLOCK_INVOKE(^{
+            QHAsyncBlockTaskReporter *reporter = [QHAsyncBlockTaskReporter new];
+            reporter.task = self;
+            self.bodyBlock(self, reporter);
+        });
+    }
+    else {
+        // subclass implements detail
+    }
 }
 
 - (void)p_doClear
 {
-    [self _clearSuccessFailBlocks];
+    [self _clearBlocks];
 }
 
 - (void)p_doCancel
@@ -193,6 +260,12 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 {
     @autoreleasepool {
         __block NSMutableArray *resources = [NSMutableArray array];
+
+        if (self.bodyBlock) {
+            [resources addObject:self.bodyBlock];
+            self.bodyBlock = nil;
+        }
+
         [self p_doCollect:resources];
         
         if (resources.count > 0) {
@@ -210,23 +283,46 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 
 #pragma mark -
 
-- (void)_clearSuccessFailBlocks
+- (void)_clearBlocks
 {
+    __block QHAsyncTaskProgressBlock progress = self.progressBlock;
+    self.progressBlock = nil;
+
     __block QHAsyncTaskSuccessBlock success = self.successBlock;
     self.successBlock = nil;
 
     __block QHAsyncTaskFailBlock fail = self.failBlock;
     self.failBlock =  nil;
 
-    if (success || fail) {
+    if (progress || success || fail) {
         [self p_asyncOnDisposeQueue:^{
+            progress = nil;
             success = nil;
             fail = nil;
         }];
     }
 }
 
-- (void)p_fireSuccess:(NSObject * _Nullable)result
+- (void)p_fireProgress:(id<QHAsyncTaskProgress>)progress
+{
+    __block QHAsyncTaskProgressBlock progressBlockRef = self.progressBlock;
+
+    if (progressBlockRef) {
+        [self p_asyncOnCompletionQueue:^{
+            @retainify(self);
+
+            if (progressBlockRef) {
+                progressBlockRef(self, progress);
+            }
+
+            [self p_asyncOnDisposeQueue:^{
+                progressBlockRef = nil;
+            }];
+        }];
+    }
+}
+
+- (void)p_fireSuccess:(NSObject *)result
 {
     [self p_asyncOnWorkQueue:^{
         @retainify(self);
@@ -247,7 +343,7 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
     }];
 }
 
-- (void)_fireSuccess:(NSObject * _Nullable)result
+- (void)_fireSuccess:(NSObject *)result
 {
     if (self.state != QHAsyncTaskStateLoading) {
         return;
@@ -261,7 +357,7 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 
             __block QHAsyncTaskSuccessBlock success = self.successBlock;
 
-            [self _clearSuccessFailBlocks];
+            [self _clearBlocks];
 
             if (success) {
                 [self p_asyncOnCompletionQueue:^{
@@ -310,7 +406,7 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 
             __block QHAsyncTaskFailBlock fail = self.failBlock;
             
-            [self _clearSuccessFailBlocks];
+            [self _clearBlocks];
             
             if (fail) {
                 [self p_asyncOnCompletionQueue:^{

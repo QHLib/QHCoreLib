@@ -16,29 +16,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface QHAsyncParallelTaskGroup ()
 
 /*
- * Report porgress after each task succeed or failed. Default implementation
- * do nothing.
- * @param task the task that succeed or failed this time.
- * This mehtod will be called on `completionQueue`.
- */
-- (void)p_doReportProgress:(NSDictionary<QHAsyncTaskId, QHAsyncTask *> *)tasks
-                    taskId:(QHAsyncTaskId)taskId
-                      task:(QHAsyncTask *)task
-                   waiting:(NSSet<QHAsyncTaskId> *)waiting
-                   running:(NSSet<QHAsyncTaskId> *)running
-                   succeed:(NSSet<QHAsyncTaskId> *)succeed
-                    failed:(NSSet<QHAsyncTaskId> *)failed
-                   results:(NSDictionary<QHAsyncTaskId, id> *)results;
-
-/*
- * Generate final result from `results` of all `tasks`. Default implementation
- * returns an copy of `results`.
+ * Generate final result from `result` of all `tasks`. Default implementation
+ * returns the `results` in `result`.
  * This method will be called on `workQueue`.
  */
-- (id _Nullable)p_doAggregateResult:(NSDictionary<QHAsyncTaskId, QHAsyncTask *> *)tasks
-                            succeed:(NSSet<QHAsyncTaskId> *)succeed
-                             failed:(NSSet<QHAsyncTaskId> *)failed
-                            results:(NSDictionary<QHAsyncTaskId, id> *)results
+- (id _Nullable)p_doAggregateResult:(QHAsyncParallelTaskGroupResult *)result
                               error:(NSError * __autoreleasing *)error;
 
 @end

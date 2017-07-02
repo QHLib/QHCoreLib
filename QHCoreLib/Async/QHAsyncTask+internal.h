@@ -35,8 +35,8 @@ typedef NS_ENUM(NSUInteger, QHAsyncTaskState) {
 
 
 /**
- * Start the real job for task. Default implementation do nothing. Subclass
- * implements detail base on needs.
+ * Start the real job for task. Default implementation invoke `bodyBlock` if 
+ * not nil. Subclass overrides with detail base on needs.
  * This method will be called on `workQueue` and guarded by lock. Make sure
  * start the job did not take too long, because calling of `cancel` on another
  * thread might be blocked.
@@ -77,7 +77,9 @@ typedef NS_ENUM(NSUInteger, QHAsyncTaskState) {
 - (void)p_doCollect:(NSMutableArray *)releaseOnDisposeQueue NS_REQUIRES_SUPER;
 
 
-- (void)p_fireSuccess:(NSObject * _Nullable)result;
+- (void)p_fireProgress:(id<QHAsyncTaskProgress>)progress;
+
+- (void)p_fireSuccess:(NSObject *)result;
 - (void)p_fireFail:(NSError *)error;
                    
 @end

@@ -20,7 +20,7 @@
 - (void)p_doStart
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self p_fireSuccess:nil];
+        [self p_fireSuccess:[NSNull null]];
     });
 }
 - (void)start:(dispatch_block_t)assertFailBlock
@@ -46,21 +46,21 @@
 - (void)p_doStart
 {
     [NSThread sleepForTimeInterval:1.0];
-    [self p_fireSuccess:nil];
+    [self p_fireSuccess:[NSNull null]];
 }
 @end
 
 @interface QHAsyncTask ()
-- (void)_clearSuccessFailBlocks;
+- (void)_clearBlocks;
 @end
 @interface QHCancelOnCallingbackTask : QHCancelTask
 @end
 @implementation QHCancelOnCallingbackTask
-- (void)_clearSuccessFailBlocks
+- (void)_clearBlocks
 {
     static BOOL cleared = NO;
 
-    [super _clearSuccessFailBlocks];
+    [super _clearBlocks];
 
     if (cleared == YES) return;
 

@@ -261,7 +261,7 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
 - (void)testLoadImage
 {
     XCTestExpectation *expect = [self expectationWithDescription:@"load 'http://tctony.github.io/favicon.ico'"];
-    
+
     QHNetworkImageApi *api = [[QHNetworkImageApi alloc] initWithUrl:@"http://tctony.github.io/favicon.ico"];
     [api startWithSuccess:^(QHNetworkImageApi *api, QHNetworkImageApiResult *result) {
         [expect fulfill];
