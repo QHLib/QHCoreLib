@@ -8,7 +8,6 @@ target 'QHCoreLib' do
 
   # Pods for QHCoreLib
   pod "libextobjc", '0.4.1'
-  pod 'MustOverride', '1.1'
 
   target 'QHCoreLibTests' do
     inherit! :search_paths

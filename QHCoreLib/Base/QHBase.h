@@ -10,6 +10,7 @@
 #define QHBase_h
 
 #import <QHCoreLib/QHDefines.h>
+#import <QHCoreLib/QHMustOverride.h>
 #import <QHCoreLib/QHAsserts.h>
 #import <QHCoreLib/QHUtil.h>
 #import <QHCoreLib/QHCoreLibCategories.h>

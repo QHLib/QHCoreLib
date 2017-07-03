@@ -13,13 +13,6 @@
 
 #import <libextobjc/extobjc.h>
 
-#if __has_include(<MustOverride/MustOverride.h>)
-#   import <MustOverride/MustOverride.h>
-#else
-#   warning Please add 'MustOverride' via pod or manually
-#   define SUBCLASS_MUST_OVERRIDE
-#endif
-
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -84,12 +77,6 @@ NS_ASSUME_NONNULL_BEGIN
 #define ext_retainify_(INDEX, VAR) \
     __strong __typeof__(VAR) metamacro_concat(VAR, _retain_) = VAR; \
     __strong __typeof__(VAR) VAR = metamacro_concat(VAR, _retain_);
-
-#if QH_DEBUG
-#   define QH_SUBCLASS_MUST_OVERRIDE autoreleasepool{} SUBCLASS_MUST_OVERRIDE
-#else
-#   define QH_SUBCLASS_MUST_OVERRIDE autoreleasepool{}
-#endif
 
 #if __has_attribute(deprecated)
 #   define QH_DEPRECATED(_msg) __attribute__((deprecated(_msg)))

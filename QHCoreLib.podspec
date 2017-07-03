@@ -27,7 +27,6 @@ Pod::Spec.new do |s|
     ss.private_header_files = "QHCoreLib/Base/Internal/**/*.h"
     ss.frameworks = "Foundation", "Security", "MobileCoreServices", "CoreGraphics"
     ss.dependency "libextobjc", '0.4.1'
-    ss.dependency 'MustOverride', '1.1'
   end
 
   s.subspec 'QHLog' do |ss|

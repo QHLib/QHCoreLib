@@ -102,6 +102,9 @@
 		EAB2EC931EF7B83400CDDF6D /* QHNetworkMultipart.m in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EC911EF7B83400CDDF6D /* QHNetworkMultipart.m */; };
 		EAB2EEF11F04E82B00CDDF6D /* QHAsyncParallelTaskGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = EAB2EEEF1F04E82B00CDDF6D /* QHAsyncParallelTaskGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAB2EEF21F04E82B00CDDF6D /* QHAsyncParallelTaskGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = EAB2EEF01F04E82B00CDDF6D /* QHAsyncParallelTaskGroup.m */; };
+		EAE2FE511F0A9548004354F8 /* QHMustOverride.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE2FE4F1F0A9548004354F8 /* QHMustOverride.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EAE2FE521F0A9548004354F8 /* QHMustOverride.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE2FE501F0A9548004354F8 /* QHMustOverride.m */; };
+		EAE2FE541F0A9837004354F8 /* QHCoreLibMustOverrideTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE2FE531F0A9837004354F8 /* QHCoreLibMustOverrideTests.m */; };
 		EAE3C7A51EE12A9000A93456 /* QHProfiler.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE3C7A21EE12A0F00A93456 /* QHProfiler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAE3C7B41EE153A400A93456 /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = EA1D433C1ED70CE3002177BF /* DDLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F06443AE55B201F94A964E1C /* Pods_QHCoreLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BFD5D802EAE749D3FCD8FC /* Pods_QHCoreLib.framework */; };
@@ -226,6 +229,9 @@
 		EAB2EC911EF7B83400CDDF6D /* QHNetworkMultipart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHNetworkMultipart.m; sourceTree = "<group>"; };
 		EAB2EEEF1F04E82B00CDDF6D /* QHAsyncParallelTaskGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHAsyncParallelTaskGroup.h; sourceTree = "<group>"; };
 		EAB2EEF01F04E82B00CDDF6D /* QHAsyncParallelTaskGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHAsyncParallelTaskGroup.m; sourceTree = "<group>"; };
+		EAE2FE4F1F0A9548004354F8 /* QHMustOverride.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHMustOverride.h; sourceTree = "<group>"; };
+		EAE2FE501F0A9548004354F8 /* QHMustOverride.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHMustOverride.m; sourceTree = "<group>"; };
+		EAE2FE531F0A9837004354F8 /* QHCoreLibMustOverrideTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHCoreLibMustOverrideTests.m; sourceTree = "<group>"; };
 		EAE3C7A21EE12A0F00A93456 /* QHProfiler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHProfiler.h; sourceTree = "<group>"; };
 		EAE3C7A31EE12A4F00A93456 /* QHLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHLog.h; sourceTree = "<group>"; };
 		F2B4A6B4945BFE0B2872201F /* Pods_QHCoreLibTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QHCoreLibTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -344,6 +350,7 @@
 				EA1D43181ED70C7B002177BF /* QHCoreLibExternTest.h */,
 				EA1D43171ED70C7B002177BF /* QHCoreLibExternCTests.m */,
 				EA1D43161ED70C7B002177BF /* QHCoreLibExternCppTests.mm */,
+				EAE2FE531F0A9837004354F8 /* QHCoreLibMustOverrideTests.m */,
 				EA1D43141ED70C7B002177BF /* QHCoreLibAssertsTests.m */,
 				EA1D43191ED70C7B002177BF /* QHCoreLibUtilTests.m */,
 				EA1D430F1ED70C7B002177BF /* Category */,
@@ -391,6 +398,7 @@
 				EA1D442C1ED92EE7002177BF /* QHBase.h */,
 				EAAE5AF61EE94D350084FA69 /* Internal */,
 				EA1D43351ED70CE3002177BF /* QHDefines.h */,
+				EAE2FE4E1F0A9510004354F8 /* MustOverride */,
 				EA1D43331ED70CE3002177BF /* QHAsserts.h */,
 				EA1D43341ED70CE3002177BF /* QHAsserts.m */,
 				EA1D43361ED70CE3002177BF /* QHUtil.h */,
@@ -569,6 +577,15 @@
 			path = Internal;
 			sourceTree = "<group>";
 		};
+		EAE2FE4E1F0A9510004354F8 /* MustOverride */ = {
+			isa = PBXGroup;
+			children = (
+				EAE2FE4F1F0A9548004354F8 /* QHMustOverride.h */,
+				EAE2FE501F0A9548004354F8 /* QHMustOverride.m */,
+			);
+			path = MustOverride;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -591,6 +608,7 @@
 				EAB2EEF11F04E82B00CDDF6D /* QHAsyncParallelTaskGroup.h in Headers */,
 				EA1D43661ED70CE3002177BF /* QHCoreLibCategories.h in Headers */,
 				EA19CC5D1EE2539600C18853 /* QHCoreLib+All.h in Headers */,
+				EAE2FE511F0A9548004354F8 /* QHMustOverride.h in Headers */,
 				EA1D43761ED70CE3002177BF /* QHLogUtil.h in Headers */,
 				EA1693741EFA9E2900BD9A25 /* QHMisc.h in Headers */,
 				EA1D436D1ED70CE3002177BF /* QHDefines.h in Headers */,
@@ -838,6 +856,7 @@
 				EA1D43891ED70CE3002177BF /* AFHTTPRequestOperation.m in Sources */,
 				EA1D43821ED70CE3002177BF /* QHNetworkUtil.m in Sources */,
 				EA1D43961ED70CE3002177BF /* AFURLResponseSerialization.m in Sources */,
+				EAE2FE521F0A9548004354F8 /* QHMustOverride.m in Sources */,
 				EA19CC6E1EEA57D900C18853 /* QHNetworkHtmlApi.m in Sources */,
 				EA4FBA9B1F074E64004A6FE5 /* QHAsyncLinkedTaskGroup.m in Sources */,
 			);
@@ -863,6 +882,7 @@
 				EA4FBA6E1F050BEF004A6FE5 /* QHAsyncParallelTaskGroupTests.m in Sources */,
 				EA1D439E1ED70E49002177BF /* QHCoreLibFoundationTests.m in Sources */,
 				EA1693791EFABD4300BD9A25 /* QHAsyncTaskTests.m in Sources */,
+				EAE2FE541F0A9837004354F8 /* QHCoreLibMustOverrideTests.m in Sources */,
 				EA4FBA9D1F07593A004A6FE5 /* QHAsyncLinkedTaskGroupTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -892,6 +912,7 @@
 				INFOPLIST_FILE = QHCoreLib/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = QHCoreLib/QHCoreLib.modulemap;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tencent.QHLib.QHCoreLib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -916,6 +937,7 @@
 				INFOPLIST_FILE = QHCoreLib/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = QHCoreLib/QHCoreLib.modulemap;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tencent.QHLib.QHCoreLib;
 				PRODUCT_NAME = "$(TARGET_NAME)";

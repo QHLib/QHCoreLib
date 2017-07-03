@@ -34,16 +34,13 @@ PODS:
     - libextobjc/RuntimeExtensions
   - libextobjc/RuntimeExtensions (0.4.1)
   - libextobjc/UmbrellaHeader (0.4.1)
-  - MustOverride (1.1)
 
 DEPENDENCIES:
   - libextobjc (= 0.4.1)
-  - MustOverride (= 1.1)
 
 SPEC CHECKSUMS:
   libextobjc: a650fc1bf489a3d3a9bc2e621efa3e1006fc5471
-  MustOverride: feccf16d11e574a814a03d940b9f4d7b4a759ce0
 
-PODFILE CHECKSUM: 17725a58b4b2f21b9d6256fd4a04f96f81c65340
+PODFILE CHECKSUM: bd90cdea26007fd2e6dee1bea56892a91c9c2925
 
 COCOAPODS: 1.2.1
