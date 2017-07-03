@@ -106,9 +106,9 @@
     QH_XCTAssertThrows_On_DEBUG(self.testDict = @{ @1: @2 });
 
     QH_XCTAssertThrows_On_DEBUG([[self class] qh_synthesizeBOOLProperty:@"testBool"
-                                                              forKey:@"testBool"
-                                                        defaultValue:YES
-                                                        userDefaults:testUserDefaults]);
+                                                                 forKey:@"testBool"
+                                                           defaultValue:YES
+                                                           userDefaults:testUserDefaults]);
 }
 
 - (void)testKey

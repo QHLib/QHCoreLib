@@ -33,7 +33,13 @@ QH_EXTERN void QHSetLogLevel(DDLogLevel logLevel);
 do { \
     if(lvl & flg) \
         _LOG_MACRO(async, lvl, flg, ctx, tag, fnct, frmt, ##__VA_ARGS__); \
-} while(0) 
+} while(0)
+
+#if QH_DEBUG
+#   define QHLogFatal(...) QHAssert(NO, @"Fatal error! " __VA_ARGS__)
+#else
+#   define QHLogFatal(...) QHLogError(__VA_ARGS__)
+#endif
 
 #define QHLogError(frmt, ...) \
 _LOG_MAYBE(NO,  QHLogLevel, DDLogFlagError,   0, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)

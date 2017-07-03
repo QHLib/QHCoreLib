@@ -47,4 +47,12 @@
     QHSetLogLevel(level);
 }
 
+- (void)testFatal
+{
+    dispatch_block_t block = ^{
+        QHLogFatal(@"test fatal error.");
+    };
+    QH_XCTAssertThrows_On_DEBUG(block());
+}
+
 @end
