@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSArray<ObjectType> *)qh_filteredArrayWithBlock:(BOOL (^)(NSUInteger idx, ObjectType obj))block;
 
-- (NSArray<ObjectType> *)qh_mappedArrayWithBlock:(id (^)(NSUInteger idx, ObjectType obj))block;
+- (NSArray *)qh_mappedArrayWithBlock:(id (^)(NSUInteger idx, ObjectType obj))block;
 
 - (ObjectType)qh_objectAtIndex:(NSUInteger)index;
 
