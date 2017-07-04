@@ -134,19 +134,23 @@ QH_SINGLETON_IMP
     QH_msgSendFunc_void_void(f0);
     f0(self, @checkselector0(self, void_void));
 
-    QH_msgSendFunc_void_object(f1, NSString *);
-    NSString *str = f1(self, @checkselector0(self, void_object));
+    QH_msgSendFunc_void_value(f1, NSString *);
+    NSString *str = f1(self, @checkselector0(self, void_value));
     XCTAssertTrue(QH_IS_STRING(str));
 
-    QH_msgSendFunc_void_object(desc, NSString *);
+    QH_msgSendFunc_void_value(desc, NSString *);
     XCTAssertEqualObjects(desc(self, @selector(description)), [self description]);
 
     QH_msgSendFunc_params_void(f4, NSString *, int);
     f4(self, @checkselector(self, params_void:, int:) , @"", 0);
 
-    QH_msgSendFunc_params_object(f5, NSString *, NSString *, id, int);
-    str = f5(self, @checkselector(self, params_object:, obj:, int:), @"", nil, 0);
+    QH_msgSendFunc_params_value(f5, NSString *, NSString *, id, int);
+    str = f5(self, @checkselector(self, params_value:, obj:, int:), @"", nil, 0);
     XCTAssertEqualObjects(@"", str);
+
+    QH_msgSendFunc_void_value(f6, int);
+    int i = f6(self, @checkselector0(self, void_int));
+    XCTAssertEqual(i, 1);
 }
 
 - (void)void_void
@@ -154,7 +158,7 @@ QH_SINGLETON_IMP
     XCTAssertTrue(YES);
 }
 
-- (NSString *)void_object
+- (NSString *)void_value
 {
     XCTAssertTrue(YES);
     return [NSString new];
@@ -165,12 +169,16 @@ QH_SINGLETON_IMP
     XCTAssertTrue(YES);
 }
 
-- (NSString *)params_object:(NSString *)str obj:(id)obj int:(int)i
+- (NSString *)params_value:(NSString *)str obj:(id)obj int:(int)i
 {
     XCTAssertTrue(YES);
     return @"";
 }
 
+- (int)void_int
+{
+    return 1;
+}
 
 
 @end
