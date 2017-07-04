@@ -19,7 +19,7 @@
 
 - (void)testBundleId
 {
-    XCTAssertEqualObjects(QHCoreLibBundleId(), @"com.tencent.QHLib.QHCoreLib");
+    XCTAssertEqualObjects(QHCoreLibBundleId(), @"com.tencent.QHLib.QHCoreLibTests");
 }
 
 - (void)testIsMainQueueAndIsMainThread
