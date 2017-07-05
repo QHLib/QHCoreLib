@@ -48,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (instancetype)initWithUrl:(NSString *)url
-                  queryDict:(NSDictionary *)queryDict
+                  queryDict:(NSDictionary * _Nullable)queryDict
                    bodyDict:(NSDictionary *)bodyDict
 {
     self = [super init];

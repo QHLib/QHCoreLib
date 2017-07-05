@@ -26,7 +26,7 @@ QH_NETWORK_API_DECL(QHNetworkHttpApi, QHNetworkHttpApiResult);
 
 // POST url with query and body
 - (instancetype)initWithUrl:(NSString *)url
-                  queryDict:(NSDictionary *)queryDict
+                  queryDict:(NSDictionary * _Nullable)queryDict
                    bodyDict:(NSDictionary *)bodyDict;
 
 @property (nonatomic, readonly) NSString *url;
