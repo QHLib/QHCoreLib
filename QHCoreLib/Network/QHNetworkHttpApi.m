@@ -99,6 +99,7 @@ QH_NETWORK_API_IMPL_DIRECT(QHNetworkHttpApi, QHNetworkHttpApiResult);
 @implementation QHNetworkHttpApiResult
 
 QH_NETWORK_API_RESULT_IMPL_SUPER(QHNetworkHttpApi, QHNetworkHttpApiResult) {
+    // result.response.responseObject is NSData
     // do nothing
 }
 QH_NETWORK_API_RESULT_IMPL_RETURN;

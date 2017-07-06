@@ -38,7 +38,7 @@ QH_NETWORK_API_IMPL_INDIRECT(QHNetworkHtmlApi, QHNetworkHtmlApiResult,
 
 QH_NETWORK_API_RESULT_IMPL_SUPER(QHNetworkHtmlApi, QHNetworkHtmlApiResult) {
     if (QH_IS_STRING(response.responseObject)) {
-        result.html = response.responseObject;
+        result.html = (NSString *)response.responseObject;
     }
     else {
         QHCoreLibWarn(@"%@ get html failed: %@\n%@",

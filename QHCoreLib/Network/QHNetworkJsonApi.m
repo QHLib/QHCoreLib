@@ -31,7 +31,7 @@ QH_NETWORK_API_IMPL_INDIRECT(QHNetworkJsonApi, QHNetworkJsonApiResult,
 
 @interface QHNetworkJsonApiResult ()
 
-@property (nonatomic, copy, readwrite) NSString * _Nullable json;
+@property (nonatomic, copy, readwrite) NSDictionary * _Nullable json;
 
 @end
 
@@ -39,7 +39,7 @@ QH_NETWORK_API_IMPL_INDIRECT(QHNetworkJsonApi, QHNetworkJsonApiResult,
 
 QH_NETWORK_API_RESULT_IMPL_SUPER(QHNetworkJsonApi, QHNetworkJsonApiResult) {
     if (QH_IS_DICTIONARY(response.responseObject)) {
-        result.json = response.responseObject;
+        result.json = (NSDictionary *)response.responseObject;
     }
     else {
         QHCoreLibWarn(@"%@ get json failed: %@\n%@",

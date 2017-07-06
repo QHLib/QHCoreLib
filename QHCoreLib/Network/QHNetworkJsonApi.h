@@ -23,7 +23,7 @@ QH_NETWORK_API_DECL(QHNetworkJsonApi, QHNetworkJsonApiResult);
 
 QH_NETWORK_API_RESULT_DECL(QHNetworkJsonApi, QHNetworkJsonApiResult);
 
-@property (nonatomic, readonly) NSString * _Nullable json;
+@property (nonatomic, readonly) NSDictionary * _Nullable json;
 
 @end
 

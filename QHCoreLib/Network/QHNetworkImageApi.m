@@ -42,7 +42,7 @@ QH_NETWORK_API_IMPL_INDIRECT(QHNetworkImageApi, QHNetworkImageApiResult,
 
 QH_NETWORK_API_RESULT_IMPL_SUPER(QHNetworkImageApi, QHNetworkImageApiResult) {
     if (QH_IS(response.responseObject, UIImage)) {
-        result.image = response.responseObject;
+        result.image = (UIImage *)response.responseObject;
     }
     else {
         QHCoreLibWarn(@"%@ get image failed: %@\n%@",
