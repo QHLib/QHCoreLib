@@ -364,9 +364,9 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
                     @retainify(self);
 
                     if (self.state == QHAsyncTaskStateCallingback) {
-                        success(self, result);
-
                         self.state = QHAsyncTaskStateFinished;
+
+                        success(self, result);
 
                         [self p_asyncOnDisposeQueue:^{
                             success = nil;
@@ -413,9 +413,9 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
                     @retainify(self);
 
                     if (self.state == QHAsyncTaskStateCallingback) {
-                        fail(self, error);
-
                         self.state = QHAsyncTaskStateFinished;
+
+                        fail(self, error);
 
                         [self p_asyncOnDisposeQueue:^{
                             fail = nil;
