@@ -40,6 +40,13 @@ QH_NETWORK_API_DECL(QHNetworkHttpApi, QHNetworkHttpApiResult);
 
 @end
 
+#define QH_NETWORK_API_DECL_FINAL(API_TYPE, RESULT_TYPE) \
+QH_NETWORK_API_DECL(API_TYPE, RESULT_TYPE) \
+- (instancetype)initWithUrl:(NSString *)url NS_UNAVAILABLE; \
+- (instancetype)initWithUrl:(NSString *)url queryDict:(NSDictionary *)queryDict NS_UNAVAILABLE; \
+- (instancetype)initWithUrl:(NSString *)url queryDict:(NSDictionary * _Nullable)queryDict bodyDict:(NSDictionary *)bodyDict NS_UNAVAILABLE; \
+- (instancetype)initWithUrlRequest:(NSURLRequest *)urlRequest NS_UNAVAILABLE;
+
 @interface QHNetworkHttpApiResult : QHNetworkApiResult
 
 QH_NETWORK_API_RESULT_DECL(QHNetworkHttpApi, QHNetworkHttpApiResult);
