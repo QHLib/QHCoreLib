@@ -63,7 +63,7 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 
 + (instancetype)taskWithBlock:(QHAsyncBlockTaskBody)block
 {
-    QHAsyncTask *blockTask = [[QHAsyncTask alloc] init];
+    QHAsyncTask *blockTask = [[self alloc] init];
 
     blockTask.bodyBlock = block;
 
