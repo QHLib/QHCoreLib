@@ -112,7 +112,7 @@ static void *QHAsyncTaskCarryASOKey = &QHAsyncTaskCarryASOKey;
 {
     return QH_ERROR(QHAsyncTaskErrorDomain,
                     QHAsyncTaskErrorInvalidCarry,
-                    $(@"%@ invalid carray: %@", self, self.carry),
+                    $(@"%@ invalid carry: %@", self, self.carry),
                     nil);
 }
 
@@ -205,10 +205,10 @@ QH_ASYNC_TASK_PROGRESS_IMPL(QHAsyncTask, QHAsyncLinkedTaskGroupProgress);
     });
 }
 
-- (void)_runNextTask:(id)carray
+- (void)_runNextTask:(id)carry
 {
     QHAsyncTask *task = [self.tasks qh_objectAtIndex:self.currentIndex];
-    task.carry = carray;
+    task.carry = carry;
 
     @weakify(self);
     [task startWithSuccess:^(QHAsyncTask * _Nonnull task, id  _Nonnull result) {
