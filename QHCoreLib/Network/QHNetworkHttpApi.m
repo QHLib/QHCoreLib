@@ -9,16 +9,20 @@
 #import "QHNetworkHttpApi.h"
 #import "QHNetworkApi+internal.h"
 #import "QHNetworkUtil.h"
+#import "QHNetworkMultipart.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QHNetworkHttpApi ()
 
-@property (nonatomic, copy) NSString *method;
-@property (nonatomic, copy, readwrite) NSString *url;
-@property (nonatomic, copy, readwrite) NSDictionary * _Nullable queryDict;
-@property (nonatomic, copy, readwrite) NSDictionary * _Nullable bodyDict;
+@property (nonatomic,   copy) NSString *method;
+
+@property (nonatomic,   copy, readwrite) NSString *url;
+@property (nonatomic,   copy, readwrite) NSDictionary * _Nullable queryDict;
+@property (nonatomic,   copy, readwrite) NSDictionary * _Nullable bodyDict;
+
+@property (nonatomic,   copy, readwrite) QHNetworkMultipartBuilderBlock _Nullable builderBlock;
 
 @property (nonatomic, strong, readwrite) NSMutableURLRequest * _Nullable urlRequest;
 
@@ -38,9 +42,12 @@ NS_ASSUME_NONNULL_BEGIN
     self = [super init];
     if (self) {
         self.method = QHNetWorkHttpMethodGet;
+
         self.url = url;
         self.queryDict = queryDict;
         self.bodyDict = nil;
+
+        self.builderBlock = nil;
 
         self.urlRequest = nil;
     }
@@ -54,9 +61,32 @@ NS_ASSUME_NONNULL_BEGIN
     self = [super init];
     if (self) {
         self.method = QHNetWorkHttpMethodPost;
+
         self.url = url;
         self.queryDict = queryDict;
         self.bodyDict = bodyDict;
+
+        self.builderBlock = nil;
+
+        self.urlRequest = nil;
+    }
+    return self;
+}
+
+- (instancetype)initWithUrl:(NSString *)url
+                  queryDict:(NSDictionary * _Nullable)queryDict
+                   bodyDict:(NSDictionary * _Nullable)bodyDict
+           multipartBuilder:(QHNetworkMultipartBuilderBlock)builderBlock
+{
+    self = [super init];
+    if (self) {
+        self.method = QHNetWorkHttpMethodPost;
+
+        self.url = url;
+        self.queryDict = queryDict;
+        self.bodyDict = bodyDict;
+
+        self.builderBlock = builderBlock;
 
         self.urlRequest = nil;
     }
@@ -78,6 +108,12 @@ NS_ASSUME_NONNULL_BEGIN
 
     if (self.urlRequest) {
         request.urlRequest = self.urlRequest;
+    }
+    else if (self.builderBlock) {
+        request.urlRequest = [QHNetworkMultipart requestFromUrl:self.url
+                                                      queryDict:self.queryDict
+                                                       bodyDict:self.bodyDict
+                                               multipartBuilder:self.builderBlock];
     }
     else {
         request.urlRequest = [QHNetworkUtil requestFromMethod:self.method

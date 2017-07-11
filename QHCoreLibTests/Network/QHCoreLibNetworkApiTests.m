@@ -64,6 +64,35 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
 
 @end
 
+@class QHNetworkTestFinalApiResult;
+
+@interface QHNetworkTestFinalApi : QHNetworkApi
+
+QH_NETWORK_API_DECL_FINAL(QHNetworkTestFinalApi, QHNetworkTestFinalApiResult);
+
+@end
+
+@interface QHNetworkTestFinalApiResult : QHNetworkApiResult
+
+QH_NETWORK_API_RESULT_DECL(QHNetworkTestFinalApi, QHNetworkTestFinalApiResult);
+
+@end
+
+@implementation QHNetworkTestFinalApi
+
+QH_NETWORK_API_IMPL_DIRECT(QHNetworkTestFinalApi, QHNetworkTestFinalApiResult);
+
+@end
+
+@implementation QHNetworkTestFinalApiResult
+
+QH_NETWORK_API_RESULT_IMPL_SUPER(QHNetworkTestFinalApi, QHNetworkTestFinalApiResult) {
+    // do nothing
+}
+QH_NETWORK_API_RESULT_IMPL_RETURN;
+
+@end
+
 
 @interface QHCoreLibNetworkApiTests : XCTestCase
 
@@ -237,14 +266,31 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
     NSURL *fileUrl = [NSURL fileURLWithPath:[tmpDir stringByAppendingPathComponent:[[NSUUID UUID] UUIDString]]];
     [@"content of file" writeToURL:fileUrl atomically:YES encoding:NSUTF8StringEncoding error:nil];
 
-    NSMutableURLRequest *request = [QHNetworkMultipart requestFromUrl:@"http://httpbin.org/post"
-                                                            queryDict:@{@"t": @"123"}
-                                                             bodyDict:@{@"u": @"456"}
-                                                     multipartBuilder:^(id<QHNetworkMultipartBuilder> builder) {
-                                                         [builder appendPartWithFileUrl:fileUrl name:@"file" error:nil];
-                                                     }];
+    QHNetworkJsonApi *api = [[QHNetworkJsonApi alloc] initWithUrl:@"http://httpbin.org/post"
+                                                        queryDict:@{@"t": @"123"}
+                                                         bodyDict:@{@"u": @"456"}
+                                                 multipartBuilder:^(id<QHNetworkMultipartBuilder> builder) {
+                                                     [builder appendPartWithFileUrl:fileUrl name:@"file" error:nil];
+                                                 }];
 
-    QHNetworkJsonApi *api = [[QHNetworkJsonApi alloc] initWithUrlRequest:request];
+    [api startWithSuccess:^(QHNetworkJsonApi *api, QHNetworkJsonApiResult *result) {
+        [expect fulfill];
+    } fail:^(QHNetworkJsonApi *api, NSError *error) {
+        NSLog(@"error: %@", error);
+        XCTAssert(NO, @"should not be here");
+        [expect fulfill];
+    }];
+
+    [self waitForExpectationsWithTimeout:api.worker.request.urlRequest.timeoutInterval + 0.1
+                                 handler:nil];
+}
+
+- (void)testLoadJsonWithUrlRequest
+{
+    XCTestExpectation *expect = [self expectationWithDescription:@"load 'http://httpbin.org/get"];
+
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://httpbin.org/get"]];
+    QHNetworkJsonApi *api = [[QHNetworkJsonApi alloc] initWithUrlRequest:urlRequest];
 
     [api startWithSuccess:^(QHNetworkJsonApi *api, QHNetworkJsonApiResult *result) {
         [expect fulfill];
@@ -273,6 +319,12 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
     
     [self waitForExpectationsWithTimeout:api.worker.request.urlRequest.timeoutInterval + 0.1
                                  handler:nil];
+}
+
+- (void)testFinal
+{
+    // should warn not available
+//    QHNetworkTestFinalApi *api = [[QHNetworkTestFinalApi alloc] initWithUrl:@""];
 }
 
 @end

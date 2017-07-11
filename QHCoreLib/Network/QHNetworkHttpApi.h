@@ -7,7 +7,7 @@
 //
 
 #import <QHCoreLib/QHNetworkApi.h>
-
+#import <QHCoreLib/QHNetworkMultipartBuilder.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -32,11 +32,23 @@ QH_NETWORK_API_DECL(QHNetworkHttpApi, QHNetworkHttpApiResult);
                    bodyDict:(NSDictionary *)bodyDict NS_DESIGNATED_INITIALIZER;
 
 @property (nonatomic, readonly) NSString *url;
-@property (nonatomic, readonly) NSDictionary *queryDict;
-@property (nonatomic, readonly) NSDictionary *bodyDict;
+@property (nonatomic, readonly) NSDictionary * _Nullable queryDict;
+@property (nonatomic, readonly) NSDictionary * _Nullable bodyDict;
 
 
+// POST multipart to url with query and body
+- (instancetype)initWithUrl:(NSString *)url
+                  queryDict:(NSDictionary * _Nullable)queryDict
+                   bodyDict:(NSDictionary * _Nullable)bodyDict
+           multipartBuilder:(QHNetworkMultipartBuilderBlock)builderBlock NS_DESIGNATED_INITIALIZER;
+
+@property (nonatomic, readonly) QHNetworkMultipartBuilderBlock _Nullable builderBlock;
+
+
+// send request with arbitrary url request
 - (instancetype)initWithUrlRequest:(NSURLRequest *)urlRequest NS_DESIGNATED_INITIALIZER;
+
+@property (nonatomic, readonly) NSURLRequest * _Nullable request;
 
 @end
 
@@ -45,6 +57,7 @@ QH_NETWORK_API_DECL(API_TYPE, RESULT_TYPE) \
 - (instancetype)initWithUrl:(NSString *)url NS_UNAVAILABLE; \
 - (instancetype)initWithUrl:(NSString *)url queryDict:(NSDictionary *)queryDict NS_UNAVAILABLE; \
 - (instancetype)initWithUrl:(NSString *)url queryDict:(NSDictionary * _Nullable)queryDict bodyDict:(NSDictionary *)bodyDict NS_UNAVAILABLE; \
+- (instancetype)initWithUrl:(NSString *)url queryDict:(NSDictionary * _Nullable)queryDict bodyDict:(NSDictionary * _Nullable)bodyDict multipartBuilder:(void (^)(id<QHNetworkMultipartBuilder>))builderBlock NS_UNAVAILABLE; \
 - (instancetype)initWithUrlRequest:(NSURLRequest *)urlRequest NS_UNAVAILABLE;
 
 @interface QHNetworkHttpApiResult : QHNetworkApiResult

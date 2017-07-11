@@ -38,7 +38,7 @@ static NSString * const QHHttpHeaderContentDisposition = @"Content-Disposition";
 + (NSMutableURLRequest *)requestFromUrl:(NSString *)urlString
                               queryDict:(NSDictionary * _Nullable)queryDict
                                bodyDict:(NSDictionary * _Nullable)bodyDict
-                       multipartBuilder:(void (^)(id<QHNetworkMultipartBuilder>))builderBlock
+                       multipartBuilder:(QHNetworkMultipartBuilderBlock)builderBlock
 {
     NSMutableURLRequest *request = [QHNetworkUtil requestFromMethod:QHNetWorkHttpMethodPost
                                                                 url:urlString
