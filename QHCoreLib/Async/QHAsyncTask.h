@@ -21,6 +21,9 @@ typedef NS_ENUM(NSUInteger, QHAsyncTaskError) {
 
     // parallel
     QHAsyncTaskErrorAllParallelTaskFailed = 1200,
+
+    // linked
+    QHAsyncTaskErrorInvalidCarry = 1400,
 };
 
 
