@@ -63,6 +63,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, strong) id carry;
 
+- (NSError *)p_invalidCarryError;
+
 @end
 
 /*

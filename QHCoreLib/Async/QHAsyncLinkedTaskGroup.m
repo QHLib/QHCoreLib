@@ -108,6 +108,14 @@ static void *QHAsyncTaskCarryASOKey = &QHAsyncTaskCarryASOKey;
     return objc_getAssociatedObject(self, QHAsyncTaskCarryASOKey);
 }
 
+- (NSError *)p_invalidCarryError
+{
+    return QH_ERROR(QHAsyncTaskErrorDomain,
+                    QHAsyncTaskErrorInvalidCarry,
+                    $(@"%@ invalid carray: %@", self, self.carry),
+                    nil);
+}
+
 @end
 
 @interface QHAsyncLinkedTaskGroup () {
