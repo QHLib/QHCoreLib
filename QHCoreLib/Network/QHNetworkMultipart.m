@@ -222,7 +222,7 @@ static inline NSString * QHMultipartBoundaryLast(NSString *boundary) {
     QHAssertParam(fileUrl);
     QHAssertParam(name);
 
-    NSString *fileName = [name lastPathComponent];
+    NSString *fileName = [fileUrl lastPathComponent];
     NSString *mimeType = QHContentTypeOfExtension([fileUrl pathExtension]);
 
     [self appendPartWithFileUrl:fileUrl
