@@ -311,20 +311,24 @@ static id AFJSONObjectByRemovingKeysWithNullValues(id JSONObject, NSJSONReadingO
             // See http://stackoverflow.com/a/12843465/157142
             data = [responseString dataUsingEncoding:NSUTF8StringEncoding];
 
-            if (data) {
-                if ([data length] > 0) {
-                    responseObject = [NSJSONSerialization JSONObjectWithData:data options:self.readingOptions error:&serializationError];
-                } else {
-                    return nil;
-                }
-            } else {
-                NSDictionary *userInfo = @{
-                                           NSLocalizedDescriptionKey: NSLocalizedStringFromTable(@"Data failed decoding as a UTF-8 string", @"AFNetworking", nil),
-                                           NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:NSLocalizedStringFromTable(@"Could not decode string: %@", @"AFNetworking", nil), responseString]
-                                           };
-
-                serializationError = [NSError errorWithDomain:AFURLResponseSerializationErrorDomain code:NSURLErrorCannotDecodeContentData userInfo:userInfo];
+            if (data && [data length] > 0) {
+                responseObject = [NSJSONSerialization JSONObjectWithData:data options:self.readingOptions error:&serializationError];
             }
+
+            if (responseObject == nil) {
+                NSString *message = [NSString stringWithFormat:@"create json object failed with response string: \"%@\".", responseString];
+                NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: message };
+                serializationError = [NSError errorWithDomain:AFURLResponseSerializationErrorDomain
+                                                         code:NSURLErrorCannotDecodeRawData
+                                                     userInfo:userInfo];
+            }
+        }
+        else {
+            NSString *message = [NSString stringWithFormat:@"encode http body to %@ string failed", response.textEncodingName];
+            NSDictionary *userInfo = @{ NSLocalizedDescriptionKey: message };
+            serializationError = [NSError errorWithDomain:AFURLResponseSerializationErrorDomain
+                                                     code:NSURLErrorCannotDecodeRawData
+                                                 userInfo:userInfo];
         }
     }
 

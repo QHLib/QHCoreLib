@@ -221,6 +221,23 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
                                  handler:nil];
 }
 
+- (void)testLoadInvalidJson
+{
+    XCTestExpectation *expect = [self expectationWithDescription:@"load 'http://httpbin.org/status/400'"];
+
+    QHNetworkJsonApi *api = [[QHNetworkJsonApi alloc] initWithUrl:@"http://httpbin.org/status/400"];
+    [api startWithSuccess:^(QHNetworkJsonApi *api, QHNetworkJsonApiResult *result) {
+        XCTAssert(NO, @"should not be here");
+        [expect fulfill];
+    } fail:^(QHNetworkJsonApi *api, NSError *error) {
+        NSLog(@"error: %@", error);
+        [expect fulfill];
+    }];
+
+    [self waitForExpectationsWithTimeout:api.worker.request.urlRequest.timeoutInterval + 0.1
+                                 handler:nil];
+}
+
 - (void)testLoadJsonWithQuery
 {
     XCTestExpectation *expect = [self expectationWithDescription:@"load 'http://httpbin.org/get?t=123'"];
