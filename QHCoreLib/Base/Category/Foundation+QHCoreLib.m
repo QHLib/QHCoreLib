@@ -356,7 +356,7 @@ QH_DUMMY_CLASS(FoudationQHCoreLib)
         [userInfo addEntriesFromDictionary:info];
     }
     
-    if (userInfo[NSLocalizedDescriptionKey]) {
+    if (userInfo[NSLocalizedDescriptionKey] == nil) {
         NSString *fileName = [[[NSString alloc] initWithCString:file encoding:NSUTF8StringEncoding] lastPathComponent];
         userInfo[NSLocalizedDescriptionKey] = $(@"*%@:%d, %@", fileName, line, message);
     }
