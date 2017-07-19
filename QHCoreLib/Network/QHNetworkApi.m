@@ -25,7 +25,7 @@ NSString * const QHNetworkApiErrorDomain = @"QHNetworkApiErrorDomain";
 
 - (QHNetworkRequest *)buildRequest
 {
-    QHAssertReturnValueOnFailure(nil, NO, @"subclass implement");
+    QHAssertReturnValueOnFailure([QHNetworkRequest new], NO, @"subclass implement");
 }
 
 - (NSString *)description
@@ -117,9 +117,9 @@ NSString * const QHNetworkApiErrorDomain = @"QHNetworkApiErrorDomain";
 
 @implementation QHNetworkApiResult
 
-+ (QHNetworkApiResult *)parse:(QHNetworkResponse *)response
-                        error:(NSError *__autoreleasing *)error
-                          api:(QHNetworkApi *)api
++ (QHNetworkApiResult * _Nullable)parse:(QHNetworkResponse *)response
+                                  error:(NSError *__autoreleasing *)error
+                                    api:(QHNetworkApi *)api
 {
     QHNetworkApiResult *result = [[self class] new];
     result.api = api;

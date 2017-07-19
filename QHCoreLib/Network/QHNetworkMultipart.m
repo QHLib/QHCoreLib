@@ -74,10 +74,15 @@ static NSString * const QHHttpHeaderContentDisposition = @"Content-Disposition";
 
 static NSString *QHMultipartCreateBoundary()
 {
-    NSData *data = QHRandomBytes(16);
+    NSData *data = QHRandomBytes(8);
     QHAssert(data != nil, @"create random bytes should not fail");
-    int32_t *buffer = (int32_t *)data.bytes;
-    return $(@"--------------Boundary%08X%08X", buffer[0], buffer[1]); // length is 38
+
+    if (data != nil) {
+        int32_t *buffer = (int32_t *)data.bytes;
+        return $(@"--------------Boundary%08X%08X", buffer[0], buffer[1]); // length is 38
+    } else {
+        return @"--------------BoundaryABCDEFGHABCDEFGH";
+    }
 }
 
 static NSString * const QHMultipartCRLF = @"\r\n";
@@ -215,7 +220,7 @@ static inline NSString * QHMultipartBoundaryLast(NSString *boundary) {
     [self appendPartWithHeaders:headers name:name body:data];
 }
 
-- (void)appendPartWithFileUrl:(NSURL *)fileUrl
+- (BOOL)appendPartWithFileUrl:(NSURL *)fileUrl
                          name:(NSString *)name
                         error:(NSError * __autoreleasing *)error
 {
@@ -225,32 +230,38 @@ static inline NSString * QHMultipartBoundaryLast(NSString *boundary) {
     NSString *fileName = [fileUrl lastPathComponent];
     NSString *mimeType = QHContentTypeOfExtension([fileUrl pathExtension]);
 
-    [self appendPartWithFileUrl:fileUrl
-                           name:name
-                       fileName:fileName
-                       mimeType:mimeType
-                          error:error];
+    return [self appendPartWithFileUrl:fileUrl
+                                  name:name
+                              fileName:fileName
+                              mimeType:mimeType
+                                 error:error];
 }
 
-- (void)appendPartWithFileUrl:(NSURL *)fileUrl
+- (BOOL)appendPartWithFileUrl:(NSURL *)fileUrl
                          name:(NSString *)name
                      fileName:(NSString *)fileName
                      mimeType:(NSString *)mimeType
                         error:(NSError * __autoreleasing *)error
 {
     QHAssertParam(fileUrl);
-    QHAssertReturnVoidOnFailure([fileUrl isFileURL], @"need file url");
+    QHAssertReturnValueOnFailure(NO, [fileUrl isFileURL], @"need file url");
     QHAssertParam(name);
     QHAssertParam(fileName);
     QHAssertParam(mimeType);
 
     if ([fileUrl checkResourceIsReachableAndReturnError:error] == NO) {
-        return;
+        if (error) {
+            *error = QH_ERROR(NSStringFromClass([self class]),
+                              -1,
+                              $(@"file url %@ is not reachable", fileUrl),
+                              nil);
+        }
+        return NO;
     }
 
     NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[fileUrl path] error:error];
     if (!fileAttributes) {
-        return;
+        return NO;
     }
 
     NSMutableDictionary *headers = [NSMutableDictionary dictionary];
@@ -268,6 +279,8 @@ static inline NSString * QHMultipartBoundaryLast(NSString *boundary) {
     bodyPart.bodyLength = [[fileAttributes objectForKey:NSFileSize] unsignedLongLongValue];
 
     [self.bodyStream appendBodyPart:bodyPart];
+
+    return YES;
 }
 
 - (void)appendPartWithInputStream:(NSInputStream *)inputStream
@@ -318,7 +331,7 @@ typedef NS_ENUM(NSUInteger, QHMultipartBodyPartSection) {
 
 - (uint64_t)contentLength;  // include boundary
 
-@property (nonatomic, strong) NSInputStream *stream;
+@property (nonatomic, strong) NSInputStream * _Nullable stream;
 
 - (BOOL)hasBytesAvailable;
 
@@ -404,7 +417,7 @@ typedef NS_ENUM(NSUInteger, QHMultipartBodyPartSection) {
 
 #pragma mark -
 
-- (NSInputStream *)stream
+- (NSInputStream * _Nullable)stream
 {
     if (_stream == nil) {
         if (QH_IS(self.bodyObject, NSData)) {

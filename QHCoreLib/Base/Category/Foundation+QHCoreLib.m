@@ -19,12 +19,12 @@ QH_DUMMY_CLASS(FoudationQHCoreLib)
 
 @implementation NSObject (QHCoreLib)
 
-+ (instancetype)qh_cast:(id)obj
++ (instancetype _Nullable)qh_cast:(id)obj
 {
     return [self qh_cast:obj warnOnFailure:YES];
 }
 
-+ (instancetype)qh_cast:(id)obj warnOnFailure:(BOOL)warnOnFailure
++ (instancetype _Nullable)qh_cast:(id)obj warnOnFailure:(BOOL)warnOnFailure
 {
     if (obj == nil) return nil;
 
@@ -88,7 +88,7 @@ QH_DUMMY_CLASS(FoudationQHCoreLib)
 
 - (NSArray *)qh_mappedArrayWithBlock:(id (^)(NSUInteger, id))block
 {
-        if (block) {
+    if (block) {
         NSMutableArray *results = [NSMutableArray arrayWithCapacity:[self count]];
 
         [self enumerateObjectsUsingBlock:^(id _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -104,7 +104,7 @@ QH_DUMMY_CLASS(FoudationQHCoreLib)
     }
 }
 
-- (id)qh_objectAtIndex:(NSUInteger)index
+- (id _Nullable)qh_objectAtIndex:(NSUInteger)index
 {
     if (index < self.count) {
         return [self objectAtIndex:index];

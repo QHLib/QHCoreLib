@@ -25,11 +25,11 @@
                       fileName:(NSString *)fileName
                      mimieType:(NSString *)mimeType;
 
-- (void)appendPartWithFileUrl:(NSURL *)fileUrl
+- (BOOL)appendPartWithFileUrl:(NSURL *)fileUrl
                          name:(NSString *)name
                         error:(NSError * __autoreleasing *)error;
 
-- (void)appendPartWithFileUrl:(NSURL *)fileUrl
+- (BOOL)appendPartWithFileUrl:(NSURL *)fileUrl
                          name:(NSString *)name
                      fileName:(NSString *)fileName
                      mimeType:(NSString *)mimeType

@@ -15,9 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSObject (QHCoreLib)
 
-+ (instancetype)qh_cast:(id)obj; // warnOnFailure:YES
++ (instancetype _Nullable)qh_cast:(id)obj; // warnOnFailure:YES
 
-+ (instancetype)qh_cast:(id)obj warnOnFailure:(BOOL)warnOnFailure;
++ (instancetype _Nullable)qh_cast:(id)obj warnOnFailure:(BOOL)warnOnFailure;
 
 @end
 
@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSArray *)qh_mappedArrayWithBlock:(id (^)(NSUInteger idx, ObjectType obj))block;
 
-- (ObjectType)qh_objectAtIndex:(NSUInteger)index;
+- (ObjectType _Nullable)qh_objectAtIndex:(NSUInteger)index;
 
 - (NSArray<ObjectType> *)qh_objectsAtIndexes:(NSIndexSet *)indexes;
 
