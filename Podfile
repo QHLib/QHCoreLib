@@ -1,5 +1,5 @@
 source 'https://github.com/CocoaPods/Specs.git'
-source 'https://git.code.oa.com/QHLib/QHLibSpecs.git'
+source 'http://git.code.oa.com/QHLib/QHLibSpecs.git'
 
 platform :ios, '8.0'
 

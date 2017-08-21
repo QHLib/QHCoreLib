@@ -3,13 +3,13 @@ Pod::Spec.new do |s|
   s.name         = "QHCoreLib"
   s.version      = "0.0.21"
   s.summary      = "QHCoreLib inlucdes some macros and util classes."
-  s.homepage     = "https://git.code.oa.com/QHLib/QHCoreLib.git"
+  s.homepage     = "http://git.code.oa.com/QHLib/QHCoreLib.git"
   s.license      = "MIT"
   s.author       = { "changtang(唐畅)" => "changtang@tencent.com" }
 
   s.platform     = :ios, "8.0"
 
-  s.source       = { :git => "https://git.code.oa.com/QHLib/QHCoreLib.git", :tag => s.version }
+  s.source       = { :git => "http://git.code.oa.com/QHLib/QHCoreLib.git", :tag => s.version }
 
   s.requires_arc = true
 
