@@ -1,7 +1,7 @@
 # coding: utf-8
 Pod::Spec.new do |s|
   s.name         = "QHCoreLib"
-  s.version      = "0.0.22"
+  s.version      = "0.0.23"
   s.summary      = "QHCoreLib inlucdes some macros and util classes."
   s.homepage     = "http://git.code.oa.com/QHLib/QHCoreLib.git"
   s.license      = "MIT"
