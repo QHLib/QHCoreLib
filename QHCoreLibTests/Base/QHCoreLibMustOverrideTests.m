@@ -10,11 +10,15 @@
 
 #import "QHMustOverride.h"
 
-
 @interface QHMustOverrideTester : NSObject
 - (void)method;
 @end
 @implementation QHMustOverrideTester
++ (void)load
+{
+    QH_SUBCLASS_MUST_OVERRIDE_CHECK;
+}
+
 - (void)method
 {
     @QH_SUBCLASS_MUST_OVERRIDE;

@@ -34,6 +34,20 @@
 
 #import <QHCoreLib/QHDefines.h>
 
+#if QH_DEBUG
+@interface QHMustOverride : NSObject
+
++ (void)check;
+
+@end
+#endif
+
+#if QH_DEBUG
+#   define QH_SUBCLASS_MUST_OVERRIDE_CHECK [QHMustOverride check]
+#else
+#   define QH_SUBCLASS_MUST_OVERRIDE_CHECK
+#endif
+
 /**
  * Include this macro inside any class or instance method that MUST be overridden
  * by its subclass(es). The app will then crash immediately on launch with an

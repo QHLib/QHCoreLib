@@ -124,10 +124,6 @@ static void BuildClassGraph()
     }
 }
 
-@interface QHMustOverride : NSObject
-
-@end
-
 #ifdef __LP64__
 typedef uint64_t MustOverrideValue;
 typedef struct section_64 MustOverrideSection;
@@ -187,12 +183,19 @@ static void CheckOverrides(void)
 
 + (void)load
 {
+    // we do not call check() here automaticly.
+    // because check take a lots of memory which might be killed
+    // when run within an extension
+}
+
++ (void)check
+{
     CFAbsoluteTime start = CFAbsoluteTimeGetCurrent();
 
     BuildClassGraph();
 
     CheckOverrides();
-    
+
     QHCoreLibDebug(@"Check overrides ok, cost: %.2fms", (CFAbsoluteTimeGetCurrent() - start) * 1000);
 }
 
