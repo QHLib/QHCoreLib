@@ -200,4 +200,15 @@
     XCTAssertTrue(CGSizeEqualToSize(QHSizeAspectFillInSize(CGSizeMake(200, 400), CGSizeMake(800, 800),YES), CGSizeMake(800, 1600)));
 }
 
+- (void)testTimestamp
+{
+    NSLog(@"timestamp: %f, %f, %llu, %llu",
+          [[NSDate date] timeIntervalSince1970],
+          QHTimestampInDouble(),
+          QHTimestampInSeconds(),
+          QHTimestampInMilliseconds());
+    
+    XCTAssertTrue(YES, @"ok");
+}
+
 @end

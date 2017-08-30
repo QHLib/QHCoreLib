@@ -74,4 +74,9 @@ QH_EXTERN NSString *QHContentTypeOfExtension(NSString *ext);
 QH_EXTERN CGSize QHSizeAspectFitInSize(CGSize size, CGSize fitInSize, BOOL shouldEnlarge);
 QH_EXTERN CGSize QHSizeAspectFillInSize(CGSize size, CGSize fillInSize, BOOL shouldEnlarge);
 
+
+QH_EXTERN double QHTimestampInDouble();  // seconds
+QH_EXTERN uint64_t QHTimestampInSeconds();
+QH_EXTERN uint64_t QHTimestampInMilliseconds();
+
 NS_ASSUME_NONNULL_END

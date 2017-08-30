@@ -221,4 +221,20 @@ CGSize QHSizeAspectFillInSize(CGSize size, CGSize fillInSize, BOOL shouldEnlarge
     return CGSizeMake(size.width * ratio, size.height * ratio);
 }
 
+
+double QHTimestampInDouble()
+{
+    return [[NSDate date] timeIntervalSince1970];
+}
+
+uint64_t QHTimestampInSeconds()
+{
+    return (uint64_t)QHTimestampInDouble();
+}
+
+uint64_t QHTimestampInMilliseconds()
+{
+    return (uint64_t)(QHTimestampInDouble() * 1000);
+}
+
 NS_ASSUME_NONNULL_END
