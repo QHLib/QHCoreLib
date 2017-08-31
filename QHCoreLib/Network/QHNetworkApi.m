@@ -81,7 +81,7 @@ NSString * const QHNetworkApiErrorDomain = @"QHNetworkApiErrorDomain";
                 [self p_fireSuccess:result];
             }
             else {
-                QHLogDebug(@"request: %@\nfinished with error: %@", self, error);
+                QHLogDebug(@"request: %@\nfinished: %@\nwith error: %@", self, response.responseObject, error);
                 [self p_fireFail:error];
             }
         }
