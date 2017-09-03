@@ -10,10 +10,7 @@
 
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 
-#if DEBUG
-#warning TODO: remove this dependency
-#endif
-#import "AFNetworkReachabilityManager.h"
+#import "QHNetworkReachabilityManager.h"
 
 #import "QHLog.h"
 
@@ -68,23 +65,23 @@ QH_SINGLETON_IMP
     _networkStatus = QHNetworkStatusUnknown;
     _wwanInfo = [[CTTelephonyNetworkInfo alloc] init];
 
-    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
-    [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+    QHNetworkReachabilityManager *manager = [QHNetworkReachabilityManager defaultManager];
+    [manager setReachabilityStatusChangeBlock:^(QHNetworkReachabilityStatus status) {
         switch (status) {
-            case AFNetworkReachabilityStatusUnknown:
+            case QHNetworkReachabilityStatusUnknown:
                 self.networkStatus = QHNetworkStatusUnknown;
                 break;
-            case AFNetworkReachabilityStatusNotReachable:
+            case QHNetworkReachabilityStatusNotReachable:
                 self.networkStatus = QHNetworkStatusNotReachable;
                 break;
-            case AFNetworkReachabilityStatusReachableViaWWAN:
+            case QHNetworkReachabilityStatusReachableViaWWAN:
                 self.networkStatus = QHNetworkStatusReachableViaWWAN;
                 break;
-            case AFNetworkReachabilityStatusReachableViaWiFi:
+            case QHNetworkReachabilityStatusReachableViaWiFi:
                 self.networkStatus = QHNetworkStatusReachableViaWiFi;
                 break;
             default:
-                QHLogWarn(@"Unknown network status from AFNetworkReachabilityManager : %d", (int)status);
+                QHLogWarn(@"Unknown network status from QHNetworkReachabilityManager : %d", (int)status);
                 break;
         }
 
@@ -203,12 +200,12 @@ QH_SINGLETON_IMP
 
 - (void)startMonitoring
 {
-    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    [[QHNetworkReachabilityManager defaultManager] startMonitoring];
 }
 
 - (void)stopMonitoring
 {
-    [[AFNetworkReachabilityManager sharedManager] stopMonitoring];
+    [[QHNetworkReachabilityManager defaultManager] stopMonitoring];
 }
 
 - (void)cancelAll

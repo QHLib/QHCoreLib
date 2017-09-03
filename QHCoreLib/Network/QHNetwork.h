@@ -53,6 +53,7 @@ QH_SINGLETON_DEF
 
 NS_ASSUME_NONNULL_END
 
+#import <QHCoreLib/QHNetworkReachabilityManager.h>
 #import <QHCoreLib/QHNetworkUtil.h>
 #import <QHCoreLib/QHNetworkMultipart.h>
 #import <QHCoreLib/QHNetworkRequest.h>
