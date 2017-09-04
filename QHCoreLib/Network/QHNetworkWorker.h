@@ -7,12 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <QHCoreLib/QHBase.h>
 #import <QHCoreLib/QHNetworkRequest.h>
 #import <QHCoreLib/QHNetworkResponse.h>
 
-
 NS_ASSUME_NONNULL_BEGIN
+
+QH_EXTERN NSString * const QHNetworkWorkerDidStartNotification;
+QH_EXTERN NSString * const QHNetworkWorkerDidFinishNotification;
 
 @class QHNetworkWorker;
 

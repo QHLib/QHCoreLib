@@ -1,0 +1,6 @@
+framework module Pods_QHCoreLibDemo {
+  umbrella header "Pods-QHCoreLibDemo-umbrella.h"
+
+  export *
+  module * { export * }
+}

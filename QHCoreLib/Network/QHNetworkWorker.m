@@ -18,6 +18,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+NSString * const QHNetworkWorkerDidStartNotification = @"QHNetworkWorkerDidStartNotification";
+NSString * const QHNetworkWorkerDidFinishNotification = @"QHNetworkWorkerDidFinishNotification";
+
 typedef NS_ENUM(NSUInteger, QHNetworkWorkerState) {
     QHNetworkWorkerStateNone,
     QHNetworkWorkerStateLoading,
@@ -126,6 +129,9 @@ typedef NS_ENUM(NSUInteger, QHNetworkWorkerState) {
         self.completionHandler = completionHandler;
         
         [self p_doStart];
+
+        [[NSNotificationCenter defaultCenter] postNotificationName:QHNetworkWorkerDidStartNotification
+                                                            object:self];
     });
 }
 
@@ -181,6 +187,9 @@ typedef NS_ENUM(NSUInteger, QHNetworkWorkerState) {
 
                 self.completionHandler = nil;
             }
+
+            [[NSNotificationCenter defaultCenter] postNotificationName:QHNetworkWorkerDidFinishNotification
+                                                                object:self];
         });
     });
 }

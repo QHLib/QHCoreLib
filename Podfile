@@ -8,11 +8,15 @@ target 'QHCoreLib' do
 
   # Pods for QHCoreLib
   pod "libextobjc", '0.4.1'
-  
+
   pod "UIDevice-Hardware"
 
   target 'QHCoreLibTests' do
     inherit! :search_paths
-    # Pods for testing
+
   end
+end
+
+target 'QHCoreLibDemo' do
+
 end
