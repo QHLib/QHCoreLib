@@ -133,4 +133,14 @@ NS_ASSUME_NONNULL_BEGIN
 #define QH_ERROR(_domain, _code, _message, _info) \
 [NSError qh_errorWithDomain:(_domain) code:(_code) message:(_message) info:(_info) file:__FILE__ line:__LINE__]
 
+@interface NSBundle (QHCoreLib)
+
++ (NSString * _Nullable)qh_mainBundle_identifier;
++ (NSString * _Nullable)qh_mainBundle_version;
++ (NSString * _Nullable)qh_mainBundle_shortVersion;
++ (NSString * _Nullable)qh_mainBundle_name;
++ (NSString * _Nullable)qh_mainBundle_displayName;
+
+@end
+
 NS_ASSUME_NONNULL_END

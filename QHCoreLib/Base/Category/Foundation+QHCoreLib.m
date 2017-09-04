@@ -368,4 +368,33 @@ QH_DUMMY_CLASS(FoudationQHCoreLib)
 
 @end
 
+@implementation NSBundle (QHCoreLib)
+
++ (NSString * _Nullable)qh_mainBundle_identifier
+{
+    return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"];
+}
+
++ (NSString * _Nullable)qh_mainBundle_version
+{
+    return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
+}
+
++ (NSString * _Nullable)qh_mainBundle_shortVersion
+{
+    return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+}
+
++ (NSString * _Nullable)qh_mainBundle_name
+{
+    return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
+}
+
++ (NSString * _Nullable)qh_mainBundle_displayName
+{
+    return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+}
+
+@end
+
 NS_ASSUME_NONNULL_END

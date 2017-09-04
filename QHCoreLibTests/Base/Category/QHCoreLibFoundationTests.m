@@ -163,4 +163,14 @@
     QH_XCTAssertThrows_On_DEBUG([testUserDefaults qh_setObject:@{ @1: @1 } forKey:@"anykey"]);
 }
 
+- (void)testMainBundle
+{
+    NSLog(@"%@\n%@\n%@\n%@\n%@\n",
+          [NSBundle qh_mainBundle_identifier],
+          [NSBundle qh_mainBundle_version],
+          [NSBundle qh_mainBundle_shortVersion],
+          [NSBundle qh_mainBundle_name],
+          [NSBundle qh_mainBundle_displayName]);
+}
+
 @end
