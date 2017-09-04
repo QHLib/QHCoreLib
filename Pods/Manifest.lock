@@ -34,13 +34,16 @@ PODS:
     - libextobjc/RuntimeExtensions
   - libextobjc/RuntimeExtensions (0.4.1)
   - libextobjc/UmbrellaHeader (0.4.1)
+  - UIDevice-Hardware (0.1.10)
 
 DEPENDENCIES:
   - libextobjc (= 0.4.1)
+  - UIDevice-Hardware
 
 SPEC CHECKSUMS:
   libextobjc: a650fc1bf489a3d3a9bc2e621efa3e1006fc5471
+  UIDevice-Hardware: 4bb15b9bd9878762ab879ac86185baad17b6c3ff
 
-PODFILE CHECKSUM: aec5a8b833ecc63f6cbdbcf37d551b69b8100b69
+PODFILE CHECKSUM: 914ff2f10a491fbd98b5588cab93f1bce9d5451b
 
 COCOAPODS: 1.3.1

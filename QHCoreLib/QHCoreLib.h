@@ -19,3 +19,4 @@ FOUNDATION_EXPORT const unsigned char QHCoreLibVersionString[];
 #import <QHCoreLib/QHProfiler.h>
 #import <QHCoreLib/QHAsync.h>
 #import <QHCoreLib/QHNetwork.h>
+#import <QHCoreLib/QHUI.h>

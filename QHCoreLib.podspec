@@ -64,4 +64,12 @@ Pod::Spec.new do |s|
     ss.dependency "QHCoreLib/QHAsync"
   end
 
+  s.subspec 'QHUI' do |ss|
+    ss.source_files = "QHCoreLib/UI/**/*.{h,m}"
+    ss.public_header_files = "QHCoreLib/UI/**/*.h"
+    ss.frameworks = "Foundation", "CoreGraphics"
+    ss.dependency "QHCoreLib/QHBase"
+    ss.dependency "UIDevice-Hardware"
+  end
+
 end

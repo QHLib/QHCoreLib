@@ -92,6 +92,9 @@
 		EA4FBA9A1F074E64004A6FE5 /* QHAsyncLinkedTaskGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = EA4FBA981F074E64004A6FE5 /* QHAsyncLinkedTaskGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA4FBA9B1F074E64004A6FE5 /* QHAsyncLinkedTaskGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4FBA991F074E64004A6FE5 /* QHAsyncLinkedTaskGroup.m */; };
 		EA4FBA9D1F07593A004A6FE5 /* QHAsyncLinkedTaskGroupTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4FBA9C1F07593A004A6FE5 /* QHAsyncLinkedTaskGroupTests.m */; };
+		EA5F5A6A1F5D418B00013F8F /* QHUI.h in Headers */ = {isa = PBXBuildFile; fileRef = EA5F5A691F5D418800013F8F /* QHUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA5F5A6D1F5D426100013F8F /* UIKit+QHCoreLib.h in Headers */ = {isa = PBXBuildFile; fileRef = EA5F5A6B1F5D426100013F8F /* UIKit+QHCoreLib.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA5F5A6E1F5D426100013F8F /* UIKit+QHCoreLib.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5F5A6C1F5D426100013F8F /* UIKit+QHCoreLib.m */; };
 		EA9EC84D1F5BA15B00B91430 /* QHNetworkReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = EA9EC84B1F5BA15A00B91430 /* QHNetworkReachabilityManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA9EC84E1F5BA15B00B91430 /* QHNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9EC84C1F5BA15B00B91430 /* QHNetworkReachabilityManager.m */; };
 		EAAA79E91ED9639A008135BE /* QHCoreLibClockEntryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAAA79E81ED9639A008135BE /* QHCoreLibClockEntryTests.m */; };
@@ -221,6 +224,9 @@
 		EA4FBA981F074E64004A6FE5 /* QHAsyncLinkedTaskGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHAsyncLinkedTaskGroup.h; sourceTree = "<group>"; };
 		EA4FBA991F074E64004A6FE5 /* QHAsyncLinkedTaskGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHAsyncLinkedTaskGroup.m; sourceTree = "<group>"; };
 		EA4FBA9C1F07593A004A6FE5 /* QHAsyncLinkedTaskGroupTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHAsyncLinkedTaskGroupTests.m; sourceTree = "<group>"; };
+		EA5F5A691F5D418800013F8F /* QHUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHUI.h; sourceTree = "<group>"; };
+		EA5F5A6B1F5D426100013F8F /* UIKit+QHCoreLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIKit+QHCoreLib.h"; sourceTree = "<group>"; };
+		EA5F5A6C1F5D426100013F8F /* UIKit+QHCoreLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIKit+QHCoreLib.m"; sourceTree = "<group>"; };
 		EA9EC84B1F5BA15A00B91430 /* QHNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHNetworkReachabilityManager.h; sourceTree = "<group>"; };
 		EA9EC84C1F5BA15B00B91430 /* QHNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHNetworkReachabilityManager.m; sourceTree = "<group>"; };
 		EAAA79E81ED9639A008135BE /* QHCoreLibClockEntryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHCoreLibClockEntryTests.m; sourceTree = "<group>"; };
@@ -330,6 +336,7 @@
 				EA1D44321ED95FBC002177BF /* Profiler */,
 				EA19CC6F1EEEE10E00C18853 /* Async */,
 				EA1D43421ED70CE3002177BF /* Network */,
+				EA5F5A681F5D406700013F8F /* UI */,
 			);
 			path = QHCoreLib;
 			sourceTree = "<group>";
@@ -556,6 +563,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		EA5F5A681F5D406700013F8F /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				EA5F5A691F5D418800013F8F /* QHUI.h */,
+				EA5F5A6B1F5D426100013F8F /* UIKit+QHCoreLib.h */,
+				EA5F5A6C1F5D426100013F8F /* UIKit+QHCoreLib.m */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		EAAA79E71ED9639A008135BE /* Profiler */ = {
 			isa = PBXGroup;
 			children = (
@@ -632,6 +649,7 @@
 				EA1D438F1ED70CE3002177BF /* AFSecurityPolicy.h in Headers */,
 				EA38F8921EF76CD6000B566F /* QHAsyncTask+internal.h in Headers */,
 				EA19CC771EEEE36A00C18853 /* QHAsync.h in Headers */,
+				EA5F5A6D1F5D426100013F8F /* UIKit+QHCoreLib.h in Headers */,
 				EA1D43741ED70CE3002177BF /* DDTTYLogger.h in Headers */,
 				EA19CC5B1EE24F5C00C18853 /* QHLog.h in Headers */,
 				EA1D438C1ED70CE3002177BF /* AFNetworking.h in Headers */,
@@ -644,6 +662,7 @@
 				EA19CC611EE9969000C18853 /* QHNetworkHttpApi.h in Headers */,
 				EAAE59141EE7DD940084FA69 /* NSObject+QHUserDefaultsProperty.h in Headers */,
 				EA19CC741EEEE18E00C18853 /* QHAsyncTask.h in Headers */,
+				EA5F5A6A1F5D418B00013F8F /* QHUI.h in Headers */,
 				EA1D43071ED70BA3002177BF /* QHCoreLib.h in Headers */,
 				EA1D43881ED70CE3002177BF /* AFHTTPRequestOperation.h in Headers */,
 				EA4FBA961F05FD48004A6FE5 /* QHAsyncParallelTaskGroup+internal.h in Headers */,
@@ -776,10 +795,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-QHCoreLibTests/Pods-QHCoreLibTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/UIDevice-Hardware/UIDevice_Hardware.framework",
 				"${BUILT_PRODUCTS_DIR}/libextobjc/libextobjc.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIDevice_Hardware.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libextobjc.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -870,6 +891,7 @@
 				EA1D43901ED70CE3002177BF /* AFSecurityPolicy.m in Sources */,
 				EA1D436A1ED70CE3002177BF /* QHDefaultValue.m in Sources */,
 				EA19CC621EE9969000C18853 /* QHNetworkHttpApi.m in Sources */,
+				EA5F5A6E1F5D426100013F8F /* UIKit+QHCoreLib.m in Sources */,
 				EA1D43891ED70CE3002177BF /* AFHTTPRequestOperation.m in Sources */,
 				EA1D43821ED70CE3002177BF /* QHNetworkUtil.m in Sources */,
 				EA1D43961ED70CE3002177BF /* AFURLResponseSerialization.m in Sources */,
