@@ -919,6 +919,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7851078F08662E6B8192606E /* Pods-QHCoreLib.debug.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -944,6 +945,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 938ABA409DE2D52EBFB8B765 /* Pods-QHCoreLib.release.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
