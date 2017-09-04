@@ -12,7 +12,6 @@
 		EA1693791EFABD4300BD9A25 /* QHAsyncTaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA1693781EFABD4300BD9A25 /* QHAsyncTaskTests.m */; };
 		EA16937F1F054BEF00BD9A25 /* QHAsyncBlockTaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA16937E1F054BEF00BD9A25 /* QHAsyncBlockTaskTests.m */; };
 		EA19CC5B1EE24F5C00C18853 /* QHLog.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE3C7A31EE12A4F00A93456 /* QHLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EA19CC5D1EE2539600C18853 /* QHCoreLib+All.h in Headers */ = {isa = PBXBuildFile; fileRef = EA19CC5C1EE2539500C18853 /* QHCoreLib+All.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA19CC611EE9969000C18853 /* QHNetworkHttpApi.h in Headers */ = {isa = PBXBuildFile; fileRef = EA19CC5F1EE9969000C18853 /* QHNetworkHttpApi.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA19CC621EE9969000C18853 /* QHNetworkHttpApi.m in Sources */ = {isa = PBXBuildFile; fileRef = EA19CC601EE9969000C18853 /* QHNetworkHttpApi.m */; };
 		EA19CC651EE99C8300C18853 /* QHNetworkJsonApi.h in Headers */ = {isa = PBXBuildFile; fileRef = EA19CC631EE99C8300C18853 /* QHNetworkJsonApi.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -93,7 +92,7 @@
 		EA4FBA9A1F074E64004A6FE5 /* QHAsyncLinkedTaskGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = EA4FBA981F074E64004A6FE5 /* QHAsyncLinkedTaskGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA4FBA9B1F074E64004A6FE5 /* QHAsyncLinkedTaskGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4FBA991F074E64004A6FE5 /* QHAsyncLinkedTaskGroup.m */; };
 		EA4FBA9D1F07593A004A6FE5 /* QHAsyncLinkedTaskGroupTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4FBA9C1F07593A004A6FE5 /* QHAsyncLinkedTaskGroupTests.m */; };
-		EA9EC84D1F5BA15B00B91430 /* QHNetworkReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = EA9EC84B1F5BA15A00B91430 /* QHNetworkReachabilityManager.h */; };
+		EA9EC84D1F5BA15B00B91430 /* QHNetworkReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = EA9EC84B1F5BA15A00B91430 /* QHNetworkReachabilityManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA9EC84E1F5BA15B00B91430 /* QHNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9EC84C1F5BA15B00B91430 /* QHNetworkReachabilityManager.m */; };
 		EAAA79E91ED9639A008135BE /* QHCoreLibClockEntryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAAA79E81ED9639A008135BE /* QHCoreLibClockEntryTests.m */; };
 		EAAA79EB1ED96871008135BE /* QHAsserts.m in Sources */ = {isa = PBXBuildFile; fileRef = EA1D43341ED70CE3002177BF /* QHAsserts.m */; };
@@ -134,7 +133,6 @@
 		EA1693761EFAB3A800BD9A25 /* QHInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHInternal.h; sourceTree = "<group>"; };
 		EA1693781EFABD4300BD9A25 /* QHAsyncTaskTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHAsyncTaskTests.m; sourceTree = "<group>"; };
 		EA16937E1F054BEF00BD9A25 /* QHAsyncBlockTaskTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHAsyncBlockTaskTests.m; sourceTree = "<group>"; };
-		EA19CC5C1EE2539500C18853 /* QHCoreLib+All.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QHCoreLib+All.h"; sourceTree = "<group>"; };
 		EA19CC5F1EE9969000C18853 /* QHNetworkHttpApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHNetworkHttpApi.h; sourceTree = "<group>"; };
 		EA19CC601EE9969000C18853 /* QHNetworkHttpApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHNetworkHttpApi.m; sourceTree = "<group>"; };
 		EA19CC631EE99C8300C18853 /* QHNetworkJsonApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHNetworkJsonApi.h; sourceTree = "<group>"; };
@@ -571,7 +569,6 @@
 			children = (
 				EA1D42FA1ED70BA2002177BF /* Info.plist */,
 				EA1D42F91ED70BA2002177BF /* QHCoreLib.h */,
-				EA19CC5C1EE2539500C18853 /* QHCoreLib+All.h */,
 				EA1D442B1ED92ED9002177BF /* QHCoreLib.modulemap */,
 			);
 			name = "Support files";
@@ -617,7 +614,6 @@
 				EAB2EEF11F04E82B00CDDF6D /* QHAsyncParallelTaskGroup.h in Headers */,
 				EA4DC7A31F147BAE00A28C61 /* QHNetworkMultipartBuilder.h in Headers */,
 				EA1D43661ED70CE3002177BF /* QHCoreLibCategories.h in Headers */,
-				EA19CC5D1EE2539600C18853 /* QHCoreLib+All.h in Headers */,
 				EAE2FE511F0A9548004354F8 /* QHMustOverride.h in Headers */,
 				EA1D43761ED70CE3002177BF /* QHLogUtil.h in Headers */,
 				EA1693741EFA9E2900BD9A25 /* QHMisc.h in Headers */,
@@ -761,13 +757,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-QHCoreLibTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		3370BE98A21AE65169A1026D /* [CP] Embed Pods Frameworks */ = {
@@ -776,9 +775,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-QHCoreLibTests/Pods-QHCoreLibTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/libextobjc/libextobjc.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/libextobjc.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -791,13 +793,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-QHCoreLib-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		AE4E1CE11F78CCA2F1FDE0D1 /* [CP] Copy Pods Resources */ = {

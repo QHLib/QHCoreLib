@@ -1,59 +1,6 @@
 framework module QHCoreLib {
 
     umbrella header "QHCoreLib.h"
-    module * { export * }
     export *
-
-    explicit module All {
-        header "QHCoreLib+All.h"
-        export *
-        export QHLog
-        export QHProfiler
-        export QHAsync
-        export QHNetwork 
-    }
-
-    explicit module QHLog {
-        header "QHLog.h"
-        header "QHLogUtil.h"
-        export *
-    }
-
-    explicit module QHProfiler {
-        header "QHProfiler.h"
-        header "QHClockEntry.h"
-        export *
-    }
-    
-    explicit module QHAsync {
-        header "QHAsync.h"
-        header "QHAsyncTask.h"
-        header "QHAsyncTask+internal.h"
-        header "QHAsyncParallelTaskGroup.h"
-        header "QHAsyncParallelTaskGroup+internal.h"
-        header "QHAsyncLinkedTaskGroup.h"
-        export *
-        export QHLog
-        export QHProfiler
-    }
-
-    explicit module QHNetwork {
-        header "QHNetwork.h"
-        header "QHNetworkUtil.h"
-        header "QHNetworkMultipart.h"
-        header "QHNetworkMultipartBuilder.h"
-        header "QHNetworkRequest.h"
-        header "QHNetworkResponse.h"
-        header "QHNetworkWorker.h"
-        header "QHNetworkApi.h"
-        header "QHNetworkApi+internal.h"
-        header "QHNetworkHttpApi.h"
-        header "QHNetworkHtmlApi.h"
-        header "QHNetworkJsonApi.h"
-        header "QHNetworkImageApi.h"
-        export *
-        export QHLog
-        export QHProfiler
-        export QHAsync
-    }
+    module * { export * }
 }

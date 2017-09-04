@@ -1,10 +1,10 @@
 source 'https://github.com/CocoaPods/Specs.git'
-source 'http://git.code.oa.com/QHLib/QHLibSpecs.git'
 
 platform :ios, '8.0'
 
+use_frameworks!
+
 target 'QHCoreLib' do
-  use_frameworks!
 
   # Pods for QHCoreLib
   pod "libextobjc", '0.4.1'
@@ -13,5 +13,4 @@ target 'QHCoreLib' do
     inherit! :search_paths
     # Pods for testing
   end
-
 end

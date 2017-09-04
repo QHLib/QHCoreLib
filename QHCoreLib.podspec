@@ -13,8 +13,8 @@ Pod::Spec.new do |s|
 
   s.requires_arc = true
 
-  s.source_files  = "QHCoreLib/QHCoreLib.h", "QHCoreLib/QHCoreLib+All.h"
-  s.public_header_files = "QHCoreLib/QHCoreLib.h", "QHCoreLib/QHCoreLib+All.h"
+  s.source_files  = "QHCoreLib/QHCoreLib.h"
+  s.public_header_files = "QHCoreLib/QHCoreLib.h"
   s.prefix_header_contents = <<-EOS
                              EOS
   s.xcconfig = {
