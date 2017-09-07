@@ -17,6 +17,7 @@
 
 #import <QHCoreLib/UIKit+QHCoreLib.h>
 #import <QHCoreLib/QHNetworkActivityIndicator.h>
+#import <QHCoreLib/QHListData.h>
 
 
 #endif /* QHUI_h */
