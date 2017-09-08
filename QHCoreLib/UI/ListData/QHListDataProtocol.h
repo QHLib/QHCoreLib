@@ -122,9 +122,13 @@ typedef NS_ENUM(NSUInteger, QHListDataRequestType) {
 
 @protocol QHListDataLoaderDelegate <NSObject>
 
-- (void)listDataLoaderFinished:(id<QHListDataLoader>)listDataLoader
-                      userInfo:(NSDictionary * _Nullable)userInfo
-                         error:(NSError * _Nullable)error;
+- (void)listDataLoaderSucceed:(id<QHListDataLoader>)listDataLoader
+                         list:(NSArray *)list
+                     userInfo:(NSDictionary * _Nullable)userInfo;
+
+- (void)listDataLoaderFailed:(id<QHListDataLoader>)listDataLoader
+                       error:(NSError *)error
+                    userInfo:(NSDictionary * _Nullable)userInfo;
 
 @end
 

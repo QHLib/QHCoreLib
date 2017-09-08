@@ -7,8 +7,11 @@
 //
 
 #import "AppDelegate.h"
-#import "TableViewController.h"
+
 #import <QHCoreLib/QHCoreLib.h>
+
+#import "EntranceViewController.h"
+#import "QHListDataEntranceController.h"
 
 @interface AppDelegate ()
 
@@ -21,7 +24,15 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = ({
-        [[UINavigationController alloc] initWithRootViewController:[[TableViewController alloc] init]];
+        EntranceViewController *entranceController = [EntranceViewController new];
+        entranceController.controllerTitles = [NSArray arrayWithObjects:
+                                               @"QHList",
+                                               nil];
+        entranceController.controllerClasses = [NSArray arrayWithObjects:
+                                                [QHListDataEntranceController class],
+                                                nil];
+        
+        [[UINavigationController alloc] initWithRootViewController:entranceController];
     });
     [self.window makeKeyAndVisible];
 

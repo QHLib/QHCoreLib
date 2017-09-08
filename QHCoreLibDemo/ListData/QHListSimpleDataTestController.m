@@ -1,33 +1,30 @@
 //
-//  QHListSimpleDataTestControler.m
+//  QHListSimpleDataTestController.m
 //  QHCoreLibDemo
 //
-//  Created by changtang on 2017/9/7.
+//  Created by changtang on 2017/9/8.
 //  Copyright © 2017年 Tencent. All rights reserved.
 //
 
-#import "QHListSimpleDataTestControler.h"
+#import "QHListSimpleDataTestController.h"
 
-#import <QHCoreLib/QHCoreLib.h>
-
-
-@interface QHListSimpleDataTestControler () <QHListSimpleDataDelegate>
+@interface QHListSimpleDataTestController () <QHListSimpleDataDelegate>
 
 @property (nonatomic, strong) QHListSimpleData<NSString *> *listData;
 
 @end
 
-@implementation QHListSimpleDataTestControler
+@implementation QHListSimpleDataTestController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     self.listData = [[QHListSimpleData alloc] init];
     self.listData.delegate = self;
 
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.listData setListData:@[ @"", @"", @"" ]];
+        [self.listData setListData:@[ [self nextRowId], [self nextRowId], [self nextRowId] ]];
     });
 }
 
@@ -41,9 +38,16 @@
     return self.listData.numberOfItems;
 }
 
+- (NSString *)textForIndexPath:(NSIndexPath *)indexPath
+{
+    return $(@"%@, %@",
+             [super textForIndexPath:indexPath],
+             [self.listData listItemAtIndex:indexPath.row]);
+}
+
 - (void)add
 {
-    [self.listData p_appendList:@[ @"" ]];
+    [self.listData p_appendList:@[ [self nextRowId] ]];
 }
 
 #pragma mark -

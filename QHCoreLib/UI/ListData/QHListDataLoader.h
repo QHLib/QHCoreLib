@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface QHListDataLoader : NSObject
-#warning todo
+#import <QHCoreLib/QHListDataProtocol.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface QHListDataLoader : NSObject <QHListDataLoader>
+
+@property (nonatomic, weak, nullable) id<QHListDataLoaderDelegate> delegate;
+
 @end
+
+NS_ASSUME_NONNULL_END

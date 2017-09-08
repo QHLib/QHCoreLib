@@ -11,6 +11,8 @@
 
 @interface QHListTestTableViewController ()
 
+@property (nonatomic, assign) NSInteger rowId;
+
 @end
 
 @implementation QHListTestTableViewController
@@ -18,6 +20,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    self.rowId = 0;
 
     [self.tableView registerClass:[UITableViewCell class]
            forCellReuseIdentifier:@"reuse"];
@@ -64,7 +68,7 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse" forIndexPath:indexPath];
 
-    cell.textLabel.text = $(@"%d-%d", (int)indexPath.section, (int)indexPath.row);
+    cell.textLabel.text = [self textForIndexPath:indexPath];
 
     return cell;
 }
@@ -143,5 +147,15 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
 }
 
 #pragma mark -
+
+- (NSString *)nextRowId
+{
+    return $(@"r%d", (int)self.rowId++);
+}
+
+- (NSString *)textForIndexPath:(NSIndexPath *)indexPath
+{
+    return $(@"%d-%d", (int)indexPath.section, (int)indexPath.row);
+}
 
 @end

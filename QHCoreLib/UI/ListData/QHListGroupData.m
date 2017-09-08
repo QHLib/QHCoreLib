@@ -8,6 +8,10 @@
 
 #import "QHListGroupData.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @implementation QHListGroupData
 
 @end
+
+NS_ASSUME_NONNULL_END

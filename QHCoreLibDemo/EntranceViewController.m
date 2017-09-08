@@ -1,33 +1,32 @@
 //
-//  TableViewController.m
+//  EntranceViewController.m
 //  QHCoreLibDemo
 //
 //  Created by changtang on 2017/9/7.
 //  Copyright © 2017年 Tencent. All rights reserved.
 //
 
-#import "TableViewController.h"
-#import "QHListSimpleDataTestControler.h"
+#import "EntranceViewController.h"
 
-@interface TableViewController ()
-
-@property (nonatomic, strong) NSArray<NSString *> *controllerTitles;
-@property (nonatomic, strong) NSArray<Class> *controllerClasses;
+@interface EntranceViewController ()
 
 @end
 
-@implementation TableViewController
+@implementation EntranceViewController
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.controllerTitles = @[];
+        self.controllerClasses = @[];
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    self.controllerTitles = [NSArray arrayWithObjects:
-                             @"QHListSimpleData",
-                             nil];
-    self.controllerClasses= [NSArray arrayWithObjects:
-                             [QHListSimpleDataTestControler class],
-                             nil];
 
     [self.tableView registerClass:[UITableViewCell class]
            forCellReuseIdentifier:@"reuse"];

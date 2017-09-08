@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+#import <QHCoreLib/QHListDataProtocol.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
 @interface QHListGroupData : NSObject
 #warning todo
 @end
+
+NS_ASSUME_NONNULL_END

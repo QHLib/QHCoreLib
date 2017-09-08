@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface QHListCommonData : NSObject
-#warning todo
+#import <QHCoreLib/QHListSimpleData.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface QHListCommonData<ListItemType> : QHListSimpleData<ListItemType> <QHListDataLoader>
+
+@property (nonatomic, weak, nullable) id<QHListSimpleDataDelegate, QHListDataLoaderDelegate> delegate;
+
 @end
+
+NS_ASSUME_NONNULL_END

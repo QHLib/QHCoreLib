@@ -12,4 +12,8 @@
 
 @interface QHListTestTableViewController : UITableViewController <QHListSimpleDataDelegate, QHListGroupDataDelegate>
 
+- (NSString *)nextRowId;
+
+- (NSString *)textForIndexPath:(NSIndexPath *)indexPath;
+
 @end
