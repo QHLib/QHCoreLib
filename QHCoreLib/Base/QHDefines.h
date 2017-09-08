@@ -47,6 +47,14 @@ NS_ASSUME_NONNULL_BEGIN
 #define QH_IS_SET(obj)                                  (QH_IS(obj, NSSet))
 #define QH_IS_DATA(obj)                                 (QH_IS(obj, NSData))
 
+#define QH_IS_VALID_STRING(obj)                       (QH_IS_STRING(obj) && [obj length])
+#define QH_IS_VALID_NUMBER(obj)                       (QH_IS_NUMBER(obj))
+#define QH_IS_VALID_ARRAY(obj)                        (QH_IS_ARRAY(obj) && [obj count])
+#define QH_IS_VALID_DICTIONARY(obj)                   (QH_IS_DICTIONARY(obj) && [obj count])
+#define QH_IS_VALID_SET(obj)                          (QH_IS_SET(obj) && [obj count])
+#define QH_IS_VALID_DATA(obj)                         (QH_IS_DATA(obj) && [obj length])
+#define QH_IS_VALID_DELEGATE(d, s)                    (d && [d respondsToSelector:s])
+
 #define QH_AS(obj, cls, var)                            cls *var = nil; if (QH_IS(obj, cls)) var = (cls *)obj;
 
 #define QH_DUMMY_CLASS(_name) \
