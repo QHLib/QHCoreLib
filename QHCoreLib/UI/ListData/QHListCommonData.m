@@ -7,7 +7,7 @@
 //
 
 #import "QHListCommonData.h"
-#import "QHListCommonData+protected.h"
+#import "QHListCommonData+internal.h"
 
 #import "QHBase+internal.h"
 

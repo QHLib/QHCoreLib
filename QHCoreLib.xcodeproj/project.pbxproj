@@ -17,10 +17,10 @@
 		EA0C78B41F61390C0038CC88 /* QHListDataLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0C78B21F61390C0038CC88 /* QHListDataLoader.m */; };
 		EA0C78B71F61394E0038CC88 /* QHListCommonData.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0C78B51F61394E0038CC88 /* QHListCommonData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA0C78B81F61394E0038CC88 /* QHListCommonData.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0C78B61F61394E0038CC88 /* QHListCommonData.m */; };
-		EA0C78BD1F613DAB0038CC88 /* QHListSimpleData+protected.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0C78BB1F613DAB0038CC88 /* QHListSimpleData+protected.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EA0C78C11F613DFE0038CC88 /* QHListGroupData+protected.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0C78BF1F613DFE0038CC88 /* QHListGroupData+protected.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EA0C78C61F613E6F0038CC88 /* QHListDataLoader+protected.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0C78C41F613E6F0038CC88 /* QHListDataLoader+protected.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EA0C78CA1F613E970038CC88 /* QHListCommonData+protected.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0C78C81F613E970038CC88 /* QHListCommonData+protected.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA0C78BD1F613DAB0038CC88 /* QHListSimpleData+internal.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0C78BB1F613DAB0038CC88 /* QHListSimpleData+internal.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA0C78C11F613DFE0038CC88 /* QHListGroupData+internal.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0C78BF1F613DFE0038CC88 /* QHListGroupData+internal.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA0C78C61F613E6F0038CC88 /* QHListDataLoader+internal.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0C78C41F613E6F0038CC88 /* QHListDataLoader+internal.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA0C78CA1F613E970038CC88 /* QHListCommonData+internal.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0C78C81F613E970038CC88 /* QHListCommonData+internal.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA0C78CE1F614F310038CC88 /* EntranceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0C78CD1F614F310038CC88 /* EntranceViewController.m */; };
 		EA0C78E61F626F8C0038CC88 /* QHListDataEntranceController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0C78E51F626F8C0038CC88 /* QHListDataEntranceController.m */; };
 		EA0C78E91F62708C0038CC88 /* QHListDataLoaderTestController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0C78E81F62708C0038CC88 /* QHListDataLoaderTestController.m */; };
@@ -193,10 +193,10 @@
 		EA0C78B21F61390C0038CC88 /* QHListDataLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHListDataLoader.m; sourceTree = "<group>"; };
 		EA0C78B51F61394E0038CC88 /* QHListCommonData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHListCommonData.h; sourceTree = "<group>"; };
 		EA0C78B61F61394E0038CC88 /* QHListCommonData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHListCommonData.m; sourceTree = "<group>"; };
-		EA0C78BB1F613DAB0038CC88 /* QHListSimpleData+protected.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QHListSimpleData+protected.h"; sourceTree = "<group>"; };
-		EA0C78BF1F613DFE0038CC88 /* QHListGroupData+protected.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QHListGroupData+protected.h"; sourceTree = "<group>"; };
-		EA0C78C41F613E6F0038CC88 /* QHListDataLoader+protected.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QHListDataLoader+protected.h"; sourceTree = "<group>"; };
-		EA0C78C81F613E970038CC88 /* QHListCommonData+protected.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QHListCommonData+protected.h"; sourceTree = "<group>"; };
+		EA0C78BB1F613DAB0038CC88 /* QHListSimpleData+internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QHListSimpleData+internal.h"; sourceTree = "<group>"; };
+		EA0C78BF1F613DFE0038CC88 /* QHListGroupData+internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QHListGroupData+internal.h"; sourceTree = "<group>"; };
+		EA0C78C41F613E6F0038CC88 /* QHListDataLoader+internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QHListDataLoader+internal.h"; sourceTree = "<group>"; };
+		EA0C78C81F613E970038CC88 /* QHListCommonData+internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QHListCommonData+internal.h"; sourceTree = "<group>"; };
 		EA0C78CC1F614F310038CC88 /* EntranceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EntranceViewController.h; sourceTree = "<group>"; };
 		EA0C78CD1F614F310038CC88 /* EntranceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EntranceViewController.m; sourceTree = "<group>"; };
 		EA0C78DC1F626F400038CC88 /* QHListCommonDataTestController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHListCommonDataTestController.h; sourceTree = "<group>"; };
@@ -730,16 +730,16 @@
 				EA6D30011F61259300B5B6AA /* QHListData.h */,
 				EA6D30021F61259300B5B6AA /* QHListDataProtocol.h */,
 				EA0C78A91F6138E80038CC88 /* QHListSimpleData.h */,
-				EA0C78BB1F613DAB0038CC88 /* QHListSimpleData+protected.h */,
+				EA0C78BB1F613DAB0038CC88 /* QHListSimpleData+internal.h */,
 				EA0C78AA1F6138E80038CC88 /* QHListSimpleData.m */,
 				EA0C78B11F61390C0038CC88 /* QHListDataLoader.h */,
-				EA0C78C41F613E6F0038CC88 /* QHListDataLoader+protected.h */,
+				EA0C78C41F613E6F0038CC88 /* QHListDataLoader+internal.h */,
 				EA0C78B21F61390C0038CC88 /* QHListDataLoader.m */,
 				EA0C78B51F61394E0038CC88 /* QHListCommonData.h */,
-				EA0C78C81F613E970038CC88 /* QHListCommonData+protected.h */,
+				EA0C78C81F613E970038CC88 /* QHListCommonData+internal.h */,
 				EA0C78B61F61394E0038CC88 /* QHListCommonData.m */,
 				EA0C78AD1F6138F60038CC88 /* QHListGroupData.h */,
-				EA0C78BF1F613DFE0038CC88 /* QHListGroupData+protected.h */,
+				EA0C78BF1F613DFE0038CC88 /* QHListGroupData+internal.h */,
 				EA0C78AE1F6138F60038CC88 /* QHListGroupData.m */,
 			);
 			path = ListData;
@@ -800,9 +800,9 @@
 				EA1D43781ED70CE3002177BF /* QHNetwork.h in Headers */,
 				EA1D43641ED70CE3002177BF /* Foundation+QHCoreLib.h in Headers */,
 				EA19CC6D1EEA57D900C18853 /* QHNetworkHtmlApi.h in Headers */,
-				EA0C78CA1F613E970038CC88 /* QHListCommonData+protected.h in Headers */,
+				EA0C78CA1F613E970038CC88 /* QHListCommonData+internal.h in Headers */,
 				EA1D43691ED70CE3002177BF /* QHDefaultValue.h in Headers */,
-				EA0C78C61F613E6F0038CC88 /* QHListDataLoader+protected.h in Headers */,
+				EA0C78C61F613E6F0038CC88 /* QHListDataLoader+internal.h in Headers */,
 				EAB2EEF11F04E82B00CDDF6D /* QHAsyncParallelTaskGroup.h in Headers */,
 				EA4DC7A31F147BAE00A28C61 /* QHNetworkMultipartBuilder.h in Headers */,
 				EA1D43661ED70CE3002177BF /* QHCoreLibCategories.h in Headers */,
@@ -822,12 +822,12 @@
 				EA4FBA9A1F074E64004A6FE5 /* QHAsyncLinkedTaskGroup.h in Headers */,
 				EA1D43851ED70CE3002177BF /* _QHNetworkWorker+subclass.h in Headers */,
 				EA1D43951ED70CE3002177BF /* AFURLResponseSerialization.h in Headers */,
-				EA0C78C11F613DFE0038CC88 /* QHListGroupData+protected.h in Headers */,
+				EA0C78C11F613DFE0038CC88 /* QHListGroupData+internal.h in Headers */,
 				EA5F5A711F5D4C1000013F8F /* QHNetworkActivityIndicator.h in Headers */,
 				EA0C78B71F61394E0038CC88 /* QHListCommonData.h in Headers */,
 				EA1D438F1ED70CE3002177BF /* AFSecurityPolicy.h in Headers */,
 				EA0C78AF1F6138F60038CC88 /* QHListGroupData.h in Headers */,
-				EA0C78BD1F613DAB0038CC88 /* QHListSimpleData+protected.h in Headers */,
+				EA0C78BD1F613DAB0038CC88 /* QHListSimpleData+internal.h in Headers */,
 				EA38F8921EF76CD6000B566F /* QHAsyncTask+internal.h in Headers */,
 				EA0C78AB1F6138E80038CC88 /* QHListSimpleData.h in Headers */,
 				EA19CC771EEEE36A00C18853 /* QHAsync.h in Headers */,

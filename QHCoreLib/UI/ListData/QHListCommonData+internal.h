@@ -1,5 +1,5 @@
 //
-//  QHListCommonData+protected.h
+//  QHListCommonData+internal.h
 //  QHCoreLib
 //
 //  Created by changtang on 2017/9/7.
@@ -7,7 +7,7 @@
 //
 
 #import <QHCoreLib/QHListCommonData.h>
-#import <QHCoreLib/QHListSimpleData+protected.h>
+#import <QHCoreLib/QHListSimpleData+internal.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

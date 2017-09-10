@@ -1,5 +1,5 @@
 //
-//  QHListSimpleData+protected.h
+//  QHListSimpleData+internal.h
 //  QHCoreLib
 //
 //  Created by changtang on 2017/9/7.

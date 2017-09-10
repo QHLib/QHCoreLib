@@ -7,9 +7,9 @@
 //
 
 #import "QHListGroupData.h"
-#import "QHListGroupData+protected.h"
+#import "QHListGroupData+internal.h"
 #import "QHListSimpleData.h"
-#import "QHListSimpleData+protected.h"
+#import "QHListSimpleData+internal.h"
 
 #import "QHBase+internal.h"
 

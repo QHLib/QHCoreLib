@@ -11,12 +11,12 @@
 
 #import <QHCoreLib/QHListDataProtocol.h>
 #import <QHCoreLib/QHListSimpleData.h>
-#import <QHCoreLib/QHListSimpleData+protected.h>
+#import <QHCoreLib/QHListSimpleData+internal.h>
 #import <QHCoreLib/QHListGroupData.h>
-#import <QHCoreLib/QHListGroupData+protected.h>
+#import <QHCoreLib/QHListGroupData+internal.h>
 #import <QHCoreLib/QHListDataLoader.h>
-#import <QHCoreLib/QHListDataLoader+protected.h>
+#import <QHCoreLib/QHListDataLoader+internal.h>
 #import <QHCoreLib/QHListCommonData.h>
-#import <QHCoreLib/QHListCommonData+protected.h>
+#import <QHCoreLib/QHListCommonData+internal.h>
 
 #endif /* QHList_h */

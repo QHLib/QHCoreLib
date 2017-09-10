@@ -7,7 +7,7 @@
 //
 
 #import "QHListDataLoader.h"
-#import "QHListDataLoader+protected.h"
+#import "QHListDataLoader+internal.h"
 
 #import "QHBase+internal.h"
 
