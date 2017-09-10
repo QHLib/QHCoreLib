@@ -23,7 +23,7 @@
     self.listData = [[QHListSimpleData alloc] init];
     self.listData.delegate = self;
 
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.listData setListData:@[ [self nextRowId], [self nextRowId], [self nextRowId] ]];
     });
 }
@@ -47,7 +47,12 @@
 
 - (void)add
 {
-    [self.listData p_appendList:@[ [self nextRowId] ]];
+    [self.listData appendListData:@[ [self nextRowId] ]];
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+
+        self.listData[self.listData.numberOfItems - 1] = $(@"%@...", self.listData[self.listData.numberOfItems - 1]);
+    });
 }
 
 #pragma mark -
@@ -57,8 +62,7 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:indexPath.row];
-        [self.listData p_listRemoveAtIndexes:indexSet];
+        [self.listData deleteListItemAtIndexes:[NSIndexSet indexSetWithIndex:indexPath.row]];
     }
 }
 
@@ -66,9 +70,9 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
       toIndexPath:(NSIndexPath *)destinationIndexPath
 {
-    [self.listData p_listMoveFromIndex:sourceIndexPath.row
-                               toIndex:destinationIndexPath.row
-                          shouldNotify:NO];
+    [self.listData moveListItemFromIndex:sourceIndexPath.row
+                                 toIndex:destinationIndexPath.row
+                            shouldNotify:NO];
 }
 
 @end

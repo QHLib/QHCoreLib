@@ -52,46 +52,6 @@ typedef NS_ENUM(NSUInteger, QHListItemChangeType) {
 @end
 
 
-@protocol QHListGroupDataDelegate;
-
-@protocol QHListGroupData <NSObject>
-
-@property (nonatomic, weak, nullable) id<QHListGroupDataDelegate> delegate;
-
-- (NSUInteger)numberOfSections;
-
-- (NSUInteger)numberOfRowsInSection:(NSUInteger)section;
-
-- (id _Nullable)listItemAtIndexPath:(NSIndexPath *)indexPath;
-
-@optional
-
-- (id _Nullable)headItemForSection:(NSUInteger)section;
-- (id _Nullable)footItemForSection:(NSUInteger)section;
-
-@end
-
-@protocol QHListGroupDataDelegate
-@optional
-
-- (void)listGroupDataReloadAll:(id<QHListGroupData>)listGroupData;
-
-- (void)listGroupData:(id<QHListGroupData>)listGroupData
-       reloadSections:(NSIndexSet *)indexSet;
-
-- (void)listGroupDataWillBeginChange:(id<QHListGroupData>)listGroupData;
-
-- (void)listGroupData:(id<QHListGroupData>)listGroupData
-    didChangeListItem:(id _Nullable)listItem
-        forChangeType:(QHListItemChangeType)changeType
-         oldIndexPath:(NSIndexPath *)oldIndexPath
-         newIndexPath:(NSIndexPath *)newIndexPath;
-
-- (void)listGroupDataDidFinishChange:(id<QHListGroupData>)listGroupData;
-
-@end
-
-
 typedef NS_ENUM(NSUInteger, QHListDataRequestType) {
     QHListDataRequestTypeNotLoadYet = 0,
     QHListDataRequestTypeEmptyLoad,         // no cache
@@ -129,6 +89,57 @@ typedef NS_ENUM(NSUInteger, QHListDataRequestType) {
 - (void)listDataLoaderFailed:(id<QHListDataLoader>)listDataLoader
                        error:(NSError *)error
                     userInfo:(NSDictionary * _Nullable)userInfo;
+
+@end
+
+
+typedef NS_ENUM(NSUInteger, QHListSectionChangeType) {
+    QHListSectionChangeTypeInsert = 1,
+    QHListSectionChangeTypeDelete = 2,
+    QHListSectionChangeTypeUpdate = 4,
+};
+
+@protocol QHListGroupDataDelegate;
+
+@protocol QHListGroupData <NSObject>
+
+@property (nonatomic, weak, nullable) id<QHListGroupDataDelegate> delegate;
+
+- (NSUInteger)numberOfSections;
+
+- (id<QHListSimpleData>)sectionAtIndex:(NSUInteger)sectionIndex;
+
+- (NSUInteger)numberOfRowsInSection:(NSUInteger)sectionIndex;
+
+- (id _Nullable)listItemAtIndexPath:(NSIndexPath *)indexPath;
+
+@optional
+
+- (id _Nullable)headItemForSection:(NSUInteger)sectionIndex;
+- (id _Nullable)footItemForSection:(NSUInteger)sectionIndex;
+
+@end
+
+@protocol QHListGroupDataDelegate <NSObject>
+@optional
+
+- (void)listGroupDataReloadAll:(id<QHListGroupData>)listGroupData;
+
+- (void)listGroupDataWillBeginChange:(id<QHListGroupData>)listGroupData;
+
+- (void)listGroupData:(id<QHListGroupData>)listGroupData
+     didChangeSection:(id<QHListSimpleData> _Nullable)section
+           changeType:(QHListSectionChangeType)changeType
+             oldIndex:(NSUInteger)oldSectionIndex
+             newIndex:(NSUInteger)newSectionIndex;
+
+- (void)listGroupData:(id<QHListGroupData>)listGroupData
+    didChangeListItem:(id _Nullable)listItem
+           changeType:(QHListItemChangeType)changeType
+         oldIndexPath:(NSIndexPath * _Nullable)oldIndexPath
+         newIndexPath:(NSIndexPath * _Nullable)newIndexPath;
+
+- (void)listGroupDataDidFinishChange:(id<QHListGroupData>)listGroupData;
 
 @end
 

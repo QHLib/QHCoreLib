@@ -10,28 +10,26 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface QHListSimpleData<ListItemType> ()// (protected)
+@interface QHListSimpleData<ListItemType> ()
 
-@property (nonatomic, strong) NSMutableArray<ListItemType> *list;
+@property (nonatomic, strong) NSMutableArray *_list;
+@property (nonatomic, strong, nullable) id _head;
+@property (nonatomic, strong, nullable) id _foot;
 
-- (ListItemType _Nullable)objectInListAtIndex:(NSUInteger)index;
+#pragma mark - notify methods
 
-- (void)p_setList:(NSArray<ListItemType> *)list;
+- (void)p_listReload;
 
 - (void)p_listBeginUpdate;
 
-- (void)p_listInsert:(NSArray<ListItemType> *)list
-             atIndex:(NSUInteger)index;
-
-- (void)p_appendList:(NSArray<ListItemType> *)list;
+- (void)p_listInsertAtIndexes:(NSIndexSet *)indexes;
 
 - (void)p_listUpdateAtIndexes:(NSIndexSet *)indexes;
 
-- (void)p_listRemoveAtIndexes:(NSIndexSet *)indexes;
+- (void)p_listDeleteAtIndexes:(NSIndexSet *)indexes;
 
 - (void)p_listMoveFromIndex:(NSUInteger)oldIndex
-                    toIndex:(NSUInteger)newIndex
-               shouldNotify:(BOOL)shouldNotify;
+                    toIndex:(NSUInteger)newIndex;
 
 - (void)p_listEndUpdate;
 

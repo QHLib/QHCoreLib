@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface QHListCommonData ()// (protected)
+@interface QHListCommonData ()
 
 @property (nonatomic, assign, readwrite) QHListDataRequestType requestType;
 

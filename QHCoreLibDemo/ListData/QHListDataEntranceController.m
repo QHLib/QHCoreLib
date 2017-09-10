@@ -10,6 +10,7 @@
 #import "QHListSimpleDataTestController.h"
 #import "QHListDataLoaderTestController.h"
 #import "QHListCommonDataTestController.h"
+#import "QHListGroupDataTestController.h"
 
 @interface QHListDataEntranceController ()
 
@@ -24,11 +25,13 @@
                              @"QHListSimpleData",
                              @"QHListDataLoader",
                              @"QHListCommonData",
+                             @"QHListGroupData",
                              nil];
     self.controllerClasses= [NSArray arrayWithObjects:
                              [QHListSimpleDataTestController class],
                              [QHListDataLoaderTestController class],
                              [QHListCommonDataTestController class],
+                             [QHListGroupDataTestController class],
                              nil];
 }
 

@@ -27,6 +27,7 @@
 		EA0C78EC1F6271B50038CC88 /* QHListSimpleDataTestController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0C78EB1F6271B50038CC88 /* QHListSimpleDataTestController.m */; };
 		EA0C78ED1F6272280038CC88 /* QHListTestTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0C78E31F626F400038CC88 /* QHListTestTableViewController.m */; };
 		EA0C78EE1F62722F0038CC88 /* QHListCommonDataTestController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0C78DD1F626F400038CC88 /* QHListCommonDataTestController.m */; };
+		EA0C78F11F64EC180038CC88 /* QHListGroupDataTestController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0C78F01F64EC180038CC88 /* QHListGroupDataTestController.m */; };
 		EA1693741EFA9E2900BD9A25 /* QHMisc.h in Headers */ = {isa = PBXBuildFile; fileRef = EA1693731EFA9E2900BD9A25 /* QHMisc.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA1693791EFABD4300BD9A25 /* QHAsyncTaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA1693781EFABD4300BD9A25 /* QHAsyncTaskTests.m */; };
 		EA16937F1F054BEF00BD9A25 /* QHAsyncBlockTaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA16937E1F054BEF00BD9A25 /* QHAsyncBlockTaskTests.m */; };
@@ -208,6 +209,8 @@
 		EA0C78E81F62708C0038CC88 /* QHListDataLoaderTestController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHListDataLoaderTestController.m; sourceTree = "<group>"; };
 		EA0C78EA1F6271B50038CC88 /* QHListSimpleDataTestController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHListSimpleDataTestController.h; sourceTree = "<group>"; };
 		EA0C78EB1F6271B50038CC88 /* QHListSimpleDataTestController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHListSimpleDataTestController.m; sourceTree = "<group>"; };
+		EA0C78EF1F64EC180038CC88 /* QHListGroupDataTestController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHListGroupDataTestController.h; sourceTree = "<group>"; };
+		EA0C78F01F64EC180038CC88 /* QHListGroupDataTestController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHListGroupDataTestController.m; sourceTree = "<group>"; };
 		EA1693731EFA9E2900BD9A25 /* QHMisc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHMisc.h; sourceTree = "<group>"; };
 		EA1693751EFAB30100BD9A25 /* QHBase+internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QHBase+internal.h"; sourceTree = "<group>"; };
 		EA1693761EFAB3A800BD9A25 /* QHInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHInternal.h; sourceTree = "<group>"; };
@@ -401,6 +404,8 @@
 				EA0C78E81F62708C0038CC88 /* QHListDataLoaderTestController.m */,
 				EA0C78DC1F626F400038CC88 /* QHListCommonDataTestController.h */,
 				EA0C78DD1F626F400038CC88 /* QHListCommonDataTestController.m */,
+				EA0C78EF1F64EC180038CC88 /* QHListGroupDataTestController.h */,
+				EA0C78F01F64EC180038CC88 /* QHListGroupDataTestController.m */,
 			);
 			path = ListData;
 			sourceTree = "<group>";
@@ -727,15 +732,15 @@
 				EA0C78A91F6138E80038CC88 /* QHListSimpleData.h */,
 				EA0C78BB1F613DAB0038CC88 /* QHListSimpleData+protected.h */,
 				EA0C78AA1F6138E80038CC88 /* QHListSimpleData.m */,
-				EA0C78AD1F6138F60038CC88 /* QHListGroupData.h */,
-				EA0C78BF1F613DFE0038CC88 /* QHListGroupData+protected.h */,
-				EA0C78AE1F6138F60038CC88 /* QHListGroupData.m */,
 				EA0C78B11F61390C0038CC88 /* QHListDataLoader.h */,
 				EA0C78C41F613E6F0038CC88 /* QHListDataLoader+protected.h */,
 				EA0C78B21F61390C0038CC88 /* QHListDataLoader.m */,
 				EA0C78B51F61394E0038CC88 /* QHListCommonData.h */,
 				EA0C78C81F613E970038CC88 /* QHListCommonData+protected.h */,
 				EA0C78B61F61394E0038CC88 /* QHListCommonData.m */,
+				EA0C78AD1F6138F60038CC88 /* QHListGroupData.h */,
+				EA0C78BF1F613DFE0038CC88 /* QHListGroupData+protected.h */,
+				EA0C78AE1F6138F60038CC88 /* QHListGroupData.m */,
 			);
 			path = ListData;
 			sourceTree = "<group>";
@@ -1211,6 +1216,7 @@
 				EA0C78EC1F6271B50038CC88 /* QHListSimpleDataTestController.m in Sources */,
 				EA0C78ED1F6272280038CC88 /* QHListTestTableViewController.m in Sources */,
 				EA0C78EE1F62722F0038CC88 /* QHListCommonDataTestController.m in Sources */,
+				EA0C78F11F64EC180038CC88 /* QHListGroupDataTestController.m in Sources */,
 				EA5F5AAC1F5D519E00013F8F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -13,6 +13,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@interface QHListSimpleData ()
+
+@end
+
 @implementation QHListSimpleData
 
 + (BOOL)supportsSecureCoding
@@ -29,9 +33,9 @@ NS_ASSUME_NONNULL_BEGIN
 {
     self = [super init];
     if (self) {
-        self.list = [NSMutableArray array];
+        self._list = [NSMutableArray array];
         if (QH_IS_ARRAY(listData)) {
-            [self.list addObjectsFromArray:listData];
+            [self._list addObjectsFromArray:listData];
         } else {
             QHAssert(NO, @"list data is not array: %@", listData);
         }
@@ -48,97 +52,74 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
-    [aCoder encodeObject:self.list forKey:@"list"];
+    [aCoder encodeObject:self._list forKey:@"list"];
+}
+
+#pragma mark -
+
+- (id)objectAtIndexedSubscript:(NSUInteger)index
+{
+    return [self listItemAtIndex:index];
+}
+
+- (void)setObject:(id)obj atIndexedSubscript:(NSUInteger)index
+{
+    [self setListItemAtIndex:index withListItem:obj];
 }
 
 #pragma mark -
 
 - (NSUInteger)numberOfItems
 {
-    return self.list.count;
+    return self._list.count;
 }
 
 - (id _Nullable)listItemAtIndex:(NSUInteger)index
 {
-    return [self.list qh_objectAtIndex:index];
+    return [self._list qh_objectAtIndex:index];
 }
 
 - (id _Nullable)headItem
 {
-    return nil;
+    return self._head;
 }
 
 - (id _Nullable)footItem
 {
-    return nil;
+    return self._foot;
 }
 
 #pragma mark -
 
-- (id _Nullable)objectInListAtIndex:(NSUInteger)index
+- (void)p_listReload
 {
-    return [self listItemAtIndex:index];
-}
-
-- (void)p_setList:(NSArray *)list
-{
-    QHAssertReturnVoidOnFailure(QH_IS_ARRAY(list),
-                                @"invalid list: %@\ncall stack: %@",
-                                list, QHCallStackShort());
-
-    [self.list removeAllObjects];
-    [self.list addObjectsFromArray:list];
-
-    if ([self.delegate respondsToSelector:@selector(listSimpleDataReload:)]) {
+    if ([self.delegate respondsToSelector:
+         @selector(listSimpleDataReload:)]) {
         [self.delegate listSimpleDataReload:self];
     }
 }
 
 - (void)p_listBeginUpdate
 {
-    if ([self.delegate respondsToSelector:@selector(listSimpleDataWillBeginChange:)]) {
+    if ([self.delegate respondsToSelector:
+         @selector(listSimpleDataWillBeginChange:)]) {
         [self.delegate listSimpleDataWillBeginChange:self];
     }
 }
 
-- (void)p_listInsert:(NSArray *)list
-             atIndex:(NSUInteger)index
+- (void)p_listInsertAtIndexes:(NSIndexSet *)indexes
 {
-    QHAssertReturnVoidOnFailure(QH_IS_ARRAY(list),
-                                @"invalid list: %@\ncall stack: %@",
-                                list, QHCallStackShort());
-    if (list.count == 0) return;
-
-    QHAssertReturnVoidOnFailure(index <= self.list.count,
-                                @"invalid index to insert at: %d/%d\ncall stack: %@",
-                                (int)index, (int)self.list.count,
-                                QHCallStackShort());
-
-    NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(index, list.count)];
-    [self.list insertObjects:list atIndexes:indexes];
-
     if ([self.delegate respondsToSelector:
          @selector(listSimpleData:didChangeListItem:changeType:oldIndex:newIndex:)]) {
 
-        [list enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
             [self.delegate listSimpleData:self
-                        didChangeListItem:list[idx]
+                        didChangeListItem:self[idx]
                                changeType:QHListItemChangeTypeInsert
                                  oldIndex:NSNotFound
-                                 newIndex:index + idx];
+                                 newIndex:idx];
         }];
     }
-}
-
-- (void)p_appendList:(NSArray *)list
-{
-    QHAssertReturnVoidOnFailure(QH_IS_ARRAY(list),
-                                @"invalid list: %@\ncall stack: %@",
-                                list, QHCallStackShort());
-
-    [self p_listBeginUpdate];
-    [self p_listInsert:list atIndex:self.list.count];
-    [self p_listEndUpdate];
 }
 
 - (void)p_listUpdateAtIndexes:(NSIndexSet *)indexes
@@ -147,12 +128,9 @@ NS_ASSUME_NONNULL_BEGIN
          @selector(listSimpleData:didChangeListItem:changeType:oldIndex:newIndex:)]) {
 
         [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
-            QHAssertReturnVoidOnFailure(idx < self.list.count,
-                                        @"invalid update index: %d/%d\ncall stack: %@",
-                                        (int)idx, (int)self.list.count, QHCallStackShort());
 
             [self.delegate listSimpleData:self
-                        didChangeListItem:self.list[idx]
+                        didChangeListItem:self._list[idx]
                                changeType:QHListItemChangeTypeUpdate
                                  oldIndex:idx
                                  newIndex:idx];
@@ -160,59 +138,32 @@ NS_ASSUME_NONNULL_BEGIN
     }
 }
 
-- (void)p_listRemoveAtIndexes:(NSIndexSet *)indexes
+- (void)p_listDeleteAtIndexes:(NSIndexSet *)indexes
 {
-    NSMutableIndexSet *indexesToRemove = [NSMutableIndexSet indexSet];
-    NSMutableDictionary *objectsToRemove = [NSMutableDictionary dictionary];
-
-    [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
-
-        QHAssertReturnVoidOnFailure(idx < self.list.count,
-                                    @"invalid remove index %d/%d\ncall stack: %@",
-                                    (int)idx, (int)self.list.count, QHCallStackShort());
-
-        [indexesToRemove addIndex:idx];
-        [objectsToRemove setObject:self.list[idx] forKey:@(idx)];
-    }];
-
-    [self.list removeObjectsAtIndexes:indexesToRemove];
-
     if ([self.delegate respondsToSelector:
          @selector(listSimpleData:didChangeListItem:changeType:oldIndex:newIndex:)]) {
 
-        [objectsToRemove enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
 
             [self.delegate listSimpleData:self
-                        didChangeListItem:obj
+                        didChangeListItem:self[idx]
                                changeType:QHListItemChangeTypeDelete
-                                 oldIndex:[key unsignedIntegerValue]
+                                 oldIndex:idx
                                  newIndex:NSNotFound];
         }];
     }
 }
 
-- (void)p_listMoveFromIndex:(NSUInteger)oldIndex
-                    toIndex:(NSUInteger)newIndex
-               shouldNotify:(BOOL)shouldNotify
+- (void)p_listMoveFromIndex:(NSUInteger)oldIndex toIndex:(NSUInteger)newIndex
 {
-    QHAssertReturnVoidOnFailure(oldIndex < self.list.count && newIndex < self.list.count,
-                                @"invalid move index pair: %d/%d -> %d/%d\ncall stack: %@",
-                                (int)oldIndex, (int)self.list.count, (int)newIndex,
-                                (int)self.list.count, QHCallStackShort());
+    if ([self.delegate respondsToSelector:
+         @selector(listSimpleData:didChangeListItem:changeType:oldIndex:newIndex:)]) {
 
-    id obj = self.list[oldIndex];
-    [self.list removeObjectAtIndex:oldIndex];
-    [self.list insertObject:obj atIndex:newIndex];
-
-    if (shouldNotify) {
-        if ([self.delegate respondsToSelector:
-             @selector(listSimpleData:didChangeListItem:changeType:oldIndex:newIndex:)]) {
-            [self.delegate listSimpleData:self
-                        didChangeListItem:obj
-                               changeType:QHListItemChangeTypeMove
-                                 oldIndex:oldIndex
-                                 newIndex:newIndex];
-        }
+        [self.delegate listSimpleData:self
+                    didChangeListItem:self[oldIndex]
+                           changeType:QHListItemChangeTypeMove
+                             oldIndex:oldIndex
+                             newIndex:newIndex];
     }
 }
 
@@ -227,17 +178,119 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setListData:(NSArray *)listData
 {
-    [self p_setList:listData];
+    QHAssertReturnVoidOnFailure(QH_IS_ARRAY(listData),
+                                @"invalid listData: %@\ncall stack: %@",
+                                listData, QHCallStackShort());
+
+    [self._list removeAllObjects];
+    [self._list addObjectsFromArray:listData];
+
+    [self p_listReload];
+}
+
+- (void)setHeadItem:(id)headItem
+{
+    self._head = headItem;
+    [self p_listReload];
+}
+
+- (void)setFootItem:(id)footItem
+{
+    self._foot = footItem;
+    [self p_listReload];
 }
 
 - (void)insertListData:(NSArray *)listData atIndex:(NSUInteger)index
 {
-    [self p_listInsert:listData atIndex:index];
+    QHAssertReturnVoidOnFailure(QH_IS_ARRAY(listData),
+                                @"invalid list data: %@\ncall stack: %@",
+                                listData, QHCallStackShort());
+    if (listData.count == 0) return;
+
+    QHAssertReturnVoidOnFailure(index <= self._list.count,
+                                @"invalid index to insert at: %d/%d\ncall stack: %@",
+                                (int)index, (int)self._list.count,
+                                QHCallStackShort());
+    [self p_listBeginUpdate];
+    NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(index, listData.count)];
+    [self._list insertObjects:listData atIndexes:indexes];
+    [self p_listInsertAtIndexes:indexes];
+    [self p_listEndUpdate];
 }
 
 - (void)appendListData:(NSArray *)listData
 {
-    [self p_appendList:listData];
+    [self insertListData:listData atIndex:self._list.count];
+}
+
+- (void)deleteListItemAtIndexes:(NSIndexSet *)indexes
+{
+    indexes = [indexes indexesPassingTest:^BOOL(NSUInteger idx, BOOL * _Nonnull stop) {
+        QHAssertReturnValueOnFailure(NO,
+                                     idx < self._list.count,
+                                     @"invalid delete index: %d/%d\ncall stack: %@",
+                                     (int)idx, (int)self._list.count, QHCallStackShort());
+        return YES;
+    }];
+
+    [self p_listBeginUpdate];
+    [self p_listDeleteAtIndexes:indexes];
+    [self._list removeObjectsAtIndexes:indexes];
+    [self p_listEndUpdate];
+}
+
+- (void)updateListItemAtIndexes:(NSIndexSet *)indexes
+{
+    indexes = [indexes indexesPassingTest:^BOOL(NSUInteger idx, BOOL * _Nonnull stop) {
+        QHAssertReturnValueOnFailure(NO,
+                                     idx < self._list.count,
+                                     @"invalid update index: %d/%d\ncall stack: %@",
+                                     (int)idx, (int)self._list.count, QHCallStackShort());
+        return YES;
+    }];
+    
+    [self p_listBeginUpdate];
+    [self p_listUpdateAtIndexes:indexes];
+    [self p_listEndUpdate];
+}
+
+- (void)setListItemAtIndex:(NSUInteger)index withListItem:(id)listItem
+{
+    QHAssertReturnVoidOnFailure(index < self._list.count,
+                                @"invalid replace index: %d/%d\ncall stack: %@",
+                                (int)index, (int)self._list.count, QHCallStackShort());
+
+    QHAssertReturnVoidOnFailure(listItem,
+                                @"list item is nil\ncall stack: %@",
+                                QHCallStackShort());
+
+    [self p_listBeginUpdate];
+    [self._list replaceObjectAtIndex:index withObject:listItem];
+    [self p_listUpdateAtIndexes:[NSIndexSet indexSetWithIndex:index]];
+    [self p_listEndUpdate];
+}
+
+- (void)moveListItemFromIndex:(NSUInteger)oldIndex
+                      toIndex:(NSUInteger)newIndex
+                 shouldNotify:(BOOL)shouldNotify
+{
+    QHAssertReturnVoidOnFailure(oldIndex < self._list.count && newIndex < self._list.count,
+                                @"invalid move index pair: %d/%d -> %d/%d\ncall stack: %@",
+                                (int)oldIndex, (int)self._list.count, (int)newIndex,
+                                (int)self._list.count, QHCallStackShort());
+
+    id obj = self[oldIndex];
+    if (shouldNotify) {
+        [self p_listBeginUpdate];
+        [self p_listMoveFromIndex:oldIndex toIndex:newIndex];
+        [self._list removeObjectAtIndex:oldIndex];
+        [self._list insertObject:obj atIndex:newIndex];
+        [self p_listEndUpdate];
+    }
+    else {
+        [self._list removeObjectAtIndex:oldIndex];
+        [self._list insertObject:obj atIndex:newIndex];
+    }
 }
 
 @end

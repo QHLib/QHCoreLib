@@ -36,6 +36,10 @@
                                            style:UIBarButtonItemStylePlain
                                           target:self
                                           action:@selector(edit)],
+          [[UIBarButtonItem alloc] initWithTitle:@"delete"
+                                           style:UIBarButtonItemStylePlain
+                                          target:self
+                                          action:@selector(delete)],
           ];
     }) ;
 
@@ -50,6 +54,11 @@
 {
     [self.tableView setEditing:!self.tableView.isEditing
                       animated:YES];
+}
+
+- (void)delete
+{
+    
 }
 
 #pragma mark -
@@ -90,6 +99,18 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
       toIndexPath:(NSIndexPath *)destinationIndexPath
 {
 
+}
+
+#pragma mark -
+
+- (NSString *)nextRowId
+{
+    return $(@"r%d", (int)self.rowId++);
+}
+
+- (NSString *)textForIndexPath:(NSIndexPath *)indexPath
+{
+    return $(@"%d-%d", (int)indexPath.section, (int)indexPath.row);
 }
 
 #pragma mark -
@@ -148,14 +169,83 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
 
 #pragma mark -
 
-- (NSString *)nextRowId
+- (void)listGroupDataReloadAll:(id<QHListGroupData>)listGroupData
 {
-    return $(@"r%d", (int)self.rowId++);
+    [self.tableView reloadData];
 }
 
-- (NSString *)textForIndexPath:(NSIndexPath *)indexPath
+- (void)listGroupDataWillBeginChange:(id<QHListGroupData>)listGroupData
 {
-    return $(@"%d-%d", (int)indexPath.section, (int)indexPath.row);
+    [self.tableView beginUpdates];
+}
+
+- (void)listGroupData:(id<QHListGroupData>)listGroupData
+     didChangeSection:(id<QHListSimpleData> _Nullable)section
+           changeType:(QHListSectionChangeType)changeType
+             oldIndex:(NSUInteger)oldSectionIndex
+             newIndex:(NSUInteger)newSectionIndex
+{
+    switch (changeType) {
+        case QHListSectionChangeTypeInsert: {
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:newSectionIndex]
+                          withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+        }
+        case QHListSectionChangeTypeDelete: {
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:oldSectionIndex]
+                          withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+        }
+
+        case QHListSectionChangeTypeUpdate: {
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:oldSectionIndex]
+                          withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+        }
+
+        default:
+            break;
+    }
+}
+
+- (void)listGroupData:(id<QHListGroupData>)listGroupData
+    didChangeListItem:(id)listItem
+           changeType:(QHListItemChangeType)changeType
+         oldIndexPath:(NSIndexPath * _Nullable)oldIndexPath
+         newIndexPath:(NSIndexPath * _Nullable)newIndexPath
+{
+    switch (changeType) {
+        case QHListItemChangeTypeInsert: {
+            [self.tableView insertRowsAtIndexPaths:@[ newIndexPath  ]
+                                  withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+        }
+
+        case QHListItemChangeTypeDelete: {
+            [self.tableView deleteRowsAtIndexPaths:@[ oldIndexPath ]
+                                  withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+        }
+
+        case QHListItemChangeTypeMove: {
+            [self.tableView moveRowAtIndexPath:oldIndexPath toIndexPath:newIndexPath];
+            break;
+        }
+
+        case QHListItemChangeTypeUpdate: {
+            [self.tableView reloadRowsAtIndexPaths:@[ oldIndexPath ]
+                                  withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+        }
+
+        default:
+            break;
+    }
+}
+
+- (void)listGroupDataDidFinishChange:(id<QHListGroupData>)listGroupData
+{
+    [self.tableView endUpdates];
 }
 
 @end
