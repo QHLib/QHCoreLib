@@ -12,6 +12,8 @@
 
 + (void)qh_disableAnimationDuringBlock:(dispatch_block_t)block;
 
+@property (nonatomic, assign) BOOL needsCalculateSize;
+
 @end
 
 @interface UIView (Frame)

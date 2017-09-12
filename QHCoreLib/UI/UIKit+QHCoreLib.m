@@ -19,6 +19,22 @@
     [UIView setAnimationsEnabled:savedAnimated];
 }
 
+static const void * kNeedsCalculateSizeASOKey = &kNeedsCalculateSizeASOKey;
+
+- (BOOL)needsCalculateSize
+{
+    return [objc_getAssociatedObject(self,
+                                     kNeedsCalculateSizeASOKey) boolValue];
+}
+
+- (void)setNeedsCalculateSize:(BOOL)needsCalculateSize
+{
+    objc_setAssociatedObject(self,
+                             kNeedsCalculateSizeASOKey,
+                             @(needsCalculateSize),
+                             OBJC_ASSOCIATION_RETAIN);
+}
+
 @end
 
 @implementation UIView (Frame)
