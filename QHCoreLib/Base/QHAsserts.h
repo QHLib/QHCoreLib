@@ -40,10 +40,10 @@ typedef void (^QHAssertFunction)(NSString *condition,
                                  NSString *message);
 
 QH_EXTERN void QHSetAssertFunction(QHAssertFunction _Nullable assertFunction);
-QH_EXTERN QHAssertFunction QHGetAssertFunction();
+QH_EXTERN QHAssertFunction QHGetAssertFunction(void);
 
 
-QH_EXTERN BOOL QHIsMainQueue();
+QH_EXTERN BOOL QHIsMainQueue(void);
 
 #define QHAssertMainQueue() QHAssert(QHIsMainQueue(), \
     @"this method must be called on main queue")
@@ -51,7 +51,7 @@ QH_EXTERN BOOL QHIsMainQueue();
 #define QHAssertNotMainQueue() QHAssert(!QHIsMainQueue(), \
     @"this method must not be called on main queue")
 
-QH_EXTERN BOOL QHIsMainThread();
+QH_EXTERN BOOL QHIsMainThread(void);
 
 #define QHAssertMainThread() QHAssert(QHIsMainThread(), \
     @"this method must be called on main thread")

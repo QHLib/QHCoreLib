@@ -15,7 +15,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-QH_EXTERN NSString *QHCoreLibBundleId();
+QH_EXTERN NSString *QHCoreLibBundleId(void);
 
 // check if currently on the main queue
 QH_EXTERN BOOL QHIsMainQueue(void);
@@ -64,7 +64,7 @@ static inline void QHNSLock(id<NSLocking> lock, dispatch_block_t block) {
 
 QH_EXTERN NSData *QHRandomBytes(uint32_t length);
 
-QH_EXTERN uint32_t QHRandomNumber();
+QH_EXTERN uint32_t QHRandomNumber(void);
 
 
 // MIME type of 'ext'
@@ -75,8 +75,8 @@ QH_EXTERN CGSize QHSizeAspectFitInSize(CGSize size, CGSize fitInSize, BOOL shoul
 QH_EXTERN CGSize QHSizeAspectFillInSize(CGSize size, CGSize fillInSize, BOOL shouldEnlarge);
 
 
-QH_EXTERN double QHTimestampInDouble();  // seconds
-QH_EXTERN uint64_t QHTimestampInSeconds();
-QH_EXTERN uint64_t QHTimestampInMilliseconds();
+QH_EXTERN double QHTimestampInDouble(void);  // seconds
+QH_EXTERN uint64_t QHTimestampInSeconds(void);
+QH_EXTERN uint64_t QHTimestampInMilliseconds(void);
 
 NS_ASSUME_NONNULL_END
