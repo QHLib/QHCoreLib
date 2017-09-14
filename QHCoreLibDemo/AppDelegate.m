@@ -12,6 +12,7 @@
 
 #import "EntranceViewController.h"
 #import "QHListDataEntranceController.h"
+#import "QHUIWidgetsController.h"
 
 @interface AppDelegate ()
 
@@ -27,9 +28,11 @@
         EntranceViewController *entranceController = [EntranceViewController new];
         entranceController.controllerTitles = [NSArray arrayWithObjects:
                                                @"QHList",
+                                               @"QHUIWidgets",
                                                nil];
         entranceController.controllerClasses = [NSArray arrayWithObjects:
                                                 [QHListDataEntranceController class],
+                                                [QHUIWidgetsController class],
                                                 nil];
         
         [[UINavigationController alloc] initWithRootViewController:entranceController];

@@ -126,6 +126,11 @@
 		EA5F5AC31F5D51C300013F8F /* QHCoreLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EA1D42F71ED70BA2002177BF /* QHCoreLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EA6D30031F61259300B5B6AA /* QHListData.h in Headers */ = {isa = PBXBuildFile; fileRef = EA6D30011F61259300B5B6AA /* QHListData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA6D30041F61259300B5B6AA /* QHListDataProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = EA6D30021F61259300B5B6AA /* QHListDataProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA9EA4A21F6912BE009EF00C /* QHHintBadge.h in Headers */ = {isa = PBXBuildFile; fileRef = EA9EA49E1F6912BE009EF00C /* QHHintBadge.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA9EA4A31F6912BE009EF00C /* QHHintBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9EA49F1F6912BE009EF00C /* QHHintBadge.m */; };
+		EA9EA4A41F6912BE009EF00C /* QHNumberBadge.h in Headers */ = {isa = PBXBuildFile; fileRef = EA9EA4A01F6912BE009EF00C /* QHNumberBadge.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA9EA4A51F6912BE009EF00C /* QHNumberBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9EA4A11F6912BE009EF00C /* QHNumberBadge.m */; };
+		EA9EA4A81F69149B009EF00C /* QHUIWidgetsController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9EA4A71F69149B009EF00C /* QHUIWidgetsController.m */; };
 		EA9EC84D1F5BA15B00B91430 /* QHNetworkReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = EA9EC84B1F5BA15A00B91430 /* QHNetworkReachabilityManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA9EC84E1F5BA15B00B91430 /* QHNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9EC84C1F5BA15B00B91430 /* QHNetworkReachabilityManager.m */; };
 		EAAA79E91ED9639A008135BE /* QHCoreLibClockEntryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAAA79E81ED9639A008135BE /* QHCoreLibClockEntryTests.m */; };
@@ -320,6 +325,12 @@
 		EA5F5ABE1F5D519E00013F8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA6D30011F61259300B5B6AA /* QHListData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHListData.h; sourceTree = "<group>"; };
 		EA6D30021F61259300B5B6AA /* QHListDataProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHListDataProtocol.h; sourceTree = "<group>"; };
+		EA9EA49E1F6912BE009EF00C /* QHHintBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHHintBadge.h; sourceTree = "<group>"; };
+		EA9EA49F1F6912BE009EF00C /* QHHintBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHHintBadge.m; sourceTree = "<group>"; };
+		EA9EA4A01F6912BE009EF00C /* QHNumberBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHNumberBadge.h; sourceTree = "<group>"; };
+		EA9EA4A11F6912BE009EF00C /* QHNumberBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHNumberBadge.m; sourceTree = "<group>"; };
+		EA9EA4A61F69149B009EF00C /* QHUIWidgetsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = QHUIWidgetsController.h; path = QHCoreLibDemo/QHUIWidgetsController.h; sourceTree = SOURCE_ROOT; };
+		EA9EA4A71F69149B009EF00C /* QHUIWidgetsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = QHUIWidgetsController.m; path = QHCoreLibDemo/QHUIWidgetsController.m; sourceTree = SOURCE_ROOT; };
 		EA9EC84B1F5BA15A00B91430 /* QHNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHNetworkReachabilityManager.h; sourceTree = "<group>"; };
 		EA9EC84C1F5BA15B00B91430 /* QHNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHNetworkReachabilityManager.m; sourceTree = "<group>"; };
 		EAAA79E81ED9639A008135BE /* QHCoreLibClockEntryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHCoreLibClockEntryTests.m; sourceTree = "<group>"; };
@@ -707,6 +718,7 @@
 				EA5F5A6F1F5D4C1000013F8F /* QHNetworkActivityIndicator.h */,
 				EA5F5A701F5D4C1000013F8F /* QHNetworkActivityIndicator.m */,
 				EA6D30001F61259300B5B6AA /* ListData */,
+				EA9EA49D1F6912BE009EF00C /* RedDot */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -719,6 +731,8 @@
 				EA0C78CC1F614F310038CC88 /* EntranceViewController.h */,
 				EA0C78CD1F614F310038CC88 /* EntranceViewController.m */,
 				EA0C78DB1F626F400038CC88 /* ListData */,
+				EA9EA4A61F69149B009EF00C /* QHUIWidgetsController.h */,
+				EA9EA4A71F69149B009EF00C /* QHUIWidgetsController.m */,
 				EA5F5AB91F5D519E00013F8F /* Assets.xcassets */,
 				EA5F5ABB1F5D519E00013F8F /* LaunchScreen.storyboard */,
 				EA5F5ABE1F5D519E00013F8F /* Info.plist */,
@@ -754,6 +768,17 @@
 				EA0C78AE1F6138F60038CC88 /* QHListGroupData.m */,
 			);
 			path = ListData;
+			sourceTree = "<group>";
+		};
+		EA9EA49D1F6912BE009EF00C /* RedDot */ = {
+			isa = PBXGroup;
+			children = (
+				EA9EA49E1F6912BE009EF00C /* QHHintBadge.h */,
+				EA9EA49F1F6912BE009EF00C /* QHHintBadge.m */,
+				EA9EA4A01F6912BE009EF00C /* QHNumberBadge.h */,
+				EA9EA4A11F6912BE009EF00C /* QHNumberBadge.m */,
+			);
+			path = RedDot;
 			sourceTree = "<group>";
 		};
 		EAAA79E71ED9639A008135BE /* Profiler */ = {
@@ -835,6 +860,7 @@
 				EA1D43951ED70CE3002177BF /* AFURLResponseSerialization.h in Headers */,
 				EA0C78C11F613DFE0038CC88 /* QHListGroupData+internal.h in Headers */,
 				EA5F5A711F5D4C1000013F8F /* QHNetworkActivityIndicator.h in Headers */,
+				EA9EA4A21F6912BE009EF00C /* QHHintBadge.h in Headers */,
 				EA0C78B71F61394E0038CC88 /* QHListCommonData.h in Headers */,
 				EA1D438F1ED70CE3002177BF /* AFSecurityPolicy.h in Headers */,
 				EA0C78AF1F6138F60038CC88 /* QHListGroupData.h in Headers */,
@@ -857,6 +883,7 @@
 				EAAE59141EE7DD940084FA69 /* NSObject+QHUserDefaultsProperty.h in Headers */,
 				EA19CC741EEEE18E00C18853 /* QHAsyncTask.h in Headers */,
 				EA5F5A6A1F5D418B00013F8F /* QHUI.h in Headers */,
+				EA9EA4A41F6912BE009EF00C /* QHNumberBadge.h in Headers */,
 				EA1D43071ED70BA3002177BF /* QHCoreLib.h in Headers */,
 				EA1D43881ED70CE3002177BF /* AFHTTPRequestOperation.h in Headers */,
 				EA4FBA961F05FD48004A6FE5 /* QHAsyncParallelTaskGroup+internal.h in Headers */,
@@ -1176,6 +1203,7 @@
 				EA1D43791ED70CE3002177BF /* QHNetwork.m in Sources */,
 				EA1D43651ED70CE3002177BF /* Foundation+QHCoreLib.m in Sources */,
 				EA0C78B01F6138F60038CC88 /* QHListGroupData.m in Sources */,
+				EA9EA4A31F6912BE009EF00C /* QHHintBadge.m in Sources */,
 				EA1D43901ED70CE3002177BF /* AFSecurityPolicy.m in Sources */,
 				EA1D436A1ED70CE3002177BF /* QHDefaultValue.m in Sources */,
 				EA19CC621EE9969000C18853 /* QHNetworkHttpApi.m in Sources */,
@@ -1188,6 +1216,7 @@
 				EA19CC6E1EEA57D900C18853 /* QHNetworkHtmlApi.m in Sources */,
 				EA4FBA9B1F074E64004A6FE5 /* QHAsyncLinkedTaskGroup.m in Sources */,
 				EA0C78B41F61390C0038CC88 /* QHListDataLoader.m in Sources */,
+				EA9EA4A51F6912BE009EF00C /* QHNumberBadge.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1227,6 +1256,7 @@
 				EA0C78CE1F614F310038CC88 /* EntranceViewController.m in Sources */,
 				EA0C78EC1F6271B50038CC88 /* QHListSimpleDataTestController.m in Sources */,
 				EA0C78ED1F6272280038CC88 /* QHListTestTableViewController.m in Sources */,
+				EA9EA4A81F69149B009EF00C /* QHUIWidgetsController.m in Sources */,
 				EA0C78EE1F62722F0038CC88 /* QHListCommonDataTestController.m in Sources */,
 				EA0C78F11F64EC180038CC88 /* QHListGroupDataTestController.m in Sources */,
 				EA5F5AAC1F5D519E00013F8F /* main.m in Sources */,

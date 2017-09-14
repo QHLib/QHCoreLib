@@ -19,5 +19,8 @@
 #import <QHCoreLib/QHNetworkActivityIndicator.h>
 #import <QHCoreLib/QHListData.h>
 
+#import <QHCoreLib/QHHintBadge.h>
+#import <QHCoreLib/QHNumberBadge.h>
+
 
 #endif /* QHUI_h */

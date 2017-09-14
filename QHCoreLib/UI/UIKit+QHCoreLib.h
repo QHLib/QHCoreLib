@@ -18,6 +18,9 @@
 
 @interface UIView (Frame)
 
+@property (nonatomic, assign) CGPoint origin;
+@property (nonatomic, assign) CGSize size;
+
 @property (nonatomic, assign) CGFloat top;
 @property (nonatomic, assign) CGFloat left;
 @property (nonatomic, assign) CGFloat bottom;
