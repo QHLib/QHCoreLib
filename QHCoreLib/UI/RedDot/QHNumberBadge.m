@@ -65,6 +65,7 @@
 {
     if (self.numberLabel.needsCalculateSize) {
         [self.numberLabel sizeToFit];
+        self.numberLabel.needsCalculateSize = NO;
     }
 
     CGFloat viewWidth = MAX(self.config.diameter,

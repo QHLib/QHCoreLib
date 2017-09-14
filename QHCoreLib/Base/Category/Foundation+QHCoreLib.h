@@ -143,4 +143,24 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+QH_EXTERN NSString * const kQHDateFormatFull;
+QH_EXTERN NSString * const kQHDateFormatDate;
+QH_EXTERN NSString * const kQHDateFormatDateChinese;
+QH_EXTERN NSString * const kQHDateFormatTime;
+QH_EXTERN NSString * const kQHDateFormatTimeExtra;
+QH_EXTERN NSString * const kQHDateFormatWeekNumber;
+QH_EXTERN NSString * const kQHDateFormatWeekString;
+
+@interface NSDateFormatter (QHCoreLib)
+
++ (NSDateFormatter *)sharedFormatter:(NSString *)format;
+
+@end
+
+@interface NSDate (QHCoreLib)
+
+- (NSString *)stringFromDateFormat:(NSString *)format;
+
+@end
+
 NS_ASSUME_NONNULL_END

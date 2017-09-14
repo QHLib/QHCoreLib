@@ -173,4 +173,19 @@
           [NSBundle qh_mainBundle_displayName]);
 }
 
+- (void)testDateFormatter
+{
+    // test shared
+    XCTAssert([NSDateFormatter sharedFormatter:@"aaa"] == [NSDateFormatter sharedFormatter:@"aaa"]);
+
+    NSDate *date = [NSDate date];
+    NSLog(@"full: %@", [date stringFromDateFormat:kQHDateFormatFull]);
+    NSLog(@"date: %@", [date stringFromDateFormat:kQHDateFormatDate]);
+    NSLog(@"dateChinese: %@", [date stringFromDateFormat:kQHDateFormatDateChinese]);
+    NSLog(@"time: %@", [date stringFromDateFormat:kQHDateFormatTime]);
+    NSLog(@"timeCxtra: %@", [date stringFromDateFormat:kQHDateFormatTimeExtra]);
+    NSLog(@"weekNumber: %@", [date stringFromDateFormat:kQHDateFormatWeekNumber]);
+    NSLog(@"weekString: %@", [date stringFromDateFormat:kQHDateFormatWeekString]);
+}
+
 @end

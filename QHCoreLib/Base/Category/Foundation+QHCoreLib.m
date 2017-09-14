@@ -9,6 +9,7 @@
 #import "Foundation+QHCoreLib.h"
 
 #import "QHInternal.h"
+#import "QHAsserts.h"
 #import "QHUtil.h"
 #import "QHDefaultValue.h"
 
@@ -393,6 +394,50 @@ QH_DUMMY_CLASS(FoudationQHCoreLib)
 + (NSString * _Nullable)qh_mainBundle_displayName
 {
     return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+}
+
+@end
+
+NSString * const kQHDateFormatFull = @"yyyy-MM-dd HH:mm:ss";
+NSString * const kQHDateFormatDate = @"yyyy-MM-dd";
+NSString * const kQHDateFormatDateChinese = @"yyyy年MM月dd日";
+NSString * const kQHDateFormatTime = @"HH:mm:ss";
+NSString * const kQHDateFormatTimeExtra = @"HH:mm:ss SSS";
+NSString * const kQHDateFormatWeekNumber = @"c";
+NSString * const kQHDateFormatWeekString = @"ccc";
+
+@implementation NSDateFormatter (QHCoreLib)
+
++ (NSDateFormatter *)sharedFormatter:(NSString *)format
+{
+    static dispatch_semaphore_t lock;
+    static NSMutableDictionary *sharedFormatters;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        lock = dispatch_semaphore_create(1);
+        sharedFormatters = [NSMutableDictionary dictionary];
+    });
+
+    __block NSDateFormatter *ret = nil;
+    QHDispatchSemaphoreLock(lock, ^{
+        ret = [sharedFormatters objectForKey:format];
+        if (!ret) {
+            ret = [[self alloc] init];
+            ret.dateFormat = format;
+            [sharedFormatters qh_setObject:ret forKey:format];
+        }
+    });
+
+    return ret;
+}
+
+@end
+
+@implementation NSDate (QHCoreLib)
+
+- (NSString *)stringFromDateFormat:(NSString *)format
+{
+    return [[NSDateFormatter sharedFormatter:format] stringFromDate:self];
 }
 
 @end
