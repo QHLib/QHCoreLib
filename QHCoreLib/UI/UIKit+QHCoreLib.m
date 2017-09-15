@@ -163,6 +163,48 @@ static const void * kNeedsCalculateSizeASOKey = &kNeedsCalculateSizeASOKey;
 
 @end
 
+
+@implementation UIView (lockBackgroundColor)
+
+static const void * kLockedBackgroundColorKVOKey = &kLockedBackgroundColorKVOKey;
+
+- (void)qh_setBackgroundColor_inject:(UIColor *)color
+{
+    BOOL locked = [objc_getAssociatedObject(self,
+                                            kLockedBackgroundColorKVOKey) boolValue];
+    if (locked) {
+        return;
+    }
+    else {
+        [self qh_setBackgroundColor_inject:color];
+    }
+}
+
+- (void)qh_lockBackgroundColor;
+{
+    objc_setAssociatedObject(self,
+                             kLockedBackgroundColorKVOKey,
+                             @(YES),
+                             OBJC_ASSOCIATION_RETAIN);
+
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        Method old_setter = class_getInstanceMethod([self class], @selector(setBackgroundColor:));
+        Method new_setter = class_getInstanceMethod([self class], @selector(qh_setBackgroundColor_inject:));
+        method_exchangeImplementations(old_setter, new_setter);
+    });
+}
+
+- (void)qh_unlockBackgroundColor
+{
+    objc_setAssociatedObject(self,
+                             kLockedBackgroundColorKVOKey,
+                             @(NO),
+                             OBJC_ASSOCIATION_RETAIN);
+}
+
+@end
+
 @implementation UIColor (Hex)
 
 + (UIColor *)colorWithHex:(NSUInteger)hex
@@ -205,4 +247,6 @@ static const void * kNeedsCalculateSizeASOKey = &kNeedsCalculateSizeASOKey;
 
 @end
 
+@implementation UITableViewCell (QHCoreLib)
 
+@end

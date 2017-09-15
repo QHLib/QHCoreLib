@@ -717,6 +717,7 @@
 				EA5F5A6C1F5D426100013F8F /* UIKit+QHCoreLib.m */,
 				EA5F5A6F1F5D4C1000013F8F /* QHNetworkActivityIndicator.h */,
 				EA5F5A701F5D4C1000013F8F /* QHNetworkActivityIndicator.m */,
+				EA7E92DC1F6B78F700245283 /* View */,
 				EA6D30001F61259300B5B6AA /* ListData */,
 				EA9EA49D1F6912BE009EF00C /* RedDot */,
 			);
@@ -768,6 +769,13 @@
 				EA0C78AE1F6138F60038CC88 /* QHListGroupData.m */,
 			);
 			path = ListData;
+			sourceTree = "<group>";
+		};
+		EA7E92DC1F6B78F700245283 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		EA9EA49D1F6912BE009EF00C /* RedDot */ = {

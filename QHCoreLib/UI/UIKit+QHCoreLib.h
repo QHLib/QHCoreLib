@@ -34,6 +34,13 @@
 
 @end
 
+@interface UIView (backgroundColorLocker)
+
+- (void)qh_lockBackgroundColor;
+- (void)qh_unlockBackgroundColor;
+
+@end
+
 @interface UIColor (Hex)
 
 + (UIColor *)colorWithHex:(NSUInteger)hex;
@@ -47,5 +54,9 @@
 + (UIImage *)imageWithColor:(UIColor *)color;
 
 + (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size;
+
+@end
+
+@interface UITableViewCell (QHCoreLib)
 
 @end
