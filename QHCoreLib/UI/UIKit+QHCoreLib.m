@@ -272,14 +272,22 @@ static const void * kLockedBackgroundColorKVOKey = &kLockedBackgroundColorKVOKey
 
 @implementation UITableViewCell (QHCoreLib)
 
-- (CGFloat)qh_seperatorLineDefaultHeight
+static const void * kQHTableViewCellSeperatorLineHeightKVOKey = &kQHTableViewCellSeperatorLineHeightKVOKey;
+
+- (CGFloat)qh_seperatorLineHeight
 {
- static CGFloat height = 0.0;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        height = 1.0 / [UIScreen mainScreen].scale;
-    });
-    return height;
+    NSNumber *height = objc_getAssociatedObject(self, kQHTableViewCellSeperatorLineHeightKVOKey);
+    return height ? [height floatValue] : (1.0 / [UIScreen mainScreen].scale);
+}
+
+- (void)setQh_seperatorLineHeight:(CGFloat)qh_seperatorLineHeight
+{
+    objc_setAssociatedObject(self,
+                             kQHTableViewCellSeperatorLineHeightKVOKey,
+                             @(qh_seperatorLineHeight),
+                             OBJC_ASSOCIATION_RETAIN);
+
+    [self qh_layoutSeperatorLines];
 }
 
 #pragma mark - top
@@ -292,9 +300,9 @@ static const void * kQHTableViewCellTopSeperatorLineKVOKey = &kQHTableViewCellTo
     if (view == nil) {
         UIEdgeInsets insets = self.qh_topSeperatorLineInsets;
         view = [[QHTableViewCellSeperatorLine alloc] initWithFrame:CGRectMake(insets.left,
-                                                                              -[self qh_seperatorLineDefaultHeight],
+                                                                              -[self qh_seperatorLineHeight],
                                                                               self.width - insets.left - insets.right,
-                                                                              [self qh_seperatorLineDefaultHeight])];
+                                                                              [self qh_seperatorLineHeight])];
         objc_setAssociatedObject(self,
                                  kQHTableViewCellTopSeperatorLineKVOKey,
                                  view,
@@ -328,9 +336,9 @@ static const void * kQHTableViewCellTopSeperatorLineInsetsKVOKey = &kQHTableView
     UIView *view = objc_getAssociatedObject(self, kQHTableViewCellTopSeperatorLineKVOKey);
     if (view) {
         view.frame = CGRectMake(insets.left,
-                                - [self qh_seperatorLineDefaultHeight] / 2.0,
+                                - [self qh_seperatorLineHeight] / 2.0,
                                 self.width - insets.left - insets.right,
-                                [self qh_seperatorLineDefaultHeight]);
+                                [self qh_seperatorLineHeight]);
     }
 }
 
@@ -346,7 +354,7 @@ static const void * kQHTableViewCellBottomSeperatorLineKVOKey = &kQHTableViewCel
         view = [[QHTableViewCellSeperatorLine alloc] initWithFrame:CGRectMake(insets.left,
                                                                               self.height,
                                                                               self.width - insets.left - insets.right,
-                                                                              [self qh_seperatorLineDefaultHeight])];
+                                                                              [self qh_seperatorLineHeight])];
         objc_setAssociatedObject(self,
                                  kQHTableViewCellBottomSeperatorLineKVOKey,
                                  view,
@@ -380,9 +388,9 @@ static const void * kQHTableViewCellBottomSeperatorLineInsetsKVOKey = &kQHTableV
     UIView *view = objc_getAssociatedObject(self, kQHTableViewCellBottomSeperatorLineKVOKey);
     if (view) {
         view.frame = CGRectMake(insets.left,
-                                self.height - [self qh_seperatorLineDefaultHeight] / 2.0,
+                                self.height - [self qh_seperatorLineHeight] / 2.0,
                                 self.width - insets.left - insets.right,
-                                [self qh_seperatorLineDefaultHeight]);
+                                [self qh_seperatorLineHeight]);
     }
 }
 

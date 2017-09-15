@@ -67,6 +67,8 @@
 
 @interface UITableViewCell (QHCoreLib)
 
+@property (nonatomic, assign) CGFloat qh_seperatorLineHeight;
+
 @property (nonatomic, readonly) QHTableViewCellSeperatorLine *qh_topSeperatorLine;
 @property (nonatomic, assign) UIEdgeInsets qh_topSeperatorLineInsets;
 

@@ -80,6 +80,8 @@
 
     cell.textLabel.text = [self textForIndexPath:indexPath];
 
+    cell.qh_seperatorLineHeight = 0.5;
+    
     cell.qh_topSeperatorLineInsets = UIEdgeInsetsMake(0, 20, 0, 20);
     [cell.qh_topSeperatorLine qh_setLockedBackgroundColor:[UIColor lightGrayColor]];
 
