@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QHCoreLib/QHDefines.h>
 
 @interface UIView (QHCoreLib)
 
@@ -57,12 +58,19 @@
 
 @end
 
+@interface QHTableViewCellSeperatorLine : UIImageView
+
+- (void)qh_setLockedBackgroundColor:(UIColor *)backgroundColor;
+- (void)setBackgroundColor:(UIColor *)backgroundColor QH_DEPRECATED("use `qh_setLockedBackgroundColor:`");
+
+@end
+
 @interface UITableViewCell (QHCoreLib)
 
-@property (nonatomic, readonly) UIView *qh_topSeperatorLine;
+@property (nonatomic, readonly) QHTableViewCellSeperatorLine *qh_topSeperatorLine;
 @property (nonatomic, assign) UIEdgeInsets qh_topSeperatorLineInsets;
 
-@property (nonatomic, readonly) UIView *qh_bottomSeperatorLine;
+@property (nonatomic, readonly) QHTableViewCellSeperatorLine *qh_bottomSeperatorLine;
 @property (nonatomic, assign) UIEdgeInsets qh_bottomSeperatorLineInsets;
 
 - (void)qh_layoutSeperatorLines;

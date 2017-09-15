@@ -81,12 +81,10 @@
     cell.textLabel.text = [self textForIndexPath:indexPath];
 
     cell.qh_topSeperatorLineInsets = UIEdgeInsetsMake(0, 20, 0, 20);
-    cell.qh_topSeperatorLine.backgroundColor = [UIColor greenColor];
-    [cell.qh_topSeperatorLine qh_lockBackgroundColor];
+    [cell.qh_topSeperatorLine qh_setLockedBackgroundColor:[UIColor lightGrayColor]];
 
     cell.qh_bottomSeperatorLineInsets = UIEdgeInsetsMake(0, 20, 0, 20);
-    cell.qh_bottomSeperatorLine.backgroundColor = [UIColor greenColor];
-    [cell.qh_bottomSeperatorLine qh_lockBackgroundColor];
+    [cell.qh_bottomSeperatorLine qh_setLockedBackgroundColor:[UIColor lightGrayColor]];
 
     QHDispatchAsyncMain(^{
         [cell qh_layoutSeperatorLines];
