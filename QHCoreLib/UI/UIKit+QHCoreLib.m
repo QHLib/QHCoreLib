@@ -249,4 +249,124 @@ static const void * kLockedBackgroundColorKVOKey = &kLockedBackgroundColorKVOKey
 
 @implementation UITableViewCell (QHCoreLib)
 
+- (CGFloat)qh_seperatorLineDefaultHeight
+{
+ static CGFloat height = 0.0;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        height = 1.0 / [UIScreen mainScreen].scale;
+    });
+    return height;
+}
+
+#pragma mark - top
+
+static const void * kQHTableViewCellTopSeperatorLineKVOKey = &kQHTableViewCellTopSeperatorLineKVOKey;
+
+- (UIView *)qh_topSeperatorLine
+{
+    UIView *view = objc_getAssociatedObject(self, kQHTableViewCellTopSeperatorLineKVOKey);
+    if (view == nil) {
+        UIEdgeInsets insets = self.qh_topSeperatorLineInsets;
+        view = [[UIView alloc] initWithFrame:CGRectMake(insets.left,
+                                                        -[self qh_seperatorLineDefaultHeight],
+                                                        self.width - insets.left - insets.right,
+                                                        [self qh_seperatorLineDefaultHeight])];
+        objc_setAssociatedObject(self,
+                                 kQHTableViewCellTopSeperatorLineKVOKey,
+                                 view,
+                                 OBJC_ASSOCIATION_RETAIN);
+        [self.contentView addSubview:view];
+    }
+    return view;
+}
+
+static const void * kQHTableViewCellTopSeperatorLineInsetsKVOKey = &kQHTableViewCellTopSeperatorLineInsetsKVOKey;
+
+- (UIEdgeInsets)qh_topSeperatorLineInsets
+{
+    NSValue *value = objc_getAssociatedObject(self, kQHTableViewCellTopSeperatorLineInsetsKVOKey);
+    return value ? [value UIEdgeInsetsValue] : UIEdgeInsetsZero;
+}
+
+- (void)setQh_topSeperatorLineInsets:(UIEdgeInsets)qh_topSeperatorLineInsets
+{
+    objc_setAssociatedObject(self,
+                             kQHTableViewCellTopSeperatorLineInsetsKVOKey,
+                             [NSValue valueWithUIEdgeInsets:qh_topSeperatorLineInsets],
+                             OBJC_ASSOCIATION_RETAIN);
+
+    UIView *view = objc_getAssociatedObject(self, kQHTableViewCellTopSeperatorLineKVOKey);
+    if (view) {
+        [self qh_layoutTopSeperatorLine];
+    }
+}
+
+- (void)qh_layoutTopSeperatorLine
+{
+    UIEdgeInsets insets = self.qh_topSeperatorLineInsets;
+    self.qh_topSeperatorLine.frame = CGRectMake(insets.left,
+                                                - [self qh_seperatorLineDefaultHeight] / 2.0,
+                                                self.width - insets.left - insets.right,
+                                                [self qh_seperatorLineDefaultHeight]);
+}
+
+#pragma mark - bottom
+
+static const void * kQHTableViewCellBottomSeperatorLineKVOKey = &kQHTableViewCellBottomSeperatorLineKVOKey;
+
+- (UIView *)qh_bottomSeperatorLine
+{
+    UIView *view = objc_getAssociatedObject(self, kQHTableViewCellBottomSeperatorLineKVOKey);
+    if (view == nil) {
+        UIEdgeInsets insets = self.qh_bottomSeperatorLineInsets;
+        view = [[UIView alloc] initWithFrame:CGRectMake(insets.left,
+                                                        self.height,
+                                                        self.width - insets.left - insets.right,
+                                                        [self qh_seperatorLineDefaultHeight])];
+        objc_setAssociatedObject(self,
+                                 kQHTableViewCellBottomSeperatorLineKVOKey,
+                                 view,
+                                 OBJC_ASSOCIATION_RETAIN);
+        [self.contentView addSubview:view];
+    }
+    return view;
+}
+
+static const void * kQHTableViewCellBottomSeperatorLineInsetsKVOKey = &kQHTableViewCellBottomSeperatorLineInsetsKVOKey;
+
+- (UIEdgeInsets)qh_bottomSeperatorLineInsets
+{
+    NSValue *value = objc_getAssociatedObject(self, kQHTableViewCellBottomSeperatorLineInsetsKVOKey);
+    return value ? [value UIEdgeInsetsValue] : UIEdgeInsetsZero;
+}
+
+- (void)setQh_bottomSeperatorLineInsets:(UIEdgeInsets)qh_bottomSeperatorLineInsets
+{
+    objc_setAssociatedObject(self,
+                             kQHTableViewCellBottomSeperatorLineInsetsKVOKey,
+                             [NSValue valueWithUIEdgeInsets:qh_bottomSeperatorLineInsets],
+                             OBJC_ASSOCIATION_RETAIN);
+
+    UIView *view = objc_getAssociatedObject(self, kQHTableViewCellBottomSeperatorLineKVOKey);
+    if (view) {
+        [self qh_layoutBottomSeperatorLine];
+    }
+}
+
+- (void)qh_layoutBottomSeperatorLine
+{
+    UIEdgeInsets insets = self.qh_bottomSeperatorLineInsets;
+    self.qh_bottomSeperatorLine.frame = CGRectMake(insets.left,
+                                                   self.height - [self qh_seperatorLineDefaultHeight] / 2.0,
+                                                   self.width - insets.left - insets.right,
+                                                   [self qh_seperatorLineDefaultHeight]);
+}
+
+- (void)qh_layoutSeperatorLines
+{
+    [self qh_layoutTopSeperatorLine];
+    [self qh_layoutBottomSeperatorLine];
+}
+
 @end

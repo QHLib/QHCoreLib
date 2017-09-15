@@ -59,4 +59,12 @@
 
 @interface UITableViewCell (QHCoreLib)
 
+@property (nonatomic, readonly) UIView *qh_topSeperatorLine;
+@property (nonatomic, assign) UIEdgeInsets qh_topSeperatorLineInsets;
+
+@property (nonatomic, readonly) UIView *qh_bottomSeperatorLine;
+@property (nonatomic, assign) UIEdgeInsets qh_bottomSeperatorLineInsets;
+
+- (void)qh_layoutSeperatorLines;
+
 @end

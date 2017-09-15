@@ -25,6 +25,7 @@
 
     [self.tableView registerClass:[UITableViewCell class]
            forCellReuseIdentifier:@"reuse"];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
     self.navigationItem.rightBarButtonItems = ({
         @[
@@ -79,7 +80,24 @@
 
     cell.textLabel.text = [self textForIndexPath:indexPath];
 
+    cell.qh_topSeperatorLineInsets = UIEdgeInsetsMake(0, 20, 0, 20);
+    cell.qh_topSeperatorLine.backgroundColor = [UIColor greenColor];
+    [cell.qh_topSeperatorLine qh_lockBackgroundColor];
+
+    cell.qh_bottomSeperatorLineInsets = UIEdgeInsetsMake(0, 20, 0, 20);
+    cell.qh_bottomSeperatorLine.backgroundColor = [UIColor greenColor];
+    [cell.qh_bottomSeperatorLine qh_lockBackgroundColor];
+
+    QHDispatchAsyncMain(^{
+        [cell qh_layoutSeperatorLines];
+    });
+
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
