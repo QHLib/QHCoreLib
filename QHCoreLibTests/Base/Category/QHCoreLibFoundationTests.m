@@ -176,16 +176,82 @@
 - (void)testDateFormatter
 {
     // test shared
-    XCTAssert([NSDateFormatter sharedFormatter:@"aaa"] == [NSDateFormatter sharedFormatter:@"aaa"]);
+    XCTAssert([NSDateFormatter qh_sharedFormatter:@"aaa"] == [NSDateFormatter qh_sharedFormatter:@"aaa"]);
 
     NSDate *date = [NSDate date];
-    NSLog(@"full: %@", [date stringFromDateFormat:kQHDateFormatFull]);
-    NSLog(@"date: %@", [date stringFromDateFormat:kQHDateFormatDate]);
-    NSLog(@"dateChinese: %@", [date stringFromDateFormat:kQHDateFormatDateChinese]);
-    NSLog(@"time: %@", [date stringFromDateFormat:kQHDateFormatTime]);
-    NSLog(@"timeCxtra: %@", [date stringFromDateFormat:kQHDateFormatTimeExtra]);
-    NSLog(@"weekNumber: %@", [date stringFromDateFormat:kQHDateFormatWeekNumber]);
-    NSLog(@"weekString: %@", [date stringFromDateFormat:kQHDateFormatWeekString]);
+    NSLog(@"full: %@", [date qh_stringFromDateFormat:kQHDateFormatFull]);
+    NSLog(@"date: %@", [date qh_stringFromDateFormat:kQHDateFormatDate]);
+    NSLog(@"dateChinese: %@", [date qh_stringFromDateFormat:kQHDateFormatDateChinese]);
+    NSLog(@"monthDay: %@", [date qh_stringFromDateFormat:kQHDateFormatMouthDay]);
+    NSLog(@"monthDayChinese: %@", [date qh_stringFromDateFormat:kQHDateFormatMouthDayChinese]);
+    NSLog(@"time: %@", [date qh_stringFromDateFormat:kQHDateFormatTime]);
+    NSLog(@"timeCxtra: %@", [date qh_stringFromDateFormat:kQHDateFormatTimeExtra]);
+    NSLog(@"weekNumber: %@", [date qh_stringFromDateFormat:kQHDateFormatWeekNumber]);
+    NSLog(@"weekStringShort: %@", [date qh_stringFromDateFormat:kQHDateFormatWeekStringShort]);
+    NSLog(@"weekStringLong: %@", [date qh_stringFromDateFormat:kQHDateFormatWeekStringLong]);
+}
+
+- (void)testDateUnitCheck
+{
+    NSCalendar *calenar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+
+    NSDateComponents *now = [calenar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitWeekOfYear | NSCalendarUnitWeekday | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute ) fromDate:[NSDate date]];
+
+    NSDate *date = [calenar dateWithEra:1 year:now.year month:now.month day:now.day hour:now.hour minute:now.minute second:now.second nanosecond:0];
+    XCTAssertTrue([date qh_isWithinMinute]);
+    XCTAssertTrue([date qh_isWithinHour]);
+    XCTAssertTrue([date qh_isWithinDay]);
+    XCTAssertTrue([date qh_isWithinWeek]);
+    XCTAssertTrue([date qh_isWithinWestWeek]);
+    XCTAssertTrue([date qh_isWithinMonth]);
+    XCTAssertTrue([date qh_isWithinYear]);
+
+    date = [calenar dateWithEra:1 year:now.year month:now.month day:now.day hour:now.hour minute:now.minute - 1 second:now.second nanosecond:0];
+    XCTAssertFalse([date qh_isWithinMinute]);
+    XCTAssertTrue([date qh_isWithinHour]);
+    XCTAssertTrue([date qh_isWithinDay]);
+    XCTAssertTrue([date qh_isWithinMonth]);
+    XCTAssertTrue([date qh_isWithinYear]);
+
+    date = [calenar dateWithEra:1 year:now.year month:now.month day:now.day hour:now.hour-1 minute:now.minute - 1 second:now.second nanosecond:0];
+    XCTAssertFalse([date qh_isWithinMinute]);
+    XCTAssertFalse([date qh_isWithinHour]);
+    XCTAssertTrue([date qh_isWithinDay]);
+    XCTAssertTrue([date qh_isWithinMonth]);
+    XCTAssertTrue([date qh_isWithinYear]);
+
+    date = [calenar dateWithEra:1 year:now.year month:now.month day:now.day-1 hour:now.hour-1 minute:now.minute - 1 second:now.second nanosecond:0];
+    XCTAssertFalse([date qh_isWithinMinute]);
+    XCTAssertFalse([date qh_isWithinHour]);
+    XCTAssertFalse([date qh_isWithinDay]);
+    XCTAssertTrue([date qh_isWithinMonth]);
+    XCTAssertTrue([date qh_isWithinYear]);
+
+    date = [calenar dateWithEra:1 year:now.year month:now.month-1 day:now.day-1 hour:now.hour-1 minute:now.minute - 1 second:now.second nanosecond:0];
+    XCTAssertFalse([date qh_isWithinMinute]);
+    XCTAssertFalse([date qh_isWithinHour]);
+    XCTAssertFalse([date qh_isWithinDay]);
+    XCTAssertFalse([date qh_isWithinMonth]);
+    XCTAssertTrue([date qh_isWithinYear]);
+
+    date = [calenar dateWithEra:1 year:now.year-1 month:now.month-1 day:now.day-1 hour:now.hour-1 minute:now.minute - 1 second:now.second nanosecond:0];
+    XCTAssertFalse([date qh_isWithinMinute]);
+    XCTAssertFalse([date qh_isWithinHour]);
+    XCTAssertFalse([date qh_isWithinDay]);
+    XCTAssertFalse([date qh_isWithinMonth]);
+    XCTAssertFalse([date qh_isWithinYear]);
+
+    date = [calenar dateWithEra:1 yearForWeekOfYear:now.year weekOfYear:now.weekOfYear weekday:now.weekday hour:0 minute:0 second:0 nanosecond:0];
+    XCTAssertTrue([date qh_isWithinWestWeek]);
+    XCTAssertTrue([date qh_isWithinWeek]);
+
+    date = [calenar dateWithEra:1 yearForWeekOfYear:now.year weekOfYear:now.weekOfYear-1 weekday:now.weekday hour:0 minute:0 second:0 nanosecond:0];
+    XCTAssertFalse([date qh_isWithinWestWeek]);
+
+    // 上个礼拜天
+    date = [calenar dateWithEra:1 year:now.year-1 month:now.month-1 day:now.day-now.weekday+1 hour:now.hour-1 minute:now.minute - 1 second:now.second nanosecond:0];
+    XCTAssertFalse([date qh_isWithinWeek]);
+    XCTAssert([date qh_weekDayIndex] == 7);
 }
 
 @end

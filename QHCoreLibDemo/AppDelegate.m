@@ -41,6 +41,11 @@
 
     [QHNetwork sharedInstance];
 
+    NSDate *date = [NSDate date];
+    NSLog(@"weekNumber: %@", [date qh_stringFromDateFormat:kQHDateFormatWeekNumber]);
+    NSLog(@"weekStringShort: %@", [date qh_stringFromDateFormat:kQHDateFormatWeekStringShort]);
+    NSLog(@"weekStringLong: %@", [date qh_stringFromDateFormat:kQHDateFormatWeekStringLong]);
+
 #if 0
 #warning testing network indicator with polling
     [self p_testNetworkIndicator];

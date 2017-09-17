@@ -400,15 +400,20 @@ QH_DUMMY_CLASS(FoudationQHCoreLib)
 
 NSString * const kQHDateFormatFull = @"yyyy-MM-dd HH:mm:ss";
 NSString * const kQHDateFormatDate = @"yyyy-MM-dd";
-NSString * const kQHDateFormatDateChinese = @"yyyy年MM月dd日";
+NSString * const kQHDateFormatDateChinese = @"yyyy年M月d日";
+NSString * const kQHDateFormatDateShort = @"yy-MM-dd";
+NSString * const kQHDateFormatDateShortChinese = @"yy年M月d日";
+NSString * const kQHDateFormatMouthDay = @"MM-dd";
+NSString * const kQHDateFormatMouthDayChinese = @"M月d日";
 NSString * const kQHDateFormatTime = @"HH:mm:ss";
 NSString * const kQHDateFormatTimeExtra = @"HH:mm:ss SSS";
 NSString * const kQHDateFormatWeekNumber = @"c";
-NSString * const kQHDateFormatWeekString = @"ccc";
+NSString * const kQHDateFormatWeekStringShort = @"ccc";
+NSString * const kQHDateFormatWeekStringLong = @"cccc";
 
 @implementation NSDateFormatter (QHCoreLib)
 
-+ (NSDateFormatter *)sharedFormatter:(NSString *)format
++ (NSDateFormatter *)qh_sharedFormatter:(NSString *)format
 {
     static dispatch_semaphore_t lock;
     static NSMutableDictionary *sharedFormatters;
@@ -435,9 +440,75 @@ NSString * const kQHDateFormatWeekString = @"ccc";
 
 @implementation NSDate (QHCoreLib)
 
-- (NSString *)stringFromDateFormat:(NSString *)format
+- (NSString *)qh_stringFromDateFormat:(NSString *)format
 {
-    return [[NSDateFormatter sharedFormatter:format] stringFromDate:self];
+    return [[NSDateFormatter qh_sharedFormatter:format] stringFromDate:self];
+}
+
+- (NSCalendar *)qh_sharedCalendar
+{
+    static NSCalendar *calendar = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    });
+    return calendar;
+}
+
+- (BOOL)qh_isWithinYear
+{
+    return [[self qh_sharedCalendar] isDate:self equalToDate:[NSDate date] toUnitGranularity:NSCalendarUnitYear];
+}
+
+- (BOOL)qh_isWithinMonth
+{
+    return [[self qh_sharedCalendar] isDate:self equalToDate:[NSDate date] toUnitGranularity:NSCalendarUnitMonth];
+}
+
+- (BOOL)qh_isWithinWeek
+{
+    NSTimeInterval intervalNow = [[NSDate date] timeIntervalSinceReferenceDate];
+    NSTimeInterval intervalThis = [self timeIntervalSinceReferenceDate];
+
+    static NSTimeInterval weekInSeconds = 60 * 60 * 24 * 7;
+
+    return ((int)(intervalNow / weekInSeconds)) == ((int)(intervalThis / weekInSeconds));
+}
+
+- (BOOL)qh_isWithinWestWeek
+{
+    NSCalendarUnit units = (NSCalendarUnitYear
+                            | NSCalendarUnitMonth
+                            | NSCalendarUnitWeekOfYear);
+
+    NSDateComponents *now = [[self qh_sharedCalendar] components:units fromDate:[NSDate date]];
+    NSDateComponents *this = [[self qh_sharedCalendar] components:units fromDate:self];
+
+    return (now.year == this.year
+            && now.month == this.month
+            && now.weekOfYear == this.weekOfYear);
+}
+
+- (NSInteger)qh_weekDayIndex
+{
+    NSInteger index = [[self qh_sharedCalendar] component:NSCalendarUnitWeekday fromDate:self];
+    return ((index + 5) % 7) + 1;
+}
+
+- (BOOL)qh_isWithinDay
+{
+    return [[self qh_sharedCalendar] isDate:self equalToDate:[NSDate date] toUnitGranularity:NSCalendarUnitDay];
+}
+
+- (BOOL)qh_isWithinHour
+
+{
+    return [[self qh_sharedCalendar] isDate:self equalToDate:[NSDate date] toUnitGranularity:NSCalendarUnitHour];
+}
+
+- (BOOL)qh_isWithinMinute
+{
+    return [[self qh_sharedCalendar] isDate:self equalToDate:[NSDate date] toUnitGranularity:NSCalendarUnitMinute];
 }
 
 @end

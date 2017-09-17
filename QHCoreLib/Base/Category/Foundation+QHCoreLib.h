@@ -146,20 +146,39 @@ NS_ASSUME_NONNULL_BEGIN
 QH_EXTERN NSString * const kQHDateFormatFull;
 QH_EXTERN NSString * const kQHDateFormatDate;
 QH_EXTERN NSString * const kQHDateFormatDateChinese;
+QH_EXTERN NSString * const kQHDateFormatDateShort;
+QH_EXTERN NSString * const kQHDateFormatDateShortChinese;
+QH_EXTERN NSString * const kQHDateFormatMouthDay;
+QH_EXTERN NSString * const kQHDateFormatMouthDayChinese;
 QH_EXTERN NSString * const kQHDateFormatTime;
 QH_EXTERN NSString * const kQHDateFormatTimeExtra;
 QH_EXTERN NSString * const kQHDateFormatWeekNumber;
-QH_EXTERN NSString * const kQHDateFormatWeekString;
+QH_EXTERN NSString * const kQHDateFormatWeekStringShort;
+QH_EXTERN NSString * const kQHDateFormatWeekStringLong;
+
 
 @interface NSDateFormatter (QHCoreLib)
 
-+ (NSDateFormatter *)sharedFormatter:(NSString *)format;
++ (NSDateFormatter *)qh_sharedFormatter:(NSString *)format;
 
 @end
 
 @interface NSDate (QHCoreLib)
 
-- (NSString *)stringFromDateFormat:(NSString *)format;
+- (NSString *)qh_stringFromDateFormat:(NSString *)format;
+
+- (BOOL)qh_isWithinYear;
+- (BOOL)qh_isWithinMonth;
+
+- (BOOL)qh_isWithinWeek;
+- (BOOL)qh_isWithinWestWeek;
+// 星期一~星期日:1-7
+- (NSInteger)qh_weekDayIndex;
+
+- (BOOL)qh_isWithinDay;
+- (BOOL)qh_isWithinHour;
+- (BOOL)qh_isWithinMinute;
+
 
 @end
 
