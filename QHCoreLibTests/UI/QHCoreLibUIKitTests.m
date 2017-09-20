@@ -47,4 +47,15 @@
     XCTAssert(view.needsCalculateSize == NO);
 }
 
+- (void)testUI_reuseIdentifier
+{
+    XCTAssertEqualObjects([UITableViewCell qh_reuseIdentifier], @"UITableViewCell");
+
+    XCTAssertEqualObjects([UITableViewCell qh_reuseIdentifierWithPostfix:@"hahaha"], @"UITableViewCell_hahaha");
+
+    XCTAssertEqualObjects([UICollectionViewCell qh_reuseIdentifier], @"UICollectionViewCell");
+
+    XCTAssertEqualObjects([UICollectionViewCell qh_reuseIdentifierWithPostfix:@"hahaha"], @"UICollectionViewCell_hahaha");
+}
+
 @end

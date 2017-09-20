@@ -67,6 +67,9 @@
 
 @interface UITableViewCell (QHCoreLib)
 
++ (NSString *)qh_reuseIdentifier;
++ (NSString *)qh_reuseIdentifierWithPostfix:(NSString *)postfix;
+
 @property (nonatomic, assign) CGFloat qh_seperatorLineHeight;
 
 @property (nonatomic, readonly) QHTableViewCellSeperatorLine *qh_topSeperatorLine;
@@ -76,5 +79,12 @@
 @property (nonatomic, assign) UIEdgeInsets qh_bottomSeperatorLineInsets;
 
 - (void)qh_layoutSeperatorLines;
+
+@end
+
+@interface UICollectionViewCell (QHCoreLib)
+
++ (NSString *)qh_reuseIdentifier;
++ (NSString *)qh_reuseIdentifierWithPostfix:(NSString *)postfix;
 
 @end

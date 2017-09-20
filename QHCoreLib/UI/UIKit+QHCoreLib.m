@@ -272,6 +272,16 @@ static const void * kLockedBackgroundColorKVOKey = &kLockedBackgroundColorKVOKey
 
 @implementation UITableViewCell (QHCoreLib)
 
++ (NSString *)qh_reuseIdentifier
+{
+    return NSStringFromClass(self);
+}
+
++ (NSString *)qh_reuseIdentifierWithPostfix:(NSString *)postfix
+{
+    return $(@"%@_%@", [self qh_reuseIdentifier], postfix);
+}
+
 static const void * kQHTableViewCellSeperatorLineHeightKVOKey = &kQHTableViewCellSeperatorLineHeightKVOKey;
 
 - (CGFloat)qh_seperatorLineHeight
@@ -398,6 +408,20 @@ static const void * kQHTableViewCellBottomSeperatorLineInsetsKVOKey = &kQHTableV
 {
     [self qh_layoutTopSeperatorLine];
     [self qh_layoutBottomSeperatorLine];
+}
+
+@end
+
+@implementation UICollectionViewCell (QHCoreLib)
+
++ (NSString *)qh_reuseIdentifier
+{
+    return NSStringFromClass(self);
+}
+
++ (NSString *)qh_reuseIdentifierWithPostfix:(NSString *)postfix
+{
+    return $(@"%@_%@", [self qh_reuseIdentifier], postfix);
 }
 
 @end
