@@ -28,6 +28,11 @@
     XCTAssertTrue(QH_DP_414(414) == QH_SCREEN_PORTRAIT_WIDTH);
 
     XCTAssertTrue(QH_DP(375) == QH_SCREEN_PORTRAIT_WIDTH);
+
+    NSLog(@"status bar height: %f", QH_STATUSBAR_HEIGHT);
+    NSLog(@"navigation bar height: %f", QH_NAVIGATIONBAR_HEIGHT);
+    NSLog(@"top bar height: %f", QH_TOPBAR_HEIGHT);
+    NSLog(@"tab bar height: %f", QH_TABBAR_HEIGHT);
 }
 
 - (void)testUIView_needsCalculateSize

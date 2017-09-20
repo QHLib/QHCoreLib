@@ -25,4 +25,9 @@
 
 #define QH_DP(size) QH_DP_375(size)
 
+#define QH_STATUSBAR_HEIGHT         20.0f
+#define QH_NAVIGATIONBAR_HEIGHT     44.0f
+#define QH_TOPBAR_HEIGHT            (QH_STATUSBAR_HEIGHT + QH_NAVIGATIONBAR_HEIGHT)
+#define QH_TABBAR_HEIGHT            49.0f
+
 #endif /* QHUIDefines_h */
