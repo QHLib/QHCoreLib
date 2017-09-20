@@ -126,6 +126,7 @@
 		EA5F5AC31F5D51C300013F8F /* QHCoreLib.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EA1D42F71ED70BA2002177BF /* QHCoreLib.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EA6D30031F61259300B5B6AA /* QHListData.h in Headers */ = {isa = PBXBuildFile; fileRef = EA6D30011F61259300B5B6AA /* QHListData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA6D30041F61259300B5B6AA /* QHListDataProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = EA6D30021F61259300B5B6AA /* QHListDataProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA96875A1F721059003020BE /* QHUIDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = EA9687591F720FDE003020BE /* QHUIDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA9EA4A21F6912BE009EF00C /* QHHintBadge.h in Headers */ = {isa = PBXBuildFile; fileRef = EA9EA49E1F6912BE009EF00C /* QHHintBadge.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA9EA4A31F6912BE009EF00C /* QHHintBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9EA49F1F6912BE009EF00C /* QHHintBadge.m */; };
 		EA9EA4A41F6912BE009EF00C /* QHNumberBadge.h in Headers */ = {isa = PBXBuildFile; fileRef = EA9EA4A01F6912BE009EF00C /* QHNumberBadge.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -325,6 +326,7 @@
 		EA5F5ABE1F5D519E00013F8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA6D30011F61259300B5B6AA /* QHListData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHListData.h; sourceTree = "<group>"; };
 		EA6D30021F61259300B5B6AA /* QHListDataProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHListDataProtocol.h; sourceTree = "<group>"; };
+		EA9687591F720FDE003020BE /* QHUIDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHUIDefines.h; sourceTree = "<group>"; };
 		EA9EA49E1F6912BE009EF00C /* QHHintBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHHintBadge.h; sourceTree = "<group>"; };
 		EA9EA49F1F6912BE009EF00C /* QHHintBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHHintBadge.m; sourceTree = "<group>"; };
 		EA9EA4A01F6912BE009EF00C /* QHNumberBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHNumberBadge.h; sourceTree = "<group>"; };
@@ -713,6 +715,7 @@
 			isa = PBXGroup;
 			children = (
 				EA5F5A691F5D418800013F8F /* QHUI.h */,
+				EA9687591F720FDE003020BE /* QHUIDefines.h */,
 				EA5F5A6B1F5D426100013F8F /* UIKit+QHCoreLib.h */,
 				EA5F5A6C1F5D426100013F8F /* UIKit+QHCoreLib.m */,
 				EA5F5A6F1F5D4C1000013F8F /* QHNetworkActivityIndicator.h */,
@@ -848,6 +851,7 @@
 				EA1D436D1ED70CE3002177BF /* QHDefines.h in Headers */,
 				EA1D437A1ED70CE3002177BF /* QHNetworkApi+internal.h in Headers */,
 				EAE3C7B41EE153A400A93456 /* DDLog.h in Headers */,
+				EA96875A1F721059003020BE /* QHUIDefines.h in Headers */,
 				EA1D43931ED70CE3002177BF /* AFURLRequestSerialization.h in Headers */,
 				EA1D43701ED70CE3002177BF /* DDFileLogger.h in Headers */,
 				EAE3C7A51EE12A9000A93456 /* QHProfiler.h in Headers */,

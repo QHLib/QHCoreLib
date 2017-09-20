@@ -15,6 +15,21 @@
 
 @implementation QHCoreLibUIKitTests
 
+- (void)testUIDefines
+{
+    NSLog(@"screen scale: %f", QH_SCREEN_SCALE);
+    NSLog(@"screen width: %f", QH_SCREEN_WIDTH);
+    NSLog(@"screen height: %f", QH_SCREEN_HEIGHT);
+    NSLog(@"screen portrait width: %f", QH_SCREEN_PORTRAIT_WIDTH);
+    NSLog(@"screen portrait height: %f", QH_SCREEN_PORTRAIT_HEIGHT);
+
+    XCTAssertTrue(QH_DP_320(320) == QH_SCREEN_PORTRAIT_WIDTH);
+    XCTAssertTrue(QH_DP_375(375) == QH_SCREEN_PORTRAIT_WIDTH);
+    XCTAssertTrue(QH_DP_414(414) == QH_SCREEN_PORTRAIT_WIDTH);
+
+    XCTAssertTrue(QH_DP(375) == QH_SCREEN_PORTRAIT_WIDTH);
+}
+
 - (void)testUIView_needsCalculateSize
 {
     UIView *view = [UIView new];

@@ -15,6 +15,7 @@
 #   import <UIDevice_Hardware/UIDevice-Hardware.h>
 #endif
 
+#import <QHCoreLib/QHUIDefines.h>
 #import <QHCoreLib/UIKit+QHCoreLib.h>
 #import <QHCoreLib/QHNetworkActivityIndicator.h>
 #import <QHCoreLib/QHListData.h>
