@@ -18,6 +18,9 @@
 #import <QHCoreLib/QHUIDefines.h>
 #import <QHCoreLib/UIKit+QHCoreLib.h>
 #import <QHCoreLib/QHNetworkActivityIndicator.h>
+
+#import <QHCoreLib/QHStackView.h>
+
 #import <QHCoreLib/QHListData.h>
 
 #import <QHCoreLib/QHHintBadge.h>
