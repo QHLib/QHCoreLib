@@ -42,11 +42,13 @@
 
 @end
 
-@interface UIColor (Hex)
+@interface UIColor (QHCoreLib)
 
 + (UIColor *)colorWithHex:(NSUInteger)hex;
 
 + (UIColor *)colorWithHex:(NSUInteger)hex alpha:(CGFloat)alpha;
+
+- (UIColor *)qh_blendWithColor:(UIColor *)color alpha:(CGFloat)alpha;
 
 @end
 

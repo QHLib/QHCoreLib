@@ -18,6 +18,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [[UIColor whiteColor] qh_blendWithColor:[UIColor blackColor] alpha:0.5];
 
     {
         QHHintBadge *smallHint = [[QHHintBadge alloc] initWithDiameter:10.0];
