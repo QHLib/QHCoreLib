@@ -176,6 +176,10 @@ NS_ASSUME_NONNULL_BEGIN
     }
 }
 
+- (CGSize)wrappedSize
+{
+    return CGSizeMake([self p_stackViewLength], [self p_stackViewHeight]);
+}
 
 @end
 

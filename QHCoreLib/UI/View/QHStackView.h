@@ -42,6 +42,8 @@ typedef NS_ENUM(NSUInteger, QHStackViewHorizontalAlign) {
 @property (nonatomic, assign) BOOL extendItemTouchArea; // default NO
 @property (nonatomic, assign) CGFloat extendPadding; // default 0
 
+- (CGSize)wrappedSize;
+
 @end
 
 NS_ASSUME_NONNULL_END
