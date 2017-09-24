@@ -9,6 +9,7 @@
 #import "QHNumberBadge.h"
 #import "QHBase.h"
 #import "UIKit+QHCoreLib.h"
+#import "CGFunctions.h"
 
 @interface QHNumberBadge()
 
@@ -46,17 +47,8 @@
 - (void)drawRect:(CGRect)rect
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextBeginPath(context);
     CGFloat radius = CGRectGetHeight(rect) / 2.0;
-    CGFloat width = CGRectGetWidth(rect);
-    CGContextMoveToPoint(context, 0, radius);
-    CGContextAddArcToPoint(context, 0, 0, radius, 0, radius);
-    CGContextAddLineToPoint(context, width-radius, 0);
-    CGContextAddArcToPoint(context, width, 0, width, radius, radius);
-    CGContextAddArcToPoint(context, width, 2*radius, width-radius, 2*radius, radius);
-    CGContextAddLineToPoint(context, radius, 2*radius);
-    CGContextAddArcToPoint(context, 0, 2*radius, 0, radius, radius);
-    CGContextClosePath(context);
+    CGContextAddRoundedRect(context, radius, self.bounds);
     CGContextSetFillColorWithColor(context, [UIColor redColor].CGColor);
     CGContextFillPath(context);
 }

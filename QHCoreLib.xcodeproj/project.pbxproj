@@ -151,6 +151,8 @@
 		EAE2FE541F0A9837004354F8 /* QHCoreLibMustOverrideTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE2FE531F0A9837004354F8 /* QHCoreLibMustOverrideTests.m */; };
 		EAE3C7A51EE12A9000A93456 /* QHProfiler.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE3C7A21EE12A0F00A93456 /* QHProfiler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAE3C7B41EE153A400A93456 /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = EA1D433C1ED70CE3002177BF /* DDLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EAE690F91F7796AD00A097D4 /* CGFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE690F71F7796AD00A097D4 /* CGFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EAE690FA1F7796AD00A097D4 /* CGFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE690F81F7796AD00A097D4 /* CGFunctions.m */; };
 		F06443AE55B201F94A964E1C /* Pods_QHCoreLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BFD5D802EAE749D3FCD8FC /* Pods_QHCoreLib.framework */; };
 /* End PBXBuildFile section */
 
@@ -354,6 +356,8 @@
 		EAE2FE531F0A9837004354F8 /* QHCoreLibMustOverrideTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHCoreLibMustOverrideTests.m; sourceTree = "<group>"; };
 		EAE3C7A21EE12A0F00A93456 /* QHProfiler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHProfiler.h; sourceTree = "<group>"; };
 		EAE3C7A31EE12A4F00A93456 /* QHLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHLog.h; sourceTree = "<group>"; };
+		EAE690F71F7796AD00A097D4 /* CGFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CGFunctions.h; sourceTree = "<group>"; };
+		EAE690F81F7796AD00A097D4 /* CGFunctions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CGFunctions.m; sourceTree = "<group>"; };
 		F2B4A6B4945BFE0B2872201F /* Pods_QHCoreLibTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QHCoreLibTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -732,6 +736,8 @@
 				EA9687591F720FDE003020BE /* QHUIDefines.h */,
 				EA5F5A6B1F5D426100013F8F /* UIKit+QHCoreLib.h */,
 				EA5F5A6C1F5D426100013F8F /* UIKit+QHCoreLib.m */,
+				EAE690F71F7796AD00A097D4 /* CGFunctions.h */,
+				EAE690F81F7796AD00A097D4 /* CGFunctions.m */,
 				EA5F5A6F1F5D4C1000013F8F /* QHNetworkActivityIndicator.h */,
 				EA5F5A701F5D4C1000013F8F /* QHNetworkActivityIndicator.m */,
 				EA5145991F73988E000988C2 /* View */,
@@ -874,6 +880,7 @@
 				EA19CC691EE99C9600C18853 /* QHNetworkImageApi.h in Headers */,
 				EA6D30041F61259300B5B6AA /* QHListDataProtocol.h in Headers */,
 				EAB2EC921EF7B83400CDDF6D /* QHNetworkMultipart.h in Headers */,
+				EAE690F91F7796AD00A097D4 /* CGFunctions.h in Headers */,
 				EA1D438A1ED70CE3002177BF /* AFHTTPRequestOperationManager.h in Headers */,
 				EA4FBA9A1F074E64004A6FE5 /* QHAsyncLinkedTaskGroup.h in Headers */,
 				EA1D43851ED70CE3002177BF /* _QHNetworkWorker+subclass.h in Headers */,
@@ -1206,6 +1213,7 @@
 				EA1D43801ED70CE3002177BF /* QHNetworkResponse.m in Sources */,
 				EA1D437C1ED70CE3002177BF /* QHNetworkApi.m in Sources */,
 				EAB2EEF21F04E82B00CDDF6D /* QHAsyncParallelTaskGroup.m in Sources */,
+				EAE690FA1F7796AD00A097D4 /* CGFunctions.m in Sources */,
 				EA1D438E1ED70CE3002177BF /* AFNetworkReachabilityManager.m in Sources */,
 				EAB2EC931EF7B83400CDDF6D /* QHNetworkMultipart.m in Sources */,
 				EA1D43751ED70CE3002177BF /* DDTTYLogger.m in Sources */,

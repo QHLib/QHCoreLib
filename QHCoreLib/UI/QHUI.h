@@ -17,6 +17,7 @@
 
 #import <QHCoreLib/QHUIDefines.h>
 #import <QHCoreLib/UIKit+QHCoreLib.h>
+#import <QHCoreLib/CGFunctions.h>
 #import <QHCoreLib/QHNetworkActivityIndicator.h>
 
 #import <QHCoreLib/QHStackView.h>
