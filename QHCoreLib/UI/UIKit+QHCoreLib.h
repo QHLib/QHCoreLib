@@ -50,6 +50,8 @@
 
 - (UIColor *)qh_blendWithColor:(UIColor *)color alpha:(CGFloat)alpha;
 
++ (UIColor *)colorWithColor:(UIColor *)color alpha:(CGFloat)alpha;
+
 @end
 
 @interface UIImage (Color)

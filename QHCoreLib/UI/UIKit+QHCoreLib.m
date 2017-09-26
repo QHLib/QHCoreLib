@@ -238,6 +238,18 @@ static const void * kLockedBackgroundColorKVOKey = &kLockedBackgroundColorKVOKey
     return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
 }
 
++ (UIColor *)colorWithColor:(UIColor *)color alpha:(CGFloat)alpha
+{
+    CGFloat red = 0.0;
+    CGFloat green = 0.0;
+    CGFloat blue = 0.0;
+    CGFloat al = 0.0;
+    [color getRed:&red green:&green blue:&blue alpha:&al];
+    
+    UIColor *newColor = [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
+    return newColor;
+}
+
 @end
 
 @implementation UIImage (Color)
