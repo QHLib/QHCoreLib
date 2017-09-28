@@ -147,6 +147,12 @@
     [dict qh_setObject:@1 forKey:nilValue()];
     [dict qh_setObject:@2 forKey:@1];
     XCTAssertEqualObjects(@2, dict[@1]);
+
+    XCTAssertEqualObjects([dict qh_objectForKey:@2 createIfNotExists:nil], @2);
+    XCTAssertEqualObjects([dict qh_objectForKey:@3 createIfNotExists:^id _Nonnull{
+        return @3;
+    }], @3);
+    XCTAssertEqualObjects([dict qh_objectForKey:@3 createIfNotExists:nil], @3);
 }
 
 - (void)testMutableSet

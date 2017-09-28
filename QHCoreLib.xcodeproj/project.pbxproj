@@ -725,8 +725,7 @@
 				EA51459B1F7398C5000988C2 /* QHStackView.h */,
 				EA51459A1F7398C4000988C2 /* QHStackView.m */,
 			);
-			name = View;
-			path = "New Group";
+			path = View;
 			sourceTree = "<group>";
 		};
 		EA5F5A681F5D406700013F8F /* UI */ = {

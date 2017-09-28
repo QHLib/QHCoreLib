@@ -285,6 +285,16 @@ QH_DUMMY_CLASS(FoudationQHCoreLib)
     }
 }
 
+- (id)qh_objectForKey:(id)key createIfNotExists:(id  _Nonnull (^)(void))createBlock
+{
+    id object = [self objectForKey:key];
+    if (!object && createBlock) {
+        object = createBlock();
+        [self qh_setObject:object forKey:key];
+    }
+    return object;
+}
+
 @end
 
 @implementation NSMutableSet (QHCoreLib)
