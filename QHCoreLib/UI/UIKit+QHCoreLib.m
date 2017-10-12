@@ -296,6 +296,17 @@ static const void * kLockedBackgroundColorKVOKey = &kLockedBackgroundColorKVOKey
 
 @end
 
+@implementation UIScrollView (QHCoreLib)
+
+- (void)qh_disableContentInsetAdjust
+{
+    if (@available(iOS 11.0, *)) {
+        self.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
+}
+
+@end
+
 @implementation UITableViewCell (QHCoreLib)
 
 + (NSString *)qh_reuseIdentifier

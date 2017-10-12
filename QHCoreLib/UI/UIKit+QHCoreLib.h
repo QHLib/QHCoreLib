@@ -69,6 +69,12 @@
 
 @end
 
+@interface UIScrollView (QHCoreLib)
+
+- (void)qh_disableContentInsetAdjust;
+
+@end
+
 @interface UITableViewCell (QHCoreLib)
 
 + (NSString *)qh_reuseIdentifier;
