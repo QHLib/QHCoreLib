@@ -300,9 +300,11 @@ static const void * kLockedBackgroundColorKVOKey = &kLockedBackgroundColorKVOKey
 
 - (void)qh_disableContentInsetAdjust
 {
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 110000
     if (@available(iOS 11.0, *)) {
         self.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
+#endif
 }
 
 @end
