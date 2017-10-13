@@ -13,6 +13,7 @@
 
 #import <libextobjc/extobjc.h>
 
+#import <objc/message.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -38,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #define QH_UNUSED_VAR(var) ((void)(var))
 
-#define QH_IS(obj, cls)                                 (obj && [obj isKindOfClass:[cls class]])
+#define QH_IS(obj, cls)                                 (obj != nil && [obj isKindOfClass:[cls class]])
 
 #define QH_IS_STRING(obj)                               (QH_IS(obj, NSString))
 #define QH_IS_NUMBER(obj)                               (QH_IS(obj, NSNumber))

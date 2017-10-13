@@ -12,11 +12,11 @@
 #import "QHDefines.h"
 
 QH_EXTERN int extern_var;
-QH_EXTERN void extern_function();
+QH_EXTERN void extern_function(void);
 
 QH_EXTERN_C_BEGIN
 
-void another_extern_function();
+void another_extern_function(void);
 
 QH_EXTERN_C_END
 
