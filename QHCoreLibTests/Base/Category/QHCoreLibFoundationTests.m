@@ -29,6 +29,48 @@
     XCTAssertEqual([NSNumber qh_cast:num], num);
     XCTAssertNil([NSNumber qh_cast:str]); // warn
     XCTAssertNil([NSNumber qh_cast:str warnOnFailure:NO]); // no warn
+
+    XCTAssertNil(self.qh_handy_carry);
+    self.qh_handy_carry = @1;
+    XCTAssertEqualObjects(self.qh_handy_carry, @1);
+    self.qh_handy_carry = nil;
+    XCTAssertNil(self.qh_handy_carry);
+
+    XCTAssertNil(self.qh_handy_carry2);
+    self.qh_handy_carry2 = @2;
+    XCTAssertEqualObjects(self.qh_handy_carry2, @2);
+    self.qh_handy_carry2 = nil;
+    XCTAssertNil(self.qh_handy_carry2);
+
+    XCTAssertNil(self.qh_handy_carry3);
+    self.qh_handy_carry3 = @3;
+    XCTAssertEqualObjects(self.qh_handy_carry3, @3);
+    self.qh_handy_carry3 = nil;
+    XCTAssertNil(self.qh_handy_carry3);
+
+    XCTAssertNil(self.qh_handy_weakCarry);
+    @autoreleasepool {
+        id obj = [NSObject new];
+        self.qh_handy_weakCarry = obj;
+        XCTAssertEqual(obj, self.qh_handy_weakCarry);
+    }
+    XCTAssertNil(self.qh_handy_weakCarry);
+
+    XCTAssertNil(self.qh_handy_weakCarry2);
+    @autoreleasepool {
+        id obj = [NSObject new];
+        self.qh_handy_weakCarry2 = obj;
+        XCTAssertEqual(obj, self.qh_handy_weakCarry2);
+    }
+    XCTAssertNil(self.qh_handy_weakCarry2);
+
+    XCTAssertNil(self.qh_handy_weakCarry3);
+    @autoreleasepool {
+        id obj = [NSObject new];
+        self.qh_handy_weakCarry3 = obj;
+        XCTAssertEqual(obj, self.qh_handy_weakCarry3);
+    }
+    XCTAssertNil(self.qh_handy_weakCarry3);
 }
 
 - (void)testNSArray

@@ -12,6 +12,7 @@
 #import "QHAsserts.h"
 #import "QHUtil.h"
 #import "QHDefaultValue.h"
+#import "QHWeakWrapper.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -42,6 +43,99 @@ QH_DUMMY_CLASS(FoudationQHCoreLib)
         }
         return nil;
     }
+}
+
+static const void *kNSObjectCarryASOKey = &kNSObjectCarryASOKey;
+- (void)setQh_handy_carry:(id _Nullable)qh_handy_carry
+{
+    objc_setAssociatedObject(self,
+                             kNSObjectCarryASOKey,
+                             qh_handy_carry,
+                             OBJC_ASSOCIATION_RETAIN);
+}
+- (id _Nullable)qh_handy_carry
+{
+    return objc_getAssociatedObject(self, kNSObjectCarryASOKey);
+}
+
+static const void *kNSObjectCarry2ASOKey = &kNSObjectCarry2ASOKey;
+- (void)setQh_handy_carry2:(id _Nullable)qh_handy_carry2
+{
+    objc_setAssociatedObject(self,
+                             kNSObjectCarry2ASOKey,
+                             qh_handy_carry2,
+                             OBJC_ASSOCIATION_RETAIN);
+}
+- (id _Nullable)qh_handy_carry2
+{
+    return objc_getAssociatedObject(self, kNSObjectCarry2ASOKey);
+}
+
+static const void *kNSObjectCarry3ASOKey = &kNSObjectCarry3ASOKey;
+- (void)setQh_handy_carry3:(id _Nullable)qh_handy_carry3
+{
+    objc_setAssociatedObject(self,
+                             kNSObjectCarry3ASOKey,
+                             qh_handy_carry3,
+                             OBJC_ASSOCIATION_RETAIN);
+}
+- (id _Nullable)qh_handy_carry3
+{
+    return objc_getAssociatedObject(self, kNSObjectCarry3ASOKey);
+}
+
+static const void *kNSObjectWeakCarryASOKey = &kNSObjectWeakCarryASOKey;
+- (void)setQh_handy_weakCarry:(id _Nullable)qh_handy_weakCarry
+{
+    QHWeakWrapper *wrapper = objc_getAssociatedObject(self, kNSObjectWeakCarryASOKey);
+    if (wrapper && QH_IS(wrapper, QHWeakWrapper)) {
+        wrapper.obj = qh_handy_weakCarry;
+    } else {
+        objc_setAssociatedObject(self,
+                                 kNSObjectWeakCarryASOKey,
+                                 QHWeakWrap(qh_handy_weakCarry),
+                                 OBJC_ASSOCIATION_RETAIN);
+    }
+}
+- (id _Nullable)qh_handy_weakCarry
+{
+    return QHWeakUnwrap(objc_getAssociatedObject(self, kNSObjectWeakCarryASOKey));
+}
+
+static const void *kNSObjectWeakCarry2ASOKey = &kNSObjectWeakCarry2ASOKey;
+- (void)setQh_handy_weakCarry2:(id _Nullable)qh_handy_weakCarry2
+{
+    QHWeakWrapper *wrapper = objc_getAssociatedObject(self, kNSObjectWeakCarry2ASOKey);
+    if (wrapper && QH_IS(wrapper, QHWeakWrapper)) {
+        wrapper.obj = qh_handy_weakCarry2;
+    } else {
+        objc_setAssociatedObject(self,
+                                 kNSObjectWeakCarry2ASOKey,
+                                 QHWeakWrap(qh_handy_weakCarry2),
+                                 OBJC_ASSOCIATION_RETAIN);
+    }
+}
+- (id _Nullable)qh_handy_weakCarry2
+{
+    return QHWeakUnwrap(objc_getAssociatedObject(self, kNSObjectWeakCarry2ASOKey));
+}
+
+static const void *kNSObjectWeakCarry3ASOKey = &kNSObjectWeakCarry3ASOKey;
+- (void)setQh_handy_weakCarry3:(id _Nullable)qh_handy_weakCarry3
+{
+    QHWeakWrapper *wrapper = objc_getAssociatedObject(self, kNSObjectWeakCarry3ASOKey);
+    if (wrapper && QH_IS(wrapper, QHWeakWrapper)) {
+        wrapper.obj = qh_handy_weakCarry3;
+    } else {
+        objc_setAssociatedObject(self,
+                                 kNSObjectWeakCarry3ASOKey,
+                                 QHWeakWrap(qh_handy_weakCarry3),
+                                 OBJC_ASSOCIATION_RETAIN);
+    }
+}
+- (id _Nullable)qh_handy_weakCarry3
+{
+    return QHWeakUnwrap(objc_getAssociatedObject(self, kNSObjectWeakCarry3ASOKey));
 }
 
 @end

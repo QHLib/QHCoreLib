@@ -19,6 +19,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype _Nullable)qh_cast:(id)obj warnOnFailure:(BOOL)warnOnFailure;
 
+@property (nonatomic, strong) id _Nullable qh_handy_carry;
+@property (nonatomic, strong) id _Nullable qh_handy_carry2;
+@property (nonatomic, strong) id _Nullable qh_handy_carry3;
+
+@property (nonatomic, weak) id _Nullable qh_handy_weakCarry;
+@property (nonatomic, weak) id _Nullable qh_handy_weakCarry2;
+@property (nonatomic, weak) id _Nullable qh_handy_weakCarry3;
+
 @end
 
 
