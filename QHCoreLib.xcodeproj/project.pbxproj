@@ -9,12 +9,9 @@
 /* Begin PBXBuildFile section */
 		B298B0272BD7D105205BBBCD /* Pods_QHCoreLibTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B4A6B4945BFE0B2872201F /* Pods_QHCoreLibTests.framework */; };
 		B5C99F6CDFD2C52D4465C578 /* Pods_QHCoreLibDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8FA84D154630817925AAC5A /* Pods_QHCoreLibDemo.framework */; };
-		EA0BF9991F94BBD400BC443E /* QHWeakWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0BF9971F94BBD400BC443E /* QHWeakWrapper.h */; };
+		EA0BF9991F94BBD400BC443E /* QHWeakWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0BF9971F94BBD400BC443E /* QHWeakWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA0BF99A1F94BBD400BC443E /* QHWeakWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0BF9981F94BBD400BC443E /* QHWeakWrapper.m */; };
 		EA0BF99C1F94BED800BC443E /* QHCoreLibWeakWrapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0BF99B1F94BED800BC443E /* QHCoreLibWeakWrapperTests.m */; };
-		EA0BF99F1F94D8CE00BC443E /* QHUIAlertViewManager.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0BF99D1F94D8CE00BC443E /* QHUIAlertViewManager.h */; };
-		EA0BF9A01F94D8CE00BC443E /* QHUIAlertViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0BF99E1F94D8CE00BC443E /* QHUIAlertViewManager.m */; };
-		EA0BF9A31F94DD9700BC443E /* QHUIAlertViewManagerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0BF9A21F94DD9700BC443E /* QHUIAlertViewManagerController.m */; };
 		EA0C78AB1F6138E80038CC88 /* QHListSimpleData.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0C78A91F6138E80038CC88 /* QHListSimpleData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA0C78AC1F6138E80038CC88 /* QHListSimpleData.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0C78AA1F6138E80038CC88 /* QHListSimpleData.m */; };
 		EA0C78AF1F6138F60038CC88 /* QHListGroupData.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0C78AD1F6138F60038CC88 /* QHListGroupData.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -205,10 +202,6 @@
 		EA0BF9971F94BBD400BC443E /* QHWeakWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHWeakWrapper.h; sourceTree = "<group>"; };
 		EA0BF9981F94BBD400BC443E /* QHWeakWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHWeakWrapper.m; sourceTree = "<group>"; };
 		EA0BF99B1F94BED800BC443E /* QHCoreLibWeakWrapperTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHCoreLibWeakWrapperTests.m; sourceTree = "<group>"; };
-		EA0BF99D1F94D8CE00BC443E /* QHUIAlertViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHUIAlertViewManager.h; sourceTree = "<group>"; };
-		EA0BF99E1F94D8CE00BC443E /* QHUIAlertViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHUIAlertViewManager.m; sourceTree = "<group>"; };
-		EA0BF9A11F94DD9700BC443E /* QHUIAlertViewManagerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHUIAlertViewManagerController.h; sourceTree = "<group>"; };
-		EA0BF9A21F94DD9700BC443E /* QHUIAlertViewManagerController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHUIAlertViewManagerController.m; sourceTree = "<group>"; };
 		EA0C78A91F6138E80038CC88 /* QHListSimpleData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHListSimpleData.h; sourceTree = "<group>"; };
 		EA0C78AA1F6138E80038CC88 /* QHListSimpleData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHListSimpleData.m; sourceTree = "<group>"; };
 		EA0C78AD1F6138F60038CC88 /* QHListGroupData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHListGroupData.h; sourceTree = "<group>"; };
@@ -740,8 +733,6 @@
 			children = (
 				EA51459B1F7398C5000988C2 /* QHStackView.h */,
 				EA51459A1F7398C4000988C2 /* QHStackView.m */,
-				EA0BF99D1F94D8CE00BC443E /* QHUIAlertViewManager.h */,
-				EA0BF99E1F94D8CE00BC443E /* QHUIAlertViewManager.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -774,8 +765,6 @@
 				EA0C78DB1F626F400038CC88 /* ListData */,
 				EA9EA4A61F69149B009EF00C /* QHUIWidgetsController.h */,
 				EA9EA4A71F69149B009EF00C /* QHUIWidgetsController.m */,
-				EA0BF9A11F94DD9700BC443E /* QHUIAlertViewManagerController.h */,
-				EA0BF9A21F94DD9700BC443E /* QHUIAlertViewManagerController.m */,
 				EA5F5AB91F5D519E00013F8F /* Assets.xcassets */,
 				EA5F5ABB1F5D519E00013F8F /* LaunchScreen.storyboard */,
 				EA5F5ABE1F5D519E00013F8F /* Info.plist */,
@@ -883,7 +872,6 @@
 				EA1D43691ED70CE3002177BF /* QHDefaultValue.h in Headers */,
 				EA0C78C61F613E6F0038CC88 /* QHListDataLoader+internal.h in Headers */,
 				EAB2EEF11F04E82B00CDDF6D /* QHAsyncParallelTaskGroup.h in Headers */,
-				EA0BF99F1F94D8CE00BC443E /* QHUIAlertViewManager.h in Headers */,
 				EA4DC7A31F147BAE00A28C61 /* QHNetworkMultipartBuilder.h in Headers */,
 				EA1D43661ED70CE3002177BF /* QHCoreLibCategories.h in Headers */,
 				EAE2FE511F0A9548004354F8 /* QHMustOverride.h in Headers */,
@@ -1254,7 +1242,6 @@
 				EA1D43651ED70CE3002177BF /* Foundation+QHCoreLib.m in Sources */,
 				EA0C78B01F6138F60038CC88 /* QHListGroupData.m in Sources */,
 				EA9EA4A31F6912BE009EF00C /* QHHintBadge.m in Sources */,
-				EA0BF9A01F94D8CE00BC443E /* QHUIAlertViewManager.m in Sources */,
 				EA1D43901ED70CE3002177BF /* AFSecurityPolicy.m in Sources */,
 				EA1D436A1ED70CE3002177BF /* QHDefaultValue.m in Sources */,
 				EA19CC621EE9969000C18853 /* QHNetworkHttpApi.m in Sources */,
@@ -1305,7 +1292,6 @@
 			files = (
 				EA0C78E61F626F8C0038CC88 /* QHListDataEntranceController.m in Sources */,
 				EA5F5AAF1F5D519E00013F8F /* AppDelegate.m in Sources */,
-				EA0BF9A31F94DD9700BC443E /* QHUIAlertViewManagerController.m in Sources */,
 				EA0C78E91F62708C0038CC88 /* QHListDataLoaderTestController.m in Sources */,
 				EA0C78CE1F614F310038CC88 /* EntranceViewController.m in Sources */,
 				EA0C78EC1F6271B50038CC88 /* QHListSimpleDataTestController.m in Sources */,

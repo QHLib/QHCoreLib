@@ -98,3 +98,9 @@
 + (NSString *)qh_reuseIdentifierWithPostfix:(NSString *)postfix;
 
 @end
+
+@interface UIAlertView (QHCoreLib)
+
+- (void)showWithHandler:(void(^)(NSUInteger buttonIndex))clickedButtonAtIndex;
+
+@end

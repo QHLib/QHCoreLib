@@ -49,6 +49,12 @@ NS_ASSUME_NONNULL_BEGIN
 #   define QHCoreLibDebug(...)
 #endif
 
+#if _QHCoreLibDebug
+#   define QHCoreLibInfo(...)      NSLog(@"QHCoreLibInfo: " __VA_ARGS__)
+#else
+#   define QHCoreLibInfo(...)
+#endif
+
 NS_ASSUME_NONNULL_END
 
 #endif /* QHInternal_h */

@@ -7,7 +7,7 @@
 //
 
 #import "UIKit+QHCoreLib.h"
-#import "QHBase.h"
+#import "QHBase+internal.h"
 
 @implementation UIView (QHUILib)
 
@@ -461,6 +461,46 @@ static const void * kQHTableViewCellBottomSeperatorLineInsetsKVOKey = &kQHTableV
 + (NSString *)qh_reuseIdentifierWithPostfix:(NSString *)postfix
 {
     return $(@"%@_%@", [self qh_reuseIdentifier], postfix);
+}
+
+@end
+
+@interface UIAlertView_qhDelegate : NSObject <UIAlertViewDelegate>
+@property (nonatomic, strong) UIAlertView *alertView;
+@property (nonatomic, copy) void(^handler)(NSUInteger buttonIndex);
+@end
+
+@implementation UIAlertView_qhDelegate
+- (void)dealloc
+{
+    QHCoreLibInfo(@"%@ deallocing", self);
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (self.handler) {
+        self.handler(buttonIndex);
+    }
+}
+@end
+
+@implementation UIAlertView (QHCoreLib)
+
+- (void)showWithHandler:(void (^)(NSUInteger))clickedButtonAtIndex
+{
+    UIAlertView_qhDelegate *delegate = [[UIAlertView_qhDelegate alloc] init];
+    delegate.alertView = self;
+    @weakify(delegate);
+    delegate.handler = ^(NSUInteger buttonIndex) {
+        @strongify(delegate);
+        if (clickedButtonAtIndex) {
+            clickedButtonAtIndex(buttonIndex);
+        }
+        delegate.alertView.qh_handy_carry = nil; // break retain cycle
+    };
+
+    self.delegate = delegate;
+    self.qh_handy_carry = delegate;        // create retain cycle here
+    [self show];
 }
 
 @end

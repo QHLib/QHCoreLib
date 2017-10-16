@@ -10,5 +10,6 @@
 #define QHMisc_h
 
 #import <QHCoreLib/QHDefaultValue.h>
+#import <QHCoreLib/QHWeakWrapper.h>
 
 #endif /* QHMisc_h */
