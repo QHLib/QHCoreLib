@@ -271,6 +271,26 @@ static const void * kLockedBackgroundColorKVOKey = &kLockedBackgroundColorKVOKey
     return theImage;
 }
 
+- (UIImage *)resizeImageToSize:(CGSize)imageSize
+{
+    if (self.size.width == 0 || self.size.height == 0) return nil;
+
+    CGFloat widthRatio = imageSize.width / self.size.width;
+    CGFloat heightRatio = imageSize.height / self.size.height;
+    CGFloat ratio = MAX(widthRatio, heightRatio);
+
+    CGRect frame = CGRectMake(0,
+                              0,
+                              self.size.width * ratio,
+                              self.size.height * ratio);
+    UIGraphicsBeginImageContextWithOptions(frame.size, NO, self.scale);
+    [self drawInRect:frame];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    return newImage;
+}
+
 @end
 
 @implementation QHTableViewCellSeperatorLine

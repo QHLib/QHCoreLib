@@ -60,6 +60,8 @@
 
 + (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size;
 
+- (UIImage *)resizeImageToSize:(CGSize)imageSize;
+
 @end
 
 @interface QHTableViewCellSeperatorLine : UIImageView
