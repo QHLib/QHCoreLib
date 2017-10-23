@@ -108,8 +108,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)qh_setObject:(ObjectType)anObject forKey:(KeyType)aKey;
 
-- (ObjectType)qh_objectForKey:(KeyType)key
-            createIfNotExists:(ObjectType(^)(void))createBlock;
+- (ObjectType _Nullable)qh_objectForKey:(KeyType)key
+            createIfNotExists:(ObjectType(^ _Nullable)(void))createBlock;
 
 @end
 

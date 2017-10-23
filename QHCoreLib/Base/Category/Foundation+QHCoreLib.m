@@ -379,7 +379,7 @@ static const void *kNSObjectWeakCarry3ASOKey = &kNSObjectWeakCarry3ASOKey;
     }
 }
 
-- (id)qh_objectForKey:(id)key createIfNotExists:(id  _Nonnull (^)(void))createBlock
+- (id _Nullable)qh_objectForKey:(id)key createIfNotExists:(id _Nonnull (^ _Nullable)(void))createBlock
 {
     id object = [self objectForKey:key];
     if (!object && createBlock) {
