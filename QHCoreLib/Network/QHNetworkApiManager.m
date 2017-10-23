@@ -10,11 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-NSString * const QHNetworkApiManagerApiSucceedNotification;
-NSString * const QHNetworkApiManagerApiFailedNotification;
-NSString * const QHNetworkApiManagerUserInfoApiKey;
-NSString * const QHNetworkApiManagerUserInfoResultKey;
-NSString * const QHNetworkApiManagerUserInfoErrorKey;
+NSString * const QHNetworkApiManagerApiSucceedNotification = @"QHNetworkApiManagerApiSucceedNotification";
+NSString * const QHNetworkApiManagerApiFailedNotification = @"QHNetworkApiManagerApiFailedNotification";
+NSString * const QHNetworkApiManagerUserInfoApiKey = @"QHNetworkApiManagerUserInfoApiKey";
+NSString * const QHNetworkApiManagerUserInfoResultKey = @"QHNetworkApiManagerUserInfoResultKey";
+NSString * const QHNetworkApiManagerUserInfoErrorKey = @"QHNetworkApiManagerUserInfoErrorKey";
 
 static NSMutableSet<QHNetworkApi *> *apiHolder = nil;
 
