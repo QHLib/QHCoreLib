@@ -79,4 +79,6 @@ QH_EXTERN double QHTimestampInDouble(void);  // seconds
 QH_EXTERN uint64_t QHTimestampInSeconds(void);
 QH_EXTERN uint64_t QHTimestampInMilliseconds(void);
 
+QH_EXTERN CGFloat QHClamp(CGFloat value, CGFloat bounds1, CGFloat bounds2);
+
 NS_ASSUME_NONNULL_END

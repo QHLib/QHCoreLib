@@ -237,4 +237,13 @@ uint64_t QHTimestampInMilliseconds()
     return (uint64_t)(QHTimestampInDouble() * 1000);
 }
 
+CGFloat QHClamp(CGFloat value, CGFloat bounds1, CGFloat bounds2)
+{
+    if (bounds1 < bounds2) {
+        return MIN(MAX(value, bounds1), bounds2);
+    } else {
+        return MAX(MIN(value, bounds1), bounds2);
+    }
+}
+
 NS_ASSUME_NONNULL_END
