@@ -93,6 +93,8 @@ NS_ASSUME_NONNULL_BEGIN
 #   define QH_DEPRECATED(_msg)
 #endif
 
+#define QH_C_ARRAY_SIZE(array, type) (sizeof(array)/sizeof(type))
+
 /**
  * Concat two literals. Supports macro expansions,
  * e.g. QH_CONCAT(foo, __FILE__).

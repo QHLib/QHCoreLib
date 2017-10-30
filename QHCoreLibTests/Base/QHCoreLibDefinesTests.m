@@ -102,6 +102,13 @@ QH_SINGLETON_IMP
     [self waitForExpectationsWithTimeout:0.2 handler:nil];
 }
 
+- (void)testCArraySize
+{
+    char *carray[] = { "a", "b", "c" };
+    XCTAssertEqual(QH_C_ARRAY_SIZE(carray, char*),
+                   3);
+}
+
 - (void)testConcat
 {
 #define A aaa
