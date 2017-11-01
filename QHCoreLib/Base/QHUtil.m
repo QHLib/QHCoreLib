@@ -246,4 +246,31 @@ CGFloat QHClamp(CGFloat value, CGFloat bounds1, CGFloat bounds2)
     }
 }
 
+// https://stackoverflow.com/a/9169489/822417
+BOOL QHCharacterIsChinese(unichar character)
+{
+    if ((character >= 0x4E00 && character <= 0x9FFF)
+        || (character >= 0x3400 && character <= 0x4DBF)) {
+        return YES;
+    }
+    return NO;
+}
+
+BOOL QHCharacterIsAlphabet(unichar character)
+{
+    return ((character >= 'a' && character <= 'z')
+            || (character >= 'A' && character <= 'Z'));
+}
+
+BOOL QHCharacterIsNumber(unichar character)
+{
+    return (character >= '0' && character <= '9');
+}
+
+BOOL QHCharacterIsAlpNum(unichar character)
+{
+    return (QHCharacterIsAlphabet(character)
+            || QHCharacterIsNumber(character));
+}
+
 NS_ASSUME_NONNULL_END

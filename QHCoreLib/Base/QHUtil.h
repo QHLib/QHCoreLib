@@ -81,4 +81,11 @@ QH_EXTERN uint64_t QHTimestampInMilliseconds(void);
 
 QH_EXTERN CGFloat QHClamp(CGFloat value, CGFloat bounds1, CGFloat bounds2);
 
+// 字符判断
+QH_EXTERN BOOL QHCharacterIsChinese(unichar character);
+QH_EXTERN BOOL QHCharacterIsAlphabet(unichar character);
+QH_EXTERN BOOL QHCharacterIsNumber(unichar character);
+QH_EXTERN BOOL QHCharacterIsAlpNum(unichar character);
+
+
 NS_ASSUME_NONNULL_END

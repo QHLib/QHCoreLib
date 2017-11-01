@@ -211,4 +211,16 @@
     XCTAssertTrue(YES, @"ok");
 }
 
+- (void)testChineseCharacter
+{
+    NSString *str = @"你好hello123,";
+    for (int i = 0; i < str.length; ++i) {
+        unichar c = [str characterAtIndex:i];
+        XCTAssertEqual(QHCharacterIsChinese(c), i < 2);
+        XCTAssertEqual(QHCharacterIsAlphabet(c), i >=2 && i < 7);
+        XCTAssertEqual(QHCharacterIsNumber(c), i >=7 && i < 10);
+        XCTAssertEqual([[NSCharacterSet punctuationCharacterSet] characterIsMember:c], i >= 10);
+    }
+}
+
 @end
