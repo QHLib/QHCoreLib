@@ -145,6 +145,9 @@ typedef NS_ENUM(NSUInteger, QHNetworkWorkerState) {
         self.completionHandler = nil;
 
         [self p_doCancel];
+
+        [[NSNotificationCenter defaultCenter] postNotificationName:QHNetworkWorkerDidFinishNotification
+                                                            object:self];
     });
 }
 
