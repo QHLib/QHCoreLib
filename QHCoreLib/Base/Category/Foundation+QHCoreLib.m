@@ -555,6 +555,7 @@ NSString * const kQHDateFormatWeekStringLong = @"cccc";
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+        calendar.timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
     });
     return calendar;
 }
