@@ -79,6 +79,9 @@ QH_EXTERN double QHTimestampInDouble(void);  // seconds
 QH_EXTERN uint64_t QHTimestampInSeconds(void);
 QH_EXTERN uint64_t QHTimestampInMilliseconds(void);
 
+QH_EXTERN uint64_t QHTimestampDayFloor(uint64_t timestamp); // in seconds
+QH_EXTERN uint64_t QHTimestampWeekFloor(uint64_t timestamp); // in seconds
+
 QH_EXTERN CGFloat QHClamp(CGFloat value, CGFloat bounds1, CGFloat bounds2);
 
 // 字符判断

@@ -211,6 +211,17 @@
     XCTAssertTrue(YES, @"ok");
 }
 
+- (void)testTimestampFloor
+{
+    // 1509689148 2017/11/3 14:05:48 星期五
+    // 1509638400 2017/11/3 09:00:00 星期五
+    XCTAssertEqual(QHTimestampDayFloor(1509689148), 1509638400);
+
+    XCTAssertEqual(QHTimestampWeekFloor(1509689148), 1509638400 - 4 * 86400);
+    XCTAssertEqual(QHTimestampWeekFloor(1509689148 - 2 * 86400), 1509638400 - 4 * 86400);
+    XCTAssertNotEqual(QHTimestampWeekFloor(1509689148 - 5 * 86400), 1509638400 - 4 * 86400);
+}
+
 - (void)testChineseCharacter
 {
     NSString *str = @"你好hello123,";

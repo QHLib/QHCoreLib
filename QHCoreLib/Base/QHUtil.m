@@ -237,6 +237,21 @@ uint64_t QHTimestampInMilliseconds()
     return (uint64_t)(QHTimestampInDouble() * 1000);
 }
 
+// timestamp 0 是北京时间1970年1月1日 08:00 星期四
+uint64_t QHTimestampDayFloor(uint64_t timestamp)
+{
+    uint64_t delta = ((timestamp % 86400) + 8 * 3600) % 86400;
+    return timestamp - delta;
+}
+
+// timestamp 0 是北京时间1970年1月1日 08:00 星期四
+uint64_t QHTimestampWeekFloor(uint64_t timestamp)
+{
+    static uint64_t weekInSeconds = 7 * 86400;
+    uint64_t delta = ((timestamp % weekInSeconds) + 3 * 86400 + 8 * 3600) % weekInSeconds;
+    return timestamp - delta;
+}
+
 CGFloat QHClamp(CGFloat value, CGFloat bounds1, CGFloat bounds2)
 {
     if (bounds1 < bounds2) {
