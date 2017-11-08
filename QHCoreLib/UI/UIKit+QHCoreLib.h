@@ -107,8 +107,8 @@
 
 @end
 
-@interface UIAlertController (QHCoreLib)
+@interface UIAlertAction (QHCoreLib)
 
-- (void)qh_setActionTitleColor:(UIColor *)color;
+- (void)qh_setTitleColor:(UIColor *)color;
 
 @end

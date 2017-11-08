@@ -525,9 +525,9 @@ static const void * kQHTableViewCellBottomSeperatorLineInsetsKVOKey = &kQHTableV
 
 @end
 
-@implementation UIAlertController (QHCoreLib)
+@implementation UIAlertAction (QHCoreLib)
 
-- (void)qh_setActionTitleColor:(UIColor *)color
+- (void)qh_setTitleColor:(UIColor *)color
 {
     if (NSFoundationVersionNumber >= NSFoundationVersionNumber_iOS_8_3) {
         [self setValue:color forKey:@"titleTextColor"];
