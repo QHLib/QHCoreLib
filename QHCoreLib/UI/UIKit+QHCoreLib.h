@@ -106,3 +106,9 @@
 - (void)showWithHandler:(void(^)(NSUInteger buttonIndex))clickedButtonAtIndex;
 
 @end
+
+@interface UIAlertController (QHCoreLib)
+
+- (void)qh_setActionTitleColor:(UIColor *)color;
+
+@end
