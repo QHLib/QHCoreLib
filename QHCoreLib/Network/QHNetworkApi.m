@@ -52,7 +52,7 @@ NSString * const QHNetworkApiErrorDomain = @"QHNetworkApiErrorDomain";
     QHAssertReturnVoidOnFailure(request != nil, @"build request for %@ failed", self);
 
     self.worker = [QHNetworkWorker workerFromRequest:request];
-    
+
     [super startWithSuccess:(QHAsyncTaskSuccessBlock)success
                        fail:(QHAsyncTaskFailBlock)fail];
 }

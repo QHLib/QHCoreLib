@@ -16,8 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface QHNetworkWorker ()
 
-+ (NSOperationQueue *)sharedNetworkQueue;
-
 - (instancetype)initWithRequest:(QHNetworkRequest *)request;
 
 @property (nonatomic, strong, readwrite) QHNetworkRequest *request;

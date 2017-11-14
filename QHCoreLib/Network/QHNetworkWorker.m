@@ -44,21 +44,9 @@ typedef NS_ENUM(NSUInteger, QHNetworkWorkerState) {
 
 @implementation QHNetworkWorker
 
-+ (NSOperationQueue *)sharedNetworkQueue
-{
-    static NSOperationQueue *networkQueue = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        networkQueue = [[NSOperationQueue alloc] init];
-        networkQueue.name = @"com.tencent.QHLib.QHCoreLib.networkqueue";
-        networkQueue.maxConcurrentOperationCount = 4;
-    });
-    return networkQueue;
-}
-
 + (void)cancelAll
 {
-    [[self sharedNetworkQueue] cancelAllOperations];
+    [QHNetworkWorkerAFHTTPRequestOperation cancelAll];
 }
 
 + (QHNetworkWorker *)workerFromRequest:(QHNetworkRequest *)request
@@ -183,8 +171,6 @@ typedef NS_ENUM(NSUInteger, QHNetworkWorkerState) {
         QHNSLock(self.lock, ^{
             self.state = QHNetworkWorkerStateFinished;
 
-            [self p_checkSlowRequest];
-
             if (self.completionHandler) {
                 self.completionHandler(worker, response, error);
 
@@ -195,40 +181,6 @@ typedef NS_ENUM(NSUInteger, QHNetworkWorkerState) {
                                                                 object:self];
         });
     });
-}
-
-- (int)connectCost
-{
-    @QH_SUBCLASS_MUST_OVERRIDE;
-    NSAssert(NO, @"subclass should implement");
-    return 0;
-}
-
-- (int)transportCost
-{
-    @QH_SUBCLASS_MUST_OVERRIDE;
-    NSAssert(NO, @"subclass should implement");
-    return 0;
-}
-
-- (int)requestCost
-{
-    @QH_SUBCLASS_MUST_OVERRIDE;
-    NSAssert(NO, @"subclass should implement");
-    return 0;
-}
-
-#pragma mark 
-
-- (void)p_checkSlowRequest
-{
-    NSTimeInterval threshold = ([QHNetwork sharedInstance].status == QHNetworkStatusReachableViaWiFi
-                                ? 3.0 : 10.0f);
-    if ([self requestCost] > threshold * 1000) {
-        QHLogWarn(@"slow request %@ cost %d ms",
-                  self.request.urlRequest.URL.absoluteString,
-                  [self requestCost]);
-    }
 }
 
 @end

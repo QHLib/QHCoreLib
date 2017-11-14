@@ -41,11 +41,6 @@ typedef void(^QHNetworkWorkerCompletionHandler)(QHNetworkWorker *worker, QHNetwo
 
 @property (nonatomic, readonly) BOOL isCancelled;
 
-// cost in ms, value is meanless unless finished
-@property (nonatomic, readonly) int connectCost;
-@property (nonatomic, readonly) int transportCost;
-@property (nonatomic, readonly) int requestCost;
-
 @end
 
 NS_ASSUME_NONNULL_END

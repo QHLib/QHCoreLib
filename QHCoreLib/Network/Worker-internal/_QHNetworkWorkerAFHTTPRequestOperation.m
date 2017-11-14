@@ -8,22 +8,23 @@
 
 #import "_QHNetworkWorkerAFHTTPRequestOperation.h"
 
-#import "AFHTTPRequestOperationManager.h"
+#import "AFHTTPSessionManager.h"
 
 #import "QHBase+internal.h"
+#import "QHProfiler.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-static AFHTTPRequestOperationManager *httpManager;
-static AFHTTPRequestOperationManager *htmlManager;
-static AFHTTPRequestOperationManager *jsonManager;
-static AFHTTPRequestOperationManager *imageManager;
+static AFHTTPSessionManager *httpManager;
+static AFHTTPSessionManager *htmlManager;
+static AFHTTPSessionManager *jsonManager;
+static AFHTTPSessionManager *imageManager;
 
 
 @interface QHNetworkWorkerAFHTTPRequestOperation ()
 
-@property (nonatomic, strong) AFHTTPRequestOperation * _Nullable operation;
+@property (nonatomic, strong) NSURLSessionTask * _Nullable task;
 
 @end
 
@@ -35,34 +36,26 @@ static AFHTTPRequestOperationManager *imageManager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
 
-        AFSecurityPolicy *securityPolicy = ({
-            AFSecurityPolicy *policy = [AFSecurityPolicy defaultPolicy];
-            policy.validatesCertificateChain = YES;
-            policy.allowInvalidCertificates = NO;
-            policy.validatesDomainName = YES;
-            policy;
-        });
-
-        httpManager = [AFHTTPRequestOperationManager manager];
-        httpManager.operationQueue = [self sharedNetworkQueue];
+        httpManager = [AFHTTPSessionManager manager];
         httpManager.responseSerializer = [AFHTTPResponseSerializer serializer];
-        httpManager.securityPolicy = securityPolicy;
         
-        htmlManager = [AFHTTPRequestOperationManager manager];
-        htmlManager.operationQueue = [self sharedNetworkQueue];
+        htmlManager = [AFHTTPSessionManager manager];
         htmlManager.responseSerializer = [AFHTMLResponseSerializer serializer];
-        htmlManager.securityPolicy = securityPolicy;
 
-        jsonManager = [AFHTTPRequestOperationManager manager];
-        jsonManager.operationQueue = [self sharedNetworkQueue];
+        jsonManager = [AFHTTPSessionManager manager];
         jsonManager.responseSerializer = [AFJSONResponseSerializer serializer];
-        jsonManager.securityPolicy = securityPolicy;
 
-        imageManager = [AFHTTPRequestOperationManager manager];
-        imageManager.operationQueue = [self sharedNetworkQueue];
+        imageManager = [AFHTTPSessionManager manager];
         imageManager.responseSerializer = [[AFImageResponseSerializer alloc] init];
-        imageManager.securityPolicy = securityPolicy;
     });
+}
+
++ (void)cancelAll
+{
+    [httpManager.session invalidateAndCancel];
+    [htmlManager.session invalidateAndCancel];
+    [jsonManager.session invalidateAndCancel];
+    [imageManager.session invalidateAndCancel];
 }
 
 - (instancetype)initWithRequest:(QHNetworkRequest *)request
@@ -76,10 +69,10 @@ static AFHTTPRequestOperationManager *imageManager;
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"<%@, operation: %@>",
-            [super description], self.operation];
+            [super description], self.task];
 }
 
-- (AFHTTPRequestOperationManager *)p_manager
+- (AFHTTPSessionManager *)p_manager
 {
     switch (self.request.resourceType) {
         case QHNetworkResourceHTTP:
@@ -101,102 +94,64 @@ static AFHTTPRequestOperationManager *imageManager;
 
 - (void)p_doStart
 {
-    self.operation = [[self p_manager] HTTPRequestOperationWithRequest:self.request.urlRequest
-                                                               success:[self successBlock]
-                                                               failure:[self failureBlock]];
-
-    self.operation.queuePriority = [self p_getPriority];
-
-    [[[self class] sharedNetworkQueue] addOperation:self.operation];
+    self.task = [[self p_manager] dataTaskWithRequest:self.request.urlRequest
+                                    completionHandler:[self taskCompletionHandler]];
+    self.task.priority = [self p_getPriority];
+    
+    [self.task resume];
 }
 
-- (NSOperationQueuePriority)p_getPriority
+- (float)p_getPriority
 {
     switch (self.request.priority) {
         case QHNetworkRequestPriorityDeafult:
-            return NSOperationQueuePriorityNormal;
+            return NSURLSessionTaskPriorityDefault;
 
         case QHNetworkRequestPriorityHigh:
-            return NSOperationQueuePriorityHigh;
+            return NSURLSessionTaskPriorityHigh;
 
         case QHNetworkRequestPriorityLow:
-            return NSOperationQueuePriorityLow;
+            return NSURLSessionTaskPriorityLow;
 
         default:
-            return NSOperationQueuePriorityNormal;
+            return NSURLSessionTaskPriorityDefault;
             break;
     }
 }
 
 - (void)p_doCancel
 {
-    [self.operation cancel];
-    self.operation = nil;
+    [self.task cancel];
+    self.task = nil;
 }
 
-- (void(^)(AFHTTPRequestOperation *operation, id responseObject))successBlock
+- (void(^)(NSURLResponse * _Nonnull response,
+           id  _Nullable responseObject,
+           NSError * _Nullable error))taskCompletionHandler
 {
     @weakify(self);
 
-    return ^(AFHTTPRequestOperation *operation, id responseObject) {
-
+    return ^(NSURLResponse * _Nonnull response,
+             id  _Nullable responseObject,
+             NSError * _Nullable error) {
+        
         @strongify(self);
-
-        if (operation.cancelled == YES
-            || self == nil || self.operation != operation) {
+        
+        if (self.isCancelled) {
             return;
         }
-
-        QHNetworkResponse *response = [QHNetworkResponse responseWithURL:operation.request.URL
-                                                              statusCode:operation.response.statusCode
-                                                         responseHeaders:operation.response.allHeaderFields
-                                                           reponseLength:operation.responseData.length
-                                                          responseObject:responseObject];
-
+        
+        QH_AS(response, NSHTTPURLResponse, httpResponse);
+        QHNetworkResponse *workerResponse = [QHNetworkResponse responseWithURL:httpResponse.URL
+                                                                    statusCode:httpResponse.statusCode
+                                                               responseHeaders:httpResponse.allHeaderFields
+                                                                 reponseLength:httpResponse.expectedContentLength
+                                                                responseObject:responseObject];
+        
         [self p_doCompletion:self
-                    response:response
-                       error:nil];
-    };
-}
-
-- (void(^)(AFHTTPRequestOperation *operation,  NSError *error))failureBlock
-{
-    @weakify(self);
-
-    return ^(AFHTTPRequestOperation *operation, NSError *error) {
-
-        @strongify(self);
-
-        if (operation.cancelled == YES
-            || self == nil || self.operation != operation) {
-            return;
-        }
-
-        QHNetworkResponse *response = [QHNetworkResponse responseWithURL:operation.request.URL
-                                                              statusCode:operation.response.statusCode
-                                                         responseHeaders:operation.response.allHeaderFields
-                                                           reponseLength:operation.responseData.length
-                                                          responseObject:nil];
-
-        [self p_doCompletion:self
-                    response:response
+                    response:workerResponse
                        error:error];
     };
-}
-
-- (int)connectCost
-{
-    return self.operation.getConnectTimeInMiliseconds;
-}
-
-- (int)transportCost
-{
-    return self.operation.getTransportTimeInMiliseconds;
-}
-
-- (int)requestCost
-{
-    return self.operation.getRequestTimeInMiliseconds;
 }
 
 @end
