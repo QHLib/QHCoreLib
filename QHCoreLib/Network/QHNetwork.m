@@ -3,7 +3,7 @@
 //  QQHouse
 //
 //  Created by leis on 15-08-11.
-//  Copyright (c) 2014年 Tencent. All rights reserved.
+//  Copyright (c) 2014年 TCTONY. All rights reserved.
 //
 
 #import "QHNetwork.h"

@@ -3,7 +3,7 @@
 //  QHCoreLib
 //
 //  Created by changtang on 2017/7/11.
-//  Copyright © 2017年 Tencent. All rights reserved.
+//  Copyright © 2017年 TCTONY. All rights reserved.
 //
 
 #ifndef QHNetworkMultipartBuilder_h

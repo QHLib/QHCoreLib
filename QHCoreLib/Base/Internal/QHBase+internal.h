@@ -3,7 +3,7 @@
 //  QHCoreLib
 //
 //  Created by Tony Tang on 2017/6/21.
-//  Copyright © 2017年 Tencent. All rights reserved.
+//  Copyright © 2017年 TCTONY. All rights reserved.
 //
 
 #ifndef QHBase_internal_h
