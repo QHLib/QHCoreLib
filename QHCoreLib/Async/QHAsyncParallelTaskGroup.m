@@ -15,6 +15,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation QHAsyncParallelTaskGroupProgress
 
+- (uint64_t)totalCount
+{
+    return self.tasks.count;
+}
+
+- (uint64_t)completedCount
+{
+    return (self.succeed.count + self.failed.count);
+}
+
 - (CGFloat)currentProgress
 {
     QHAssert(self.tasks.count > 0, @"empty tasks in %@", self);

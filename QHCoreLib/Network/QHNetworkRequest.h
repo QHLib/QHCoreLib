@@ -22,6 +22,7 @@ typedef NS_ENUM(NSUInteger, QHNetworkResourceType) {
     QHNetworkResourceHTML,
     QHNetworkResourceJSON,
     QHNetworkResourceImage,
+    QHNetworkResourceFile,
 };
 
 @interface QHNetworkRequest : NSObject
@@ -30,7 +31,12 @@ typedef NS_ENUM(NSUInteger, QHNetworkResourceType) {
 
 @property (nonatomic, assign) QHNetworkRequestPriority priority;        // default QHNetworkRequestPriorityDeafult
 
+// [1.0, 0.0]: progressWeight * upload progress + (1 - progressWeight) * download progress
+@property (nonatomic, assign) double progressWeight; 
+
 @property (nonatomic, assign) QHNetworkResourceType resourceType;       // default QHNetworkResourceHTTP
+
+@property (nonatomic,   copy) NSString *targetFilePath;                 // might present if resourceType is file
 
 @end
 

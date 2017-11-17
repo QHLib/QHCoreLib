@@ -17,7 +17,20 @@ NS_ASSUME_NONNULL_BEGIN
 NSString * const QHNetworkApiErrorDomain = @"QHNetworkApiErrorDomain";
 
 
+@implementation QHNetworkProgress
+
+- (NSTimeInterval)estimatedTime
+{
+    QHAssert(NO, @"not implemented yet");
+    return 0.0;
+}
+
+@end
+
 @interface QHNetworkApi ()
+
+@property (nonatomic, strong) NSProgress * _Nullable upoloadProgress;
+@property (nonatomic, strong) NSProgress * _Nullable downloadProgress;
 
 @end
 
@@ -44,6 +57,8 @@ NSString * const QHNetworkApiErrorDomain = @"QHNetworkApiErrorDomain";
     return str;
 }
 
+QH_ASYNC_TASK_PROGRESS_IMPL(QHNetworkApi, QHNetworkProgress);
+
 - (void)startWithSuccess:(void (^ _Nullable)(QHNetworkApi *, QHNetworkApiResult *))success
                     fail:(void (^ _Nullable)(QHNetworkApi *, NSError *))fail
 {
@@ -52,6 +67,18 @@ NSString * const QHNetworkApiErrorDomain = @"QHNetworkApiErrorDomain";
     QHAssertReturnVoidOnFailure(request != nil, @"build request for %@ failed", self);
 
     self.worker = [QHNetworkWorker workerFromRequest:request];
+    
+    @weakify(self);
+    [self.worker setUploadProgressHandler:^(NSProgress * _Nonnull progress) {
+        @strongify(self);
+        self.upoloadProgress = progress;
+        [self p_updateWorkerProgress];
+    }];
+    [self.worker setDownloadProgressHandler:^(NSProgress * _Nonnull progress) {
+        @strongify(self);
+        self.downloadProgress = progress;
+        [self p_updateWorkerProgress];
+    }];
 
     [super startWithSuccess:(QHAsyncTaskSuccessBlock)success
                        fail:(QHAsyncTaskFailBlock)fail];
@@ -97,12 +124,43 @@ NSString * const QHNetworkApiErrorDomain = @"QHNetworkApiErrorDomain";
     [self.worker cancel];
 }
 
+- (void)p_updateWorkerProgress
+{
+    QHNetworkProgress *progress = [[QHNetworkProgress alloc] init];
+    
+    CGFloat uploadWeight = self.worker.request.progressWeight;
+    uploadWeight = QHClamp(uploadWeight, 1.0, 0.0);
+    
+    progress.totalCount = (uint64_t)(uploadWeight * self.upoloadProgress.totalUnitCount);
+    progress.completedCount = (uint64_t)(uploadWeight * self.upoloadProgress.completedUnitCount);
+    
+    if (self.downloadProgress) {
+        progress.totalCount += (uint64_t)((1.0 - uploadWeight) * self.downloadProgress.totalUnitCount);
+        progress.completedCount += (uint64_t)((1.0 - uploadWeight) * self.downloadProgress.completedUnitCount);
+    } else {
+        // assume downloadProgress.totalUnitCount equals upoloadProgress.totalUnitCount
+        progress.totalCount += (uint64_t)((1.0 - uploadWeight) * self.upoloadProgress.totalUnitCount);
+        progress.completedCount += 0;
+    }
+    
+    [self p_fireProgress:progress];
+}
+
 - (void)p_doCollect:(NSMutableArray *)releaseOnDisposeQueue
 {
     [super p_doCollect:releaseOnDisposeQueue];
     
+    if (self.upoloadProgress) {
+        [releaseOnDisposeQueue qh_addObject:self.upoloadProgress];
+        self.upoloadProgress = nil;
+    }
+    if (self.downloadProgress) {
+        [releaseOnDisposeQueue qh_addObject:self.downloadProgress];
+        self.downloadProgress = nil;
+    }
     if (self.worker) {
         [releaseOnDisposeQueue qh_addObject:self.worker];
+        self.worker = nil;
     }
 }
 

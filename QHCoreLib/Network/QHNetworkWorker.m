@@ -38,6 +38,8 @@ typedef NS_ENUM(NSUInteger, QHNetworkWorkerState) {
 @property (nonatomic, assign, readwrite) QHNetworkWorkerState state;
 @property (nonatomic, readonly) NSRecursiveLock *lock;
 
+@property (nonatomic, copy) void(^ _Nullable uploadProgressHandler)(NSProgress *) ;
+@property (nonatomic, copy) void(^ _Nullable downloadProgressHandler)(NSProgress *);
 @property (nonatomic, copy) QHNetworkWorkerCompletionHandler _Nullable completionHandler;
 
 @end
@@ -130,6 +132,8 @@ typedef NS_ENUM(NSUInteger, QHNetworkWorkerState) {
 
         self.state = QHNetworkWorkerStateCancelled;
 
+        self.uploadProgressHandler = nil;
+        self.downloadProgressHandler = nil;
         self.completionHandler = nil;
 
         [self p_doCancel];
@@ -161,9 +165,34 @@ typedef NS_ENUM(NSUInteger, QHNetworkWorkerState) {
     NSAssert(NO, @"subclass should implement");
 }
 
-- (void)p_doCompletion:(QHNetworkWorker *)worker
-              response:(QHNetworkResponse * _Nullable)response
-                 error:(NSError * _Nullable)error
+- (void)p_fireUploadProgress:(NSProgress *)progress
+{
+    dispatch_async(self.completionQueue ?: dispatch_get_main_queue(), ^{
+        @retainify(self);
+        
+        QHNSLock(self.lock, ^{
+            if (self.uploadProgressHandler) {
+                self.uploadProgressHandler(progress);
+            }
+        });
+    });
+}
+
+- (void)p_fireDownloadProgress:(NSProgress *)progress
+{
+    dispatch_async(self.completionQueue ?: dispatch_get_main_queue(), ^{
+        @retainify(self);
+        
+        QHNSLock(self.lock, ^{
+            if (self.downloadProgressHandler) {
+                self.downloadProgressHandler(progress);
+            }
+        });
+    });
+}
+
+- (void)p_fireCompletionWithResponse:(QHNetworkResponse * _Nullable)response
+                               error:(NSError * _Nullable)error
 {
     dispatch_async(self.completionQueue ?: dispatch_get_main_queue(), ^{
         @retainify(self);
@@ -172,8 +201,10 @@ typedef NS_ENUM(NSUInteger, QHNetworkWorkerState) {
             self.state = QHNetworkWorkerStateFinished;
 
             if (self.completionHandler) {
-                self.completionHandler(worker, response, error);
-
+                self.completionHandler(self, response, error);
+                
+                self.uploadProgressHandler = nil;
+                self.downloadProgressHandler = nil;
                 self.completionHandler = nil;
             }
 

@@ -323,9 +323,9 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
 
 - (void)testLoadImage
 {
-    XCTestExpectation *expect = [self expectationWithDescription:@"load 'http://tctony.github.io/favicon.ico'"];
+    XCTestExpectation *expect = [self expectationWithDescription:@"load 'http://www.qq.com/favicon.ico'"];
 
-    QHNetworkImageApi *api = [[QHNetworkImageApi alloc] initWithUrl:@"http://tctony.github.io/favicon.ico"];
+    QHNetworkImageApi *api = [[QHNetworkImageApi alloc] initWithUrl:@"http://www.qq.com/favicon.ico"];
     [api startWithSuccess:^(QHNetworkImageApi *api, QHNetworkImageApiResult *result) {
         [expect fulfill];
     } fail:^(QHNetworkImageApi *api, NSError *error) {
@@ -340,8 +340,65 @@ QH_NETWORK_API_RESULT_IMPL_RETURN;
 
 - (void)testFinal
 {
-    // should warn not available
+    // error: not available
 //    QHNetworkTestFinalApi *api = [[QHNetworkTestFinalApi alloc] initWithUrl:@""];
+}
+
+- (void)testDownloadFile
+{
+    XCTestExpectation *expect = [self expectationWithDescription:@"load 'http://httpbin.org/image/jpeg'"];
+    
+    NSString *tmpFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"test.jpeg"];
+    
+    QHNetworkFileApi *api = [[QHNetworkFileApi alloc] initWithUrl:@"http://httpbin.org/image/jpeg"];
+    api.targetPath = tmpFilePath;
+    [api setProgressBlock:^(QHNetworkFileApi * _Nonnull api, QHNetworkProgress * _Nonnull progress) {
+        NSLog(@"%llu/%llu: %f",
+              progress.completedCount,
+              progress.totalCount,
+              progress.currentProgress);
+    }];
+    [api startWithSuccess:^(QHNetworkFileApi *api, QHNetworkFileApiResult *result) {
+        XCTAssert(result.filePath != nil);
+        [self p_testUploadProgress:result.filePath
+                        withExpect:expect];
+    } fail:^(QHNetworkFileApi *api, NSError *error) {
+        NSLog(@"error: %@", error);
+        XCTAssert(NO, @"should not be here");
+        [expect fulfill];
+    }];
+    
+    [self waitForExpectationsWithTimeout:30
+                                 handler:nil];
+}
+
+- (void)p_testUploadProgress:(NSString *)filePath
+                  withExpect:(XCTestExpectation *)expect
+{
+    QHNetworkJsonApi *api = [[QHNetworkJsonApi alloc] initWithUrl:@"http://httpbin.org/post"
+                                                        queryDict:nil
+                                                         bodyDict:nil
+                                                 multipartBuilder:^(id<QHNetworkMultipartBuilder> builder) {
+                                                     [builder appendPartWithFileUrl:[NSURL URLWithString:filePath]
+                                                                               name:@"test.jpeg"
+                                                                              error:nil];
+                                                 }];
+    [api setProgressBlock:^(QHNetworkJsonApi * _Nonnull api, QHNetworkProgress * _Nonnull progress) {
+        NSLog(@"%llu/%llu: %f",
+              progress.completedCount,
+              progress.totalCount,
+              progress.currentProgress);
+    }];
+    [api startWithSuccess:^(QHNetworkJsonApi *api, QHNetworkJsonApiResult *result) {
+        [expect fulfill];
+    } fail:^(QHNetworkJsonApi *api, NSError *error) {
+        NSLog(@"error: %@", error);
+        XCTAssert(NO, @"should not be here");
+        [expect fulfill];
+    }];
+    
+    // holder the api object till end of the world
+    expect.qh_handy_carry = api;
 }
 
 @end

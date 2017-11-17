@@ -87,17 +87,27 @@ static AFHTTPSessionManager *imageManager;
         case QHNetworkResourceImage:
             return imageManager;
 
+        case QHNetworkResourceFile:
+            return httpManager;
+
         default:
             QHAssert(NO, @"invalid resource type: %d", (int)self.request.resourceType);
+            return httpManager;
     }
 }
 
 - (void)p_doStart
 {
-    self.task = [[self p_manager] dataTaskWithRequest:self.request.urlRequest
-                                    completionHandler:[self taskCompletionHandler]];
+    if (self.request.resourceType != QHNetworkResourceFile) {
+        [self p_createNormalTask];
+    } else {
+        [self p_createDownloadTask];
+    }
+
+    QHAssertReturnVoidOnFailure(self.task, @"create task failed");
+
     self.task.priority = [self p_getPriority];
-    
+
     [self.task resume];
 }
 
@@ -125,33 +135,100 @@ static AFHTTPSessionManager *imageManager;
     self.task = nil;
 }
 
-- (void(^)(NSURLResponse * _Nonnull response,
-           id  _Nullable responseObject,
-           NSError * _Nullable error))taskCompletionHandler
+#pragma mark - normal task
+
+- (void)p_createNormalTask
+{
+    static NSDictionary *managerForResourceType = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        managerForResourceType = @{
+                                   @(QHNetworkResourceHTTP): httpManager,
+                                   @(QHNetworkResourceHTML): htmlManager,
+                                   @(QHNetworkResourceJSON): jsonManager,
+                                   @(QHNetworkResourceImage): imageManager,
+                                   };
+    });
+
+    AFHTTPSessionManager *manager  = managerForResourceType[@(self.request.resourceType)];
+
+    QHAssertReturnVoidOnFailure(manager, @"invalid resource type: %d", (int)self.request.resourceType);
+
+    @weakify(self);
+    self.task = [manager dataTaskWithRequest:self.request.urlRequest
+                              uploadProgress:({
+        ^(NSProgress * _Nonnull uploadProgress) {
+            @strongify(self);
+
+            [self p_fireUploadProgress:uploadProgress];
+        };
+    })
+                            downloadProgress:({
+        ^(NSProgress * _Nonnull downloadProgress) {
+            @strongify(self);
+
+            [self p_fireDownloadProgress:downloadProgress];
+        };
+    })
+                           completionHandler:({
+        ^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+            @strongify(self);
+            
+            if (self.isCancelled) {
+                return;
+            }
+            
+            QH_AS(response, NSHTTPURLResponse, httpResponse);
+            QHNetworkResponse *workerResponse = [QHNetworkResponse responseWithURL:httpResponse.URL
+                                                                        statusCode:httpResponse.statusCode
+                                                                   responseHeaders:httpResponse.allHeaderFields
+                                                                     reponseLength:httpResponse.expectedContentLength
+                                                                    responseObject:responseObject];
+            
+            [self p_fireCompletionWithResponse:workerResponse
+                                         error:error];
+        };
+    })];
+}
+
+#pragma mark - download task
+
+- (void)p_createDownloadTask
 {
     @weakify(self);
-
-    return ^(NSURLResponse * _Nonnull response,
-             id  _Nullable responseObject,
-             NSError * _Nullable error) {
-        
-        @strongify(self);
-        
-        if (self.isCancelled) {
-            return;
-        }
-        
-        QH_AS(response, NSHTTPURLResponse, httpResponse);
-        QHNetworkResponse *workerResponse = [QHNetworkResponse responseWithURL:httpResponse.URL
-                                                                    statusCode:httpResponse.statusCode
-                                                               responseHeaders:httpResponse.allHeaderFields
-                                                                 reponseLength:httpResponse.expectedContentLength
-                                                                responseObject:responseObject];
-        
-        [self p_doCompletion:self
-                    response:workerResponse
-                       error:error];
-    };
+    self.task = [httpManager downloadTaskWithRequest:self.request.urlRequest
+                                            progress:({
+        ^(NSProgress * _Nonnull downloadProgress) {
+            @strongify(self);
+            
+            [self p_fireDownloadProgress:downloadProgress];
+        };
+    })
+                                         destination:({
+        ^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
+            @strongify(self);
+            
+            if (self.request.targetFilePath) {
+                return [NSURL fileURLWithPath:self.request.targetFilePath];
+            }
+            return targetPath;
+        };
+    })
+                                   completionHandler:({
+        ^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
+            @strongify(self);
+            
+            QH_AS(response, NSHTTPURLResponse, httpResponse);
+            QHNetworkResponse *workerResponse = [QHNetworkResponse responseWithURL:httpResponse.URL
+                                                                        statusCode:httpResponse.statusCode
+                                                                   responseHeaders:httpResponse.allHeaderFields
+                                                                     reponseLength:httpResponse.expectedContentLength
+                                                                    responseObject:filePath];
+            
+            [self p_fireCompletionWithResponse:workerResponse
+                                         error:error];
+        };
+    })];
 }
 
 @end

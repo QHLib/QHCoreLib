@@ -25,9 +25,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)p_doCancel; // subclass imp
 
-- (void)p_doCompletion:(QHNetworkWorker *)worker
-              response:(QHNetworkResponse * _Nullable)response
-                 error:(NSError * _Nullable)error;
+- (void)p_fireUploadProgress:(NSProgress *)progress;
+
+- (void)p_fireDownloadProgress:(NSProgress *)progress;
+
+- (void)p_fireCompletionWithResponse:(QHNetworkResponse * _Nullable)response
+                               error:(NSError * _Nullable)error;
 
 @end
 

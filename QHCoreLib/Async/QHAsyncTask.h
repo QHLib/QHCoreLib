@@ -31,12 +31,16 @@ typedef id<NSCopying> QHAsyncTaskId;
 
 
 @protocol QHAsyncTaskProgress <NSObject>
-- (CGFloat)currentProgress; // 0.0 ~ 1.0
-- (NSTimeInterval)estimatedTime; // to finish the task, in seconds.
+- (uint64_t)totalCount;
+- (uint64_t)completedCount;
+- (CGFloat)currentProgress; // completedCount / totalCount, 0.0 ~ 1.0
+- (NSTimeInterval)estimatedTime; // estimated time to finish the task, in seconds.
 @end
 
 @interface QHAsyncTaskProgress : NSObject <QHAsyncTaskProgress>
-@property (nonatomic, assign) CGFloat currentProgress;
+@property (nonatomic, assign) uint64_t totalCount;
+@property (nonatomic, assign) uint64_t completedCount;
+@property (nonatomic, assign, readonly) CGFloat currentProgress;
 @property (nonatomic, assign) NSTimeInterval estimatedTime;
 @end
 

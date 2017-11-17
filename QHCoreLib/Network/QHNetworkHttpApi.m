@@ -121,8 +121,9 @@ NS_ASSUME_NONNULL_BEGIN
                                                     queryDict:self.queryDict
                                                      bodyDict:self.bodyDict];
     }
-
+    
     request.urlRequest.timeoutInterval = 15.0f;
+    request.progressWeight = 1.0;
     request.resourceType = QHNetworkResourceHTTP;
 
     return request;

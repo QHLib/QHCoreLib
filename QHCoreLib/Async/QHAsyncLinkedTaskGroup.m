@@ -71,10 +71,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation QHAsyncLinkedTaskGroupProgress
 
+- (uint64_t)totalCount
+{
+    return self.tasks.count;
+}
+
+- (uint64_t)completedCount
+{
+    return self.results.count;
+}
+
 - (CGFloat)currentProgress
 {
     QHAssert(self.tasks.count > 0, @"empty tasks in %@", self);
-
+    
     return (self.results.count) / (CGFloat)self.tasks.count;
 }
 

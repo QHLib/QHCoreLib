@@ -66,3 +66,4 @@ NS_ASSUME_NONNULL_END
 #import <QHCoreLib/QHNetworkHtmlApi.h>
 #import <QHCoreLib/QHNetworkJsonApi.h>
 #import <QHCoreLib/QHNetworkImageApi.h>
+#import <QHCoreLib/QHNetworkFileApi.h>

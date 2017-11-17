@@ -33,6 +33,9 @@ typedef void(^QHNetworkWorkerCompletionHandler)(QHNetworkWorker *worker, QHNetwo
 // main queue if it is nil
 @property (nonatomic, strong) dispatch_queue_t completionQueue;
 
+- (void)setUploadProgressHandler:(void(^ _Nullable)(NSProgress *progress))uploadProgressHandler;
+- (void)setDownloadProgressHandler:(void(^ _Nullable)(NSProgress *progress))downloadProgressHandler;
+
 - (void)startWithCompletionHandler:(QHNetworkWorkerCompletionHandler)completionHandler;
 
 @property (nonatomic, readonly) BOOL isLoading;

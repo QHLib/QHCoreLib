@@ -16,6 +16,15 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 
 @implementation QHAsyncTaskProgress
 
+- (CGFloat)currentProgress
+{
+    if (self.totalCount != 0) {
+        return QHClamp(self.completedCount / (CGFloat)self.totalCount,
+                       0.0, 1.0);
+    }
+    return 0.0;
+}
+
 @end
 
 @interface QHAsyncBlockTaskReporter ()
