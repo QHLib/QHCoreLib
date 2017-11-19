@@ -66,6 +66,7 @@ QH_EXTERN NSData *QHRandomBytes(uint32_t length);
 
 QH_EXTERN uint32_t QHRandomNumber(void);
 
+QH_EXTERN NSString *QHHexStringFromBytes(const uint8_t *p, int length);
 
 // MIME type of 'ext'
 QH_EXTERN NSString *QHContentTypeOfExtension(NSString *ext);

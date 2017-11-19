@@ -171,6 +171,12 @@
     XCTAssertNotEqual(r1, r2);
 }
 
+- (void)testHexStringFromBytes
+{
+    uint8_t p[8] = { 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef };
+    XCTAssertEqualObjects(@"0123456789abcdef", QHHexStringFromBytes(p, sizeof(p)));
+}
+
 - (void)testContentTypeOfExtension
 {
     XCTAssertEqualObjects(QHContentTypeOfExtension(@"txt"), @"text/plain");

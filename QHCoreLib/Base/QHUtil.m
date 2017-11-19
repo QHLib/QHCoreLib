@@ -168,6 +168,22 @@ uint32_t QHRandomNumber()
     return *((uint32_t *)fourBytes.bytes);
 }
 
+NSString *QHHexStringFromBytes(const uint8_t *p, int length)
+{
+    static char *table = "0123456789abcdef";
+    
+    if (!p || !length) return @"";
+    
+    uint8_t *h =  malloc(length * 2);
+    for (int i = 0; i < length; ++i) {
+        h[2 * i] = table[p[i] >> 4];
+        h[2 * i + 1] = table[p[i] & 0xf];
+    }
+    return [[NSString alloc] initWithBytesNoCopy:h
+                                          length:length * 2
+                                        encoding:NSASCIIStringEncoding
+                                    freeWhenDone:YES];
+}
 
 NSString *QHContentTypeOfExtension(NSString *ext)
 {
