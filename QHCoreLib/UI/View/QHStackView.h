@@ -10,6 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+// should be renamed to direction
 typedef NS_ENUM(NSUInteger, QHStackViewAlign) {
     QHStackViewAlignVertical,
     QHStackViewAlignHorizontal,
@@ -29,6 +30,9 @@ typedef NS_ENUM(NSUInteger, QHStackViewHorizontalAlign) {
 
 // 从左往右横向依次排列，以spacing为间隔
 @interface QHStackView : UIView
+
++ (instancetype)horizontalStackViewWithHeight:(CGFloat)height;
++ (instancetype)verticalStackViewWithWidth:(CGFloat)width;
 
 // automatic update stack view length to: all itemViews width + (itemViews - 1) * spacing
 @property (nullable, nonatomic, strong) NSArray<__kindof UIView *> *itemViews;

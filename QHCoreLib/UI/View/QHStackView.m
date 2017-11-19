@@ -13,10 +13,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface QHStackView ()
 
-
 @end
 
 @implementation QHStackView
+
++ (instancetype)horizontalStackViewWithHeight:(CGFloat)height
+{
+    QHStackView *stackView = [[QHStackView alloc] initWithFrame:CGRectMake(0, 0, 10, height)];
+    return stackView;
+}
+
++ (instancetype)verticalStackViewWithWidth:(CGFloat)width
+{
+    QHStackView *stackView = [[QHStackView alloc] initWithFrame:CGRectMake(0, 0, width, 10)];
+    stackView.viewAlign = QHStackViewAlignVertical;
+    return stackView;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
