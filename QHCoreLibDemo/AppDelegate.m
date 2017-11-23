@@ -52,6 +52,8 @@
         NSLog(@"weekStringLong: %@", [date qh_stringFromDateFormat:kQHDateFormatWeekStringLong]);
     }
 
+    NSLog(@"launch image is %@", [UIImage qh_lanchImage]);
+
     return YES;
 }
 

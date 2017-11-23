@@ -54,6 +54,15 @@
 
 @end
 
+@interface UIImage (LaunchImage)
+
++ (UIImage *)qh_lanchImage;
+
++ (UIImage *)qh_launchImageFromSize:(CGSize)screenSize
+                        orientation:(UIDeviceOrientation)orientation;
+
+@end
+
 @interface UIImage (Color)
 
 + (UIImage *)imageWithColor:(UIColor *)color;

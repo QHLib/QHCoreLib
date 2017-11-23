@@ -1534,6 +1534,7 @@
 			baseConfigurationReference = 67860B926A0249452170C2C2 /* Pods-QHCoreLibDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = XD4G683TDY;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1553,6 +1554,7 @@
 			baseConfigurationReference = AA072A9E1A6E88CFE69846DB /* Pods-QHCoreLibDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = XD4G683TDY;
 				INFOPLIST_FILE = QHCoreLibDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

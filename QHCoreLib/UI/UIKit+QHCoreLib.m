@@ -252,6 +252,45 @@ static const void * kLockedBackgroundColorKVOKey = &kLockedBackgroundColorKVOKey
 
 @end
 
+@implementation UIImage (LaunchImage)
+
++ (UIImage *)qh_lanchImage
+{
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
+    if (orientation == UIDeviceOrientationUnknown) {
+        orientation = UIDeviceOrientationPortrait;
+    }
+    return [self qh_launchImageFromSize:screenSize
+                            orientation:orientation];
+}
+
++ (UIImage *)qh_launchImageFromSize:(CGSize)screenSize
+                        orientation:(UIDeviceOrientation)orientation
+{
+    __block NSString *imageName = nil;
+
+    NSString *portraitOrLandscape = (UIDeviceOrientationIsPortrait(orientation)
+                                     ? @"Portrait"
+                                     : @"Landscape");
+
+    NSArray<NSDictionary *> *imagesDict = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"UILaunchImages"];
+    [imagesDict enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull dict,
+                                             NSUInteger idx,
+                                             BOOL * _Nonnull stop) {
+        CGSize imageSize = CGSizeFromString(dict[@"UILaunchImageSize"]);
+        NSString *orientationString = dict[@"UILaunchImageOrientation"];
+        if (CGSizeEqualToSize(screenSize, imageSize)
+            && [portraitOrLandscape isEqualToString:orientationString]) {
+            imageName = dict[@"UILaunchImageName"];
+        }
+    }];
+
+    return [UIImage imageNamed:imageName];
+}
+
+@end
+
 @implementation UIImage (Color)
 
 + (UIImage *)imageWithColor:(UIColor *)color
