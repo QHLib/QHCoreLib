@@ -1,0 +1,17 @@
+//
+//  QHCoreLibDemo-Prefix.pch
+//  QHCoreLib
+//
+//  Created by Tony Tang on 2017/11/26.
+//  Copyright © 2017年 TCTONY. All rights reserved.
+//
+
+#ifndef QHCoreLibDemo_Prefix_pch
+#define QHCoreLibDemo_Prefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import <QHCoreLib/QHCoreLib.h>
+
+#endif /* QHCoreLibDemo_Prefix_pch */
