@@ -9,7 +9,7 @@
 #import "QHTableViewCellTestController.h"
 
 typedef NS_ENUM(NSInteger, QHTableViewCellTestType) {
-    QHTableViewCellTestTypeOne = 1,
+    QHTableViewCellTestTypeOne = QHTableViewCellTypeCustomBegin,
     QHTableViewCellTestTypeTwo,
     QHTableViewCellTestTypeResolve1,
     QHTableViewCellTestTypeResolve2,
@@ -25,13 +25,11 @@ typedef NS_ENUM(NSInteger, QHTableViewCellTestType) {
 
 @interface QHTableViewCellResolve1 : UITableViewCell
 
-QH_TABLEVIEW_CELL_DATA_DECL(NSString);
-
 @end
 
 @interface QHTableViewCellResolve2 : UITableViewCell
 
-QH_TABLEVIEW_CELL_DATA_DECL_(my, NSString);
+QH_TABLEVIEW_CELL_DATA_DECL(my, NSString);
 
 @end
 
@@ -88,14 +86,25 @@ QH_TABLEVIEW_CELL_DATA_DECL_(my, NSString);
     self.staticCell.textLabel.text = @"static cell";
     self.staticCell.selectionStyle = UITableViewCellSelectionStyleNone;
     
+    QHTableViewSeperatorConfig *sepConfig = [QHTableViewSeperatorConfig new];
+    sepConfig.height = 3;
+    sepConfig.backgroundColor = [UIColor blackColor];
+    sepConfig.insets = UIEdgeInsetsMake(1, 10, 1, 10);
+    
     self.listData = [[QHListSimpleData alloc] initWithListData:({
         @[
           QHTableViewCellItemMake(QHTableViewCellTypeStatic, nil),
+          QHTableViewCellItemMake(QHTableViewCellTypeSeperator, sepConfig),
           QHTableViewCellItemMake(QHTableViewCellTypeDefault, @"default one"),
+          QHTableViewCellItemMake(QHTableViewCellTypeSeperator, sepConfig),
           QHTableViewCellItemMake(QHTableViewCellTypeDefault, @"default two"),
+          QHTableViewCellItemMake(QHTableViewCellTypeSeperator, sepConfig),
           QHTableViewCellItemMake(QHTableViewCellTestTypeOne, nil),
+          QHTableViewCellItemMake(QHTableViewCellTypeSeperator, sepConfig),
           QHTableViewCellItemMake(QHTableViewCellTestTypeTwo, nil),
+          QHTableViewCellItemMake(QHTableViewCellTypeSeperator, sepConfig),
           QHTableViewCellItemMake(QHTableViewCellTestTypeResolve1, nil),
+          QHTableViewCellItemMake(QHTableViewCellTypeSeperator, sepConfig),
           QHTableViewCellItemMake(QHTableViewCellTestTypeResolve2, nil),
           ];
     })];
@@ -206,8 +215,6 @@ QH_TABLEVIEW_CELL_DATA_DECL_(my, NSString);
     return self;
 }
 
-QH_TABLEVIEW_CELL_DATA_IMPL(NSString)
-
 @end
 
 @implementation QHTableViewCellResolve2
@@ -227,6 +234,6 @@ QH_TABLEVIEW_CELL_DATA_IMPL(NSString)
     return self;
 }
 
-QH_TABLEVIEW_CELL_DATA_IMPL_(my, NSString)
+QH_TABLEVIEW_CELL_DATA_IMPL(my, NSString)
 
 @end

@@ -24,20 +24,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-#define QH_TABLEVIEW_CELL_DATA_DECL_(_name, _type) \
+#define QH_TABLEVIEW_CELL_DATA_DECL(_name, _type) \
 - (_type *)_name##Data;
 
-#define QH_TABLEVIEW_CELL_DATA_IMPL_(_name, _type) \
+#define QH_TABLEVIEW_CELL_DATA_IMPL(_name, _type) \
 - (_type *)_name##Data \
 { \
-    QH_AS(self.qh_cellItem, _type, data); \
+    QH_AS(self.qh_cellItem.data, _type, data); \
     return data; \
 }
-
-#define QH_TABLEVIEW_CELL_DATA_DECL(_type) \
-    QH_TABLEVIEW_CELL_DATA_DECL_(qh_cell, _type)
-
-#define QH_TABLEVIEW_CELL_DATA_IMPL(_type) \
-    QH_TABLEVIEW_CELL_DATA_IMPL_(qh_cell, _type)
 
 NS_ASSUME_NONNULL_END

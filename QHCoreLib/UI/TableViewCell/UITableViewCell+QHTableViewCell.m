@@ -14,7 +14,6 @@
 + (CGFloat)qh_heightForItem:(QHTableViewCellItem *)item
                     context:(QHTableViewCellContext *)context
 {
-    @QH_SUBCLASS_MUST_OVERRIDE;
     return 44.0f;
 }
 

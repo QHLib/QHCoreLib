@@ -160,6 +160,8 @@
 		EABCB7811FBB4054009F8EEF /* QHNetworkFileApi.h in Headers */ = {isa = PBXBuildFile; fileRef = EABCB77F1FBB4054009F8EEF /* QHNetworkFileApi.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EABCB7821FBB4054009F8EEF /* QHNetworkFileApi.m in Sources */ = {isa = PBXBuildFile; fileRef = EABCB7801FBB4054009F8EEF /* QHNetworkFileApi.m */; };
 		EABCB7861FCAA39C009F8EEF /* QHTableViewCellTestController.m in Sources */ = {isa = PBXBuildFile; fileRef = EABCB7851FCAA39C009F8EEF /* QHTableViewCellTestController.m */; };
+		EABCB7971FCB05D4009F8EEF /* QHTableViewSeperatorCell.h in Headers */ = {isa = PBXBuildFile; fileRef = EABCB7951FCB05D4009F8EEF /* QHTableViewSeperatorCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EABCB7981FCB05D4009F8EEF /* QHTableViewSeperatorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EABCB7961FCB05D4009F8EEF /* QHTableViewSeperatorCell.m */; };
 		EAE2FE511F0A9548004354F8 /* QHMustOverride.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE2FE4F1F0A9548004354F8 /* QHMustOverride.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAE2FE521F0A9548004354F8 /* QHMustOverride.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE2FE501F0A9548004354F8 /* QHMustOverride.m */; };
 		EAE2FE541F0A9837004354F8 /* QHCoreLibMustOverrideTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE2FE531F0A9837004354F8 /* QHCoreLibMustOverrideTests.m */; };
@@ -381,6 +383,8 @@
 		EABCB7841FCAA39C009F8EEF /* QHTableViewCellTestController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHTableViewCellTestController.h; sourceTree = "<group>"; };
 		EABCB7851FCAA39C009F8EEF /* QHTableViewCellTestController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHTableViewCellTestController.m; sourceTree = "<group>"; };
 		EABCB7871FCAA7E7009F8EEF /* QHCoreLibDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QHCoreLibDemo-Prefix.pch"; sourceTree = "<group>"; };
+		EABCB7951FCB05D4009F8EEF /* QHTableViewSeperatorCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHTableViewSeperatorCell.h; sourceTree = "<group>"; };
+		EABCB7961FCB05D4009F8EEF /* QHTableViewSeperatorCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHTableViewSeperatorCell.m; sourceTree = "<group>"; };
 		EAE2FE4F1F0A9548004354F8 /* QHMustOverride.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHMustOverride.h; sourceTree = "<group>"; };
 		EAE2FE501F0A9548004354F8 /* QHMustOverride.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHMustOverride.m; sourceTree = "<group>"; };
 		EAE2FE531F0A9837004354F8 /* QHCoreLibMustOverrideTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHCoreLibMustOverrideTests.m; sourceTree = "<group>"; };
@@ -822,6 +826,8 @@
 				EA7295721FC83A9D003DCD5F /* QHTableViewCellItem.m */,
 				EA7295751FC83AB9003DCD5F /* QHTableViewCellContext.h */,
 				EA7295761FC83AB9003DCD5F /* QHTableViewCellContext.m */,
+				EABCB7951FCB05D4009F8EEF /* QHTableViewSeperatorCell.h */,
+				EABCB7961FCB05D4009F8EEF /* QHTableViewSeperatorCell.m */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -931,6 +937,7 @@
 				EA1D43661ED70CE3002177BF /* QHCoreLibCategories.h in Headers */,
 				EAE2FE511F0A9548004354F8 /* QHMustOverride.h in Headers */,
 				EA90ECA11F9D901D00EF3D32 /* QHNetworkApiManager.h in Headers */,
+				EABCB7971FCB05D4009F8EEF /* QHTableViewSeperatorCell.h in Headers */,
 				EABCB7811FBB4054009F8EEF /* QHNetworkFileApi.h in Headers */,
 				EA1D43761ED70CE3002177BF /* QHLogUtil.h in Headers */,
 				EA1693741EFA9E2900BD9A25 /* QHMisc.h in Headers */,
@@ -1271,6 +1278,7 @@
 			files = (
 				EA1D43871ED70CE3002177BF /* _QHNetworkWorkerAFHTTPRequestOperation.m in Sources */,
 				EA1D43731ED70CE3002177BF /* DDLog.m in Sources */,
+				EABCB7981FCB05D4009F8EEF /* QHTableViewSeperatorCell.m in Sources */,
 				EAAE59151EE7DD940084FA69 /* NSObject+QHUserDefaultsProperty.m in Sources */,
 				EA1D43841ED70CE3002177BF /* QHNetworkWorker.m in Sources */,
 				EA9EC84E1F5BA15B00B91430 /* QHNetworkReachabilityManager.m in Sources */,

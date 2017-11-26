@@ -9,6 +9,7 @@
 #import "QHTableViewCellFactory.h"
 #import "QHBase+internal.h"
 #import "UIKit+QHCoreLib.h"
+#import "QHTableViewSeperatorCell.h"
 
 typedef Class(^QHTableViewCellClassResolver)(QHTableViewCellItem *,
                                              QHTableViewCellContext *);
@@ -30,6 +31,9 @@ QH_SINGLETON_IMP
     if (self) {
         self.type2Class = [NSMutableDictionary dictionary];
         self.resolvers = [NSMutableArray array];
+        
+        [self registryCellClass:[QHTableViewSeperatorCell class]
+                        forType:QHTableViewCellTypeSeperator];
     }
     return self;
 }

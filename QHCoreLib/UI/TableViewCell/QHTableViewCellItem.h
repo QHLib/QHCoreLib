@@ -13,6 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, QHTableViewCellType) {
     QHTableViewCellTypeStatic = -1,
     QHTableViewCellTypeDefault = 0,
+    
+    QHTableViewCellTypeSeperator,
+    
+    QHTableViewCellTypeCustomBegin = 100,
 };
 
 @interface QHTableViewCellItem : NSObject
