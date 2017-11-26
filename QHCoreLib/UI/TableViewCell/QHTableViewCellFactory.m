@@ -40,7 +40,7 @@ QH_SINGLETON_IMP
                                 @"invalid pair: %@, %d", cellClass, (int)type);
     
     Class previous = [self.type2Class objectForKey:@(type)];
-    if (previous) {
+    if (previous && previous != cellClass) {
         QHCoreLibWarn(@"overwriting registry on type: %d with class: %@, previouse class: %@",
                       (int)type, NSStringFromClass(cellClass), previous);
     }

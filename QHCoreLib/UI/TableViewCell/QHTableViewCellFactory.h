@@ -30,4 +30,8 @@ QH_SINGLETON_DEF
 
 @end
 
+#define QHTableViewCellFactoryRegistry(_class, _type) \
+    [[QHTableViewCellFactory sharedInstance] registryCellClass:_class \
+                                                       forType:_type];
+
 NS_ASSUME_NONNULL_END

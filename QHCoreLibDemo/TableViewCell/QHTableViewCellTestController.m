@@ -25,9 +25,13 @@ typedef NS_ENUM(NSInteger, QHTableViewCellTestType) {
 
 @interface QHTableViewCellResolve1 : UITableViewCell
 
+QH_TABLEVIEW_CELL_DATA_DECL(NSString);
+
 @end
 
 @interface QHTableViewCellResolve2 : UITableViewCell
+
+QH_TABLEVIEW_CELL_DATA_DECL_(my, NSString);
 
 @end
 
@@ -42,6 +46,29 @@ typedef NS_ENUM(NSInteger, QHTableViewCellTestType) {
 @end
 
 @implementation QHTableViewCellTestController
+
++ (void)initialize
+{
+    QHTableViewCellFactoryRegistry([QHTableViewCellOne class], QHTableViewCellTestTypeOne);
+
+    QHTableViewCellFactoryRegistry([QHTableViewCellOne class], QHTableViewCellTestTypeTwo);
+    // warn and overwrite
+    QHTableViewCellFactoryRegistry([QHTableViewCellTwo class], QHTableViewCellTestTypeTwo);
+    // no warn
+    QHTableViewCellFactoryRegistry([QHTableViewCellTwo class], QHTableViewCellTestTypeTwo);
+    
+    [[QHTableViewCellFactory sharedInstance] registryCellClassResolver:({
+        ^Class _Nullable(QHTableViewCellItem * _Nonnull item,
+                         QHTableViewCellContext * _Nonnull context) {
+            if (item.type == QHTableViewCellTestTypeResolve1) {
+                return [QHTableViewCellResolve1 class];
+            } else if (item.type == QHTableViewCellTestTypeResolve2) {
+                return [QHTableViewCellResolve2 class];
+            }
+            return nil;
+        };
+    })];
+}
 
 - (void)viewDidLoad
 {
@@ -72,26 +99,6 @@ typedef NS_ENUM(NSInteger, QHTableViewCellTestType) {
           QHTableViewCellItemMake(QHTableViewCellTestTypeResolve2, nil),
           ];
     })];
-
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        [[QHTableViewCellFactory sharedInstance] registryCellClass:[QHTableViewCellOne class]
-                                                           forType:QHTableViewCellTestTypeOne];
-        [[QHTableViewCellFactory sharedInstance] registryCellClass:[QHTableViewCellTwo class]
-                                                           forType:QHTableViewCellTestTypeTwo];
-        
-        [[QHTableViewCellFactory sharedInstance] registryCellClassResolver:({
-            ^Class _Nullable(QHTableViewCellItem * _Nonnull item,
-                             QHTableViewCellContext * _Nonnull context) {
-                if (item.type == QHTableViewCellTestTypeResolve1) {
-                    return [QHTableViewCellResolve1 class];
-                } else if (item.type == QHTableViewCellTestTypeResolve2) {
-                    return [QHTableViewCellResolve2 class];
-                }
-                return nil;
-            };
-        })];
-    });
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -199,6 +206,8 @@ typedef NS_ENUM(NSInteger, QHTableViewCellTestType) {
     return self;
 }
 
+QH_TABLEVIEW_CELL_DATA_IMPL(NSString)
+
 @end
 
 @implementation QHTableViewCellResolve2
@@ -217,5 +226,7 @@ typedef NS_ENUM(NSInteger, QHTableViewCellTestType) {
     }
     return self;
 }
+
+QH_TABLEVIEW_CELL_DATA_IMPL_(my, NSString)
 
 @end
