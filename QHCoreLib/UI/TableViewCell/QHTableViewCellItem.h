@@ -14,8 +14,9 @@ typedef NS_ENUM(NSInteger, QHTableViewCellType) {
     QHTableViewCellTypeStatic = -1,
     QHTableViewCellTypeDefault = 0,
     
+    QHTableViewCellTypePlaceholder,
     QHTableViewCellTypeSeperator,
-    
+
     QHTableViewCellTypeCustomBegin = 100,
 };
 

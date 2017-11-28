@@ -94,6 +94,9 @@ QH_TABLEVIEW_CELL_DATA_DECL(my, NSString);
     self.listData = [[QHListSimpleData alloc] initWithListData:({
         @[
           QHTableViewCellItemMake(QHTableViewCellTypeStatic, nil),
+          QHTableViewCellItemMake(QHTableViewCellTypePlaceholder, nil),
+          QHTableViewCellItemMake(QHTableViewCellTypeSeperator, sepConfig),
+          QHTableViewCellItemMake(QHTableViewCellTypePlaceholder, @(100)),
           QHTableViewCellItemMake(QHTableViewCellTypeSeperator, sepConfig),
           QHTableViewCellItemMake(QHTableViewCellTypeDefault, @"default one"),
           QHTableViewCellItemMake(QHTableViewCellTypeSeperator, sepConfig),
