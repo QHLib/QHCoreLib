@@ -85,6 +85,9 @@ QH_TABLEVIEW_CELL_DATA_DECL(my, NSString);
     self.staticCell.backgroundColor = [UIColor greenColor];
     self.staticCell.textLabel.text = @"static cell";
     self.staticCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.staticCell.qh_seperatorLineHeight = 10;
+    [self.staticCell.qh_bottomSeperatorLine qh_setLockedBackgroundColor:[UIColor grayColor]];
+    self.staticCell.qh_bottomSeperatorLineInsets = UIEdgeInsetsMake(-15, 10, 20, 10);
     
     QHTableViewSeperatorConfig *sepConfig = [QHTableViewSeperatorConfig new];
     sepConfig.height = 3;
