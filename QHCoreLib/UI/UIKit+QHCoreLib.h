@@ -15,6 +15,8 @@
 
 @property (nonatomic, assign) BOOL needsCalculateSize;
 
+- (void)calculateSizeIfNeeded:(dispatch_block_t)doCalculate;
+
 @end
 
 @interface UIView (Frame)

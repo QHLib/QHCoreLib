@@ -35,6 +35,16 @@ static const void * kNeedsCalculateSizeASOKey = &kNeedsCalculateSizeASOKey;
                              OBJC_ASSOCIATION_RETAIN);
 }
 
+- (void)calculateSizeIfNeeded:(dispatch_block_t)doCalculate
+{
+    if (self.needsCalculateSize) {
+        self.needsCalculateSize = NO;
+        if (doCalculate) {
+            doCalculate();
+        }
+    }
+}
+
 @end
 
 @implementation UIView (Frame)
