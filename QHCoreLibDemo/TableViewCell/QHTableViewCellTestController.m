@@ -155,6 +155,10 @@ QH_TABLEVIEW_CELL_DATA_DECL(my, NSString);
         cell.textLabel.text = title ?: @"";
         cell.textLabel.backgroundColor = [UIColor yellowColor];
     }
+
+    if (context.isLast) {
+        cell.backgroundColor = [UIColor orangeColor];
+    }
     
     return cell;
 }

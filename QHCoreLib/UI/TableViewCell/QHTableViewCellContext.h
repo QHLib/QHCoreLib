@@ -18,6 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSIndexPath *indexPath;
 
+@property (nonatomic, assign) BOOL isFirst;
+@property (nonatomic, assign) BOOL isLast;
+
 // nil for default identifier
 // set to [NSNull null] would disable reuse
 @property (nonatomic, strong) NSString * _Nullable reuseIdentifier;

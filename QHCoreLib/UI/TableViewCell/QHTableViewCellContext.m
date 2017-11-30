@@ -18,6 +18,10 @@
     context.tableView = tableView;
     context.indexPath = indexPath;
 
+    context.isFirst = (indexPath.row == 0);
+    context.isLast = (indexPath.row == (([tableView.dataSource tableView:tableView
+                                                   numberOfRowsInSection:indexPath.section]) - 1));
+
     return context;
 }
 
