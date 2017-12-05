@@ -32,7 +32,7 @@ static void *kQHTableViewCellItemASOKey = &kQHTableViewCellItemASOKey;
                              OBJC_ASSOCIATION_RETAIN);
 }
 
-- (void)qh_configure:(QHTableViewCellItem *)item
+- (void)qh_configure:(QHTableViewCellItem * )item
              context:(QHTableViewCellContext *)context
 {
     [self setQh_cellItem:item];

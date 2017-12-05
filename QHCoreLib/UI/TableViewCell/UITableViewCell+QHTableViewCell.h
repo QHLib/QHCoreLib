@@ -19,8 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, readonly, nullable) QHTableViewCellItem *qh_cellItem;
 
-- (void)qh_configure:(QHTableViewCellItem *)item
-             context:(QHTableViewCellContext *)context NS_REQUIRES_SUPER;
+- (void)qh_configure:(QHTableViewCellItem * _Nullable)item
+             context:(QHTableViewCellContext * _Nullable)context NS_REQUIRES_SUPER;
 
 @end
 
