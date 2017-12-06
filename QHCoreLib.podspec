@@ -65,7 +65,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'QHUI' do |ss|
-    ss.source_files = "QHCoreLib/UI/**/*.{h,m}"
+    ss.source_files = "QHCoreLib/UI/**/*.{h,m,swift}"
     ss.public_header_files = "QHCoreLib/UI/**/*.h"
     ss.frameworks = "Foundation", "CoreGraphics"
     ss.dependency "QHCoreLib/QHBase"

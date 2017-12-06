@@ -21,6 +21,7 @@
 #import <QHCoreLib/QHNetworkActivityIndicator.h>
 
 #import <QHCoreLib/QHStackView.h>
+#import <QHCoreLib/QHFlowView.h>
 
 #import <QHCoreLib/QHTableViewCellFactory.h>
 

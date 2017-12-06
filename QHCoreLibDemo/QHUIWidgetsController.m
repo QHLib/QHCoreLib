@@ -80,6 +80,43 @@
     [alertView showWithHandler:^(NSUInteger buttonIndex) {
         NSLog(@"clicked at index: %d", (int)buttonIndex);
     }];
+    
+    QHFlowView *flowView = [[QHFlowView alloc] initWithFrame:CGRectMake(0, 200, 300, 20)];
+    flowView.flowLayout.sectionInset = UIEdgeInsetsMake(10, 20, 10, 20);
+    flowView.flowLayout.minimumInteritemSpacing = 10;
+    flowView.flowLayout.minimumLineSpacing = 15;
+    [flowView setHorizontalAlign:QHFlowViewItemHorizontalAlignRight];
+    flowView.backgroundColor = [UIColor greenColor];
+    [flowView setItemViews:({
+        @[
+          ({
+              UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
+              view.backgroundColor = [UIColor redColor];
+              view;
+          }),
+          ({
+              UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
+              view.backgroundColor = [UIColor redColor];
+              view;
+          }),
+          ({
+              UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 80, 20)];
+              view.backgroundColor = [UIColor redColor];
+              view;
+          }),
+          ({
+              UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 80, 20)];
+              view.backgroundColor = [UIColor redColor];
+              view;
+          }),
+          ({
+              UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 80, 20)];
+              view.backgroundColor = [UIColor redColor];
+              view;
+          }),
+          ];
+    })];
+    [self.view addSubview:flowView];
 }
 
 @end
