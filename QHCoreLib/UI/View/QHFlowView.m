@@ -35,6 +35,7 @@
         self.collectionView = [[UICollectionView alloc] initWithFrame:frame
                                                  collectionViewLayout:self.flowLayout];
         [self.collectionView qh_disableContentInsetAdjust];
+        self.collectionView.backgroundView = [UIColor clearColor];
         self.collectionView.dataSource = self;
         self.collectionView.delegate = self;
         [self.collectionView registerClass:[QHCollectionViewWrapCell class]
