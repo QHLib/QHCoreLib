@@ -36,6 +36,6 @@ typedef NS_ENUM(NSUInteger, QHFlowViewItemVerticalAlign) {
 // default YES
 @property (nonatomic, assign) BOOL showAll;
 
-- (void)setItemViews:(NSArray<UIView *> *)itemViews;
+@property (nonatomic, strong) NSArray<UIView *> *itemViews;
 
 @end

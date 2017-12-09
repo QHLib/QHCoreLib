@@ -22,7 +22,6 @@
 
 @property (nonatomic, strong, readwrite) AlignedCollectionViewFlowLayout *flowLayout;
 @property (nonatomic, strong, readwrite) UICollectionView *collectionView;
-@property (nonatomic, strong) NSArray<UIView *> *itemViews;
 
 @end
 
