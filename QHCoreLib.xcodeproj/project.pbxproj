@@ -169,6 +169,8 @@
 		EAE3C7B41EE153A400A93456 /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = EA1D433C1ED70CE3002177BF /* DDLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAE690F91F7796AD00A097D4 /* CGFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE690F71F7796AD00A097D4 /* CGFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAE690FA1F7796AD00A097D4 /* CGFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE690F81F7796AD00A097D4 /* CGFunctions.m */; };
+		EAEF5D9B1FDBD77000F27D74 /* UICollectionViewCell+QHCollectionViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = EAEF5D991FDBD77000F27D74 /* UICollectionViewCell+QHCollectionViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EAEF5D9C1FDBD77000F27D74 /* UICollectionViewCell+QHCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EAEF5D9A1FDBD77000F27D74 /* UICollectionViewCell+QHCollectionViewCell.m */; };
 		EAFBB2781FCD533F00B9D505 /* QHTableViewPlaceholderCell.h in Headers */ = {isa = PBXBuildFile; fileRef = EAFBB2761FCD533F00B9D505 /* QHTableViewPlaceholderCell.h */; };
 		EAFBB2791FCD533F00B9D505 /* QHTableViewPlaceholderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFBB2771FCD533F00B9D505 /* QHTableViewPlaceholderCell.m */; };
 		EAFC30D81FD7F3170050CBA8 /* QHFlowView.h in Headers */ = {isa = PBXBuildFile; fileRef = EAFC30D61FD7F3170050CBA8 /* QHFlowView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -399,6 +401,8 @@
 		EAE3C7A31EE12A4F00A93456 /* QHLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHLog.h; sourceTree = "<group>"; };
 		EAE690F71F7796AD00A097D4 /* CGFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CGFunctions.h; sourceTree = "<group>"; };
 		EAE690F81F7796AD00A097D4 /* CGFunctions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CGFunctions.m; sourceTree = "<group>"; };
+		EAEF5D991FDBD77000F27D74 /* UICollectionViewCell+QHCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UICollectionViewCell+QHCollectionViewCell.h"; sourceTree = "<group>"; };
+		EAEF5D9A1FDBD77000F27D74 /* UICollectionViewCell+QHCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UICollectionViewCell+QHCollectionViewCell.m"; sourceTree = "<group>"; };
 		EAFBB2761FCD533F00B9D505 /* QHTableViewPlaceholderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHTableViewPlaceholderCell.h; sourceTree = "<group>"; };
 		EAFBB2771FCD533F00B9D505 /* QHTableViewPlaceholderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHTableViewPlaceholderCell.m; sourceTree = "<group>"; };
 		EAFC30D61FD7F3170050CBA8 /* QHFlowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHFlowView.h; sourceTree = "<group>"; };
@@ -778,6 +782,7 @@
 				EA5F5A701F5D4C1000013F8F /* QHNetworkActivityIndicator.m */,
 				EA5145991F73988E000988C2 /* View */,
 				EA72956C1FC83A29003DCD5F /* TableViewCell */,
+				EAEF5D981FDBD73F00F27D74 /* CollectionViewCell */,
 				EA6D30001F61259300B5B6AA /* ListData */,
 				EA9EA49D1F6912BE009EF00C /* RedDot */,
 			);
@@ -931,6 +936,15 @@
 			path = MustOverride;
 			sourceTree = "<group>";
 		};
+		EAEF5D981FDBD73F00F27D74 /* CollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				EAEF5D991FDBD77000F27D74 /* UICollectionViewCell+QHCollectionViewCell.h */,
+				EAEF5D9A1FDBD77000F27D74 /* UICollectionViewCell+QHCollectionViewCell.m */,
+			);
+			path = CollectionViewCell;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -939,6 +953,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA1D437D1ED70CE3002177BF /* QHNetworkRequest.h in Headers */,
+				EAEF5D9B1FDBD77000F27D74 /* UICollectionViewCell+QHCollectionViewCell.h in Headers */,
 				EA1D437F1ED70CE3002177BF /* QHNetworkResponse.h in Headers */,
 				EA1D436B1ED70CE3002177BF /* QHAsserts.h in Headers */,
 				EA1D43831ED70CE3002177BF /* QHNetworkWorker.h in Headers */,
@@ -1357,6 +1372,7 @@
 				EA0C78B41F61390C0038CC88 /* QHListDataLoader.m in Sources */,
 				EA90ECA21F9D901D00EF3D32 /* QHNetworkApiManager.m in Sources */,
 				EAFBB2791FCD533F00B9D505 /* QHTableViewPlaceholderCell.m in Sources */,
+				EAEF5D9C1FDBD77000F27D74 /* UICollectionViewCell+QHCollectionViewCell.m in Sources */,
 				EA9EA4A51F6912BE009EF00C /* QHNumberBadge.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

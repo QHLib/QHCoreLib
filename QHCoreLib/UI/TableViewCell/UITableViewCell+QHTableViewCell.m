@@ -26,10 +26,12 @@ static void *kQHTableViewCellItemASOKey = &kQHTableViewCellItemASOKey;
 
 - (void)setQh_cellItem:(QHTableViewCellItem * _Nullable)qh_cellItem
 {
+    [self willChangeValueForKey:QH_PROPETY_NAME(qh_cellItem)];
     objc_setAssociatedObject(self,
                              kQHTableViewCellItemASOKey,
                              qh_cellItem,
                              OBJC_ASSOCIATION_RETAIN);
+    [self didChangeValueForKey:QH_PROPETY_NAME(qh_cellItem)];
 }
 
 - (void)qh_configure:(QHTableViewCellItem * )item

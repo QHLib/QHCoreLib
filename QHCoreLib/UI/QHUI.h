@@ -24,6 +24,7 @@
 #import <QHCoreLib/QHFlowView.h>
 
 #import <QHCoreLib/QHTableViewCellFactory.h>
+#import <QHCoreLib/UICollectionViewCell+QHCollectionViewCell.h>
 
 #import <QHCoreLib/QHListData.h>
 

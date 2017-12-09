@@ -9,10 +9,18 @@
 #import "QHFlowView.h"
 #import "QHBase.h"
 #import "UIKit+QHCoreLib.h"
-
+#import "UICollectionViewCell+QHCollectionViewCell.h"
 #import "QHCoreLib/QHCoreLib-Swift.h"
 
+@interface QHCollectionViewWrapCellModel : NSObject
+
+@property (nonatomic, strong) UIView *targetView;
+
+@end
+
 @interface QHCollectionViewWrapCell : UICollectionViewCell
+
+QH_COLLECTIONVIEW_CELL_DATA_DECL(cell, QHCollectionViewWrapCellModel);
 
 @property (nonatomic, strong) UIView *targetView;
 
@@ -103,6 +111,10 @@
 
 @end
 
+@implementation QHCollectionViewWrapCellModel
+
+@end
+
 @implementation QHCollectionViewWrapCell
 
 - (void)layoutSubviews
@@ -114,6 +126,15 @@
 {
     [_targetView removeFromSuperview];
     _targetView = nil;
+}
+
+QH_COLLECTIONVIEW_CELL_DATA_IMPL(cell, QHCollectionViewWrapCellModel);
+
+- (void)qh_configure:(id)data
+{
+    [super qh_configure:data];
+
+    self.targetView = self.cellData.targetView;
 }
 
 - (void)setTargetView:(UIView *)targetView
