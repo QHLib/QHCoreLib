@@ -52,7 +52,7 @@ NSException *_QHNotImplementedException(SEL cmd, Class cls)
 {
     NSString *msg = [NSString stringWithFormat:@"%s is not implemented "
                      "for the class %@", sel_getName(cmd), cls];
-    return [NSException exceptionWithName:@"RCTNotImplementedException"
+    return [NSException exceptionWithName:@"QHNotImplementedException"
                                    reason:msg userInfo:nil];
 }
 
