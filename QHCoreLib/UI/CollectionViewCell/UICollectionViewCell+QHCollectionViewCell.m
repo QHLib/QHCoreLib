@@ -29,6 +29,7 @@ static void *kQHCollectionViewCellItemASOKey = &kQHCollectionViewCellItemASOKey;
 }
 
 - (void)qh_configure:(id)data
+             context:(QHCollectionViewCellContext *)context
 {
     [self setQh_data:data];
 }

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QHCoreLib/QHCollectionViewCellContext.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,7 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, readonly, nullable) id qh_data;
 
-- (void)qh_configure:(id _Nullable)data NS_REQUIRES_SUPER;
+- (void)qh_configure:(id _Nullable)data
+             context:(QHCollectionViewCellContext * _Nullable)context NS_REQUIRES_SUPER;
 
 @end
 

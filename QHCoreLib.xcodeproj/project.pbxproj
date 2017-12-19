@@ -93,6 +93,8 @@
 		EA1D44351ED95FBC002177BF /* QHClockEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = EA1D44331ED95FBC002177BF /* QHClockEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA1D44361ED95FBC002177BF /* QHClockEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = EA1D44341ED95FBC002177BF /* QHClockEntry.m */; };
 		EA38F8921EF76CD6000B566F /* QHAsyncTask+internal.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAC480F1EF527B80091759D /* QHAsyncTask+internal.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA4709A81FE901E300EF6DF6 /* QHCollectionViewCellContext.h in Headers */ = {isa = PBXBuildFile; fileRef = EA4709A61FE901E300EF6DF6 /* QHCollectionViewCellContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA4709A91FE901E300EF6DF6 /* QHCollectionViewCellContext.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4709A71FE901E300EF6DF6 /* QHCollectionViewCellContext.m */; };
 		EA4DC7A31F147BAE00A28C61 /* QHNetworkMultipartBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = EA4DC7A21F147B6200A28C61 /* QHNetworkMultipartBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA4FBA6E1F050BEF004A6FE5 /* QHAsyncParallelTaskGroupTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4FBA6D1F050BEF004A6FE5 /* QHAsyncParallelTaskGroupTests.m */; };
 		EA4FBA711F050ED4004A6FE5 /* QHAsyncTestTasks.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4FBA701F050ED4004A6FE5 /* QHAsyncTestTasks.m */; };
@@ -320,6 +322,8 @@
 		EA1D442C1ED92EE7002177BF /* QHBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHBase.h; sourceTree = "<group>"; };
 		EA1D44331ED95FBC002177BF /* QHClockEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHClockEntry.h; sourceTree = "<group>"; };
 		EA1D44341ED95FBC002177BF /* QHClockEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHClockEntry.m; sourceTree = "<group>"; };
+		EA4709A61FE901E300EF6DF6 /* QHCollectionViewCellContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHCollectionViewCellContext.h; sourceTree = "<group>"; };
+		EA4709A71FE901E300EF6DF6 /* QHCollectionViewCellContext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHCollectionViewCellContext.m; sourceTree = "<group>"; };
 		EA4DC7A21F147B6200A28C61 /* QHNetworkMultipartBuilder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHNetworkMultipartBuilder.h; sourceTree = "<group>"; };
 		EA4FBA691F0504B8004A6FE5 /* QHAsyncParallelTaskGroup+internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QHAsyncParallelTaskGroup+internal.h"; sourceTree = "<group>"; };
 		EA4FBA6D1F050BEF004A6FE5 /* QHAsyncParallelTaskGroupTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHAsyncParallelTaskGroupTests.m; sourceTree = "<group>"; };
@@ -941,6 +945,8 @@
 			children = (
 				EAEF5D991FDBD77000F27D74 /* UICollectionViewCell+QHCollectionViewCell.h */,
 				EAEF5D9A1FDBD77000F27D74 /* UICollectionViewCell+QHCollectionViewCell.m */,
+				EA4709A61FE901E300EF6DF6 /* QHCollectionViewCellContext.h */,
+				EA4709A71FE901E300EF6DF6 /* QHCollectionViewCellContext.m */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -961,6 +967,7 @@
 				EA1D437B1ED70CE3002177BF /* QHNetworkApi.h in Headers */,
 				EA1D44351ED95FBC002177BF /* QHClockEntry.h in Headers */,
 				EA1D436E1ED70CE3002177BF /* QHUtil.h in Headers */,
+				EA4709A81FE901E300EF6DF6 /* QHCollectionViewCellContext.h in Headers */,
 				EA6D30031F61259300B5B6AA /* QHListData.h in Headers */,
 				EA1D43811ED70CE3002177BF /* QHNetworkUtil.h in Headers */,
 				EA1D43781ED70CE3002177BF /* QHNetwork.h in Headers */,
@@ -1340,6 +1347,7 @@
 				EAAA79EB1ED96871008135BE /* QHAsserts.m in Sources */,
 				EA9C468B1FB9E10A007E7DB5 /* AFURLRequestSerialization.m in Sources */,
 				EA1D436F1ED70CE3002177BF /* QHUtil.m in Sources */,
+				EA4709A91FE901E300EF6DF6 /* QHCollectionViewCellContext.m in Sources */,
 				EA19CC661EE99C8300C18853 /* QHNetworkJsonApi.m in Sources */,
 				EA51459C1F7398C5000988C2 /* QHStackView.m in Sources */,
 				EA9C46891FB9E10A007E7DB5 /* AFSecurityPolicy.m in Sources */,

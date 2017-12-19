@@ -98,7 +98,10 @@ QH_COLLECTIONVIEW_CELL_DATA_DECL(cell, QHCollectionViewWrapCellModel);
 {
     QHCollectionViewWrapCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell"
                                                                                forIndexPath:indexPath];
-    cell.targetView = [self.itemViews qh_objectAtIndex:indexPath.row];
+    QHCollectionViewWrapCellModel *cellModel = [QHCollectionViewWrapCellModel new];
+    cellModel.targetView = [self.itemViews qh_objectAtIndex:indexPath.row];
+    [cell qh_configure:cellModel
+               context:QHCollectionViewCellContextMake(collectionView, indexPath)];
     return cell;
 }
 
@@ -130,9 +133,9 @@ QH_COLLECTIONVIEW_CELL_DATA_DECL(cell, QHCollectionViewWrapCellModel);
 
 QH_COLLECTIONVIEW_CELL_DATA_IMPL(cell, QHCollectionViewWrapCellModel);
 
-- (void)qh_configure:(id)data
+- (void)qh_configure:(id)data context:(QHCollectionViewCellContext * _Nullable)context
 {
-    [super qh_configure:data];
+    [super qh_configure:data context:context];
 
     self.targetView = self.cellData.targetView;
 }
