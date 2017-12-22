@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isFirst;
 @property (nonatomic, assign) BOOL isLast;
 
+@property (nonatomic, strong) UIViewController * _Nullable controller;
+
 // any thing yout want to pass through
 @property (nonatomic, strong) id _Nullable opaque;
 

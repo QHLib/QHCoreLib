@@ -25,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 // set to [NSNull null] would disable reuse
 @property (nonatomic, strong) NSString * _Nullable reuseIdentifier;
 
+@property (nonatomic, strong) UIViewController * _Nullable controller;
+
 // any thing yout want to pass through
 @property (nonatomic, strong) id _Nullable opaque;
 
