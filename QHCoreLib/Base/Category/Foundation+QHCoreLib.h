@@ -176,9 +176,11 @@ QH_EXTERN NSString * const kQHDateFormatWeekStringLong;
 
 @interface NSDate (QHCoreLib)
 
-- (NSString *)qh_stringFromDateFormat:(NSString *)format;
++ (NSCalendar *)qh_sharedCalendar;
 
 - (NSCalendar *)qh_sharedCalendar;
+
+- (NSString *)qh_stringFromDateFormat:(NSString *)format;
 
 - (BOOL)qh_isWithinYear;
 - (BOOL)qh_isWithinMonth;

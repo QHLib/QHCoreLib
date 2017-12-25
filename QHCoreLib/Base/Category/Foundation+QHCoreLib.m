@@ -544,12 +544,7 @@ NSString * const kQHDateFormatWeekStringLong = @"cccc";
 
 @implementation NSDate (QHCoreLib)
 
-- (NSString *)qh_stringFromDateFormat:(NSString *)format
-{
-    return [[NSDateFormatter qh_sharedFormatter:format] stringFromDate:self];
-}
-
-- (NSCalendar *)qh_sharedCalendar
++ (NSCalendar *)qh_sharedCalendar
 {
     static NSCalendar *calendar = nil;
     static dispatch_once_t onceToken;
@@ -558,6 +553,16 @@ NSString * const kQHDateFormatWeekStringLong = @"cccc";
         calendar.timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
     });
     return calendar;
+}
+
+- (NSCalendar *)qh_sharedCalendar
+{
+    return [[self class] qh_sharedCalendar];
+}
+
+- (NSString *)qh_stringFromDateFormat:(NSString *)format
+{
+    return [[NSDateFormatter qh_sharedFormatter:format] stringFromDate:self];
 }
 
 - (BOOL)qh_isWithinYear
