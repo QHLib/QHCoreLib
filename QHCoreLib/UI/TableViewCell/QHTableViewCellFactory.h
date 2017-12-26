@@ -11,6 +11,7 @@
 #import <QHCoreLib/QHTableViewCellItem.h>
 #import <QHCoreLib/QHTableViewCellContext.h>
 #import <QHCoreLib/UITableViewCell+QHTableViewCell.h>
+#import <QHCoreLib/QHTableViewPlaceholderCell.h>
 #import <QHCoreLib/QHTableViewSeperatorCell.h>
 
 NS_ASSUME_NONNULL_BEGIN

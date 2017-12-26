@@ -173,7 +173,7 @@
 		EAE690FA1F7796AD00A097D4 /* CGFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE690F81F7796AD00A097D4 /* CGFunctions.m */; };
 		EAEF5D9B1FDBD77000F27D74 /* UICollectionViewCell+QHCollectionViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = EAEF5D991FDBD77000F27D74 /* UICollectionViewCell+QHCollectionViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAEF5D9C1FDBD77000F27D74 /* UICollectionViewCell+QHCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EAEF5D9A1FDBD77000F27D74 /* UICollectionViewCell+QHCollectionViewCell.m */; };
-		EAFBB2781FCD533F00B9D505 /* QHTableViewPlaceholderCell.h in Headers */ = {isa = PBXBuildFile; fileRef = EAFBB2761FCD533F00B9D505 /* QHTableViewPlaceholderCell.h */; };
+		EAFBB2781FCD533F00B9D505 /* QHTableViewPlaceholderCell.h in Headers */ = {isa = PBXBuildFile; fileRef = EAFBB2761FCD533F00B9D505 /* QHTableViewPlaceholderCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAFBB2791FCD533F00B9D505 /* QHTableViewPlaceholderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFBB2771FCD533F00B9D505 /* QHTableViewPlaceholderCell.m */; };
 		EAFC30D81FD7F3170050CBA8 /* QHFlowView.h in Headers */ = {isa = PBXBuildFile; fileRef = EAFC30D61FD7F3170050CBA8 /* QHFlowView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAFC30D91FD7F3170050CBA8 /* QHFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAFC30D71FD7F3170050CBA8 /* QHFlowView.m */; };
