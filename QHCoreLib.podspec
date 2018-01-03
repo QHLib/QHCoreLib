@@ -57,7 +57,7 @@ Pod::Spec.new do |s|
     ss.source_files = "QHCoreLib/Network/**/*.{h,m}"
     ss.public_header_files = "QHCoreLib/Network/**/*.h"
     ss.private_header_files = "QHCoreLib/Network/Worker-internal/**/*.h"
-    ss.frameworks = "Foundation", "CoreTelephony", "MobileCoreServices", "SystemConfiguration", "CoreGraphics"
+    ss.frameworks = "Foundation", "CFNetwork", "CoreTelephony", "MobileCoreServices", "SystemConfiguration", "CoreGraphics"
     ss.dependency "QHCoreLib/QHBase"
     ss.dependency "QHCoreLib/QHLog"
     ss.dependency "QHCoreLib/QHProfiler"
