@@ -22,8 +22,6 @@
 
 #import <QHCoreLib/QHStackView.h>
 
-#import <QHCoreLib/QHTableViewCellFactory.h>
-
 #import <QHCoreLib/QHListData.h>
 
 #import <QHCoreLib/QHHintBadge.h>
