@@ -164,6 +164,7 @@
 		EABCB7861FCAA39C009F8EEF /* QHTableViewCellTestController.m in Sources */ = {isa = PBXBuildFile; fileRef = EABCB7851FCAA39C009F8EEF /* QHTableViewCellTestController.m */; };
 		EABCB7971FCB05D4009F8EEF /* QHTableViewSeperatorCell.h in Headers */ = {isa = PBXBuildFile; fileRef = EABCB7951FCB05D4009F8EEF /* QHTableViewSeperatorCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EABCB7981FCB05D4009F8EEF /* QHTableViewSeperatorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EABCB7961FCB05D4009F8EEF /* QHTableViewSeperatorCell.m */; };
+		EADE977A1FFC788F0064F2C6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EADE97781FFC786B0064F2C6 /* CFNetwork.framework */; };
 		EAE2FE511F0A9548004354F8 /* QHMustOverride.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE2FE4F1F0A9548004354F8 /* QHMustOverride.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAE2FE521F0A9548004354F8 /* QHMustOverride.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE2FE501F0A9548004354F8 /* QHMustOverride.m */; };
 		EAE2FE541F0A9837004354F8 /* QHCoreLibMustOverrideTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE2FE531F0A9837004354F8 /* QHCoreLibMustOverrideTests.m */; };
@@ -398,6 +399,7 @@
 		EABCB7871FCAA7E7009F8EEF /* QHCoreLibDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QHCoreLibDemo-Prefix.pch"; sourceTree = "<group>"; };
 		EABCB7951FCB05D4009F8EEF /* QHTableViewSeperatorCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHTableViewSeperatorCell.h; sourceTree = "<group>"; };
 		EABCB7961FCB05D4009F8EEF /* QHTableViewSeperatorCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHTableViewSeperatorCell.m; sourceTree = "<group>"; };
+		EADE97781FFC786B0064F2C6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		EAE2FE4F1F0A9548004354F8 /* QHMustOverride.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHMustOverride.h; sourceTree = "<group>"; };
 		EAE2FE501F0A9548004354F8 /* QHMustOverride.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHMustOverride.m; sourceTree = "<group>"; };
 		EAE2FE531F0A9837004354F8 /* QHCoreLibMustOverrideTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHCoreLibMustOverrideTests.m; sourceTree = "<group>"; };
@@ -440,6 +442,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EADE977A1FFC788F0064F2C6 /* CFNetwork.framework in Frameworks */,
 				EA5F5AC21F5D51C300013F8F /* QHCoreLib.framework in Frameworks */,
 				B5C99F6CDFD2C52D4465C578 /* Pods_QHCoreLibDemo.framework in Frameworks */,
 			);
@@ -451,6 +454,7 @@
 		00E5F898274EC58F22420238 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EADE97781FFC786B0064F2C6 /* CFNetwork.framework */,
 				18BFD5D802EAE749D3FCD8FC /* Pods_QHCoreLib.framework */,
 				F2B4A6B4945BFE0B2872201F /* Pods_QHCoreLibTests.framework */,
 				C8FA84D154630817925AAC5A /* Pods_QHCoreLibDemo.framework */,
