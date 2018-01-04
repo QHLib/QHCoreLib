@@ -165,6 +165,8 @@
 		EABCB7971FCB05D4009F8EEF /* QHTableViewSeperatorCell.h in Headers */ = {isa = PBXBuildFile; fileRef = EABCB7951FCB05D4009F8EEF /* QHTableViewSeperatorCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EABCB7981FCB05D4009F8EEF /* QHTableViewSeperatorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EABCB7961FCB05D4009F8EEF /* QHTableViewSeperatorCell.m */; };
 		EADE977A1FFC788F0064F2C6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EADE97781FFC786B0064F2C6 /* CFNetwork.framework */; };
+		EADE97BB1FFE1C500064F2C6 /* QHPathUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = EADE97B91FFE1C500064F2C6 /* QHPathUtil.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EADE97BC1FFE1C500064F2C6 /* QHPathUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = EADE97BA1FFE1C500064F2C6 /* QHPathUtil.m */; };
 		EAE2FE511F0A9548004354F8 /* QHMustOverride.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE2FE4F1F0A9548004354F8 /* QHMustOverride.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAE2FE521F0A9548004354F8 /* QHMustOverride.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE2FE501F0A9548004354F8 /* QHMustOverride.m */; };
 		EAE2FE541F0A9837004354F8 /* QHCoreLibMustOverrideTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE2FE531F0A9837004354F8 /* QHCoreLibMustOverrideTests.m */; };
@@ -400,6 +402,8 @@
 		EABCB7951FCB05D4009F8EEF /* QHTableViewSeperatorCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHTableViewSeperatorCell.h; sourceTree = "<group>"; };
 		EABCB7961FCB05D4009F8EEF /* QHTableViewSeperatorCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHTableViewSeperatorCell.m; sourceTree = "<group>"; };
 		EADE97781FFC786B0064F2C6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		EADE97B91FFE1C500064F2C6 /* QHPathUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHPathUtil.h; sourceTree = "<group>"; };
+		EADE97BA1FFE1C500064F2C6 /* QHPathUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHPathUtil.m; sourceTree = "<group>"; };
 		EAE2FE4F1F0A9548004354F8 /* QHMustOverride.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHMustOverride.h; sourceTree = "<group>"; };
 		EAE2FE501F0A9548004354F8 /* QHMustOverride.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHMustOverride.m; sourceTree = "<group>"; };
 		EAE2FE531F0A9837004354F8 /* QHCoreLibMustOverrideTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHCoreLibMustOverrideTests.m; sourceTree = "<group>"; };
@@ -648,6 +652,8 @@
 				EA1D43321ED70CE3002177BF /* QHDefaultValue.m */,
 				EA0BF9971F94BBD400BC443E /* QHWeakWrapper.h */,
 				EA0BF9981F94BBD400BC443E /* QHWeakWrapper.m */,
+				EADE97B91FFE1C500064F2C6 /* QHPathUtil.h */,
+				EADE97BA1FFE1C500064F2C6 /* QHPathUtil.m */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -994,6 +1000,7 @@
 				EA51459D1F7398C5000988C2 /* QHStackView.h in Headers */,
 				EA1D436D1ED70CE3002177BF /* QHDefines.h in Headers */,
 				EA1D437A1ED70CE3002177BF /* QHNetworkApi+internal.h in Headers */,
+				EADE97BB1FFE1C500064F2C6 /* QHPathUtil.h in Headers */,
 				EAE3C7B41EE153A400A93456 /* DDLog.h in Headers */,
 				EA9C46831FB9E10A007E7DB5 /* AFHTTPSessionManager.h in Headers */,
 				EA96875A1F721059003020BE /* QHUIDefines.h in Headers */,
@@ -1332,6 +1339,7 @@
 				EA1D43871ED70CE3002177BF /* _QHNetworkWorkerAFHTTPRequestOperation.m in Sources */,
 				EA1D43731ED70CE3002177BF /* DDLog.m in Sources */,
 				EABCB7981FCB05D4009F8EEF /* QHTableViewSeperatorCell.m in Sources */,
+				EADE97BC1FFE1C500064F2C6 /* QHPathUtil.m in Sources */,
 				EAAE59151EE7DD940084FA69 /* NSObject+QHUserDefaultsProperty.m in Sources */,
 				EA1D43841ED70CE3002177BF /* QHNetworkWorker.m in Sources */,
 				EA9EC84E1F5BA15B00B91430 /* QHNetworkReachabilityManager.m in Sources */,

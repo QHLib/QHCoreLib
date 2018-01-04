@@ -11,5 +11,6 @@
 
 #import <QHCoreLib/QHDefaultValue.h>
 #import <QHCoreLib/QHWeakWrapper.h>
+#import <QHCoreLib/QHPathUtil.h>
 
 #endif /* QHMisc_h */

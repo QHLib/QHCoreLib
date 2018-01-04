@@ -59,6 +59,10 @@
 
     NSLog(@"launch image is %@", [UIImage qh_lanchImage]);
 
+    NSLog(@"%@", [QHPathUtil filePathInDocument:@"aaa"]);
+    NSLog(@"%@", [QHPathUtil filePathInCache:@"bbb"]);
+    NSLog(@"%@", [QHPathUtil filePathInTemp:@"ccc"]);
+
     return YES;
 }
 
