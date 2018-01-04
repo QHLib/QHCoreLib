@@ -31,6 +31,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark -
 
++ (NSString *)libraryDirPath;
+
++ (NSString *)dirPathInLibrary:(NSString *)dirName
+             createIfNotExists:(BOOL)create;
+
++ (NSString *)filePathInLibrary:(NSString *)fileName;
+
+#pragma mark -
+
 + (NSString *)cacheDirPath;
 
 + (NSString *)dirPathInCache:(NSString *)dirName

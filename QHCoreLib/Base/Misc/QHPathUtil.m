@@ -77,6 +77,39 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark -
 
++ (NSString *)libraryDirPath
+{
+    static NSString *dir = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+        dir = [paths firstObject];
+    });
+
+    [self createDirIfNotExists:dir];
+
+    return dir;
+}
+
++ (NSString *)dirPathInLibrary:(NSString *)dirName
+              createIfNotExists:(BOOL)create
+{
+    NSString *dir = [[self libraryDirPath] stringByAppendingPathComponent:dirName];
+
+    if (create) {
+        [self createDirIfNotExists:dir];
+    }
+
+    return dir;
+}
+
++ (NSString *)filePathInLibrary:(NSString *)fileName
+{
+    return [[self libraryDirPath] stringByAppendingPathComponent:fileName];
+}
+
+#pragma mark -
+
 + (NSString *)cacheDirPath
 {
     static NSString *dir = nil;
