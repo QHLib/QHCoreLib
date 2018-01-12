@@ -122,6 +122,8 @@ QH_COLLECTIONVIEW_CELL_DATA_DECL(cell, QHCollectionViewWrapCellModel);
 
 - (void)layoutSubviews
 {
+    [super layoutSubviews];
+
     self.targetView.origin = CGPointZero;
 }
 
