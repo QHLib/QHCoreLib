@@ -10,7 +10,7 @@
 #import <SystemConfiguration/SystemConfiguration.h>
 
 
-typedef NS_ENUM(NSUInteger, QHNetworkReachabilityStatus) {
+typedef NS_ENUM(NSInteger, QHNetworkReachabilityStatus) {
     QHNetworkReachabilityStatusUnknown          = -1,
     QHNetworkReachabilityStatusNotReachable     = 0,
     QHNetworkReachabilityStatusReachableViaWWAN = 1,
