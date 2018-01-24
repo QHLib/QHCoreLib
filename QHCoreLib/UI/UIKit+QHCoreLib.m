@@ -171,6 +171,30 @@ static const void * kNeedsCalculateSizeASOKey = &kNeedsCalculateSizeASOKey;
     return self.center.y;
 }
 
+- (UIView *)qh_findFirstResponder
+{
+    if ([self isFirstResponder]) {
+        return self;
+    }
+    for (UIView *subView in [self subviews]) {
+        UIView *found = [subView qh_findFirstResponder];
+        if (found != nil) return found;
+    }
+    return nil;
+}
+
+- (UIViewController *)qh_findViewController
+{
+    UIResponder *p = self;
+    while (p != nil) {
+        p = [p nextResponder];
+        if ([p isKindOfClass:[UIViewController class]]) {
+            return (UIViewController *)p;
+        }
+    }
+    return nil;
+}
+
 @end
 
 

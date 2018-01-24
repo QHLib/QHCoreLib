@@ -35,6 +35,10 @@
 @property (nonatomic, assign) CGFloat centerX;
 @property (nonatomic, assign) CGFloat centerY;
 
+- (UIView *)qh_findFirstResponder;
+
+- (UIViewController *)qh_findViewController;
+
 @end
 
 @interface UIView (backgroundColorLocker)
