@@ -28,4 +28,9 @@
 #define QH_TOPBAR_HEIGHT            (QH_STATUSBAR_HEIGHT + QH_NAVIGATIONBAR_HEIGHT)
 #define QH_TABBAR_HEIGHT            49.0f
 
+#define UIControlEventQHCustomEvent1    ((UIControlEvents)0x01000000)
+#define UIControlEventQHCustomEvent2    ((UIControlEvents)0x02000000)
+#define UIControlEventQHCustomEvent3    ((UIControlEvents)0x04000000)
+#define UIControlEventQHCustomEvent4    ((UIControlEvents)0x08000000)
+
 #endif /* QHUIDefines_h */
