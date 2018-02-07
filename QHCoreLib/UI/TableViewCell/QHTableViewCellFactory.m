@@ -20,6 +20,8 @@ typedef Class(^QHTableViewCellClassResolver)(QHTableViewCellItem *,
 @property (nonatomic, strong) NSMutableDictionary *type2Class;
 @property (nonatomic, strong) NSMutableArray<QHTableViewCellClassResolver> *resolvers;
 
+@property (nonatomic, strong) QHTableViewCellFactory *parentFactory;
+
 @end
 
 @implementation QHTableViewCellFactory
@@ -39,6 +41,13 @@ QH_SINGLETON_IMP
                         forType:QHTableViewCellTypeSeperator];
     }
     return self;
+}
+
++ (instancetype)privateFactory
+{
+    QHTableViewCellFactory *factory = [[QHTableViewCellFactory alloc] init];
+    factory.parentFactory = [self sharedInstance];
+    return factory;
 }
 
 - (void)registryCellClass:(Class)cellClass forType:(NSInteger)type
@@ -87,6 +96,11 @@ QH_SINGLETON_IMP
                     }
                 };
             })];
+        }
+
+        if (!cellClass && self.parentFactory) {
+            cellClass = [self.parentFactory cellClassForItem:item
+                                                     context:context];
         }
     }
 

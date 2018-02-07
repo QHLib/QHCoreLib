@@ -11,6 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, QHTableViewCellType) {
+    QHTableViewCellTypePrivateBegin = -666666,
+
     QHTableViewCellTypeStatic = -1,
     QHTableViewCellTypeDefault = 0,
     

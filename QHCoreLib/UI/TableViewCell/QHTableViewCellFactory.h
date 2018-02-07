@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 QH_SINGLETON_DEF
 
++ (instancetype)privateFactory;
+
 - (void)registryCellClass:(Class)cellClass
                   forType:(NSInteger)type;
 

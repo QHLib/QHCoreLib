@@ -9,6 +9,8 @@
 #import "QHTableViewCellTestController.h"
 
 typedef NS_ENUM(NSInteger, QHTableViewCellTestType) {
+    QHTableViewCellTestTypePrivate = QHTableViewCellTypePrivateBegin,
+
     QHTableViewCellTestTypeOne = QHTableViewCellTypeCustomBegin,
     QHTableViewCellTestTypeTwo,
     QHTableViewCellTestTypeResolve1,
@@ -43,6 +45,8 @@ QH_TABLEVIEW_CELL_DATA_DECL(my, NSString);
 
 @end
 
+static QHTableViewCellFactory *cellFactory = nil;
+
 @implementation QHTableViewCellTestController
 
 + (void)initialize
@@ -54,7 +58,7 @@ QH_TABLEVIEW_CELL_DATA_DECL(my, NSString);
     QHTableViewCellFactoryRegistry([QHTableViewCellTwo class], QHTableViewCellTestTypeTwo);
     // no warn
     QHTableViewCellFactoryRegistry([QHTableViewCellTwo class], QHTableViewCellTestTypeTwo);
-    
+
     [[QHTableViewCellFactory sharedInstance] registryCellClassResolver:({
         ^Class _Nullable(QHTableViewCellItem * _Nonnull item,
                          QHTableViewCellContext * _Nonnull context) {
@@ -66,6 +70,8 @@ QH_TABLEVIEW_CELL_DATA_DECL(my, NSString);
             return nil;
         };
     })];
+
+    cellFactory = [QHTableViewCellFactory privateFactory];
 }
 
 - (void)viewDidLoad
@@ -132,8 +138,8 @@ QH_TABLEVIEW_CELL_DATA_DECL(my, NSString);
         }
     }
     
-    return [[QHTableViewCellFactory sharedInstance] heightForItem:item
-                                                          context:context];
+    return [cellFactory heightForItem:item
+                              context:context];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -147,8 +153,8 @@ QH_TABLEVIEW_CELL_DATA_DECL(my, NSString);
         }
     }
     
-    UITableViewCell *cell = [[QHTableViewCellFactory sharedInstance] cellForItem:item
-                                                                         context:context];
+    UITableViewCell *cell = [cellFactory cellForItem:item
+                                             context:context];
 
     if (item.type == QHTableViewCellTypeDefault) {
         QH_AS(item.data, NSString, title)
