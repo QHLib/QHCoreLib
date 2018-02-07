@@ -9,12 +9,12 @@
 #import "QHTableViewCellTestController.h"
 
 typedef NS_ENUM(NSInteger, QHTableViewCellTestType) {
-    QHTableViewCellTestTypePrivate = QHTableViewCellTypePrivateBegin,
-
     QHTableViewCellTestTypeOne = QHTableViewCellTypeCustomBegin,
     QHTableViewCellTestTypeTwo,
     QHTableViewCellTestTypeResolve1,
     QHTableViewCellTestTypeResolve2,
+
+    QHTableViewCellTestTypePrivate = QHTableViewCellTypePrivateBegin,
 };
 
 @interface QHTableViewCellOne : UITableViewCell
