@@ -240,4 +240,14 @@
     }
 }
 
+- (void)testMobilePhoneNumber
+{
+    // 长度不对
+    XCTAssertFalse(QHMobilePhoneNumberCheck(@"133"));
+    // 号段不对
+    XCTAssertFalse(QHMobilePhoneNumberCheck(@"123"));
+
+    XCTAssertTrue(QHMobilePhoneNumberCheck(@"13800000000"));
+}
+
 @end

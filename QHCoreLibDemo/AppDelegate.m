@@ -64,6 +64,14 @@
     NSLog(@"%@", [QHPathUtil filePathInCache:@"bbb"]);
     NSLog(@"%@", [QHPathUtil filePathInTemp:@"ccc"]);
 
+    // 单元测试跑不起来，先暂时放这里。
+    // 长度不对
+    QHAssert(QHMobilePhoneNumberCheck(@"133") == NO, @"");
+    // 号段不对
+    QHAssert(QHMobilePhoneNumberCheck(@"123") == NO, @"");
+
+    QHAssert(QHMobilePhoneNumberCheck(@"13800000000") == YES, @"");
+
     return YES;
 }
 

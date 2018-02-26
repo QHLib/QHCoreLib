@@ -304,4 +304,44 @@ BOOL QHCharacterIsAlpNum(unichar character)
             || QHCharacterIsNumber(character));
 }
 
+static NSPredicate *isCM = nil;
+static NSPredicate *isCU = nil;
+static NSPredicate *isCT = nil;
+static inline void QHMobilePhoneNumberInit()
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        // 134、135、136、137、138、139、
+        // 147、
+        // 150、151、152、157、158、159、
+        // 178
+        // 182、183、184、187、188、
+        isCM = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",
+                @"^1(3[4-9]|47|5[0-27-9]|78|8[23478])\\d{8}$"];
+
+        // 130、131、132、
+        // 155、156、
+        // 176
+        // 185、186、
+        isCU = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",
+                @"^1(3[0-2]|5[56]|76|18[56])\\d{8}$"];
+
+        // 133、
+        // 153、
+        // 177
+        // 180、181、189、
+        isCT = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",
+                @"^1(33|53|77|8[019])\\d{8}$"];
+    });
+}
+
+BOOL QHMobilePhoneNumberCheck(NSString *number)
+{
+    QHMobilePhoneNumberInit();
+
+    return ([isCM evaluateWithObject:number]
+            || [isCU evaluateWithObject:number]
+            || [isCT evaluateWithObject:number]);
+}
+
 NS_ASSUME_NONNULL_END

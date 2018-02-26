@@ -91,5 +91,8 @@ QH_EXTERN BOOL QHCharacterIsAlphabet(unichar character);
 QH_EXTERN BOOL QHCharacterIsNumber(unichar character);
 QH_EXTERN BOOL QHCharacterIsAlpNum(unichar character);
 
+// 手机号判断
+QH_EXTERN BOOL QHMobilePhoneNumberCheck(NSString *number);
+
 
 NS_ASSUME_NONNULL_END
