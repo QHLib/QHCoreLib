@@ -324,7 +324,7 @@ static inline void QHMobilePhoneNumberInit()
         // 176
         // 185、186、
         isCU = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",
-                @"^1(3[0-2]|5[56]|76|18[56])\\d{8}$"];
+                @"^1(3[0-2]|5[56]|76|8[56])\\d{8}$"];
 
         // 133、
         // 153、
