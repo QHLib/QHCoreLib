@@ -138,7 +138,7 @@ typedef void (^QHAsyncTaskFailBlock)(QHAsyncTask *task, NSError *error);
 #define QH_ASYNC_TASK_PROGRESS_IMPL(TASK_TYPE, PROGRESS_TYPE) \
 - (void)setProgressBlock:(void (^ _Nullable)(TASK_TYPE *task, PROGRESS_TYPE * progress))progressBlock \
 { \
-    [super setProgressBlock:(void (^ _Nullable)(QHAsyncTask *task, id<QHAsyncTaskProgress> progress))progressBlock]; \
+    [super setProgressBlock:(id)progressBlock]; \
 }
 
 #define QH_ASYNC_TASK_DECL(TASK_TYPE, RESULT_TYPE) \
