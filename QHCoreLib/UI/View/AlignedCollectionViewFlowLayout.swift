@@ -61,7 +61,7 @@ private struct AlignmentAxis<A: Alignment> {
 /// over the horizontal and vertical alignment of the cells.
 /// You can use it to align the cells like words in a left- or right-aligned text
 /// and you can specify how the cells are vertically aligned in their row.
-public class AlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
+@objc public class AlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
     
     // MARK: - 🔶 Properties
     
@@ -117,12 +117,12 @@ public class AlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
         super.init(coder: aDecoder)
     }
     
-    public static func defaultLayout() -> AlignedCollectionViewFlowLayout {
+    @objc public static func defaultLayout() -> AlignedCollectionViewFlowLayout {
         return AlignedCollectionViewFlowLayout(horizontalAlignment: .justified,
                                                verticalAlignment: .center)
     }
     
-    public func setHorizontalAlign(align: Int) {
+    @objc public func setHorizontalAlign(align: Int) {
         if align == 0 {
             self.horizontalAlignment = .justified
         }
@@ -134,7 +134,7 @@ public class AlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
         }
     }
     
-    public func setVerticalAlign(align: Int) {
+    @objc public func setVerticalAlign(align: Int) {
         if align == 0 {
             self.verticalAlignment = .center
         }
