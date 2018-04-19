@@ -90,6 +90,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSInteger)qh_integerForKey:(id<NSCopying>)key
                  defaultValue:(NSInteger)defaultValue;
 
+- (int32_t)qh_int32ForKey:(id<NSCopying>)key
+             defaultValue:(int32_t)defaultValue;
+
+- (int64_t)qh_int64ForKey:(id<NSCopying>)key
+             defaultValue:(int64_t)defaultValue;
+
 - (double)qh_doubleForKey:(id<NSCopying>)key
              defaultValue:(double)defaultValue;
 
