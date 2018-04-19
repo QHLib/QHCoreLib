@@ -211,7 +211,6 @@ static const void *kNSObjectWeakCarry3ASOKey = &kNSObjectWeakCarry3ASOKey;
     }
 }
 
-
 - (NSArray *)qh_objectsAtIndexes:(NSIndexSet *)indexes
 {
     return [self objectsAtIndexes:[indexes indexesPassingTest:^BOOL(NSUInteger idx, BOOL *stop) {
@@ -222,6 +221,14 @@ static const void *kNSObjectWeakCarry3ASOKey = &kNSObjectWeakCarry3ASOKey;
         }
         return result;
     }]];
+}
+
+- (NSString *)qh_toJSON
+{
+    NSData *data = [NSJSONSerialization dataWithJSONObject:self
+                                                   options:0
+                                                     error:nil];
+    return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 }
 
 @end
@@ -322,6 +329,14 @@ static const void *kNSObjectWeakCarry3ASOKey = &kNSObjectWeakCarry3ASOKey;
                       QHCallStackShort());
         return [NSDictionary dictionaryWithDictionary:self];
     }
+}
+
+- (NSString *)qh_toJSON
+{
+    NSData *data = [NSJSONSerialization dataWithJSONObject:self
+                                                   options:0
+                                                     error:nil];
+    return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 }
 
 @end

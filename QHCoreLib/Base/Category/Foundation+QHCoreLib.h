@@ -42,6 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSArray<ObjectType> *)qh_objectsAtIndexes:(NSIndexSet *)indexes;
 
+- (NSString *)qh_toJSON;
+
 @end
 
 @interface NSArray (QHCoreLibDefaultValue)
@@ -79,6 +81,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSDictionary<KeyType, ObjectType> (QHCoreLib)
 
 - (NSDictionary<KeyType, id> *)qh_mappedDictionaryWithBlock:(id (^)(KeyType key, ObjectType obj))block;
+
+- (NSString *)qh_toJSON;
 
 @end
 
