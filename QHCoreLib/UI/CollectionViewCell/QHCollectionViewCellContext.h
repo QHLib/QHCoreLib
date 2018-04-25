@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UIViewController * _Nullable controller;
 
+@property (nonatomic, strong) NSNotificationCenter * _Nullable notificationCenter;
+
 // any thing yout want to pass through
 @property (nonatomic, strong) id _Nullable opaque;
 
