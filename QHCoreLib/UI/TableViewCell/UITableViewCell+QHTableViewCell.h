@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, readonly, nullable) QHTableViewCellItem *qh_cellItem;
 
+@property (nonatomic, strong, readonly, nullable) NSNotificationCenter *qh_eventBridge;
+
 - (void)qh_configure:(QHTableViewCellItem * _Nullable)item
              context:(QHTableViewCellContext * _Nullable)context NS_REQUIRES_SUPER;
 

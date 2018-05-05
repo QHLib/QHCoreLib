@@ -30,14 +30,32 @@ static void *kQHTableViewCellItemASOKey = &kQHTableViewCellItemASOKey;
     objc_setAssociatedObject(self,
                              kQHTableViewCellItemASOKey,
                              qh_cellItem,
-                             OBJC_ASSOCIATION_RETAIN);
+                             OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     [self didChangeValueForKey:QH_PROPETY_NAME(qh_cellItem)];
+}
+
+static void *kQHTableViewCellEventBridgeASOKey = &kQHTableViewCellEventBridgeASOKey;
+
+- (NSNotificationCenter *)qh_eventBridge
+{
+    return objc_getAssociatedObject(self,
+                                    kQHTableViewCellEventBridgeASOKey);
+}
+
+- (void)setQh_eventBridge:(NSNotificationCenter * _Nullable)qh_eventBridge
+{
+    objc_setAssociatedObject(self,
+                             kQHTableViewCellEventBridgeASOKey,
+                             qh_eventBridge,
+                             OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (void)qh_configure:(QHTableViewCellItem * )item
              context:(QHTableViewCellContext *)context
 {
     [self setQh_cellItem:item];
+
+    [self setQh_eventBridge:context.notificationCenter];
 }
 
 @end

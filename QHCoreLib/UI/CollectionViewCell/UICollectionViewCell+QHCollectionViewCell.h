@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, readonly, nullable) id qh_data;
 
+@property (nonatomic, strong, readonly, nullable) NSNotificationCenter *qh_eventBridge;
+
 - (void)qh_configure:(id _Nullable)data
              context:(QHCollectionViewCellContext * _Nullable)context NS_REQUIRES_SUPER;
 
