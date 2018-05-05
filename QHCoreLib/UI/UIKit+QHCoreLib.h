@@ -127,3 +127,11 @@
 - (void)qh_setTitleColor:(UIColor *)color;
 
 @end
+
+@interface UITextField (QHCoreLib)
+
+- (void)setPlaceholder:(NSString *)placeholder
+             withColor:(UIColor *)color
+               andFont:(UIFont *)font;
+
+@end

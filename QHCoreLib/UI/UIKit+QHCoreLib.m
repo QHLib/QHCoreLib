@@ -612,3 +612,22 @@ static const void * kQHTableViewCellBottomSeperatorLineInsetsKVOKey = &kQHTableV
 }
 
 @end
+
+@implementation UITextField (QHCoreLib)
+
+- (void)setPlaceholder:(NSString *)placeholder
+             withColor:(UIColor *)color
+               andFont:(UIFont *)font
+{
+    NSMutableDictionary *attrs = [NSMutableDictionary dictionary];
+    if (color) {
+        [attrs setObject:color forKey:NSForegroundColorAttributeName];
+    }
+    if (font) {
+        [attrs setObject:font forKey:NSFontAttributeName];
+    }
+    self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:placeholder ?: @""
+                                                                 attributes:attrs];
+}
+
+@end
