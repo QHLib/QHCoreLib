@@ -44,6 +44,8 @@ typedef void (^QHNetworkApiFailBlock)(QHNetworkApi *api, NSError *error);
 
 @interface QHNetworkApi : QHAsyncTask
 
++ (BOOL)logResponseOnDebug;
+
 // subclasses implement
 - (QHNetworkRequest *)buildRequest;
 

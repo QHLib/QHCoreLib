@@ -36,6 +36,11 @@ NSString * const QHNetworkApiErrorDomain = @"QHNetworkApiErrorDomain";
 
 @implementation QHNetworkApi
 
++ (BOOL)logResponseOnDebug
+{
+    return NO;
+}
+
 - (QHNetworkRequest *)buildRequest
 {
     QHAssertReturnValueOnFailure([QHNetworkRequest new], NO, @"subclass implement");
@@ -104,16 +109,18 @@ QH_ASYNC_TASK_PROGRESS_IMPL(QHNetworkApi, QHNetworkProgress);
             QHNetworkApiResult *result = [[self resultClass] parse:response error:&error api:self];
 
             if (error == nil) {
-                QHLogDebug(@"request: %@\nsucceed: %@", self, response.responseObject);
+                if ([[self class] logResponseOnDebug]) {
+                    QHLogDebug(@"request: %@\nsucceed: %@", self, response.responseObject);
+                }
                 [self p_fireSuccess:result];
             }
             else {
-                QHLogDebug(@"request: %@\nfinished: %@\nwith error: %@", self, response.responseObject, error);
+                QHLogError(@"request: %@\nfinished: %@\nwith error: %@", self, response.responseObject, error);
                 [self p_fireFail:error];
             }
         }
         else {
-            QHLogDebug(@"request: %@\nfailed: %@", self, [error description]);
+            QHLogError(@"request: %@\nfailed: %@", self, [error description]);
             [self p_fireFail:error];
         }
     }];
