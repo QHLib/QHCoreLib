@@ -112,7 +112,7 @@ QH_ASYNC_TASK_PROGRESS_IMPL(QHNetworkApi, QHNetworkProgress);
                 if ([[self class] logResponseOnDebug]) {
                     QHLogDebug(@"request: %@\nsucceed: %@", self, response.responseObject);
                 } else {
-                    QHLogDebug(@"request: %@", self);
+                    QHLogDebug(@"request: %@\nsucceed", self);
                 }
                 [self p_fireSuccess:result];
             }
