@@ -72,6 +72,9 @@
 
     QHAssert(QHMobilePhoneNumberCheck(@"13800000000") == YES, @"");
 
+    NSLog(@"%@", [QHNetworkUtil appendQuery:@{ @"a": @"b?c=123" }
+                                      toUrl:@"http://hhhh"]);
+
     return YES;
 }
 

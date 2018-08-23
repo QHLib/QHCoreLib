@@ -29,7 +29,8 @@ NSString * const QHNetWorkHttpMethodPost =  @"POST";
     static NSCharacterSet *allowedCharacterSet = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        allowedCharacterSet = [NSCharacterSet URLQueryAllowedCharacterSet];
+        allowedCharacterSet = [[NSCharacterSet characterSetWithCharactersInString:@"!*'\"();:@&=+$,/?%#[]% "]
+                               invertedSet];
     });
 
     if (QH_IS_DICTIONARY(dict) == NO || dict.count == 0) return url;
