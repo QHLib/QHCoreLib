@@ -10,6 +10,8 @@
 
 #import <QHCoreLib/QHCoreLib.h>
 
+#import "QHCoreLibDemo-Swift.h"
+
 #import "EntranceViewController.h"
 #import "QHListDataEntranceController.h"
 #import "QHUIWidgetsController.h"
@@ -74,6 +76,8 @@
 
     NSLog(@"%@", [QHNetworkUtil appendQuery:@{ @"a": @"b?c=123" }
                                       toUrl:@"http://hhhh"]);
+
+    [TestSwift log];
 
     return YES;
 }

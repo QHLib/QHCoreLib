@@ -921,12 +921,12 @@ NSString * DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy) {
 
         // Get the file name without extension
         _fileName = [_file lastPathComponent];
-        NSUInteger dotLocation = [_fileName rangeOfString:@"." options:NSBackwardsSearch].location;
-        if (dotLocation != NSNotFound)
-        {
-            _fileName = [_fileName substringToIndex:dotLocation];
-        }
-        
+//        NSUInteger dotLocation = [_fileName rangeOfString:@"." options:NSBackwardsSearch].location;
+//        if (dotLocation != NSNotFound)
+//        {
+//            _fileName = [_fileName substringToIndex:dotLocation];
+//        }
+//        
         // Try to get the current queue's label
         if (USE_DISPATCH_CURRENT_QUEUE_LABEL) {
             _queueLabel = [[NSString alloc] initWithFormat:@"%s", dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL)];

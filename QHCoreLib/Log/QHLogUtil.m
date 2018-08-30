@@ -10,7 +10,6 @@
 #import "DDTTYLogger.h"
 #import "DDFileLogger.h"
 
-
 NS_ASSUME_NONNULL_BEGIN
 
 DDLogLevel QHLogLevel = DDLogLevelAll;

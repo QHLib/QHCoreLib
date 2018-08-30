@@ -30,7 +30,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'QHLog' do |ss|
-    ss.source_files = "QHCoreLib/Log/**/*.{h,m}"
+    ss.source_files = "QHCoreLib/Log/**/*.{h,m,swift}"
     ss.public_header_files = "QHCoreLib/Log/**/*.h"
     ss.private_header_files = "QHCoreLib/Log/Lumberjack/**/*.h"
     ss.frameworks = "Foundation"
