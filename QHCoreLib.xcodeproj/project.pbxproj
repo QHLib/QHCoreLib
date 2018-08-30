@@ -918,9 +918,9 @@
 		EAAE57A71EDAB2CF0084FA69 /* Support files */ = {
 			isa = PBXGroup;
 			children = (
-				EAFC30DC1FD801310050CBA8 /* QHCoreLib.swift */,
 				EA1D42FA1ED70BA2002177BF /* Info.plist */,
 				EA1D42F91ED70BA2002177BF /* QHCoreLib.h */,
+				EAFC30DC1FD801310050CBA8 /* QHCoreLib.swift */,
 				EA1D442B1ED92ED9002177BF /* QHCoreLib.modulemap */,
 			);
 			name = "Support files";

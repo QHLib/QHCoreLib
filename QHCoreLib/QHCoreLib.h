@@ -14,7 +14,6 @@ FOUNDATION_EXPORT double QHCoreLibVersionNumber;
 //! Project version string for QHCoreLib.
 FOUNDATION_EXPORT const unsigned char QHCoreLibVersionString[];
 
-#import "QHCoreLib-Swift.h"
 #import <QHCoreLib/QHBase.h>
 #import <QHCoreLib/QHLog.h>
 #import <QHCoreLib/QHProfiler.h>
