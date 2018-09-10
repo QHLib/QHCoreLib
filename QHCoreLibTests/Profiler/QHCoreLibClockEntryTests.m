@@ -20,6 +20,8 @@
 
 - (void)testClockEntryNormal
 {
+    XCTestExpectation *expect = [self expectationWithDescription:NSStringFromSelector(_cmd)];
+
     QHClockEntry *clock = [[QHClockEntry alloc] init];
     [clock start];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -29,11 +31,17 @@
         [clock end];
 
         NSLog(@"spent: %d ms", [clock spentTimeInMiliseconds]);
+
+        [expect fulfill];
     });
+
+    [self waitForExpectationsWithTimeout:1.1 handler:nil];
 }
 
 - (void)testClockEntryAbnormal
 {
+    XCTestExpectation *expect = [self expectationWithDescription:NSStringFromSelector(_cmd)];
+
     QHSetAssertFunction(^(NSString *condition,
                           NSString *fileName,
                           NSNumber *lineNumber,
@@ -61,11 +69,15 @@
         [clock end];
 
         XCTAssertNoThrow([clock start]);
-        XCTAssertThrows([clock elapsedTimeInMiliseconds]);
-        XCTAssertNoThrow([clock spentTimeInMiliseconds]);
+        XCTAssertNoThrow([clock elapsedTimeInMiliseconds]);
+        XCTAssertThrows([clock spentTimeInMiliseconds]);
 
         QHSetAssertFunction(nil);
+
+        [expect fulfill];
     });
+
+    [self waitForExpectationsWithTimeout:1.1 handler:nil];
 }
 
 

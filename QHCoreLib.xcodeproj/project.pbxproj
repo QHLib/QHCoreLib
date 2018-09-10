@@ -175,6 +175,10 @@
 		EAE690F91F7796AD00A097D4 /* CGFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE690F71F7796AD00A097D4 /* CGFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAE690FA1F7796AD00A097D4 /* CGFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE690F81F7796AD00A097D4 /* CGFunctions.m */; };
 		EAE7E7712137DCA0007909FE /* QHLogUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE7E7702137DCA0007909FE /* QHLogUtil.swift */; };
+		EAE7E7A221462525007909FE /* QHAsyncTaskRetryWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE7E7A021462525007909FE /* QHAsyncTaskRetryWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EAE7E7A321462525007909FE /* QHAsyncTaskRetryWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE7E7A121462525007909FE /* QHAsyncTaskRetryWrapper.m */; };
+		EAE7E7A5214636B7007909FE /* QHAsyncTaskRetryWrapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE7E7A4214636B7007909FE /* QHAsyncTaskRetryWrapperTests.m */; };
+		EAE7E7A721463907007909FE /* QHCoreLibSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE7E7A621463907007909FE /* QHCoreLibSwiftTests.swift */; };
 		EAEF5D9B1FDBD77000F27D74 /* UICollectionViewCell+QHCollectionViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = EAEF5D991FDBD77000F27D74 /* UICollectionViewCell+QHCollectionViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAEF5D9C1FDBD77000F27D74 /* UICollectionViewCell+QHCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EAEF5D9A1FDBD77000F27D74 /* UICollectionViewCell+QHCollectionViewCell.m */; };
 		EAFBB2781FCD533F00B9D505 /* QHTableViewPlaceholderCell.h in Headers */ = {isa = PBXBuildFile; fileRef = EAFBB2761FCD533F00B9D505 /* QHTableViewPlaceholderCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -413,6 +417,10 @@
 		EAE690F71F7796AD00A097D4 /* CGFunctions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CGFunctions.h; sourceTree = "<group>"; };
 		EAE690F81F7796AD00A097D4 /* CGFunctions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CGFunctions.m; sourceTree = "<group>"; };
 		EAE7E7702137DCA0007909FE /* QHLogUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QHLogUtil.swift; sourceTree = "<group>"; };
+		EAE7E7A021462525007909FE /* QHAsyncTaskRetryWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHAsyncTaskRetryWrapper.h; sourceTree = "<group>"; };
+		EAE7E7A121462525007909FE /* QHAsyncTaskRetryWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHAsyncTaskRetryWrapper.m; sourceTree = "<group>"; };
+		EAE7E7A4214636B7007909FE /* QHAsyncTaskRetryWrapperTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHAsyncTaskRetryWrapperTests.m; sourceTree = "<group>"; };
+		EAE7E7A621463907007909FE /* QHCoreLibSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QHCoreLibSwiftTests.swift; sourceTree = "<group>"; };
 		EAEF5D991FDBD77000F27D74 /* UICollectionViewCell+QHCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UICollectionViewCell+QHCollectionViewCell.h"; sourceTree = "<group>"; };
 		EAEF5D9A1FDBD77000F27D74 /* UICollectionViewCell+QHCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UICollectionViewCell+QHCollectionViewCell.m"; sourceTree = "<group>"; };
 		EAFBB2761FCD533F00B9D505 /* QHTableViewPlaceholderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHTableViewPlaceholderCell.h; sourceTree = "<group>"; };
@@ -512,6 +520,8 @@
 				EAB2EEF01F04E82B00CDDF6D /* QHAsyncParallelTaskGroup.m */,
 				EA4FBA981F074E64004A6FE5 /* QHAsyncLinkedTaskGroup.h */,
 				EA4FBA991F074E64004A6FE5 /* QHAsyncLinkedTaskGroup.m */,
+				EAE7E7A021462525007909FE /* QHAsyncTaskRetryWrapper.h */,
+				EAE7E7A121462525007909FE /* QHAsyncTaskRetryWrapper.m */,
 			);
 			path = Async;
 			sourceTree = "<group>";
@@ -525,6 +535,7 @@
 				EA16937E1F054BEF00BD9A25 /* QHAsyncBlockTaskTests.m */,
 				EA4FBA6D1F050BEF004A6FE5 /* QHAsyncParallelTaskGroupTests.m */,
 				EA4FBA9C1F07593A004A6FE5 /* QHAsyncLinkedTaskGroupTests.m */,
+				EAE7E7A4214636B7007909FE /* QHAsyncTaskRetryWrapperTests.m */,
 			);
 			path = Async;
 			sourceTree = "<group>";
@@ -534,6 +545,7 @@
 			children = (
 				EA1D43061ED70BA3002177BF /* Info.plist */,
 				EA1D43041ED70BA3002177BF /* QHCoreLibTests.m */,
+				EAE7E7A621463907007909FE /* QHCoreLibSwiftTests.swift */,
 				EAAE58E21EE6B5780084FA69 /* QHCoreLibTests.pch */,
 			);
 			name = "Support files";
@@ -985,6 +997,7 @@
 				EA1D43811ED70CE3002177BF /* QHNetworkUtil.h in Headers */,
 				EA1D43781ED70CE3002177BF /* QHNetwork.h in Headers */,
 				EA1D43641ED70CE3002177BF /* Foundation+QHCoreLib.h in Headers */,
+				EAE7E7A221462525007909FE /* QHAsyncTaskRetryWrapper.h in Headers */,
 				EA19CC6D1EEA57D900C18853 /* QHNetworkHtmlApi.h in Headers */,
 				EA0C78CA1F613E970038CC88 /* QHListCommonData+internal.h in Headers */,
 				EA1D43691ED70CE3002177BF /* QHDefaultValue.h in Headers */,
@@ -1136,6 +1149,7 @@
 					EA1D42FE1ED70BA2002177BF = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = XD4G683TDY;
+						LastSwiftMigration = 0940;
 						ProvisioningStyle = Automatic;
 					};
 					EA5F5AA71F5D519E00013F8F = {
@@ -1384,6 +1398,7 @@
 				EA9C468F1FB9E10A007E7DB5 /* AFURLSessionManager.m in Sources */,
 				EA19CC621EE9969000C18853 /* QHNetworkHttpApi.m in Sources */,
 				EAFC30D91FD7F3170050CBA8 /* QHFlowView.m in Sources */,
+				EAE7E7A321462525007909FE /* QHAsyncTaskRetryWrapper.m in Sources */,
 				EA5F5A721F5D4C1000013F8F /* QHNetworkActivityIndicator.m in Sources */,
 				EA5F5A6E1F5D426100013F8F /* UIKit+QHCoreLib.m in Sources */,
 				EAFC30DD1FD801310050CBA8 /* QHCoreLib.swift in Sources */,
@@ -1408,9 +1423,11 @@
 				EAAE59171EE7E62A0084FA69 /* QHCoreLibUserDefaultsPropertyTests.m in Sources */,
 				EA1D43A01ED70E50002177BF /* QHCoreLibNetworkApiTests.m in Sources */,
 				EA1D43051ED70BA3002177BF /* QHCoreLibTests.m in Sources */,
+				EAE7E7A5214636B7007909FE /* QHAsyncTaskRetryWrapperTests.m in Sources */,
 				EA1D439A1ED70E3A002177BF /* QHCoreLibExternCTests.m in Sources */,
 				EA1D43971ED70E32002177BF /* QHCoreLibAssertsTests.m in Sources */,
 				EA1D439B1ED70E40002177BF /* QHCoreLibUtilTests.m in Sources */,
+				EAE7E7A721463907007909FE /* QHCoreLibSwiftTests.swift in Sources */,
 				EA1D439C1ED70E44002177BF /* QHCoreLibDefaultValueTests.m in Sources */,
 				EA1D43981ED70E35002177BF /* QHCoreLibDefinesTests.m in Sources */,
 				EAAA79E91ED9639A008135BE /* QHCoreLibClockEntryTests.m in Sources */,
@@ -1537,6 +1554,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0BF5B35E29ACCBA6610B6542 /* Pods-QHCoreLibTests.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = XD4G683TDY;
 				GCC_PREFIX_HEADER = QHCoreLibTests/QHCoreLibTests.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1547,6 +1565,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tctony.QHLib.QHCoreLibTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.1;
 			};
 			name = Debug;
 		};
@@ -1554,12 +1574,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A4FB93821E521314C7F610C2 /* Pods-QHCoreLibTests.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = XD4G683TDY;
 				GCC_PREFIX_HEADER = QHCoreLibTests/QHCoreLibTests.pch;
 				INFOPLIST_FILE = QHCoreLibTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tctony.QHLib.QHCoreLibTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.1;
 			};
 			name = Release;
 		};

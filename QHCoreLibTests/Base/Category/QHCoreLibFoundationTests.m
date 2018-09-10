@@ -295,11 +295,30 @@
 
     date = [calenar dateWithEra:1 yearForWeekOfYear:now.year weekOfYear:now.weekOfYear-1 weekday:now.weekday hour:0 minute:0 second:0 nanosecond:0];
     XCTAssertFalse([date qh_isWithinWestWeek]);
-
-    // 上个礼拜天
-    date = [calenar dateWithEra:1 year:now.year-1 month:now.month-1 day:now.day-now.weekday+1 hour:now.hour-1 minute:now.minute - 1 second:now.second nanosecond:0];
     XCTAssertFalse([date qh_isWithinWeek]);
-    XCTAssert([date qh_weekDayIndex] == 7);
+}
+
+- (void)testDateUnitCheckTimezone
+{
+    NSDate *now = [NSDate date];
+    int interval = [now timeIntervalSinceReferenceDate] + 3600 * 8;
+    int elapsedInThisWeek = interval % (3600 * 24);
+    NSDate *monday = [NSDate dateWithTimeIntervalSinceReferenceDate:(interval - elapsedInThisWeek + 1) - 3600 * 8];
+    NSDate *sunday = [NSDate dateWithTimeIntervalSinceReferenceDate:(interval - elapsedInThisWeek - 1) - 3600 * 8];
+
+    NSInteger weakday = [[NSDate qh_sharedCalendar] component:NSCalendarUnitWeekday
+                                               fromDate:now];
+    if (weakday == 1) { // sunday
+        XCTAssert([monday qh_isWithinWeek] == YES);
+        XCTAssert([sunday qh_isWithinWeek] == NO);
+        XCTAssert([monday qh_isWithinWestWeek] == NO);
+        XCTAssert([sunday qh_isWithinWestWeek] == NO);
+    } else {
+        XCTAssert([monday qh_isWithinWeek] == YES);
+        XCTAssert([sunday qh_isWithinWeek] == NO);
+        XCTAssert([monday qh_isWithinWestWeek] == YES);
+        XCTAssert([sunday qh_isWithinWestWeek] == YES);
+    }
 }
 
 @end

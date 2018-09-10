@@ -29,7 +29,6 @@ typedef NS_ENUM(NSUInteger, QHAsyncTaskError) {
 
 typedef id<NSCopying> QHAsyncTaskId;
 
-
 @protocol QHAsyncTaskProgress <NSObject>
 - (uint64_t)totalCount;
 - (uint64_t)completedCount;
@@ -53,6 +52,8 @@ typedef id<NSCopying> QHAsyncTaskId;
 @end
 
 @class QHAsyncTask;
+
+typedef QHAsyncTask * (^QHAsyncTaskBuilder)(void);
 
 typedef void (^QHAsyncBlockTaskBody)(QHAsyncTask *task, QHAsyncBlockTaskReporter<id, id<QHAsyncTaskProgress>> *reporter);
 

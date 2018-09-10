@@ -604,8 +604,10 @@ NSString * const kQHDateFormatWeekStringLong = @"cccc";
 
 - (BOOL)qh_isWithinWeek
 {
-    NSTimeInterval intervalNow = [[NSDate date] timeIntervalSinceReferenceDate];
-    NSTimeInterval intervalThis = [self timeIntervalSinceReferenceDate];
+    // reference date: 2001-01-01 00:00:00 UTC monday
+    // 8 * 3600 is a fix for UTC+8
+    NSTimeInterval intervalNow = [[NSDate date] timeIntervalSinceReferenceDate] + 8 * 3600;
+    NSTimeInterval intervalThis = [self timeIntervalSinceReferenceDate] + 8 * 3600;
 
     static NSTimeInterval weekInSeconds = 60 * 60 * 24 * 7;
 
