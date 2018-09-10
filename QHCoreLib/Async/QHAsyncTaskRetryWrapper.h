@@ -8,6 +8,8 @@
 
 #import <QHCoreLib/QHAsyncTask.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface QHAsyncTaskRetryWrapper<ResultType> : QHAsyncTask<ResultType>
 
 - (instancetype)initWithTaskBuilder:(QHAsyncTaskBuilder)builder
@@ -15,3 +17,5 @@
                       retryInterval:(double)retryInterval;
 
 @end
+
+NS_ASSUME_NONNULL_END

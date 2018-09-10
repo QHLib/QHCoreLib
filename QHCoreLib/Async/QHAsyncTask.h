@@ -53,7 +53,7 @@ typedef id<NSCopying> QHAsyncTaskId;
 
 @class QHAsyncTask;
 
-typedef QHAsyncTask * (^QHAsyncTaskBuilder)(void);
+typedef QHAsyncTask * _Nonnull (^QHAsyncTaskBuilder)(void);
 
 typedef void (^QHAsyncBlockTaskBody)(QHAsyncTask *task, QHAsyncBlockTaskReporter<id, id<QHAsyncTaskProgress>> *reporter);
 
