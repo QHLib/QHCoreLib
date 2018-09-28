@@ -10,16 +10,16 @@
 
 #import <QHCoreLib/QHBase.h>
 
-#import <QHCoreLib/DDLog.h>
+#import <QHCoreLib/QHDDLog.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-QH_EXTERN DDLogLevel QHLogLevel;
-QH_EXTERN void QHSetLogLevel(DDLogLevel logLevel);
+QH_EXTERN QHDDLogLevel QHLogLevel;
+QH_EXTERN void QHSetLogLevel(QHDDLogLevel logLevel);
 
 #define _LOG_MACRO(isAsynchronous, lvl, flg, ctx, atag, fnct, frmt, ...)    \
-[DDLog log : isAsynchronous                                                 \
+[QHDDLog log : isAsynchronous                                                 \
      level : lvl                                                            \
       flag : flg                                                            \
    context : ctx                                                            \
@@ -42,19 +42,19 @@ do { \
 #endif
 
 #define QHLogError(frmt, ...) \
-_LOG_MAYBE(NO,  QHLogLevel, DDLogFlagError,   0, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
+_LOG_MAYBE(NO,  QHLogLevel, QHDDLogFlagError,   0, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 
 #define QHLogWarn(frmt, ...)  \
-_LOG_MAYBE(YES, QHLogLevel, DDLogFlagWarning, 0, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
+_LOG_MAYBE(YES, QHLogLevel, QHDDLogFlagWarning, 0, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 
 #define QHLogInfo(frmt, ...) \
-_LOG_MAYBE(YES, QHLogLevel, DDLogFlagInfo,    0, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
+_LOG_MAYBE(YES, QHLogLevel, QHDDLogFlagInfo,    0, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 
 #define QHLogDebug(frmt, ...) \
-_LOG_MAYBE(YES, QHLogLevel, DDLogFlagDebug,   0, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
+_LOG_MAYBE(YES, QHLogLevel, QHDDLogFlagDebug,   0, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 
 #define QHLogVerbose(frmt, ...) \
-_LOG_MAYBE(YES, QHLogLevel, DDLogFlagVerbose, 0, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
+_LOG_MAYBE(YES, QHLogLevel, QHDDLogFlagVerbose, 0, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 
 
 @interface QHLogUtil : NSObject

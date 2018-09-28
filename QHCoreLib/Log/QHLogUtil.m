@@ -7,36 +7,36 @@
 //
 
 #import "QHLogUtil.h"
-#import "DDTTYLogger.h"
-#import "DDFileLogger.h"
+#import "QHDDTTYLogger.h"
+#import "QHDDFileLogger.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-DDLogLevel QHLogLevel = DDLogLevelAll;
+QHDDLogLevel QHLogLevel = QHDDLogLevelAll;
 
-void QHSetLogLevel(DDLogLevel logLevel)
+void QHSetLogLevel(QHDDLogLevel logLevel)
 {
     QHLogLevel = logLevel;
 }
 
-CF_INLINE NSString *QHLogFlagString(DDLogFlag flag) {
+CF_INLINE NSString *QHLogFlagString(QHDDLogFlag flag) {
     NSString *flagString = @"";
     
     switch (flag) {
-        case DDLogFlagVerbose:
+        case QHDDLogFlagVerbose:
             flagString = @"V";
             break;
-        case DDLogFlagDebug:
+        case QHDDLogFlagDebug:
             flagString = @"D";
             break;
-        case DDLogFlagInfo:
+        case QHDDLogFlagInfo:
             flagString = @"I";
             break;
-        case DDLogFlagWarning:
+        case QHDDLogFlagWarning:
             flagString = @"W";
             break;
-        case DDLogFlagError:
+        case QHDDLogFlagError:
             flagString = @"E";
             break;
         default:
@@ -47,7 +47,7 @@ CF_INLINE NSString *QHLogFlagString(DDLogFlag flag) {
     return flagString;
 }
 
-@interface QHLogFormatter : NSObject <DDLogFormatter>
+@interface QHLogFormatter : NSObject <QHDDLogFormatter>
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @end
 
@@ -61,7 +61,7 @@ CF_INLINE NSString *QHLogFlagString(DDLogFlag flag) {
     }
     return self;
 }
-- (NSString *)formatLogMessage:(DDLogMessage *)logMessage
+- (NSString *)formatLogMessage:(QHDDLogMessage *)logMessage
 {
     return [NSString stringWithFormat:@"%@ [%@] (%@)*%@:%lu %@\n%@\n",
                                         [_dateFormatter stringFromDate:logMessage.timestamp],
@@ -74,7 +74,7 @@ CF_INLINE NSString *QHLogFlagString(DDLogFlag flag) {
 }
 @end
 
-static DDFileLogger *fileLogger = nil;
+static QHDDFileLogger *fileLogger = nil;
 
 @implementation QHLogUtil
 
@@ -89,37 +89,37 @@ static DDFileLogger *fileLogger = nil;
 #if QH_DEBUG && 0
     // not used any more since Xcode does not support
     setenv("XcodeColors", "YES", 1);
-    [[DDTTYLogger sharedInstance] setColorsEnabled:YES];
-    [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor colorWithWhite:0.667 alpha:1]
+    [[QHDDTTYLogger sharedInstance] setColorsEnabled:YES];
+    [[QHDDTTYLogger sharedInstance] setForegroundColor:[UIColor colorWithWhite:0.667 alpha:1]
                                      backgroundColor:nil
-                                             forFlag:DDLogFlagVerbose];
-    [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor colorWithWhite:0.333 alpha:1]
+                                             forFlag:QHDDLogFlagVerbose];
+    [[QHDDTTYLogger sharedInstance] setForegroundColor:[UIColor colorWithWhite:0.333 alpha:1]
                                      backgroundColor:nil
-                                             forFlag:DDLogFlagDebug];
-    [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor orangeColor]
+                                             forFlag:QHDDLogFlagDebug];
+    [[QHDDTTYLogger sharedInstance] setForegroundColor:[UIColor orangeColor]
                                      backgroundColor:nil
-                                             forFlag:DDLogFlagInfo];
-    [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor purpleColor]
+                                             forFlag:QHDDLogFlagInfo];
+    [[QHDDTTYLogger sharedInstance] setForegroundColor:[UIColor purpleColor]
                                      backgroundColor:nil
-                                             forFlag:DDLogFlagWarning];
-    [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor redColor]
+                                             forFlag:QHDDLogFlagWarning];
+    [[QHDDTTYLogger sharedInstance] setForegroundColor:[UIColor redColor]
                                      backgroundColor:nil
-                                             forFlag:DDLogFlagError];
+                                             forFlag:QHDDLogFlagError];
 #endif
-    [[DDTTYLogger sharedInstance] setLogFormatter:[[QHLogFormatter alloc] init]];
-    [DDLog addLogger:[DDTTYLogger sharedInstance] withLevel:DDLogLevelAll];
+    [[QHDDTTYLogger sharedInstance] setLogFormatter:[[QHLogFormatter alloc] init]];
+    [QHDDLog addLogger:[QHDDTTYLogger sharedInstance] withLevel:QHDDLogLevelAll];
     
     // file log
-    fileLogger = [[DDFileLogger alloc] init];
+    fileLogger = [[QHDDFileLogger alloc] init];
     fileLogger.logFormatter = [[QHLogFormatter alloc] init];
     fileLogger.rollingFrequency = 0;
     fileLogger.maximumFileSize = 1024 * 1024;
-    [DDLog addLogger:fileLogger withLevel:DDLogLevelInfo];
+    [QHDDLog addLogger:fileLogger withLevel:QHDDLogLevelInfo];
 
 #if QH_DEBUG
-    QHLogLevel = DDLogLevelVerbose;
+    QHLogLevel = QHDDLogLevelVerbose;
 #else
-    QHLogLevel = DDLogLevelInfo;
+    QHLogLevel = QHDDLogLevelInfo;
 #endif
 }
 
