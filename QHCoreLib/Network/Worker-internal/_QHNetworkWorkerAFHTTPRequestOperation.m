@@ -8,7 +8,7 @@
 
 #import "_QHNetworkWorkerAFHTTPRequestOperation.h"
 
-#import "AFHTTPSessionManager.h"
+#import "QHAFHTTPSessionManager.h"
 
 #import "QHBase+internal.h"
 #import "QHProfiler.h"
@@ -16,10 +16,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-static AFHTTPSessionManager *httpManager;
-static AFHTTPSessionManager *htmlManager;
-static AFHTTPSessionManager *jsonManager;
-static AFHTTPSessionManager *imageManager;
+static QHAFHTTPSessionManager *httpManager;
+static QHAFHTTPSessionManager *htmlManager;
+static QHAFHTTPSessionManager *jsonManager;
+static QHAFHTTPSessionManager *imageManager;
 
 
 @interface QHNetworkWorkerAFHTTPRequestOperation ()
@@ -36,17 +36,17 @@ static AFHTTPSessionManager *imageManager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
 
-        httpManager = [AFHTTPSessionManager manager];
-        httpManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        httpManager = [QHAFHTTPSessionManager manager];
+        httpManager.responseSerializer = [QHAFHTTPResponseSerializer serializer];
         
-        htmlManager = [AFHTTPSessionManager manager];
-        htmlManager.responseSerializer = [AFHTMLResponseSerializer serializer];
+        htmlManager = [QHAFHTTPSessionManager manager];
+        htmlManager.responseSerializer = [QHAFHTMLResponseSerializer serializer];
 
-        jsonManager = [AFHTTPSessionManager manager];
-        jsonManager.responseSerializer = [AFJSONResponseSerializer serializer];
+        jsonManager = [QHAFHTTPSessionManager manager];
+        jsonManager.responseSerializer = [QHAFJSONResponseSerializer serializer];
 
-        imageManager = [AFHTTPSessionManager manager];
-        imageManager.responseSerializer = [[AFImageResponseSerializer alloc] init];
+        imageManager = [QHAFHTTPSessionManager manager];
+        imageManager.responseSerializer = [[QHAFImageResponseSerializer alloc] init];
     });
 }
 
@@ -72,7 +72,7 @@ static AFHTTPSessionManager *imageManager;
             [super description], self.task];
 }
 
-- (AFHTTPSessionManager *)p_manager
+- (QHAFHTTPSessionManager *)p_manager
 {
     switch (self.request.resourceType) {
         case QHNetworkResourceHTTP:
@@ -150,7 +150,7 @@ static AFHTTPSessionManager *imageManager;
                                    };
     });
 
-    AFHTTPSessionManager *manager  = managerForResourceType[@(self.request.resourceType)];
+    QHAFHTTPSessionManager *manager  = managerForResourceType[@(self.request.resourceType)];
 
     QHAssertReturnVoidOnFailure(manager, @"invalid resource type: %d", (int)self.request.resourceType);
 

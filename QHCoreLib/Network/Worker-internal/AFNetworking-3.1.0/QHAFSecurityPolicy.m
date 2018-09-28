@@ -1,4 +1,4 @@
-// AFSecurityPolicy.m
+// QHAFSecurityPolicy.m
 // Copyright (c) 2011–2016 Alamofire Software Foundation ( http://alamofire.org/ )
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -19,12 +19,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "AFSecurityPolicy.h"
+#import "QHAFSecurityPolicy.h"
 
 #import <AssertMacros.h>
 
 #if !TARGET_OS_IOS && !TARGET_OS_WATCH && !TARGET_OS_TV
-static NSData * AFSecKeyGetData(SecKeyRef key) {
+static NSData * QHAFSecKeyGetData(SecKeyRef key) {
     CFDataRef data = NULL;
 
     __Require_noErr_Quiet(SecItemExport(key, kSecFormatUnknown, kSecItemPemArmour, NULL, &data), _out);
@@ -40,15 +40,15 @@ _out:
 }
 #endif
 
-static BOOL AFSecKeyIsEqualToKey(SecKeyRef key1, SecKeyRef key2) {
+static BOOL QHAFSecKeyIsEqualToKey(SecKeyRef key1, SecKeyRef key2) {
 #if TARGET_OS_IOS || TARGET_OS_WATCH || TARGET_OS_TV
     return [(__bridge id)key1 isEqual:(__bridge id)key2];
 #else
-    return [AFSecKeyGetData(key1) isEqual:AFSecKeyGetData(key2)];
+    return [QHAFSecKeyGetData(key1) isEqual:QHAFSecKeyGetData(key2)];
 #endif
 }
 
-static id AFPublicKeyForCertificate(NSData *certificate) {
+static id QHAFPublicKeyForCertificate(NSData *certificate) {
     id allowedPublicKey = nil;
     SecCertificateRef allowedCertificate;
     SecCertificateRef allowedCertificates[1];
@@ -89,7 +89,7 @@ _out:
     return allowedPublicKey;
 }
 
-static BOOL AFServerTrustIsValid(SecTrustRef serverTrust) {
+static BOOL QHAFServerTrustIsValid(SecTrustRef serverTrust) {
     BOOL isValid = NO;
     SecTrustResultType result;
     __Require_noErr_Quiet(SecTrustEvaluate(serverTrust, &result), _out);
@@ -100,7 +100,7 @@ _out:
     return isValid;
 }
 
-static NSArray * AFCertificateTrustChainForServerTrust(SecTrustRef serverTrust) {
+static NSArray * QHAFCertificateTrustChainForServerTrust(SecTrustRef serverTrust) {
     CFIndex certificateCount = SecTrustGetCertificateCount(serverTrust);
     NSMutableArray *trustChain = [NSMutableArray arrayWithCapacity:(NSUInteger)certificateCount];
 
@@ -112,7 +112,7 @@ static NSArray * AFCertificateTrustChainForServerTrust(SecTrustRef serverTrust) 
     return [NSArray arrayWithArray:trustChain];
 }
 
-static NSArray * AFPublicKeyTrustChainForServerTrust(SecTrustRef serverTrust) {
+static NSArray * QHAFPublicKeyTrustChainForServerTrust(SecTrustRef serverTrust) {
     SecPolicyRef policy = SecPolicyCreateBasicX509();
     CFIndex certificateCount = SecTrustGetCertificateCount(serverTrust);
     NSMutableArray *trustChain = [NSMutableArray arrayWithCapacity:(NSUInteger)certificateCount];
@@ -148,12 +148,12 @@ static NSArray * AFPublicKeyTrustChainForServerTrust(SecTrustRef serverTrust) {
 
 #pragma mark -
 
-@interface AFSecurityPolicy()
-@property (readwrite, nonatomic, assign) AFSSLPinningMode SSLPinningMode;
+@interface QHAFSecurityPolicy()
+@property (readwrite, nonatomic, assign) QHAFSSLPinningMode SSLPinningMode;
 @property (readwrite, nonatomic, strong) NSSet *pinnedPublicKeys;
 @end
 
-@implementation AFSecurityPolicy
+@implementation QHAFSecurityPolicy
 
 + (NSSet *)certificatesInBundle:(NSBundle *)bundle {
     NSArray *paths = [bundle pathsForResourcesOfType:@"cer" inDirectory:@"."];
@@ -179,18 +179,18 @@ static NSArray * AFPublicKeyTrustChainForServerTrust(SecTrustRef serverTrust) {
 }
 
 + (instancetype)defaultPolicy {
-    AFSecurityPolicy *securityPolicy = [[self alloc] init];
-    securityPolicy.SSLPinningMode = AFSSLPinningModeNone;
+    QHAFSecurityPolicy *securityPolicy = [[self alloc] init];
+    securityPolicy.SSLPinningMode = QHAFSSLPinningModeNone;
 
     return securityPolicy;
 }
 
-+ (instancetype)policyWithPinningMode:(AFSSLPinningMode)pinningMode {
++ (instancetype)policyWithPinningMode:(QHAFSSLPinningMode)pinningMode {
     return [self policyWithPinningMode:pinningMode withPinnedCertificates:[self defaultPinnedCertificates]];
 }
 
-+ (instancetype)policyWithPinningMode:(AFSSLPinningMode)pinningMode withPinnedCertificates:(NSSet *)pinnedCertificates {
-    AFSecurityPolicy *securityPolicy = [[self alloc] init];
++ (instancetype)policyWithPinningMode:(QHAFSSLPinningMode)pinningMode withPinnedCertificates:(NSSet *)pinnedCertificates {
+    QHAFSecurityPolicy *securityPolicy = [[self alloc] init];
     securityPolicy.SSLPinningMode = pinningMode;
 
     [securityPolicy setPinnedCertificates:pinnedCertificates];
@@ -215,7 +215,7 @@ static NSArray * AFPublicKeyTrustChainForServerTrust(SecTrustRef serverTrust) {
     if (self.pinnedCertificates) {
         NSMutableSet *mutablePinnedPublicKeys = [NSMutableSet setWithCapacity:[self.pinnedCertificates count]];
         for (NSData *certificate in self.pinnedCertificates) {
-            id publicKey = AFPublicKeyForCertificate(certificate);
+            id publicKey = QHAFPublicKeyForCertificate(certificate);
             if (!publicKey) {
                 continue;
             }
@@ -232,7 +232,7 @@ static NSArray * AFPublicKeyTrustChainForServerTrust(SecTrustRef serverTrust) {
 - (BOOL)evaluateServerTrust:(SecTrustRef)serverTrust
                   forDomain:(NSString *)domain
 {
-    if (domain && self.allowInvalidCertificates && self.validatesDomainName && (self.SSLPinningMode == AFSSLPinningModeNone || [self.pinnedCertificates count] == 0)) {
+    if (domain && self.allowInvalidCertificates && self.validatesDomainName && (self.SSLPinningMode == QHAFSSLPinningModeNone || [self.pinnedCertificates count] == 0)) {
         // https://developer.apple.com/library/mac/documentation/NetworkingInternet/Conceptual/NetworkingTopics/Articles/OverridingSSLChainValidationCorrectly.html
         //  According to the docs, you should only trust your provided certs for evaluation.
         //  Pinned certificates are added to the trust. Without pinned certificates,
@@ -254,29 +254,29 @@ static NSArray * AFPublicKeyTrustChainForServerTrust(SecTrustRef serverTrust) {
 
     SecTrustSetPolicies(serverTrust, (__bridge CFArrayRef)policies);
 
-    if (self.SSLPinningMode == AFSSLPinningModeNone) {
-        return self.allowInvalidCertificates || AFServerTrustIsValid(serverTrust);
-    } else if (!AFServerTrustIsValid(serverTrust) && !self.allowInvalidCertificates) {
+    if (self.SSLPinningMode == QHAFSSLPinningModeNone) {
+        return self.allowInvalidCertificates || QHAFServerTrustIsValid(serverTrust);
+    } else if (!QHAFServerTrustIsValid(serverTrust) && !self.allowInvalidCertificates) {
         return NO;
     }
 
     switch (self.SSLPinningMode) {
-        case AFSSLPinningModeNone:
+        case QHAFSSLPinningModeNone:
         default:
             return NO;
-        case AFSSLPinningModeCertificate: {
+        case QHAFSSLPinningModeCertificate: {
             NSMutableArray *pinnedCertificates = [NSMutableArray array];
             for (NSData *certificateData in self.pinnedCertificates) {
                 [pinnedCertificates addObject:(__bridge_transfer id)SecCertificateCreateWithData(NULL, (__bridge CFDataRef)certificateData)];
             }
             SecTrustSetAnchorCertificates(serverTrust, (__bridge CFArrayRef)pinnedCertificates);
 
-            if (!AFServerTrustIsValid(serverTrust)) {
+            if (!QHAFServerTrustIsValid(serverTrust)) {
                 return NO;
             }
 
             // obtain the chain after being validated, which *should* contain the pinned certificate in the last position (if it's the Root CA)
-            NSArray *serverCertificates = AFCertificateTrustChainForServerTrust(serverTrust);
+            NSArray *serverCertificates = QHAFCertificateTrustChainForServerTrust(serverTrust);
             
             for (NSData *trustChainCertificate in [serverCertificates reverseObjectEnumerator]) {
                 if ([self.pinnedCertificates containsObject:trustChainCertificate]) {
@@ -286,13 +286,13 @@ static NSArray * AFPublicKeyTrustChainForServerTrust(SecTrustRef serverTrust) {
             
             return NO;
         }
-        case AFSSLPinningModePublicKey: {
+        case QHAFSSLPinningModePublicKey: {
             NSUInteger trustedPublicKeyCount = 0;
-            NSArray *publicKeys = AFPublicKeyTrustChainForServerTrust(serverTrust);
+            NSArray *publicKeys = QHAFPublicKeyTrustChainForServerTrust(serverTrust);
 
             for (id trustChainPublicKey in publicKeys) {
                 for (id pinnedPublicKey in self.pinnedPublicKeys) {
-                    if (AFSecKeyIsEqualToKey((__bridge SecKeyRef)trustChainPublicKey, (__bridge SecKeyRef)pinnedPublicKey)) {
+                    if (QHAFSecKeyIsEqualToKey((__bridge SecKeyRef)trustChainPublicKey, (__bridge SecKeyRef)pinnedPublicKey)) {
                         trustedPublicKeyCount += 1;
                     }
                 }
@@ -341,7 +341,7 @@ static NSArray * AFPublicKeyTrustChainForServerTrust(SecTrustRef serverTrust) {
 #pragma mark - NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone {
-    AFSecurityPolicy *securityPolicy = [[[self class] allocWithZone:zone] init];
+    QHAFSecurityPolicy *securityPolicy = [[[self class] allocWithZone:zone] init];
     securityPolicy.SSLPinningMode = self.SSLPinningMode;
     securityPolicy.allowInvalidCertificates = self.allowInvalidCertificates;
     securityPolicy.validatesDomainName = self.validatesDomainName;
