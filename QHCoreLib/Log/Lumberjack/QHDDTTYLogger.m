@@ -885,8 +885,8 @@ static QHDDTTYLogger *sharedInstance;
 }
 
 - (BOOL)colorsEnabled {
-    // The design of this method is taken from the DDAbstractLogger implementation.
-    // For extensive documentation please refer to the DDAbstractLogger implementation.
+    // The design of this method is taken from the QHAbstractLogger implementation.
+    // For extensive documentation please refer to the QHAbstractLogger implementation.
 
     // Note: The internal implementation MUST access the colorsEnabled variable directly,
     // This method is designed explicitly for external access.
@@ -922,8 +922,8 @@ static QHDDTTYLogger *sharedInstance;
         }
     };
 
-    // The design of this method is taken from the DDAbstractLogger implementation.
-    // For extensive documentation please refer to the DDAbstractLogger implementation.
+    // The design of this method is taken from the QHAbstractLogger implementation.
+    // For extensive documentation please refer to the QHAbstractLogger implementation.
 
     // Note: The internal implementation MUST access the colorsEnabled variable directly,
     // This method is designed explicitly for external access.
@@ -975,8 +975,8 @@ static QHDDTTYLogger *sharedInstance;
         }
     };
 
-    // The design of the setter logic below is taken from the DDAbstractLogger implementation.
-    // For documentation please refer to the DDAbstractLogger implementation.
+    // The design of the setter logic below is taken from the QHAbstractLogger implementation.
+    // For documentation please refer to the QHAbstractLogger implementation.
 
     if ([self isOnInternalLoggerQueue]) {
         block();
@@ -1007,8 +1007,8 @@ static QHDDTTYLogger *sharedInstance;
         }
     };
 
-    // The design of the setter logic below is taken from the DDAbstractLogger implementation.
-    // For documentation please refer to the DDAbstractLogger implementation.
+    // The design of the setter logic below is taken from the QHAbstractLogger implementation.
+    // For documentation please refer to the QHAbstractLogger implementation.
 
     if ([self isOnInternalLoggerQueue]) {
         block();
@@ -1045,8 +1045,8 @@ static QHDDTTYLogger *sharedInstance;
         }
     };
 
-    // The design of the setter logic below is taken from the DDAbstractLogger implementation.
-    // For documentation please refer to the DDAbstractLogger implementation.
+    // The design of the setter logic below is taken from the QHAbstractLogger implementation.
+    // For documentation please refer to the QHAbstractLogger implementation.
 
     if ([self isOnInternalLoggerQueue]) {
         block();
@@ -1069,8 +1069,8 @@ static QHDDTTYLogger *sharedInstance;
         }
     };
 
-    // The design of the setter logic below is taken from the DDAbstractLogger implementation.
-    // For documentation please refer to the DDAbstractLogger implementation.
+    // The design of the setter logic below is taken from the QHAbstractLogger implementation.
+    // For documentation please refer to the QHAbstractLogger implementation.
 
     if ([self isOnInternalLoggerQueue]) {
         block();
@@ -1091,8 +1091,8 @@ static QHDDTTYLogger *sharedInstance;
         }
     };
 
-    // The design of the setter logic below is taken from the DDAbstractLogger implementation.
-    // For documentation please refer to the DDAbstractLogger implementation.
+    // The design of the setter logic below is taken from the QHAbstractLogger implementation.
+    // For documentation please refer to the QHAbstractLogger implementation.
 
     if ([self isOnInternalLoggerQueue]) {
         block();
@@ -1113,8 +1113,8 @@ static QHDDTTYLogger *sharedInstance;
         }
     };
 
-    // The design of the setter logic below is taken from the DDAbstractLogger implementation.
-    // For documentation please refer to the DDAbstractLogger implementation.
+    // The design of the setter logic below is taken from the QHAbstractLogger implementation.
+    // For documentation please refer to the QHAbstractLogger implementation.
 
     if ([self isOnInternalLoggerQueue]) {
         block();
@@ -1136,8 +1136,8 @@ static QHDDTTYLogger *sharedInstance;
         }
     };
 
-    // The design of the setter logic below is taken from the DDAbstractLogger implementation.
-    // For documentation please refer to the DDAbstractLogger implementation.
+    // The design of the setter logic below is taken from the QHAbstractLogger implementation.
+    // For documentation please refer to the QHAbstractLogger implementation.
 
     if ([self isOnInternalLoggerQueue]) {
         block();

@@ -41,13 +41,13 @@
 
 
 #if TARGET_OS_IPHONE
-BOOL doesAppRunInBackground(void);
+BOOL qh_doesAppRunInBackground(void);
 #endif
 
-unsigned long long const kDDDefaultLogMaxFileSize      = 1024 * 1024;      // 1 MB
-NSTimeInterval     const kDDDefaultLogRollingFrequency = 60 * 60 * 24;     // 24 Hours
-NSUInteger         const kDDDefaultLogMaxNumLogFiles   = 5;                // 5 Files
-unsigned long long const kDDDefaultLogFilesDiskQuota   = 20 * 1024 * 1024; // 20 MB
+unsigned long long const kQHDDDefaultLogMaxFileSize      = 1024 * 1024;      // 1 MB
+NSTimeInterval     const kQHDDDefaultLogRollingFrequency = 60 * 60 * 24;     // 24 Hours
+NSUInteger         const kQHDDDefaultLogMaxNumLogFiles   = 5;                // 5 Files
+unsigned long long const kQHDDDefaultLogFilesDiskQuota   = 20 * 1024 * 1024; // 20 MB
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark -
@@ -79,8 +79,8 @@ unsigned long long const kDDDefaultLogFilesDiskQuota   = 20 * 1024 * 1024; // 20
 
 - (instancetype)initWithLogsDirectory:(NSString *)aLogsDirectory {
     if ((self = [super init])) {
-        _maximumNumberOfLogFiles = kDDDefaultLogMaxNumLogFiles;
-        _logFilesDiskQuota = kDDDefaultLogFilesDiskQuota;
+        _maximumNumberOfLogFiles = kQHDDDefaultLogMaxNumLogFiles;
+        _logFilesDiskQuota = kQHDDDefaultLogFilesDiskQuota;
 
         if (aLogsDirectory) {
             _logsDirectory = [aLogsDirectory copy];
@@ -509,7 +509,7 @@ unsigned long long const kDDDefaultLogFilesDiskQuota   = 20 * 1024 * 1024; // 20
             // NSFileProtectionCompleteUntilFirstUserAuthentication.
 
             NSString *key = _defaultFileProtectionLevel ? :
-                (doesAppRunInBackground() ? NSFileProtectionCompleteUntilFirstUserAuthentication : NSFileProtectionCompleteUnlessOpen);
+                (qh_doesAppRunInBackground() ? NSFileProtectionCompleteUntilFirstUserAuthentication : NSFileProtectionCompleteUnlessOpen);
 
             attributes = @{
                 NSFileProtectionKey: key
@@ -624,8 +624,8 @@ unsigned long long const kDDDefaultLogFilesDiskQuota   = 20 * 1024 * 1024; // 20
 
 - (instancetype)initWithLogFileManager:(id <QHDDLogFileManager>)aLogFileManager {
     if ((self = [super init])) {
-        _maximumFileSize = kDDDefaultLogMaxFileSize;
-        _rollingFrequency = kDDDefaultLogRollingFrequency;
+        _maximumFileSize = kQHDDDefaultLogMaxFileSize;
+        _rollingFrequency = kQHDDDefaultLogRollingFrequency;
         _automaticallyAppendNewlineForCustomFormatters = YES;
 
         logFileManager = aLogFileManager;
@@ -664,8 +664,8 @@ unsigned long long const kDDDefaultLogFilesDiskQuota   = 20 * 1024 * 1024; // 20
         result = _maximumFileSize;
     };
 
-    // The design of this method is taken from the DDAbstractLogger implementation.
-    // For extensive documentation please refer to the DDAbstractLogger implementation.
+    // The design of this method is taken from the QHAbstractLogger implementation.
+    // For extensive documentation please refer to the QHAbstractLogger implementation.
 
     // Note: The internal implementation MUST access the maximumFileSize variable directly,
     // This method is designed explicitly for external access.
@@ -694,8 +694,8 @@ unsigned long long const kDDDefaultLogFilesDiskQuota   = 20 * 1024 * 1024; // 20
         }
     };
 
-    // The design of this method is taken from the DDAbstractLogger implementation.
-    // For extensive documentation please refer to the DDAbstractLogger implementation.
+    // The design of this method is taken from the QHAbstractLogger implementation.
+    // For extensive documentation please refer to the QHAbstractLogger implementation.
 
     // Note: The internal implementation MUST access the maximumFileSize variable directly,
     // This method is designed explicitly for external access.
@@ -721,8 +721,8 @@ unsigned long long const kDDDefaultLogFilesDiskQuota   = 20 * 1024 * 1024; // 20
         result = _rollingFrequency;
     };
 
-    // The design of this method is taken from the DDAbstractLogger implementation.
-    // For extensive documentation please refer to the DDAbstractLogger implementation.
+    // The design of this method is taken from the QHAbstractLogger implementation.
+    // For extensive documentation please refer to the QHAbstractLogger implementation.
 
     // Note: The internal implementation should access the rollingFrequency variable directly,
     // This method is designed explicitly for external access.
@@ -751,8 +751,8 @@ unsigned long long const kDDDefaultLogFilesDiskQuota   = 20 * 1024 * 1024; // 20
         }
     };
 
-    // The design of this method is taken from the DDAbstractLogger implementation.
-    // For extensive documentation please refer to the DDAbstractLogger implementation.
+    // The design of this method is taken from the QHAbstractLogger implementation.
+    // For extensive documentation please refer to the QHAbstractLogger implementation.
 
     // Note: The internal implementation should access the rollingFrequency variable directly,
     // This method is designed explicitly for external access.
@@ -837,8 +837,8 @@ unsigned long long const kDDDefaultLogFilesDiskQuota   = 20 * 1024 * 1024; // 20
         }
     };
 
-    // The design of this method is taken from the DDAbstractLogger implementation.
-    // For extensive documentation please refer to the DDAbstractLogger implementation.
+    // The design of this method is taken from the QHAbstractLogger implementation.
+    // For extensive documentation please refer to the QHAbstractLogger implementation.
 
     if ([self isOnInternalLoggerQueue]) {
         block();
@@ -950,7 +950,7 @@ unsigned long long const kDDDefaultLogFilesDiskQuota   = 20 * 1024 * 1024; // 20
             //
             // If user has owerwritten to NSFileProtectionNone there is no neeed to create a new one.
 
-            if (!_doNotReuseLogFiles && doesAppRunInBackground()) {
+            if (!_doNotReuseLogFiles && qh_doesAppRunInBackground()) {
                 NSString *key = mostRecentLogFileInfo.fileAttributes[NSFileProtectionKey];
 
                 if ([key length] > 0 && !([key isEqualToString:NSFileProtectionCompleteUntilFirstUserAuthentication] || [key isEqualToString:NSFileProtectionNone])) {
@@ -1080,9 +1080,9 @@ static int exception_count = 0;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #if TARGET_IPHONE_SIMULATOR
-    NSString * const kDDXAttrArchivedName = @"archived.qh";
+    NSString * const kQHDDXAttrArchivedName = @"archived.qh";
 #else
-    NSString * const kDDXAttrArchivedName = @"lumberjack.log.archived.qh";
+    NSString * const kQHDDXAttrArchivedName = @"lumberjack.log.archived.qh";
 #endif
 
 @interface QHDDLogFileInfo () {
@@ -1205,11 +1205,11 @@ static int exception_count = 0;
     // So we have to use a less attractive alternative.
     // See full explanation in the header file.
 
-    return [self hasExtensionAttributeWithName:kDDXAttrArchivedName];
+    return [self hasExtensionAttributeWithName:kQHDDXAttrArchivedName];
 
 #else
 
-    return [self hasExtendedAttributeWithName:kDDXAttrArchivedName];
+    return [self hasExtendedAttributeWithName:kQHDDXAttrArchivedName];
 
 #endif
 }
@@ -1222,17 +1222,17 @@ static int exception_count = 0;
     // See full explanation in the header file.
 
     if (flag) {
-        [self addExtensionAttributeWithName:kDDXAttrArchivedName];
+        [self addExtensionAttributeWithName:kQHDDXAttrArchivedName];
     } else {
-        [self removeExtensionAttributeWithName:kDDXAttrArchivedName];
+        [self removeExtensionAttributeWithName:kQHDDXAttrArchivedName];
     }
 
 #else
 
     if (flag) {
-        [self addExtendedAttributeWithName:kDDXAttrArchivedName];
+        [self addExtendedAttributeWithName:kQHDDXAttrArchivedName];
     } else {
-        [self removeExtendedAttributeWithName:kDDXAttrArchivedName];
+        [self removeExtendedAttributeWithName:kQHDDXAttrArchivedName];
     }
 
 #endif
@@ -1514,7 +1514,7 @@ static int exception_count = 0;
  * want (even if device is locked). Thats why that attribute have to be changed to
  * NSFileProtectionCompleteUntilFirstUserAuthentication.
  */
-BOOL doesAppRunInBackground() {
+BOOL qh_doesAppRunInBackground() {
     BOOL answer = NO;
 
     NSArray *backgroundModes = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"UIBackgroundModes"];

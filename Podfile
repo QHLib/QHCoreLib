@@ -11,8 +11,6 @@ target 'QHCoreLib' do
 
   pod "UIDevice-Hardware"
 
-  pod "CocoaLumberjack"
-
   target 'QHCoreLibTests' do
     inherit! :search_paths
 

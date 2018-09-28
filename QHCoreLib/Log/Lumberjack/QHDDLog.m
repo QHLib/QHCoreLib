@@ -743,7 +743,7 @@ static NSUInteger _numProcessors;
 #pragma mark Utilities
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-NSString * DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy) {
+NSString * QHDDExtractFileNameWithoutExtension(const char *filePath, BOOL copy) {
     if (filePath == NULL) {
         return nil;
     }
@@ -971,7 +971,7 @@ NSString * DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy) {
 #pragma mark -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@implementation DDAbstractLogger
+@implementation QHAbstractLogger
 
 - (instancetype)init {
     if ((self = [super init])) {

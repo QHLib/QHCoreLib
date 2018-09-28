@@ -45,11 +45,11 @@ typedef NSString * (^QHAFQueryStringSerializationBlock)(NSURLRequest *request, i
     - returns: The percent-escaped string.
  */
 NSString * QHAFPercentEscapedStringFromString(NSString *string) {
-    static NSString * const kAFCharactersGeneralDelimitersToEncode = @":#[]@"; // does not include "?" or "/" due to RFC 3986 - Section 3.4
-    static NSString * const kAFCharactersSubDelimitersToEncode = @"!$&'()*+,;=";
+    static NSString * const kQHAFCharactersGeneralDelimitersToEncode = @":#[]@"; // does not include "?" or "/" due to RFC 3986 - Section 3.4
+    static NSString * const kQHAFCharactersSubDelimitersToEncode = @"!$&'()*+,;=";
 
     NSMutableCharacterSet * allowedCharacterSet = [[NSCharacterSet URLQueryAllowedCharacterSet] mutableCopy];
-    [allowedCharacterSet removeCharactersInString:[kAFCharactersGeneralDelimitersToEncode stringByAppendingString:kAFCharactersSubDelimitersToEncode]];
+    [allowedCharacterSet removeCharactersInString:[kQHAFCharactersGeneralDelimitersToEncode stringByAppendingString:kQHAFCharactersSubDelimitersToEncode]];
 
 	// FIXME: https://github.com/AFNetworking/AFNetworking/pull/3028
     // return [string stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacterSet];
@@ -175,13 +175,13 @@ NSArray * QHAFQueryStringPairsFromKeyAndValue(NSString *key, id value) {
 #pragma mark -
 
 static NSArray * QHAFHTTPRequestSerializerObservedKeyPaths() {
-    static NSArray *_AFHTTPRequestSerializerObservedKeyPaths = nil;
+    static NSArray *_QHAFHTTPRequestSerializerObservedKeyPaths = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _AFHTTPRequestSerializerObservedKeyPaths = @[NSStringFromSelector(@selector(allowsCellularAccess)), NSStringFromSelector(@selector(cachePolicy)), NSStringFromSelector(@selector(HTTPShouldHandleCookies)), NSStringFromSelector(@selector(HTTPShouldUsePipelining)), NSStringFromSelector(@selector(networkServiceType)), NSStringFromSelector(@selector(timeoutInterval))];
+        _QHAFHTTPRequestSerializerObservedKeyPaths = @[NSStringFromSelector(@selector(allowsCellularAccess)), NSStringFromSelector(@selector(cachePolicy)), NSStringFromSelector(@selector(HTTPShouldHandleCookies)), NSStringFromSelector(@selector(HTTPShouldUsePipelining)), NSStringFromSelector(@selector(networkServiceType)), NSStringFromSelector(@selector(timeoutInterval))];
     });
 
-    return _AFHTTPRequestSerializerObservedKeyPaths;
+    return _QHAFHTTPRequestSerializerObservedKeyPaths;
 }
 
 static void *QHAFHTTPRequestSerializerObserverContext = &QHAFHTTPRequestSerializerObserverContext;
@@ -583,18 +583,18 @@ static NSString * QHAFCreateMultipartFormBoundary() {
     return [NSString stringWithFormat:@"Boundary+%08X%08X", arc4random(), arc4random()];
 }
 
-static NSString * const kAFMultipartFormCRLF = @"\r\n";
+static NSString * const kQHAFMultipartFormCRLF = @"\r\n";
 
 static inline NSString * QHAFMultipartFormInitialBoundary(NSString *boundary) {
-    return [NSString stringWithFormat:@"--%@%@", boundary, kAFMultipartFormCRLF];
+    return [NSString stringWithFormat:@"--%@%@", boundary, kQHAFMultipartFormCRLF];
 }
 
 static inline NSString * QHAFMultipartFormEncapsulationBoundary(NSString *boundary) {
-    return [NSString stringWithFormat:@"%@--%@%@", kAFMultipartFormCRLF, boundary, kAFMultipartFormCRLF];
+    return [NSString stringWithFormat:@"%@--%@%@", kQHAFMultipartFormCRLF, boundary, kQHAFMultipartFormCRLF];
 }
 
 static inline NSString * QHAFMultipartFormFinalBoundary(NSString *boundary) {
-    return [NSString stringWithFormat:@"%@--%@--%@", kAFMultipartFormCRLF, boundary, kAFMultipartFormCRLF];
+    return [NSString stringWithFormat:@"%@--%@--%@", kQHAFMultipartFormCRLF, boundary, kQHAFMultipartFormCRLF];
 }
 
 static inline NSString * QHAFContentTypeForPathExtension(NSString *extension) {
@@ -607,8 +607,8 @@ static inline NSString * QHAFContentTypeForPathExtension(NSString *extension) {
     }
 }
 
-NSUInteger const kAFUploadStream3GSuggestedPacketSize = 1024 * 16;
-NSTimeInterval const kAFUploadStream3GSuggestedDelay = 0.2;
+NSUInteger const kQHAFUploadStream3GSuggestedPacketSize = 1024 * 16;
+NSTimeInterval const kQHAFUploadStream3GSuggestedDelay = 0.2;
 
 @interface QHAFHTTPBodyPart : NSObject
 @property (nonatomic, assign) NSStringEncoding stringEncoding;
@@ -1061,9 +1061,9 @@ typedef enum {
 - (NSString *)stringForHeaders {
     NSMutableString *headerString = [NSMutableString string];
     for (NSString *field in [self.headers allKeys]) {
-        [headerString appendString:[NSString stringWithFormat:@"%@: %@%@", field, [self.headers valueForKey:field], kAFMultipartFormCRLF]];
+        [headerString appendString:[NSString stringWithFormat:@"%@: %@%@", field, [self.headers valueForKey:field], kQHAFMultipartFormCRLF]];
     }
-    [headerString appendString:kAFMultipartFormCRLF];
+    [headerString appendString:kQHAFMultipartFormCRLF];
 
     return [NSString stringWithString:headerString];
 }

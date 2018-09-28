@@ -373,11 +373,11 @@ static inline BOOL af_addMethod(Class theClass, SEL selector, Method method) {
 static NSString * const QHAFNSURLSessionTaskDidResumeNotification  = @"qh.com.alamofire.networking.nsurlsessiontask.resume";
 static NSString * const QHAFNSURLSessionTaskDidSuspendNotification = @"qh.com.alamofire.networking.nsurlsessiontask.suspend";
 
-@interface _AFURLSessionTaskSwizzling : NSObject
+@interface _QHAFURLSessionTaskSwizzling : NSObject
 
 @end
 
-@implementation _AFURLSessionTaskSwizzling
+@implementation _QHAFURLSessionTaskSwizzling
 
 + (void)load {
     /**

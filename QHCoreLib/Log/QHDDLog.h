@@ -114,9 +114,9 @@ typedef NS_ENUM(NSUInteger, QHDDLogLevel) {
  * For example: QHDDLogWarn(@"%@: Unable to find thingy", THIS_FILE) -> @"MyViewController: Unable to find thingy"
  **/
 
-NSString * DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy);
+NSString * QHDDExtractFileNameWithoutExtension(const char *filePath, BOOL copy);
 
-#define THIS_FILE         (DDExtractFileNameWithoutExtension(__FILE__, NO))
+#define THIS_FILE         (QHDDExtractFileNameWithoutExtension(__FILE__, NO))
 
 /**
  * The THIS_METHOD macro gives you the name of the current objective-c method.
@@ -519,7 +519,7 @@ typedef NS_OPTIONS(NSInteger, QHDDLogMessageOptions) {
  * and they can ACCESS THE FORMATTER VARIABLE DIRECTLY from within their logMessage method!
  **/
 
-@interface DDAbstractLogger : NSObject <QHDDLogger>
+@interface QHAbstractLogger : NSObject <QHDDLogger>
 {
     // Direct accessors to be used only for performance
     @public

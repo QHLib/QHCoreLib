@@ -24,17 +24,17 @@
 
 // Default configuration and safety/sanity values.
 //
-// maximumFileSize         -> kDDDefaultLogMaxFileSize
-// rollingFrequency        -> kDDDefaultLogRollingFrequency
-// maximumNumberOfLogFiles -> kDDDefaultLogMaxNumLogFiles
-// logFilesDiskQuota       -> kDDDefaultLogFilesDiskQuota
+// maximumFileSize         -> kQHDDDefaultLogMaxFileSize
+// rollingFrequency        -> kQHDDDefaultLogRollingFrequency
+// maximumNumberOfLogFiles -> kQHDDDefaultLogMaxNumLogFiles
+// logFilesDiskQuota       -> kQHDDDefaultLogFilesDiskQuota
 //
 // You should carefully consider the proper configuration values for your application.
 
-extern unsigned long long const kDDDefaultLogMaxFileSize;
-extern NSTimeInterval     const kDDDefaultLogRollingFrequency;
-extern NSUInteger         const kDDDefaultLogMaxNumLogFiles;
-extern unsigned long long const kDDDefaultLogFilesDiskQuota;
+extern unsigned long long const kQHDDDefaultLogMaxFileSize;
+extern NSTimeInterval     const kQHDDDefaultLogRollingFrequency;
+extern NSUInteger         const kQHDDDefaultLogMaxNumLogFiles;
+extern unsigned long long const kQHDDDefaultLogFilesDiskQuota;
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -219,7 +219,7 @@ extern unsigned long long const kDDDefaultLogFilesDiskQuota;
 #pragma mark -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@interface QHDDFileLogger : DDAbstractLogger <QHDDLogger>
+@interface QHDDFileLogger : QHAbstractLogger <QHDDLogger>
 
 - (instancetype)init;
 - (instancetype)initWithLogFileManager:(id <QHDDLogFileManager>)logFileManager NS_DESIGNATED_INITIALIZER;
@@ -284,7 +284,7 @@ extern unsigned long long const kDDDefaultLogFilesDiskQuota;
 
 - (void)rollLogFile __attribute((deprecated));
 
-// Inherited from DDAbstractLogger
+// Inherited from QHAbstractLogger
 
 // - (id <QHDDLogFormatter>)logFormatter;
 // - (void)setLogFormatter:(id <QHDDLogFormatter>)formatter;
