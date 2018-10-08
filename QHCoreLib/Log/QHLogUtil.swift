@@ -13,9 +13,9 @@ public class QHLog {
         file: String = #file,
         line: UInt = #line,
         function: String = #function) {
-        if (QHLogLevel.rawValue & DDLogFlag.error.rawValue) != 0 {
+        if (QHLogLevel.rawValue & QHDDLogFlag.error.rawValue) != 0 {
             withVaList(args) {
-                DDLog.log(false,
+                QHDDLog.log(false,
                           level: QHLogLevel,
                           flag: .error,
                           context: 0,
@@ -33,9 +33,9 @@ public class QHLog {
         file: String = #file,
         line: UInt = #line,
         function: String = #function) {
-        if (QHLogLevel.rawValue & DDLogFlag.warning.rawValue) != 0 {
+        if (QHLogLevel.rawValue & QHDDLogFlag.warning.rawValue) != 0 {
             withVaList(args) {
-                DDLog.log(false,
+                QHDDLog.log(false,
                           level: QHLogLevel,
                           flag: .warning,
                           context: 0,
@@ -53,9 +53,9 @@ public class QHLog {
         file: String = #file,
         line: UInt = #line,
         function: String = #function) {
-        if (QHLogLevel.rawValue & DDLogFlag.info.rawValue) != 0 {
+        if (QHLogLevel.rawValue & QHDDLogFlag.info.rawValue) != 0 {
             withVaList(args) {
-                DDLog.log(false,
+                QHDDLog.log(false,
                           level: QHLogLevel,
                           flag: .info,
                           context: 0,
@@ -73,9 +73,9 @@ public class QHLog {
         file: String = #file,
         line: UInt = #line,
         function: String = #function) {
-        if (QHLogLevel.rawValue & DDLogFlag.debug.rawValue) != 0 {
+        if (QHLogLevel.rawValue & QHDDLogFlag.debug.rawValue) != 0 {
             withVaList(args) {
-                DDLog.log(true,
+                QHDDLog.log(true,
                           level: QHLogLevel,
                           flag: .debug,
                           context: 0,
@@ -93,9 +93,9 @@ public class QHLog {
         file: String = #file,
         line: UInt = #line,
         function: String = #function) {
-        if (QHLogLevel.rawValue & DDLogFlag.verbose.rawValue) != 0 {
+        if (QHLogLevel.rawValue & QHDDLogFlag.verbose.rawValue) != 0 {
             withVaList(args) {
-                DDLog.log(true,
+                QHDDLog.log(true,
                           level: QHLogLevel,
                           flag: .verbose,
                           context: 0,

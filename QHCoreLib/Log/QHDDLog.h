@@ -21,9 +21,9 @@
     #define DISPATCH_QUEUE_REFERENCE_TYPE assign
 #endif
 
-@class DDLogMessage;
-@protocol DDLogger;
-@protocol DDLogFormatter;
+@class QHDDLogMessage;
+@protocol QHDDLogger;
+@protocol QHDDLogFormatter;
 
 /**
  * Define the standard options.
@@ -46,12 +46,12 @@
  * However, you still needed to see your error and info log messages.
  * You could accomplish that with the following:
  *
- * static const DDLogLevel ddLogLevel = DDLogFlagError | DDLogFlagInfo;
+ * static const QHDDLogLevel ddLogLevel = QHDDLogFlagError | QHDDLogFlagInfo;
  *
  * When LOG_LEVEL_DEF is defined as ddLogLevel.
  *
  * Flags may also be consulted when writing custom log formatters,
- * as the DDLogMessage class captures the individual flag that caused the log message to fire.
+ * as the QHDDLogMessage class captures the individual flag that caused the log message to fire.
  *
  * -- Levels --
  *
@@ -64,7 +64,7 @@
  *
  * if (LOG_VERBOSE) {
  *     for (id sprocket in sprockets)
- *         DDLogVerbose(@"sprocket: %@", [sprocket description])
+ *         QHDDLogVerbose(@"sprocket: %@", [sprocket description])
  * }
  *
  * -- Async --
@@ -89,39 +89,39 @@
  * Documentation/CustomLogLevels.md
  **/
 
-typedef NS_OPTIONS(NSUInteger, DDLogFlag) {
-    DDLogFlagError      = (1 << 0), // 0...00001
-    DDLogFlagWarning    = (1 << 1), // 0...00010
-    DDLogFlagInfo       = (1 << 2), // 0...00100
-    DDLogFlagDebug      = (1 << 3), // 0...01000
-    DDLogFlagVerbose    = (1 << 4)  // 0...10000
+typedef NS_OPTIONS(NSUInteger, QHDDLogFlag) {
+    QHDDLogFlagError      = (1 << 0), // 0...00001
+    QHDDLogFlagWarning    = (1 << 1), // 0...00010
+    QHDDLogFlagInfo       = (1 << 2), // 0...00100
+    QHDDLogFlagDebug      = (1 << 3), // 0...01000
+    QHDDLogFlagVerbose    = (1 << 4)  // 0...10000
 };
 
-typedef NS_ENUM(NSUInteger, DDLogLevel) {
-    DDLogLevelOff       = 0,
-    DDLogLevelError     = (DDLogFlagError),                       // 0...00001
-    DDLogLevelWarning   = (DDLogLevelError   | DDLogFlagWarning), // 0...00011
-    DDLogLevelInfo      = (DDLogLevelWarning | DDLogFlagInfo),    // 0...00111
-    DDLogLevelDebug     = (DDLogLevelInfo    | DDLogFlagDebug),   // 0...01111
-    DDLogLevelVerbose   = (DDLogLevelDebug   | DDLogFlagVerbose), // 0...11111
-    DDLogLevelAll       = NSUIntegerMax                           // 1111....11111 (DDLogLevelVerbose plus any other flags)
+typedef NS_ENUM(NSUInteger, QHDDLogLevel) {
+    QHDDLogLevelOff       = 0,
+    QHDDLogLevelError     = (QHDDLogFlagError),                       // 0...00001
+    QHDDLogLevelWarning   = (QHDDLogLevelError   | QHDDLogFlagWarning), // 0...00011
+    QHDDLogLevelInfo      = (QHDDLogLevelWarning | QHDDLogFlagInfo),    // 0...00111
+    QHDDLogLevelDebug     = (QHDDLogLevelInfo    | QHDDLogFlagDebug),   // 0...01111
+    QHDDLogLevelVerbose   = (QHDDLogLevelDebug   | QHDDLogFlagVerbose), // 0...11111
+    QHDDLogLevelAll       = NSUIntegerMax                           // 1111....11111 (QHDDLogLevelVerbose plus any other flags)
 };
 
 /**
  * The THIS_FILE macro gives you an NSString of the file name.
  * For simplicity and clarity, the file name does not include the full path or file extension.
  *
- * For example: DDLogWarn(@"%@: Unable to find thingy", THIS_FILE) -> @"MyViewController: Unable to find thingy"
+ * For example: QHDDLogWarn(@"%@: Unable to find thingy", THIS_FILE) -> @"MyViewController: Unable to find thingy"
  **/
 
-NSString * DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy);
+NSString * QHDDExtractFileNameWithoutExtension(const char *filePath, BOOL copy);
 
-#define THIS_FILE         (DDExtractFileNameWithoutExtension(__FILE__, NO))
+#define THIS_FILE         (QHDDExtractFileNameWithoutExtension(__FILE__, NO))
 
 /**
  * The THIS_METHOD macro gives you the name of the current objective-c method.
  *
- * For example: DDLogWarn(@"%@ - Requires non-nil strings", THIS_METHOD) -> @"setMake:model: requires non-nil strings"
+ * For example: QHDDLogWarn(@"%@ - Requires non-nil strings", THIS_METHOD) -> @"setMake:model: requires non-nil strings"
  *
  * Note: This does NOT work in straight C functions (non objective-c).
  * Instead you should use the predefined __FUNCTION__ macro.
@@ -134,7 +134,7 @@ NSString * DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy);
 #pragma mark -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@interface DDLog : NSObject
+@interface QHDDLog : NSObject
 
 /**
  * Provides access to the underlying logging queue.
@@ -151,8 +151,8 @@ NSString * DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy);
  **/
 
 + (void)log:(BOOL)synchronous
-      level:(DDLogLevel)level
-       flag:(DDLogFlag)flag
+      level:(QHDDLogLevel)level
+       flag:(QHDDLogFlag)flag
     context:(NSInteger)context
        file:(const char *)file
    function:(const char *)function
@@ -167,8 +167,8 @@ NSString * DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy);
  **/
 
 + (void)log:(BOOL)asynchronous
-      level:(DDLogLevel)level
-       flag:(DDLogFlag)flag
+      level:(QHDDLogLevel)level
+       flag:(QHDDLogFlag)flag
     context:(NSInteger)context
        file:(const char *)file
    function:(const char *)function
@@ -182,8 +182,8 @@ NSString * DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy);
  **/
 + (void)log:(BOOL)asynchronous
     message:(NSString *)message
-      level:(DDLogLevel)level
-       flag:(DDLogFlag)flag
+      level:(QHDDLogLevel)level
+       flag:(QHDDLogFlag)flag
     context:(NSInteger)context
        file:(const char *)file
    function:(const char *)function
@@ -193,11 +193,11 @@ NSString * DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy);
 /**
  * Logging Primitive.
  *
- * This method can be used if you manualy prepared DDLogMessage.
+ * This method can be used if you manualy prepared QHDDLogMessage.
  **/
 
 + (void)log:(BOOL)asynchronous
-    message:(DDLogMessage *)logMessage;
+    message:(QHDDLogMessage *)logMessage;
 
 /**
  * Since logging can be asynchronous, there may be times when you want to flush the logs.
@@ -219,9 +219,9 @@ NSString * DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy);
 /**
  * Adds the logger to the system.
  *
- * This is equivalent to invoking [DDLog addLogger:logger withLogLevel:DDLogLevelAll].
+ * This is equivalent to invoking [QHDDLog addLogger:logger withLogLevel:QHDDLogLevelAll].
  **/
-+ (void)addLogger:(id <DDLogger>)logger;
++ (void)addLogger:(id <QHDDLogger>)logger;
 
 /**
  * Adds the logger to the system.
@@ -237,11 +237,11 @@ NSString * DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy);
  *
  * For example:
  *
- * [DDLog addLogger:consoleLogger withLogLevel:DDLogLevelVerbose];
- * [DDLog addLogger:fileLogger    withLogLevel:DDLogLevelWarning];
+ * [QHDDLog addLogger:consoleLogger withLogLevel:QHDDLogLevelVerbose];
+ * [QHDDLog addLogger:fileLogger    withLogLevel:QHDDLogLevelWarning];
  *
- * DDLogError(@"oh no"); => gets forwarded to consoleLogger & fileLogger
- * DDLogInfo(@"hi");     => gets forwarded to consoleLogger only
+ * QHDDLogError(@"oh no"); => gets forwarded to consoleLogger & fileLogger
+ * QHDDLogInfo(@"hi");     => gets forwarded to consoleLogger only
  *
  * It is important to remember that Lumberjack uses a BITMASK.
  * Many developers & third party frameworks may define extra log levels & flags.
@@ -249,19 +249,19 @@ NSString * DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy);
  *
  * #define SOME_FRAMEWORK_LOG_FLAG_TRACE (1 << 6) // 0...1000000
  *
- * So if you specify DDLogLevelVerbose to this method, you won't see the framework's trace messages.
+ * So if you specify QHDDLogLevelVerbose to this method, you won't see the framework's trace messages.
  *
- * (SOME_FRAMEWORK_LOG_FLAG_TRACE & DDLogLevelVerbose) => (01000000 & 00011111) => NO
+ * (SOME_FRAMEWORK_LOG_FLAG_TRACE & QHDDLogLevelVerbose) => (01000000 & 00011111) => NO
  *
- * Consider passing DDLogLevelAll to this method, which has all bits set.
+ * Consider passing QHDDLogLevelAll to this method, which has all bits set.
  * You can also use the exclusive-or bitwise operator to get a bitmask that has all flags set,
  * except the ones you explicitly don't want. For example, if you wanted everything except verbose & debug:
  *
- * ((DDLogLevelAll ^ DDLogLevelVerbose) | DDLogLevelInfo)
+ * ((QHDDLogLevelAll ^ QHDDLogLevelVerbose) | QHDDLogLevelInfo)
  **/
-+ (void)addLogger:(id <DDLogger>)logger withLevel:(DDLogLevel)level;
++ (void)addLogger:(id <QHDDLogger>)logger withLevel:(QHDDLogLevel)level;
 
-+ (void)removeLogger:(id <DDLogger>)logger;
++ (void)removeLogger:(id <QHDDLogger>)logger;
 + (void)removeAllLoggers;
 
 + (NSArray *)allLoggers;
@@ -276,11 +276,11 @@ NSString * DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy);
 + (NSArray *)registeredClasses;
 + (NSArray *)registeredClassNames;
 
-+ (DDLogLevel)levelForClass:(Class)aClass;
-+ (DDLogLevel)levelForClassWithName:(NSString *)aClassName;
++ (QHDDLogLevel)levelForClass:(Class)aClass;
++ (QHDDLogLevel)levelForClassWithName:(NSString *)aClassName;
 
-+ (void)setLevel:(DDLogLevel)level forClass:(Class)aClass;
-+ (void)setLevel:(DDLogLevel)level forClassWithName:(NSString *)aClassName;
++ (void)setLevel:(QHDDLogLevel)level forClass:(Class)aClass;
++ (void)setLevel:(QHDDLogLevel)level forClassWithName:(NSString *)aClassName;
 
 @end
 
@@ -288,9 +288,9 @@ NSString * DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy);
 #pragma mark -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@protocol DDLogger <NSObject>
+@protocol QHDDLogger <NSObject>
 
-- (void)logMessage:(DDLogMessage *)logMessage;
+- (void)logMessage:(QHDDLogMessage *)logMessage;
 
 /**
  * Formatters may optionally be added to any logger.
@@ -298,7 +298,7 @@ NSString * DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy);
  * If no formatter is set, the logger simply logs the message as it is given in logMessage,
  * or it may use its own built in formatting style.
  **/
-@property (nonatomic, strong) id <DDLogFormatter> logFormatter;
+@property (nonatomic, strong) id <QHDDLogFormatter> logFormatter;
 
 @optional
 
@@ -321,9 +321,9 @@ NSString * DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy);
  * For example, a database logger may only save occasionaly as the disk IO is slow.
  * In such loggers, this method should be implemented to flush any pending IO.
  *
- * This allows invocations of DDLog's flushLog method to be propogated to loggers that need it.
+ * This allows invocations of QHDDLog's flushLog method to be propogated to loggers that need it.
  *
- * Note that DDLog's flushLog method is invoked automatically when the application quits,
+ * Note that QHDDLog's flushLog method is invoked automatically when the application quits,
  * and it may be also invoked manually by the developer prior to application crashes, or other such reasons.
  **/
 - (void)flush;
@@ -349,7 +349,7 @@ NSString * DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy);
 #pragma mark -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@protocol DDLogFormatter <NSObject>
+@protocol QHDDLogFormatter <NSObject>
 @required
 
 /**
@@ -363,7 +363,7 @@ NSString * DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy);
  * The formatter may also optionally filter the log message by returning nil,
  * in which case the logger will not log the message.
  **/
-- (NSString *)formatLogMessage:(DDLogMessage *)logMessage;
+- (NSString *)formatLogMessage:(QHDDLogMessage *)logMessage;
 
 @optional
 
@@ -376,8 +376,8 @@ NSString * DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy);
  * Or if a formatter has potentially thread-unsafe code (e.g. NSDateFormatter),
  * it could possibly use these hooks to switch to thread-safe versions of the code.
  **/
-- (void)didAddToLogger:(id <DDLogger>)logger;
-- (void)willRemoveFromLogger:(id <DDLogger>)logger;
+- (void)didAddToLogger:(id <QHDDLogger>)logger;
+- (void)willRemoveFromLogger:(id <QHDDLogger>)logger;
 
 @end
 
@@ -403,14 +403,14 @@ NSString * DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy);
  *     return ddLogLevel;
  * }
  *
- * + (void)ddSetLogLevel:(DDLogLevel)level
+ * + (void)ddSetLogLevel:(QHDDLogLevel)level
  * {
  *     ddLogLevel = level;
  * }
  **/
 
-+ (DDLogLevel)ddLogLevel;
-+ (void)ddSetLogLevel:(DDLogLevel)level;
++ (QHDDLogLevel)ddLogLevel;
++ (void)ddSetLogLevel:(QHDDLogLevel)level;
 
 @end
 
@@ -423,29 +423,29 @@ NSString * DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy);
 #endif
 
 /**
- * The DDLogMessage class encapsulates information about the log message.
+ * The QHDDLogMessage class encapsulates information about the log message.
  * If you write custom loggers or formatters, you will be dealing with objects of this class.
  **/
 
-typedef NS_OPTIONS(NSInteger, DDLogMessageOptions) {
-    DDLogMessageCopyFile     = 1 << 0,
-    DDLogMessageCopyFunction = 1 << 1
+typedef NS_OPTIONS(NSInteger, QHDDLogMessageOptions) {
+    QHDDLogMessageCopyFile     = 1 << 0,
+    QHDDLogMessageCopyFunction = 1 << 1
 };
 
-@interface DDLogMessage : NSObject <NSCopying>
+@interface QHDDLogMessage : NSObject <NSCopying>
 {
     // Direct accessors to be used only for performance
     @public
     NSString *_message;
-    DDLogLevel _level;
-    DDLogFlag _flag;
+    QHDDLogLevel _level;
+    QHDDLogFlag _flag;
     NSInteger _context;
     NSString *_file;
     NSString *_fileName;
     NSString *_function;
     NSUInteger _line;
     id _tag;
-    DDLogMessageOptions _options;
+    QHDDLogMessageOptions _options;
     NSDate *_timestamp;
     NSString *_threadID;
     NSString *_threadName;
@@ -465,32 +465,32 @@ typedef NS_OPTIONS(NSInteger, DDLogMessageOptions) {
  * This is due to the fact that __FILE__ and __FUNCTION__ are usually used to specify these parameters,
  * so it makes sense to optimize and skip the unnecessary allocations.
  * However, if you need them to be copied you may use the options parameter to specify this.
- * Options is a bitmask which supports DDLogMessageCopyFile and DDLogMessageCopyFunction.
+ * Options is a bitmask which supports QHDDLogMessageCopyFile and QHDDLogMessageCopyFunction.
  **/
 - (instancetype)initWithMessage:(NSString *)message
-                          level:(DDLogLevel)level
-                           flag:(DDLogFlag)flag
+                          level:(QHDDLogLevel)level
+                           flag:(QHDDLogFlag)flag
                         context:(NSInteger)context
                            file:(NSString *)file
                        function:(NSString *)function
                            line:(NSUInteger)line
                             tag:(id)tag
-                        options:(DDLogMessageOptions)options
+                        options:(QHDDLogMessageOptions)options
                       timestamp:(NSDate *)timestamp NS_DESIGNATED_INITIALIZER;
 
 /**
  * Read-only properties
  **/
 @property (readonly, nonatomic) NSString *message;
-@property (readonly, nonatomic) DDLogLevel level;
-@property (readonly, nonatomic) DDLogFlag flag;
+@property (readonly, nonatomic) QHDDLogLevel level;
+@property (readonly, nonatomic) QHDDLogFlag flag;
 @property (readonly, nonatomic) NSInteger context;
 @property (readonly, nonatomic) NSString *file;
 @property (readonly, nonatomic) NSString *fileName;
 @property (readonly, nonatomic) NSString *function;
 @property (readonly, nonatomic) NSUInteger line;
 @property (readonly, nonatomic) id tag;
-@property (readonly, nonatomic) DDLogMessageOptions options;
+@property (readonly, nonatomic) QHDDLogMessageOptions options;
 @property (readonly, nonatomic) NSDate *timestamp;
 @property (readonly, nonatomic) NSString *threadID; // ID as it appears in NSLog calculated from the machThreadID
 @property (readonly, nonatomic) NSString *threadName;
@@ -503,7 +503,7 @@ typedef NS_OPTIONS(NSInteger, DDLogMessageOptions) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
- * The DDLogger protocol specifies that an optional formatter can be added to a logger.
+ * The QHDDLogger protocol specifies that an optional formatter can be added to a logger.
  * Most (but not all) loggers will want to support formatters.
  *
  * However, writting getters and setters in a thread safe manner,
@@ -519,15 +519,15 @@ typedef NS_OPTIONS(NSInteger, DDLogMessageOptions) {
  * and they can ACCESS THE FORMATTER VARIABLE DIRECTLY from within their logMessage method!
  **/
 
-@interface DDAbstractLogger : NSObject <DDLogger>
+@interface QJDDAbstractLogger : NSObject <QHDDLogger>
 {
     // Direct accessors to be used only for performance
     @public
-    id <DDLogFormatter> _logFormatter;
+    id <QHDDLogFormatter> _logFormatter;
     dispatch_queue_t _loggerQueue;
 }
 
-@property (nonatomic, strong) id <DDLogFormatter> logFormatter;
+@property (nonatomic, strong) id <QHDDLogFormatter> logFormatter;
 @property (nonatomic, DISPATCH_QUEUE_REFERENCE_TYPE) dispatch_queue_t loggerQueue;
 
 // For thread-safety assertions

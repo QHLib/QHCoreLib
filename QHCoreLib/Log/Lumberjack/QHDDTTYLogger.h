@@ -28,7 +28,7 @@
  * you may choose to use only a file logger and a tty logger.
  **/
 
-#import "DDLog.h"
+#import "QHDDLog.h"
 
 #define LOG_CONTEXT_ALL INT_MAX
 
@@ -49,11 +49,11 @@
     #define DDMakeColor(r, g, b) [CLIColor colorWithCalibratedRed:(r/255.0f) green:(g/255.0f) blue:(b/255.0f) alpha:1.0f]
 #endif
 
-@interface DDTTYLogger : DDAbstractLogger <DDLogger>
+@interface QHDDTTYLogger : QJDDAbstractLogger <QHDDLogger>
 
 + (instancetype)sharedInstance;
 
-/* Inherited from the DDLogger protocol:
+/* Inherited from the QHDDLogger protocol:
  *
  * Formatters may optionally be added to any logger.
  *
@@ -63,10 +63,10 @@
  * More information about formatters can be found here:
  * Documentation/CustomFormatters.md
  *
- * The actual implementation of these methods is inherited from DDAbstractLogger.
+ * The actual implementation of these methods is inherited from QJDDAbstractLogger.
 
-   - (id <DDLogFormatter>)logFormatter;
-   - (void)setLogFormatter:(id <DDLogFormatter>)formatter;
+   - (id <QHDDLogFormatter>)logFormatter;
+   - (void)setLogFormatter:(id <QHDDLogFormatter>)formatter;
 
  */
 
@@ -96,26 +96,26 @@
 /**
  * The default color set (foregroundColor, backgroundColor) is:
  *
- * - DDLogFlagError   = (red, nil)
- * - DDLogFlagWarning = (orange, nil)
+ * - QHDDLogFlagError   = (red, nil)
+ * - QHDDLogFlagWarning = (orange, nil)
  *
  * You can customize the colors however you see fit.
  * Please note that you are passing a flag, NOT a level.
  *
- * GOOD : [ttyLogger setForegroundColor:pink backgroundColor:nil forFlag:DDLogFlagInfo];  // <- Good :)
- *  BAD : [ttyLogger setForegroundColor:pink backgroundColor:nil forFlag:DDLogLevelInfo]; // <- BAD! :(
+ * GOOD : [ttyLogger setForegroundColor:pink backgroundColor:nil forFlag:QHDDLogFlagInfo];  // <- Good :)
+ *  BAD : [ttyLogger setForegroundColor:pink backgroundColor:nil forFlag:QHDDLogLevelInfo]; // <- BAD! :(
  *
- * DDLogFlagInfo  = 0...00100
- * DDLogLevelInfo = 0...00111 <- Would match DDLogFlagInfo and DDLogFlagWarning and DDLogFlagError
+ * QHDDLogFlagInfo  = 0...00100
+ * QHDDLogLevelInfo = 0...00111 <- Would match QHDDLogFlagInfo and QHDDLogFlagWarning and QHDDLogFlagError
  *
  * If you run the application within Xcode, then the XcodeColors plugin is required.
  *
- * If you run the application from a shell, then DDTTYLogger will automatically map the given color to
+ * If you run the application from a shell, then QHDDTTYLogger will automatically map the given color to
  * the closest available color. (xterm-256color or xterm-color which have 256 and 16 supported colors respectively.)
  *
  * This method invokes setForegroundColor:backgroundColor:forFlag:context: and applies it to `LOG_CONTEXT_ALL`.
  **/
-- (void)setForegroundColor:(DDColor *)txtColor backgroundColor:(DDColor *)bgColor forFlag:(DDLogFlag)mask;
+- (void)setForegroundColor:(DDColor *)txtColor backgroundColor:(DDColor *)bgColor forFlag:(QHDDLogFlag)mask;
 
 /**
  * Just like setForegroundColor:backgroundColor:flag, but allows you to specify a particular logging context.
@@ -128,15 +128,15 @@
  * Logging context's are explained in further detail here:
  * Documentation/CustomContext.md
  **/
-- (void)setForegroundColor:(DDColor *)txtColor backgroundColor:(DDColor *)bgColor forFlag:(DDLogFlag)mask context:(NSInteger)ctxt;
+- (void)setForegroundColor:(DDColor *)txtColor backgroundColor:(DDColor *)bgColor forFlag:(QHDDLogFlag)mask context:(NSInteger)ctxt;
 
 /**
- * Similar to the methods above, but allows you to map DDLogMessage->tag to a particular color profile.
+ * Similar to the methods above, but allows you to map QHDDLogMessage->tag to a particular color profile.
  * For example, you could do something like this:
  *
  * static NSString *const PurpleTag = @"PurpleTag";
  *
- * #define DDLogPurple(frmt, ...) LOG_OBJC_TAG_MACRO(NO, 0, 0, 0, PurpleTag, frmt, ##__VA_ARGS__)
+ * #define QHDDLogPurple(frmt, ...) LOG_OBJC_TAG_MACRO(NO, 0, 0, 0, PurpleTag, frmt, ##__VA_ARGS__)
  * 
  * And then where you configure CocoaLumberjack:
  *
@@ -146,20 +146,20 @@
  *
  * Note: For CLI OS X projects that don't link with AppKit use CLIColor objects instead
  *
- * [[DDTTYLogger sharedInstance] setForegroundColor:purple backgroundColor:nil forTag:PurpleTag];
- * [DDLog addLogger:[DDTTYLogger sharedInstance]];
+ * [[QHDDTTYLogger sharedInstance] setForegroundColor:purple backgroundColor:nil forTag:PurpleTag];
+ * [QHDDLog addLogger:[QHDDTTYLogger sharedInstance]];
  *
  * This would essentially give you a straight NSLog replacement that prints in purple:
  *
- * DDLogPurple(@"I'm a purple log message!");
+ * QHDDLogPurple(@"I'm a purple log message!");
  **/
 - (void)setForegroundColor:(DDColor *)txtColor backgroundColor:(DDColor *)bgColor forTag:(id <NSCopying>)tag;
 
 /**
  * Clearing color profiles.
  **/
-- (void)clearColorsForFlag:(DDLogFlag)mask;
-- (void)clearColorsForFlag:(DDLogFlag)mask context:(NSInteger)context;
+- (void)clearColorsForFlag:(QHDDLogFlag)mask;
+- (void)clearColorsForFlag:(QHDDLogFlag)mask context:(NSInteger)context;
 - (void)clearColorsForTag:(id <NSCopying>)tag;
 - (void)clearColorsForAllFlags;
 - (void)clearColorsForAllTags;

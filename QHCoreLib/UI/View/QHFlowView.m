@@ -10,7 +10,11 @@
 #import "QHBase.h"
 #import "UIKit+QHCoreLib.h"
 #import "UICollectionViewCell+QHCollectionViewCell.h"
+#if __has_include("QHCoreLib/QHCoreLib-Swift.h")
 #import "QHCoreLib/QHCoreLib-Swift.h"
+#else
+#import "QHCoreLib-Swift.h"
+#endif
 
 @interface QHCollectionViewWrapCellModel : NSObject
 

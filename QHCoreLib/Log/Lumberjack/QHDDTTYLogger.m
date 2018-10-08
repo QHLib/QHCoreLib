@@ -13,7 +13,7 @@
 //   to endorse or promote products derived from this software without specific
 //   prior written permission of Deusty, LLC.
 
-#import "DDTTYLogger.h"
+#import "QHDDTTYLogger.h"
 
 #import <unistd.h>
 #import <sys/uio.h>
@@ -22,7 +22,7 @@
 #error This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
 #endif
 
-// We probably shouldn't be using DDLog() statements within the DDLog implementation.
+// We probably shouldn't be using QHDDLog() statements within the QHDDLog implementation.
 // But we still want to leave our log statements for any future debugging,
 // and to allow other developers to trace the implementation (which is a great learning tool).
 //
@@ -78,9 +78,9 @@
 #define MAP_TO_TERMINAL_APP_COLORS 1
 
 
-@interface DDTTYLoggerColorProfile : NSObject {
+@interface QHDDTTYLoggerColorProfile : NSObject {
     @public
-    DDLogFlag mask;
+    QHDDLogFlag mask;
     NSInteger context;
 
     uint8_t fg_r;
@@ -107,7 +107,7 @@
     size_t resetCodeLen;
 }
 
-- (instancetype)initWithForegroundColor:(DDColor *)fgColor backgroundColor:(DDColor *)bgColor flag:(DDLogFlag)mask context:(NSInteger)ctxt;
+- (instancetype)initWithForegroundColor:(DDColor *)fgColor backgroundColor:(DDColor *)bgColor flag:(QHDDLogFlag)mask context:(NSInteger)ctxt;
 
 @end
 
@@ -115,7 +115,7 @@
 #pragma mark -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@interface DDTTYLogger () {
+@interface QHDDTTYLogger () {
     NSUInteger _calendarUnitFlags;
     
     NSString *_appName;
@@ -134,7 +134,7 @@
 @end
 
 
-@implementation DDTTYLogger
+@implementation QHDDTTYLogger
 
 static BOOL isaColorTTY;
 static BOOL isaColor256TTY;
@@ -144,7 +144,7 @@ static NSArray *codes_fg = nil;
 static NSArray *codes_bg = nil;
 static NSArray *colors   = nil;
 
-static DDTTYLogger *sharedInstance;
+static QHDDTTYLogger *sharedInstance;
 
 /**
  * Initializes the colors array, as well as the codes_fg and codes_bg arrays, for 16 color mode.
@@ -761,14 +761,14 @@ static DDTTYLogger *sharedInstance;
         CGFloat distance = sqrtf(powf(r - inR, 2.0f) + powf(g - inG, 2.0f) + powf(b - inB, 2.0f));
     #endif
 
-        NSLogVerbose(@"DDTTYLogger: %3lu : %.3f,%.3f,%.3f & %.3f,%.3f,%.3f = %.6f",
+        NSLogVerbose(@"QHDDTTYLogger: %3lu : %.3f,%.3f,%.3f & %.3f,%.3f,%.3f = %.6f",
                      (unsigned long)i, inR, inG, inB, r, g, b, distance);
 
         if (distance < lowestDistance) {
             bestIndex = i;
             lowestDistance = distance;
 
-            NSLogVerbose(@"DDTTYLogger: New best index = %lu", (unsigned long)bestIndex);
+            NSLogVerbose(@"QHDDTTYLogger: New best index = %lu", (unsigned long)bestIndex);
         }
 
         i++;
@@ -778,9 +778,9 @@ static DDTTYLogger *sharedInstance;
 }
 
 + (instancetype)sharedInstance {
-    static dispatch_once_t DDTTYLoggerOnceToken;
+    static dispatch_once_t QHDDTTYLoggerOnceToken;
 
-    dispatch_once(&DDTTYLoggerOnceToken, ^{
+    dispatch_once(&QHDDTTYLoggerOnceToken, ^{
         // Xcode does NOT natively support colors in the Xcode debugging console.
         // You'll need to install the XcodeColors plugin to see colors in the Xcode console.
         //
@@ -804,9 +804,9 @@ static DDTTYLogger *sharedInstance;
             }
         }
 
-        NSLogInfo(@"DDTTYLogger: isaColorTTY = %@", (isaColorTTY ? @"YES" : @"NO"));
-        NSLogInfo(@"DDTTYLogger: isaColor256TTY: %@", (isaColor256TTY ? @"YES" : @"NO"));
-        NSLogInfo(@"DDTTYLogger: isaXcodeColorTTY: %@", (isaXcodeColorTTY ? @"YES" : @"NO"));
+        NSLogInfo(@"QHDDTTYLogger: isaColorTTY = %@", (isaColorTTY ? @"YES" : @"NO"));
+        NSLogInfo(@"QHDDTTYLogger: isaColor256TTY: %@", (isaColor256TTY ? @"YES" : @"NO"));
+        NSLogInfo(@"QHDDTTYLogger: isaXcodeColorTTY: %@", (isaXcodeColorTTY ? @"YES" : @"NO"));
 
         sharedInstance = [[[self class] alloc] init];
     });
@@ -880,13 +880,13 @@ static DDTTYLogger *sharedInstance;
 }
 
 - (void)loadDefaultColorProfiles {
-    [self setForegroundColor:DDMakeColor(214,  57,  30) backgroundColor:nil forFlag:DDLogFlagError];
-    [self setForegroundColor:DDMakeColor(204, 121,  32) backgroundColor:nil forFlag:DDLogFlagWarning];
+    [self setForegroundColor:DDMakeColor(214,  57,  30) backgroundColor:nil forFlag:QHDDLogFlagError];
+    [self setForegroundColor:DDMakeColor(204, 121,  32) backgroundColor:nil forFlag:QHDDLogFlagWarning];
 }
 
 - (BOOL)colorsEnabled {
-    // The design of this method is taken from the DDAbstractLogger implementation.
-    // For extensive documentation please refer to the DDAbstractLogger implementation.
+    // The design of this method is taken from the QJDDAbstractLogger implementation.
+    // For extensive documentation please refer to the QJDDAbstractLogger implementation.
 
     // Note: The internal implementation MUST access the colorsEnabled variable directly,
     // This method is designed explicitly for external access.
@@ -898,7 +898,7 @@ static DDTTYLogger *sharedInstance;
     NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
     NSAssert(![self isOnInternalLoggerQueue], @"MUST access ivar directly, NOT via self.* syntax.");
 
-    dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
+    dispatch_queue_t globalLoggingQueue = [QHDDLog loggingQueue];
 
     __block BOOL result;
 
@@ -922,8 +922,8 @@ static DDTTYLogger *sharedInstance;
         }
     };
 
-    // The design of this method is taken from the DDAbstractLogger implementation.
-    // For extensive documentation please refer to the DDAbstractLogger implementation.
+    // The design of this method is taken from the QJDDAbstractLogger implementation.
+    // For extensive documentation please refer to the QJDDAbstractLogger implementation.
 
     // Note: The internal implementation MUST access the colorsEnabled variable directly,
     // This method is designed explicitly for external access.
@@ -935,31 +935,31 @@ static DDTTYLogger *sharedInstance;
     NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
     NSAssert(![self isOnInternalLoggerQueue], @"MUST access ivar directly, NOT via self.* syntax.");
 
-    dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
+    dispatch_queue_t globalLoggingQueue = [QHDDLog loggingQueue];
 
     dispatch_async(globalLoggingQueue, ^{
         dispatch_async(self.loggerQueue, block);
     });
 }
 
-- (void)setForegroundColor:(DDColor *)txtColor backgroundColor:(DDColor *)bgColor forFlag:(DDLogFlag)mask {
+- (void)setForegroundColor:(DDColor *)txtColor backgroundColor:(DDColor *)bgColor forFlag:(QHDDLogFlag)mask {
     [self setForegroundColor:txtColor backgroundColor:bgColor forFlag:mask context:LOG_CONTEXT_ALL];
 }
 
-- (void)setForegroundColor:(DDColor *)txtColor backgroundColor:(DDColor *)bgColor forFlag:(DDLogFlag)mask context:(NSInteger)ctxt {
+- (void)setForegroundColor:(DDColor *)txtColor backgroundColor:(DDColor *)bgColor forFlag:(QHDDLogFlag)mask context:(NSInteger)ctxt {
     dispatch_block_t block = ^{
         @autoreleasepool {
-            DDTTYLoggerColorProfile *newColorProfile =
-                [[DDTTYLoggerColorProfile alloc] initWithForegroundColor:txtColor
+            QHDDTTYLoggerColorProfile *newColorProfile =
+                [[QHDDTTYLoggerColorProfile alloc] initWithForegroundColor:txtColor
                                                          backgroundColor:bgColor
                                                                     flag:mask
                                                                  context:ctxt];
 
-            NSLogInfo(@"DDTTYLogger: newColorProfile: %@", newColorProfile);
+            NSLogInfo(@"QHDDTTYLogger: newColorProfile: %@", newColorProfile);
 
             NSUInteger i = 0;
 
-            for (DDTTYLoggerColorProfile *colorProfile in _colorProfilesArray) {
+            for (QHDDTTYLoggerColorProfile *colorProfile in _colorProfilesArray) {
                 if ((colorProfile->mask == mask) && (colorProfile->context == ctxt)) {
                     break;
                 }
@@ -975,13 +975,13 @@ static DDTTYLogger *sharedInstance;
         }
     };
 
-    // The design of the setter logic below is taken from the DDAbstractLogger implementation.
-    // For documentation please refer to the DDAbstractLogger implementation.
+    // The design of the setter logic below is taken from the QJDDAbstractLogger implementation.
+    // For documentation please refer to the QJDDAbstractLogger implementation.
 
     if ([self isOnInternalLoggerQueue]) {
         block();
     } else {
-        dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
+        dispatch_queue_t globalLoggingQueue = [QHDDLog loggingQueue];
         NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 
         dispatch_async(globalLoggingQueue, ^{
@@ -995,25 +995,25 @@ static DDTTYLogger *sharedInstance;
 
     dispatch_block_t block = ^{
         @autoreleasepool {
-            DDTTYLoggerColorProfile *newColorProfile =
-                [[DDTTYLoggerColorProfile alloc] initWithForegroundColor:txtColor
+            QHDDTTYLoggerColorProfile *newColorProfile =
+                [[QHDDTTYLoggerColorProfile alloc] initWithForegroundColor:txtColor
                                                          backgroundColor:bgColor
-                                                                    flag:(DDLogFlag)0
+                                                                    flag:(QHDDLogFlag)0
                                                                  context:0];
 
-            NSLogInfo(@"DDTTYLogger: newColorProfile: %@", newColorProfile);
+            NSLogInfo(@"QHDDTTYLogger: newColorProfile: %@", newColorProfile);
 
             _colorProfilesDict[tag] = newColorProfile;
         }
     };
 
-    // The design of the setter logic below is taken from the DDAbstractLogger implementation.
-    // For documentation please refer to the DDAbstractLogger implementation.
+    // The design of the setter logic below is taken from the QJDDAbstractLogger implementation.
+    // For documentation please refer to the QJDDAbstractLogger implementation.
 
     if ([self isOnInternalLoggerQueue]) {
         block();
     } else {
-        dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
+        dispatch_queue_t globalLoggingQueue = [QHDDLog loggingQueue];
         NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 
         dispatch_async(globalLoggingQueue, ^{
@@ -1022,16 +1022,16 @@ static DDTTYLogger *sharedInstance;
     }
 }
 
-- (void)clearColorsForFlag:(DDLogFlag)mask {
+- (void)clearColorsForFlag:(QHDDLogFlag)mask {
     [self clearColorsForFlag:mask context:0];
 }
 
-- (void)clearColorsForFlag:(DDLogFlag)mask context:(NSInteger)context {
+- (void)clearColorsForFlag:(QHDDLogFlag)mask context:(NSInteger)context {
     dispatch_block_t block = ^{
         @autoreleasepool {
             NSUInteger i = 0;
 
-            for (DDTTYLoggerColorProfile *colorProfile in _colorProfilesArray) {
+            for (QHDDTTYLoggerColorProfile *colorProfile in _colorProfilesArray) {
                 if ((colorProfile->mask == mask) && (colorProfile->context == context)) {
                     break;
                 }
@@ -1045,13 +1045,13 @@ static DDTTYLogger *sharedInstance;
         }
     };
 
-    // The design of the setter logic below is taken from the DDAbstractLogger implementation.
-    // For documentation please refer to the DDAbstractLogger implementation.
+    // The design of the setter logic below is taken from the QJDDAbstractLogger implementation.
+    // For documentation please refer to the QJDDAbstractLogger implementation.
 
     if ([self isOnInternalLoggerQueue]) {
         block();
     } else {
-        dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
+        dispatch_queue_t globalLoggingQueue = [QHDDLog loggingQueue];
         NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 
         dispatch_async(globalLoggingQueue, ^{
@@ -1069,13 +1069,13 @@ static DDTTYLogger *sharedInstance;
         }
     };
 
-    // The design of the setter logic below is taken from the DDAbstractLogger implementation.
-    // For documentation please refer to the DDAbstractLogger implementation.
+    // The design of the setter logic below is taken from the QJDDAbstractLogger implementation.
+    // For documentation please refer to the QJDDAbstractLogger implementation.
 
     if ([self isOnInternalLoggerQueue]) {
         block();
     } else {
-        dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
+        dispatch_queue_t globalLoggingQueue = [QHDDLog loggingQueue];
         NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 
         dispatch_async(globalLoggingQueue, ^{
@@ -1091,13 +1091,13 @@ static DDTTYLogger *sharedInstance;
         }
     };
 
-    // The design of the setter logic below is taken from the DDAbstractLogger implementation.
-    // For documentation please refer to the DDAbstractLogger implementation.
+    // The design of the setter logic below is taken from the QJDDAbstractLogger implementation.
+    // For documentation please refer to the QJDDAbstractLogger implementation.
 
     if ([self isOnInternalLoggerQueue]) {
         block();
     } else {
-        dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
+        dispatch_queue_t globalLoggingQueue = [QHDDLog loggingQueue];
         NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 
         dispatch_async(globalLoggingQueue, ^{
@@ -1113,13 +1113,13 @@ static DDTTYLogger *sharedInstance;
         }
     };
 
-    // The design of the setter logic below is taken from the DDAbstractLogger implementation.
-    // For documentation please refer to the DDAbstractLogger implementation.
+    // The design of the setter logic below is taken from the QJDDAbstractLogger implementation.
+    // For documentation please refer to the QJDDAbstractLogger implementation.
 
     if ([self isOnInternalLoggerQueue]) {
         block();
     } else {
-        dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
+        dispatch_queue_t globalLoggingQueue = [QHDDLog loggingQueue];
         NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 
         dispatch_async(globalLoggingQueue, ^{
@@ -1136,13 +1136,13 @@ static DDTTYLogger *sharedInstance;
         }
     };
 
-    // The design of the setter logic below is taken from the DDAbstractLogger implementation.
-    // For documentation please refer to the DDAbstractLogger implementation.
+    // The design of the setter logic below is taken from the QJDDAbstractLogger implementation.
+    // For documentation please refer to the QJDDAbstractLogger implementation.
 
     if ([self isOnInternalLoggerQueue]) {
         block();
     } else {
-        dispatch_queue_t globalLoggingQueue = [DDLog loggingQueue];
+        dispatch_queue_t globalLoggingQueue = [QHDDLog loggingQueue];
         NSAssert(![self isOnGlobalLoggingQueue], @"Core architecture requirement failure");
 
         dispatch_async(globalLoggingQueue, ^{
@@ -1151,7 +1151,7 @@ static DDTTYLogger *sharedInstance;
     }
 }
 
-- (void)logMessage:(DDLogMessage *)logMessage {
+- (void)logMessage:(QHDDLogMessage *)logMessage {
     NSString *logMsg = logMessage->_message;
     BOOL isFormatted = NO;
 
@@ -1163,7 +1163,7 @@ static DDTTYLogger *sharedInstance;
     if (logMsg) {
         // Search for a color profile associated with the log message
 
-        DDTTYLoggerColorProfile *colorProfile = nil;
+        QHDDTTYLoggerColorProfile *colorProfile = nil;
 
         if (_colorsEnabled) {
             if (logMessage->_tag) {
@@ -1171,7 +1171,7 @@ static DDTTYLogger *sharedInstance;
             }
 
             if (colorProfile == nil) {
-                for (DDTTYLoggerColorProfile *cp in _colorProfilesArray) {
+                for (QHDDTTYLoggerColorProfile *cp in _colorProfilesArray) {
                     if (logMessage->_flag & cp->mask) {
                         // Color profile set for this context?
                         if (logMessage->_context == cp->context) {
@@ -1356,16 +1356,16 @@ static DDTTYLogger *sharedInstance;
 }
 
 - (NSString *)loggerName {
-    return @"cocoa.lumberjack.ttyLogger";
+    return @"cocoa.qh.lumberjack.ttyLogger";
 }
 
 @end
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@implementation DDTTYLoggerColorProfile
+@implementation QHDDTTYLoggerColorProfile
 
-- (instancetype)initWithForegroundColor:(DDColor *)fgColor backgroundColor:(DDColor *)bgColor flag:(DDLogFlag)aMask context:(NSInteger)ctxt {
+- (instancetype)initWithForegroundColor:(DDColor *)fgColor backgroundColor:(DDColor *)bgColor flag:(QHDDLogFlag)aMask context:(NSInteger)ctxt {
     if ((self = [super init])) {
         mask = aMask;
         context = ctxt;
@@ -1373,7 +1373,7 @@ static DDTTYLogger *sharedInstance;
         CGFloat r, g, b;
 
         if (fgColor) {
-            [DDTTYLogger getRed:&r green:&g blue:&b fromColor:fgColor];
+            [QHDDTTYLogger getRed:&r green:&g blue:&b fromColor:fgColor];
 
             fg_r = (uint8_t)(r * 255.0f);
             fg_g = (uint8_t)(g * 255.0f);
@@ -1381,7 +1381,7 @@ static DDTTYLogger *sharedInstance;
         }
 
         if (bgColor) {
-            [DDTTYLogger getRed:&r green:&g blue:&b fromColor:bgColor];
+            [QHDDTTYLogger getRed:&r green:&g blue:&b fromColor:bgColor];
 
             bg_r = (uint8_t)(r * 255.0f);
             bg_g = (uint8_t)(g * 255.0f);
@@ -1391,7 +1391,7 @@ static DDTTYLogger *sharedInstance;
         if (fgColor && isaColorTTY) {
             // Map foreground color to closest available shell color
 
-            fgCodeIndex = [DDTTYLogger codeIndexForColor:fgColor];
+            fgCodeIndex = [QHDDTTYLogger codeIndexForColor:fgColor];
             fgCodeRaw   = codes_fg[fgCodeIndex];
 
             NSString *escapeSeq = @"\033[";
@@ -1424,7 +1424,7 @@ static DDTTYLogger *sharedInstance;
         if (bgColor && isaColorTTY) {
             // Map background color to closest available shell color
 
-            bgCodeIndex = [DDTTYLogger codeIndexForColor:bgColor];
+            bgCodeIndex = [QHDDTTYLogger codeIndexForColor:bgColor];
             bgCodeRaw   = codes_bg[bgCodeIndex];
 
             NSString *escapeSeq = @"\033[";
@@ -1469,7 +1469,7 @@ static DDTTYLogger *sharedInstance;
 
 - (NSString *)description {
     return [NSString stringWithFormat:
-            @"<DDTTYLoggerColorProfile: %p mask:%i ctxt:%ld fg:%u,%u,%u bg:%u,%u,%u fgCode:%@ bgCode:%@>",
+            @"<QHDDTTYLoggerColorProfile: %p mask:%i ctxt:%ld fg:%u,%u,%u bg:%u,%u,%u fgCode:%@ bgCode:%@>",
             self, (int)mask, (long)context, fg_r, fg_g, fg_b, bg_r, bg_g, bg_b, fgCodeRaw, bgCodeRaw];
 }
 

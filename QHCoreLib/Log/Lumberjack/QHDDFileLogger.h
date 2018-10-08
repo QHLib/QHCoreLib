@@ -13,9 +13,9 @@
 //   to endorse or promote products derived from this software without specific
 //   prior written permission of Deusty, LLC.
 
-#import "DDLog.h"
+#import "QHDDLog.h"
 
-@class DDLogFileInfo;
+@class QHDDLogFileInfo;
 
 /**
  * This class provides a logger to write log statements to a file.
@@ -24,17 +24,17 @@
 
 // Default configuration and safety/sanity values.
 //
-// maximumFileSize         -> kDDDefaultLogMaxFileSize
-// rollingFrequency        -> kDDDefaultLogRollingFrequency
-// maximumNumberOfLogFiles -> kDDDefaultLogMaxNumLogFiles
-// logFilesDiskQuota       -> kDDDefaultLogFilesDiskQuota
+// maximumFileSize         -> kQHDDDefaultLogMaxFileSize
+// rollingFrequency        -> kQHDDDefaultLogRollingFrequency
+// maximumNumberOfLogFiles -> kQHDDDefaultLogMaxNumLogFiles
+// logFilesDiskQuota       -> kQHDDDefaultLogFilesDiskQuota
 //
 // You should carefully consider the proper configuration values for your application.
 
-extern unsigned long long const kDDDefaultLogMaxFileSize;
-extern NSTimeInterval     const kDDDefaultLogRollingFrequency;
-extern NSUInteger         const kDDDefaultLogMaxNumLogFiles;
-extern unsigned long long const kDDDefaultLogFilesDiskQuota;
+extern unsigned long long const kQHDDDefaultLogMaxFileSize;
+extern NSTimeInterval     const kQHDDDefaultLogRollingFrequency;
+extern NSUInteger         const kQHDDDefaultLogMaxNumLogFiles;
+extern unsigned long long const kQHDDDefaultLogFilesDiskQuota;
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -59,11 +59,11 @@ extern unsigned long long const kDDDefaultLogFilesDiskQuota;
 // with the most recently created log file at index 0, and the oldest log file at the end of the array.
 //
 // You can fetch only the log file paths (full path including name), log file names (name only),
-// or an array of DDLogFileInfo objects.
-// The DDLogFileInfo class is documented below, and provides a handy wrapper that
+// or an array of QHDDLogFileInfo objects.
+// The QHDDLogFileInfo class is documented below, and provides a handy wrapper that
 // gives you easy access to various file attributes such as the creation date or the file size.
 
-@protocol DDLogFileManager <NSObject>
+@protocol QHDDLogFileManager <NSObject>
 @required
 
 // Public properties
@@ -98,13 +98,13 @@ extern unsigned long long const kDDDefaultLogFilesDiskQuota;
 - (NSArray *)sortedLogFileNames;
 - (NSArray *)sortedLogFileInfos;
 
-// Private methods (only to be used by DDFileLogger)
+// Private methods (only to be used by QHDDFileLogger)
 
 - (NSString *)createNewLogFile;
 
 @optional
 
-// Notifications from DDFileLogger
+// Notifications from QHDDFileLogger
 
 - (void)didArchiveLogFile:(NSString *)logFilePath;
 - (void)didRollAndArchiveLogFile:(NSString *)logFilePath;
@@ -128,7 +128,7 @@ extern unsigned long long const kDDDefaultLogFilesDiskQuota;
  *
  * Archived log files are automatically deleted according to the maximumNumberOfLogFiles property.
  **/
-@interface DDLogFileManagerDefault : NSObject <DDLogFileManager>
+@interface QHDDLogFileManagerDefault : NSObject <QHDDLogFileManager>
 
 - (instancetype)init;
 - (instancetype)initWithLogsDirectory:(NSString *)logsDirectory NS_DESIGNATED_INITIALIZER;
@@ -175,7 +175,7 @@ extern unsigned long long const kDDDefaultLogFilesDiskQuota;
 @property (readonly, copy) NSString *newLogFileName;
 - (BOOL)isLogFile:(NSString *)fileName;
 
-/* Inherited from DDLogFileManager protocol:
+/* Inherited from QHDDLogFileManager protocol:
 
    @property (readwrite, assign, atomic) NSUInteger maximumNumberOfLogFiles;
    @property (readwrite, assign, atomic) NSUInteger logFilesDiskQuota;
@@ -208,7 +208,7 @@ extern unsigned long long const kDDDefaultLogFilesDiskQuota;
  * In addition to the convenience of having a logical default formatter,
  * it will also provide a template that makes it easy for developers to copy and change.
  **/
-@interface DDLogFileFormatterDefault : NSObject <DDLogFormatter>
+@interface QHDDLogFileFormatterDefault : NSObject <QHDDLogFormatter>
 
 - (instancetype)init;
 - (instancetype)initWithDateFormatter:(NSDateFormatter *)dateFormatter NS_DESIGNATED_INITIALIZER;
@@ -219,10 +219,10 @@ extern unsigned long long const kDDDefaultLogFilesDiskQuota;
 #pragma mark -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@interface DDFileLogger : DDAbstractLogger <DDLogger>
+@interface QHDDFileLogger : QJDDAbstractLogger <QHDDLogger>
 
 - (instancetype)init;
-- (instancetype)initWithLogFileManager:(id <DDLogFileManager>)logFileManager NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithLogFileManager:(id <QHDDLogFileManager>)logFileManager NS_DESIGNATED_INITIALIZER;
 
 /**
  * Log File Rolling:
@@ -260,12 +260,12 @@ extern unsigned long long const kDDDefaultLogFilesDiskQuota;
 @property (readwrite, assign, atomic) BOOL doNotReuseLogFiles;
 
 /**
- * The DDLogFileManager instance can be used to retrieve the list of log files,
+ * The QHDDLogFileManager instance can be used to retrieve the list of log files,
  * and configure the maximum number of archived log files to keep.
  *
- * @see DDLogFileManager.maximumNumberOfLogFiles
+ * @see QHDDLogFileManager.maximumNumberOfLogFiles
  **/
-@property (strong, nonatomic, readonly) id <DDLogFileManager> logFileManager;
+@property (strong, nonatomic, readonly) id <QHDDLogFileManager> logFileManager;
 
 /**
  * When using a custom formatter you can set the logMessage method not to append
@@ -284,10 +284,10 @@ extern unsigned long long const kDDDefaultLogFilesDiskQuota;
 
 - (void)rollLogFile __attribute((deprecated));
 
-// Inherited from DDAbstractLogger
+// Inherited from QJDDAbstractLogger
 
-// - (id <DDLogFormatter>)logFormatter;
-// - (void)setLogFormatter:(id <DDLogFormatter>)formatter;
+// - (id <QHDDLogFormatter>)logFormatter;
+// - (void)setLogFormatter:(id <QHDDLogFormatter>)formatter;
 
 /**
  * Returns the log file that should be used.
@@ -296,7 +296,7 @@ extern unsigned long long const kDDDefaultLogFilesDiskQuota;
  *
  * Otherwise a new file is created and returned.
  **/
-- (DDLogFileInfo *)currentLogFileInfo;
+- (QHDDLogFileInfo *)currentLogFileInfo;
 
 @end
 
@@ -305,7 +305,7 @@ extern unsigned long long const kDDDefaultLogFilesDiskQuota;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
- * DDLogFileInfo is a simple class that provides access to various file attributes.
+ * QHDDLogFileInfo is a simple class that provides access to various file attributes.
  * It provides good performance as it only fetches the information if requested,
  * and it caches the information to prevent duplicate fetches.
  *
@@ -318,7 +318,7 @@ extern unsigned long long const kDDDefaultLogFilesDiskQuota;
  * If you absolutely must get updated values,
  * you can invoke the reset method which will clear the cache.
  **/
-@interface DDLogFileInfo : NSObject
+@interface QHDDLogFileInfo : NSObject
 
 @property (strong, nonatomic, readonly) NSString *filePath;
 @property (strong, nonatomic, readonly) NSString *fileName;
@@ -380,7 +380,7 @@ extern unsigned long long const kDDDefaultLogFilesDiskQuota;
 
 #endif /* if TARGET_IPHONE_SIMULATOR */
 
-- (NSComparisonResult)reverseCompareByCreationDate:(DDLogFileInfo *)another;
-- (NSComparisonResult)reverseCompareByModificationDate:(DDLogFileInfo *)another;
+- (NSComparisonResult)reverseCompareByCreationDate:(QHDDLogFileInfo *)another;
+- (NSComparisonResult)reverseCompareByModificationDate:(QHDDLogFileInfo *)another;
 
 @end
