@@ -19,6 +19,7 @@ Pod::Spec.new do |s|
                              EOS
   s.xcconfig = {
     "OTHER_LDFLAGS" => "-ObjC",
+    "SWIFT_VERSION" => "4.0",
   }
 
   s.subspec 'QHBase' do |ss|
