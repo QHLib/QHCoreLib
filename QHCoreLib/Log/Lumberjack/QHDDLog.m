@@ -1078,8 +1078,8 @@ NSString * QHDDExtractFileNameWithoutExtension(const char *filePath, BOOL copy) 
     __block id <QHDDLogFormatter> result;
 
     dispatch_sync(globalLoggingQueue, ^{
-        dispatch_sync(_loggerQueue, ^{
-            result = _logFormatter;
+        dispatch_sync(self->_loggerQueue, ^{
+            result = self->_logFormatter;
         });
     });
 
@@ -1094,15 +1094,15 @@ NSString * QHDDExtractFileNameWithoutExtension(const char *filePath, BOOL copy) 
 
     dispatch_block_t block = ^{
         @autoreleasepool {
-            if (_logFormatter != logFormatter) {
-                if ([_logFormatter respondsToSelector:@selector(willRemoveFromLogger:)]) {
-                    [_logFormatter willRemoveFromLogger:self];
+            if (self->_logFormatter != logFormatter) {
+                if ([self->_logFormatter respondsToSelector:@selector(willRemoveFromLogger:)]) {
+                    [self->_logFormatter willRemoveFromLogger:self];
                 }
 
-                _logFormatter = logFormatter;
+                self->_logFormatter = logFormatter;
 
-                if ([_logFormatter respondsToSelector:@selector(didAddToLogger:)]) {
-                    [_logFormatter didAddToLogger:self];
+                if ([self->_logFormatter respondsToSelector:@selector(didAddToLogger:)]) {
+                    [self->_logFormatter didAddToLogger:self];
                 }
             }
         }
@@ -1111,7 +1111,7 @@ NSString * QHDDExtractFileNameWithoutExtension(const char *filePath, BOOL copy) 
     dispatch_queue_t globalLoggingQueue = [QHDDLog loggingQueue];
 
     dispatch_async(globalLoggingQueue, ^{
-        dispatch_async(_loggerQueue, block);
+        dispatch_async(self->_loggerQueue, block);
     });
 }
 
