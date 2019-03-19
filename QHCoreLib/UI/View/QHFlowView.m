@@ -10,11 +10,6 @@
 #import "QHBase.h"
 #import "UIKit+QHCoreLib.h"
 #import "UICollectionViewCell+QHCollectionViewCell.h"
-#if __has_include("QHCoreLib/QHCoreLib-Swift.h")
-#import "QHCoreLib/QHCoreLib-Swift.h"
-#else
-#import "QHCoreLib-Swift.h"
-#endif
 
 @interface QHCollectionViewWrapCellModel : NSObject
 
@@ -32,7 +27,8 @@ QH_COLLECTIONVIEW_CELL_DATA_DECL(cell, QHCollectionViewWrapCellModel);
 
 @interface QHFlowView () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
-@property (nonatomic, strong, readwrite) AlignedCollectionViewFlowLayout *flowLayout;
+//@property (nonatomic, strong, readwrite) AlignedCollectionViewFlowLayout *flowLayout;
+@property (nonatomic, strong, readwrite) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic, strong, readwrite) UICollectionView *collectionView;
 
 @end
@@ -43,7 +39,8 @@ QH_COLLECTIONVIEW_CELL_DATA_DECL(cell, QHCollectionViewWrapCellModel);
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.flowLayout = [AlignedCollectionViewFlowLayout defaultLayout];
+//        self.flowLayout = [AlignedCollectionViewFlowLayout defaultLayout];
+        self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
         self.collectionView = [[UICollectionView alloc] initWithFrame:frame
                                                  collectionViewLayout:self.flowLayout];
         [self.collectionView qh_disableContentInsetAdjust];
@@ -64,20 +61,20 @@ QH_COLLECTIONVIEW_CELL_DATA_DECL(cell, QHCollectionViewWrapCellModel);
     self.collectionView.frame = self.bounds;
 }
 
-- (AlignedCollectionViewFlowLayout *)alignedFlowLayout
-{
-    return (AlignedCollectionViewFlowLayout *)self.flowLayout;
-}
-
-- (void)setHorizontalAlign:(QHFlowViewItemHorizontalAlign)horAlign
-{
-    [self.alignedFlowLayout setHorizontalAlignWithAlign:horAlign];
-}
-
-- (void)setVerticalAlign:(QHFlowViewItemVerticalAlign)verAlign
-{
-    [self.alignedFlowLayout setVerticalAlignWithAlign:verAlign];
-}
+//- (AlignedCollectionViewFlowLayout *)alignedFlowLayout
+//{
+//    return (AlignedCollectionViewFlowLayout *)self.flowLayout;
+//}
+//
+//- (void)setHorizontalAlign:(QHFlowViewItemHorizontalAlign)horAlign
+//{
+//    [self.alignedFlowLayout setHorizontalAlignWithAlign:horAlign];
+//}
+//
+//- (void)setVerticalAlign:(QHFlowViewItemVerticalAlign)verAlign
+//{
+//    [self.alignedFlowLayout setVerticalAlignWithAlign:verAlign];
+//}
 
 - (void)setItemViews:(NSArray<UIView *> *)itemViews
 {

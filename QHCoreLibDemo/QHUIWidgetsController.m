@@ -85,7 +85,7 @@
     flowView.flowLayout.sectionInset = UIEdgeInsetsMake(10, 20, 10, 20);
     flowView.flowLayout.minimumInteritemSpacing = 10;
     flowView.flowLayout.minimumLineSpacing = 15;
-    [flowView setHorizontalAlign:QHFlowViewItemHorizontalAlignRight];
+//    [flowView setHorizontalAlign:QHFlowViewItemHorizontalAlignRight];
     flowView.backgroundColor = [UIColor greenColor];
     [flowView setItemViews:({
         @[
