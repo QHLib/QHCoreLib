@@ -49,6 +49,8 @@ QH_SINGLETON_DEF
 
 - (void)cancelAll;
 
+- (void)setTrustCerts:(NSArray<NSString *> *)certFiles;
+
 @end
 
 NS_ASSUME_NONNULL_END

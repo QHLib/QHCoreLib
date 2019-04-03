@@ -123,6 +123,7 @@ NS_ASSUME_NONNULL_BEGIN
     }
     
     request.urlRequest.timeoutInterval = 15.0f;
+    request.urlRequest.cachePolicy = request.cachePolicy;
     request.progressWeight = 1.0;
     request.resourceType = QHNetworkResourceHTTP;
 

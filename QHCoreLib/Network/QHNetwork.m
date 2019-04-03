@@ -213,6 +213,11 @@ QH_SINGLETON_IMP
     [QHNetworkWorker cancelAll];
 }
 
+- (void)setTrustCerts:(NSArray<NSString *> *)certFiles
+{
+    [QHNetworkWorker setTrustCerts:certFiles];
+}
+
 @end
 
 NS_ASSUME_NONNULL_END

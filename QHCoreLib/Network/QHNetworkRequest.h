@@ -31,6 +31,8 @@ typedef NS_ENUM(NSUInteger, QHNetworkResourceType) {
 
 @property (nonatomic, assign) QHNetworkRequestPriority priority;        // default QHNetworkRequestPriorityDeafult
 
+@property (nonatomic, assign) NSURLRequestCachePolicy cachePolicy;
+
 // [1.0, 0.0]: progressWeight * upload progress + (1 - progressWeight) * download progress
 @property (nonatomic, assign) double progressWeight; 
 

@@ -58,6 +58,23 @@ static QHAFHTTPSessionManager *imageManager;
     [imageManager.session invalidateAndCancel];
 }
 
++ (void)setTrustCerts:(NSArray<NSString *> *)certFiles
+{
+    NSArray *certs = [certFiles qh_mappedArrayWithBlock:^id _Nonnull(NSUInteger idx,
+                                                                     NSString * _Nonnull obj) {
+        return [NSData dataWithContentsOfFile:obj];
+    }];
+    QHAFSecurityPolicy *policy = [QHAFSecurityPolicy policyWithPinningMode:QHAFSSLPinningModeCertificate
+                                                    withPinnedCertificates:[NSSet setWithArray:certs]];
+    policy.allowInvalidCertificates = YES;
+    policy.validatesDomainName = YES;
+
+    httpManager.securityPolicy = policy;
+    htmlManager.securityPolicy = policy;
+    jsonManager.securityPolicy = policy;
+    imageManager.securityPolicy = policy;
+}
+
 - (instancetype)initWithRequest:(QHNetworkRequest *)request
 {
     self = [super initWithRequest:request];

@@ -51,6 +51,11 @@ typedef NS_ENUM(NSUInteger, QHNetworkWorkerState) {
     [QHNetworkWorkerAFHTTPRequestOperation cancelAll];
 }
 
++ (void)setTrustCerts:(NSArray<NSString *> *)certFiles
+{
+    [QHNetworkWorkerAFHTTPRequestOperation setTrustCerts:certFiles];
+}
+
 + (QHNetworkWorker *)workerFromRequest:(QHNetworkRequest *)request
 {
     return [[QHNetworkWorkerAFHTTPRequestOperation alloc] initWithRequest:request];

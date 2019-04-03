@@ -39,8 +39,8 @@
 
 - (void)testSetLogLEvel
 {
-    DDLogLevel level = QHLogLevel;
-    QHSetLogLevel(DDLogLevelWarning);
+    QHDDLogLevel level = QHLogLevel;
+    QHSetLogLevel(QHDDLogLevelWarning);
     [self logAll];
     // log only warn & error
 

@@ -75,6 +75,8 @@
     NSLog(@"%@", [QHNetworkUtil appendQuery:@{ @"a": @"b?c=123" }
                                       toUrl:@"http://hhhh"]);
 
+//    [self p_testHttpsCertTrust];
+
     return YES;
 }
 
@@ -134,6 +136,22 @@
     }];
 
     [self performSelector:@selector(p_sendReqeust) withObject:nil afterDelay:3.0];
+}
+
+- (void)p_testHttpsCertTrust
+{
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"server" ofType:@"der"];
+    [[QHNetwork sharedInstance] setTrustCerts:@[ filePath ]];
+    static QHNetworkHtmlApi *api = nil;
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://server-domain"]
+                                             cachePolicy:NSURLRequestReloadIgnoringCacheData
+                                         timeoutInterval:15];
+    api = [[QHNetworkHtmlApi alloc] initWithUrlRequest:request];
+    [api startWithSuccess:^(QHNetworkHtmlApi * _Nonnull api, QHNetworkHtmlApiResult * _Nonnull result) {
+        NSLog(@"html: %@", result.html);
+    } fail:^(QHNetworkHttpApi * _Nonnull api, NSError * _Nonnull error) {
+        NSLog(@"error: %@", error);
+    }];
 }
 
 @end

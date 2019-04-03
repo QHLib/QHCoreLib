@@ -24,6 +24,8 @@ typedef void(^QHNetworkWorkerCompletionHandler)(QHNetworkWorker *worker, QHNetwo
 
 + (void)cancelAll;
 
++ (void)setTrustCerts:(NSArray<NSString *> *)certFiles;
+
 + (QHNetworkWorker *)workerFromRequest:(QHNetworkRequest *)request;
 
 - (instancetype)init NS_UNAVAILABLE;    // use factory method `workerFromRequest:`
