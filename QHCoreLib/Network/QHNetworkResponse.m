@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign, readwrite) NSInteger statusCode;
 @property (nonatomic,   copy, readwrite) NSDictionary * _Nullable responseHeaders;
-@property (nonatomic, assign, readwrite) NSUInteger responseLength;
+@property (nonatomic, assign, readwrite) long long responseLength;
 @property (nonatomic, strong, readwrite) id _Nullable responseObject;
 
 @end
@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)responseWithURL:(NSURL *)url
                      statusCode:(NSInteger)statusCode
                 responseHeaders:(NSDictionary * _Nullable)responseHeaders
-                  reponseLength:(NSUInteger)responseLength
+                  reponseLength:(long long)responseLength
                  responseObject:(id _Nullable)responseObject
 {
     QHNetworkResponse *response = [[QHNetworkResponse alloc] init];

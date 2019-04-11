@@ -3,13 +3,13 @@ Pod::Spec.new do |s|
   s.name         = "QHCoreLib"
   s.version      = "0.0.23"
   s.summary      = "QHCoreLib inlucdes some macros and util classes."
-  s.homepage     = "http://github.com/QHLib/QHCoreLib.git"
+  s.homepage     = "https://github.com/QHLib/QHCoreLib.git"
   s.license      = "MIT"
   s.author       = { "tctony(唐畅)" => "tangchang21@gmail.com" }
 
   s.platform     = :ios, "8.0"
 
-  s.source       = { :git => "http://github.com/QHLib/QHCoreLib.git", :tag => s.version }
+  s.source       = { :git => "https://github.com/QHLib/QHCoreLib.git", :tag => s.version }
 
   s.requires_arc = true
 
@@ -19,7 +19,6 @@ Pod::Spec.new do |s|
                              EOS
   s.xcconfig = {
     "OTHER_LDFLAGS" => "-ObjC",
-    "SWIFT_VERSION" => "4.0",
   }
 
   s.subspec 'QHBase' do |ss|
@@ -31,7 +30,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'QHLog' do |ss|
-    ss.source_files = "QHCoreLib/Log/**/*.{h,m,swift}"
+    ss.source_files = "QHCoreLib/Log/**/*.{h,m}"
     ss.public_header_files = "QHCoreLib/Log/**/*.h"
     ss.private_header_files = "QHCoreLib/Log/Lumberjack/**/*.h"
     ss.frameworks = "Foundation"
@@ -42,6 +41,13 @@ Pod::Spec.new do |s|
     ss.source_files = "QHCoreLib/Profiler/**/*.{h,m}"
     ss.public_header_files = "QHCoreLib/Profiler/**/*.h"
     ss.frameworks = "Foundation", "QuartzCore"
+    ss.dependency "QHCoreLib/QHBase"
+  end
+
+  s.subspec 'QHBlockQueue' do |ss|
+    ss.source_files = "QHCoreLib/BlockQueue/**/*.{h,m}"
+    ss.public_header_files = "QHCoreLib/BlockQueue/**/*.h"
+    ss.frameworks = "Foundation"
     ss.dependency "QHCoreLib/QHBase"
   end
 
@@ -66,7 +72,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'QHUI' do |ss|
-    ss.source_files = "QHCoreLib/UI/**/*.{h,m,swift}"
+    ss.source_files = "QHCoreLib/UI/**/*.{h,m}"
     ss.public_header_files = "QHCoreLib/UI/**/*.h"
     ss.frameworks = "Foundation", "CoreGraphics"
     ss.dependency "QHCoreLib/QHBase"

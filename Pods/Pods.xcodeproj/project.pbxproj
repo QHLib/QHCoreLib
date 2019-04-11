@@ -107,7 +107,7 @@
 		0BFCDD37BC154CDE1968E44909C96F5E /* UIDevice-Hardware-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIDevice-Hardware-umbrella.h"; sourceTree = "<group>"; };
 		0C126D75B6F45455421953AA0396ED5E /* NSMethodSignature+EXT.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSMethodSignature+EXT.m"; path = "extobjc/NSMethodSignature+EXT.m"; sourceTree = "<group>"; };
 		10F7D9F4BD4B2F0DB05ABBA77EEA83C8 /* EXTNil.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = EXTNil.m; path = extobjc/EXTNil.m; sourceTree = "<group>"; };
-		11A954B0D2853572C715685DEA0D1535 /* Pods_QHCoreLibDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_QHCoreLibDemo.framework; path = "Pods-QHCoreLibDemo.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		11A954B0D2853572C715685DEA0D1535 /* Pods_QHCoreLibDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QHCoreLibDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		163884E2A243114CCD23F6D7E49128CE /* libextobjc.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = libextobjc.modulemap; sourceTree = "<group>"; };
 		166C5BCFBCAE725E3C736679145991C4 /* Pods-QHCoreLibDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-QHCoreLibDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		28CF517F959CA46DA179ED01B219C675 /* Pods-QHCoreLibDemo-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-QHCoreLibDemo-resources.sh"; sourceTree = "<group>"; };
@@ -116,13 +116,13 @@
 		3ED89929FEF6D9A8C0549718315388E2 /* Pods-QHCoreLibTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-QHCoreLibTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4066DD83CE9CCB9F2F846DB7C3FFA8FD /* EXTSelectorChecking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EXTSelectorChecking.h; path = extobjc/EXTSelectorChecking.h; sourceTree = "<group>"; };
 		47C60A9D2FF3AD5C622C9F1059DB60B5 /* Pods-QHCoreLibTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-QHCoreLibTests-dummy.m"; sourceTree = "<group>"; };
-		4957DB79CFE69DD3BE2B18D14254DD74 /* UIDevice_Hardware.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = UIDevice_Hardware.framework; path = "UIDevice-Hardware.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4957DB79CFE69DD3BE2B18D14254DD74 /* UIDevice_Hardware.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIDevice_Hardware.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		51DF0C1735C4D78528562F4C26F899CC /* UIDevice-Hardware.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIDevice-Hardware.m"; sourceTree = "<group>"; };
 		57065B7084E703E96243E6F29D0175F3 /* Pods-QHCoreLibDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-QHCoreLibDemo.release.xcconfig"; sourceTree = "<group>"; };
 		5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		5CA6A556C8D9168D87DC394D0B9FC275 /* Pods-QHCoreLibTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-QHCoreLibTests-resources.sh"; sourceTree = "<group>"; };
 		606E699C35ABAB3B2A7B121842673F80 /* Pods-QHCoreLibDemo-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-QHCoreLibDemo-dummy.m"; sourceTree = "<group>"; };
-		60E53466139AF4425C4078020992A3CA /* Pods_QHCoreLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_QHCoreLib.framework; path = "Pods-QHCoreLib.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		60E53466139AF4425C4078020992A3CA /* Pods_QHCoreLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QHCoreLib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63B5B5E7BA2981100A772687E215CCD0 /* libextobjc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = libextobjc.xcconfig; sourceTree = "<group>"; };
 		6DD27991BE09B1BEDD113D511934077E /* Pods-QHCoreLib-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-QHCoreLib-acknowledgements.plist"; sourceTree = "<group>"; };
 		726C9AC45DF1A2829F8A471E741C7877 /* Pods-QHCoreLib-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-QHCoreLib-acknowledgements.markdown"; sourceTree = "<group>"; };
@@ -136,14 +136,14 @@
 		8759173B0DE4F85366E77E1ADE3F0159 /* Pods-QHCoreLibTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-QHCoreLibTests.modulemap"; sourceTree = "<group>"; };
 		8AD0369A9F56CBCBF74C2A5BCE91D85D /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D01D75BBF8573933719FE819A5DD9D5 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		93ED252A885766E91B6F961372A8E946 /* NSInvocation+EXT.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSInvocation+EXT.h"; path = "extobjc/NSInvocation+EXT.h"; sourceTree = "<group>"; };
-		980CE0494EEBE69BC72810FEB08231FE /* Pods_QHCoreLibTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_QHCoreLibTests.framework; path = "Pods-QHCoreLibTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		980CE0494EEBE69BC72810FEB08231FE /* Pods_QHCoreLibTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QHCoreLibTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DCD5EE3D167A864E7DE5EB5EEAE3B03 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9DE027E12020B361F7B9F864121577E0 /* Pods-QHCoreLib-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-QHCoreLib-dummy.m"; sourceTree = "<group>"; };
 		9FAE91801BD82A494797E59CD3B19CE1 /* UIDevice-Hardware.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIDevice-Hardware.h"; sourceTree = "<group>"; };
 		A0B87292407F014D4ABA0ADEBBE4C2EB /* Pods-QHCoreLibTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-QHCoreLibTests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		A0F675B91658911AF5AA46FF8415B894 /* libextobjc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = libextobjc.framework; path = libextobjc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0F675B91658911AF5AA46FF8415B894 /* libextobjc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = libextobjc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5239A9B261E18D2A9FAC57CCE712587 /* EXTSelectorChecking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = EXTSelectorChecking.m; path = extobjc/EXTSelectorChecking.m; sourceTree = "<group>"; };
 		AA1A1591D2784F62A69521D431F2CF5E /* Pods-QHCoreLibDemo-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-QHCoreLibDemo-umbrella.h"; sourceTree = "<group>"; };
 		AADE2ADF7314076DCF53C6424D500488 /* UIDevice-Hardware-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIDevice-Hardware-prefix.pch"; sourceTree = "<group>"; };
@@ -281,7 +281,6 @@
 				C710B64116B4A6FEB87D89ECDE22E156 /* Support Files */,
 				74042A345087E36D87F3AAE8450E57D2 /* UmbrellaHeader */,
 			);
-			name = libextobjc;
 			path = libextobjc;
 			sourceTree = "<group>";
 		};
@@ -395,7 +394,6 @@
 				51DF0C1735C4D78528562F4C26F899CC /* UIDevice-Hardware.m */,
 				6932CB98208F522043B02055D922FA7C /* Support Files */,
 			);
-			name = "UIDevice-Hardware";
 			path = "UIDevice-Hardware";
 			sourceTree = "<group>";
 		};
@@ -659,10 +657,11 @@
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
 			productRefGroup = C3450A9D4A34CF8A7D57455718FF8B82 /* Products */;

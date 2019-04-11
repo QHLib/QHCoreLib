@@ -17,14 +17,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, readonly) NSInteger statusCode;
 @property (nonatomic, readonly) NSDictionary * _Nullable responseHeaders;
-@property (nonatomic, readonly) NSUInteger responseLength;
+@property (nonatomic, readonly) long long responseLength;
 @property (nonatomic, readonly) id _Nullable responseObject;
 
 
 + (instancetype)responseWithURL:(NSURL *)url
                      statusCode:(NSInteger)statusCode
                 responseHeaders:(NSDictionary * _Nullable)responseHeaders
-                  reponseLength:(NSUInteger)responseLength
+                  reponseLength:(long long)responseLength
                  responseObject:(id _Nullable)responseObject;
 
 

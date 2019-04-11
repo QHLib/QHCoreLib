@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		B298B0272BD7D105205BBBCD /* Pods_QHCoreLibTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B4A6B4945BFE0B2872201F /* Pods_QHCoreLibTests.framework */; };
 		B5C99F6CDFD2C52D4465C578 /* Pods_QHCoreLibDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8FA84D154630817925AAC5A /* Pods_QHCoreLibDemo.framework */; };
+		EA03D1C7225CFCF20029FF47 /* QHBlockQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = EA03D1C5225CFCF20029FF47 /* QHBlockQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA03D1C8225CFCF20029FF47 /* QHBlockQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = EA03D1C6225CFCF20029FF47 /* QHBlockQueue.m */; };
+		EA03D1D8225F7B0F0029FF47 /* QHMutex.h in Headers */ = {isa = PBXBuildFile; fileRef = EA03D1D6225F7B0F0029FF47 /* QHMutex.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA03D1D9225F7B0F0029FF47 /* QHMutex.m in Sources */ = {isa = PBXBuildFile; fileRef = EA03D1D7225F7B0F0029FF47 /* QHMutex.m */; };
+		EA03D1DB225F873D0029FF47 /* QHConcurrent.h in Headers */ = {isa = PBXBuildFile; fileRef = EA03D1DA225F87390029FF47 /* QHConcurrent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA03D1DE225F89CB0029FF47 /* QHCoreLibConcurrentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA03D1DD225F89CB0029FF47 /* QHCoreLibConcurrentTests.m */; };
+		EA03D1E1225F8E250029FF47 /* QHCoreLibBlockQueueTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA03D1E0225F8E250029FF47 /* QHCoreLibBlockQueueTests.m */; };
 		EA0BF9991F94BBD400BC443E /* QHWeakWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0BF9971F94BBD400BC443E /* QHWeakWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA0BF99A1F94BBD400BC443E /* QHWeakWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0BF9981F94BBD400BC443E /* QHWeakWrapper.m */; };
 		EA0BF99C1F94BED800BC443E /* QHCoreLibWeakWrapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0BF99B1F94BED800BC443E /* QHCoreLibWeakWrapperTests.m */; };
@@ -225,6 +232,14 @@
 		A4FB93821E521314C7F610C2 /* Pods-QHCoreLibTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QHCoreLibTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-QHCoreLibTests/Pods-QHCoreLibTests.release.xcconfig"; sourceTree = "<group>"; };
 		AA072A9E1A6E88CFE69846DB /* Pods-QHCoreLibDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QHCoreLibDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-QHCoreLibDemo/Pods-QHCoreLibDemo.release.xcconfig"; sourceTree = "<group>"; };
 		C8FA84D154630817925AAC5A /* Pods_QHCoreLibDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QHCoreLibDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA03D1C2225CF9690029FF47 /* QHCoreLib.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = QHCoreLib.podspec; sourceTree = "<group>"; };
+		EA03D1C5225CFCF20029FF47 /* QHBlockQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHBlockQueue.h; sourceTree = "<group>"; };
+		EA03D1C6225CFCF20029FF47 /* QHBlockQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHBlockQueue.m; sourceTree = "<group>"; };
+		EA03D1D6225F7B0F0029FF47 /* QHMutex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHMutex.h; sourceTree = "<group>"; };
+		EA03D1D7225F7B0F0029FF47 /* QHMutex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHMutex.m; sourceTree = "<group>"; };
+		EA03D1DA225F87390029FF47 /* QHConcurrent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHConcurrent.h; sourceTree = "<group>"; };
+		EA03D1DD225F89CB0029FF47 /* QHCoreLibConcurrentTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHCoreLibConcurrentTests.m; sourceTree = "<group>"; };
+		EA03D1E0225F8E250029FF47 /* QHCoreLibBlockQueueTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHCoreLibBlockQueueTests.m; sourceTree = "<group>"; };
 		EA0BF9971F94BBD400BC443E /* QHWeakWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHWeakWrapper.h; sourceTree = "<group>"; };
 		EA0BF9981F94BBD400BC443E /* QHWeakWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHWeakWrapper.m; sourceTree = "<group>"; };
 		EA0BF99B1F94BED800BC443E /* QHCoreLibWeakWrapperTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHCoreLibWeakWrapperTests.m; sourceTree = "<group>"; };
@@ -477,6 +492,41 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		EA03D1C4225CFCB10029FF47 /* BlockQueue */ = {
+			isa = PBXGroup;
+			children = (
+				EA03D1C5225CFCF20029FF47 /* QHBlockQueue.h */,
+				EA03D1C6225CFCF20029FF47 /* QHBlockQueue.m */,
+			);
+			path = BlockQueue;
+			sourceTree = "<group>";
+		};
+		EA03D1D1225F76E60029FF47 /* Concurrent */ = {
+			isa = PBXGroup;
+			children = (
+				EA03D1DA225F87390029FF47 /* QHConcurrent.h */,
+				EA03D1D6225F7B0F0029FF47 /* QHMutex.h */,
+				EA03D1D7225F7B0F0029FF47 /* QHMutex.m */,
+			);
+			path = Concurrent;
+			sourceTree = "<group>";
+		};
+		EA03D1DC225F89A70029FF47 /* Concurrent */ = {
+			isa = PBXGroup;
+			children = (
+				EA03D1DD225F89CB0029FF47 /* QHCoreLibConcurrentTests.m */,
+			);
+			path = Concurrent;
+			sourceTree = "<group>";
+		};
+		EA03D1DF225F8DFF0029FF47 /* BlockQueue */ = {
+			isa = PBXGroup;
+			children = (
+				EA03D1E0225F8E250029FF47 /* QHCoreLibBlockQueueTests.m */,
+			);
+			path = BlockQueue;
+			sourceTree = "<group>";
+		};
 		EA0C78DB1F626F400038CC88 /* ListData */ = {
 			isa = PBXGroup;
 			children = (
@@ -545,6 +595,7 @@
 				EA1D43291ED70CE3002177BF /* Base */,
 				EA1D43381ED70CE3002177BF /* Log */,
 				EA1D44321ED95FBC002177BF /* Profiler */,
+				EA03D1C4225CFCB10029FF47 /* BlockQueue */,
 				EA19CC6F1EEEE10E00C18853 /* Async */,
 				EA1D43421ED70CE3002177BF /* Network */,
 				EA5F5A681F5D406700013F8F /* UI */,
@@ -559,6 +610,7 @@
 				EA1D430E1ED70C7B002177BF /* Base */,
 				EA1D431A1ED70C7B002177BF /* Log */,
 				EAAA79E71ED9639A008135BE /* Profiler */,
+				EA03D1DF225F8DFF0029FF47 /* BlockQueue */,
 				EA19CC701EEEE12000C18853 /* Async */,
 				EA1D431C1ED70C7B002177BF /* Network */,
 				EA50382E1F68051F00D95D59 /* UI */,
@@ -576,6 +628,7 @@
 				EAE2FE531F0A9837004354F8 /* QHCoreLibMustOverrideTests.m */,
 				EA1D43141ED70C7B002177BF /* QHCoreLibAssertsTests.m */,
 				EA1D43191ED70C7B002177BF /* QHCoreLibUtilTests.m */,
+				EA03D1DC225F89A70029FF47 /* Concurrent */,
 				EA1D430F1ED70C7B002177BF /* Category */,
 				EA1D43111ED70C7B002177BF /* Misc */,
 			);
@@ -627,6 +680,7 @@
 				EA1D43341ED70CE3002177BF /* QHAsserts.m */,
 				EA1D43361ED70CE3002177BF /* QHUtil.h */,
 				EA1D43371ED70CE3002177BF /* QHUtil.m */,
+				EA03D1D1225F76E60029FF47 /* Concurrent */,
 				EA1D432A1ED70CE3002177BF /* Category */,
 				EA1D432E1ED70CE3002177BF /* Misc */,
 			);
@@ -745,6 +799,7 @@
 		EA3C04E31ECC2B7E00C54472 = {
 			isa = PBXGroup;
 			children = (
+				EA03D1C2225CF9690029FF47 /* QHCoreLib.podspec */,
 				EA1D42F81ED70BA2002177BF /* QHCoreLib */,
 				EA1D43031ED70BA3002177BF /* QHCoreLibTests */,
 				EA5F5AA91F5D519E00013F8F /* QHCoreLibDemo */,
@@ -985,11 +1040,13 @@
 				EA1D43691ED70CE3002177BF /* QHDefaultValue.h in Headers */,
 				EA0C78C61F613E6F0038CC88 /* QHListDataLoader+internal.h in Headers */,
 				EAFC30D81FD7F3170050CBA8 /* QHFlowView.h in Headers */,
+				EA03D1C7225CFCF20029FF47 /* QHBlockQueue.h in Headers */,
 				EAB2EEF11F04E82B00CDDF6D /* QHAsyncParallelTaskGroup.h in Headers */,
 				EA4DC7A31F147BAE00A28C61 /* QHNetworkMultipartBuilder.h in Headers */,
 				EA9C468C1FB9E10A007E7DB5 /* QHAFURLResponseSerialization.h in Headers */,
 				EA1D43661ED70CE3002177BF /* QHCoreLibCategories.h in Headers */,
 				EAE2FE511F0A9548004354F8 /* QHMustOverride.h in Headers */,
+				EA03D1D8225F7B0F0029FF47 /* QHMutex.h in Headers */,
 				EA90ECA11F9D901D00EF3D32 /* QHNetworkApiManager.h in Headers */,
 				EABCB7971FCB05D4009F8EEF /* QHTableViewSeperatorCell.h in Headers */,
 				EABCB7811FBB4054009F8EEF /* QHNetworkFileApi.h in Headers */,
@@ -1013,6 +1070,7 @@
 				EA9C468A1FB9E10A007E7DB5 /* QHAFURLRequestSerialization.h in Headers */,
 				EA0C78C11F613DFE0038CC88 /* QHListGroupData+internal.h in Headers */,
 				EA5F5A711F5D4C1000013F8F /* QHNetworkActivityIndicator.h in Headers */,
+				EA03D1DB225F873D0029FF47 /* QHConcurrent.h in Headers */,
 				EAFBB2781FCD533F00B9D505 /* QHTableViewPlaceholderCell.h in Headers */,
 				EA9EA4A21F6912BE009EF00C /* QHHintBadge.h in Headers */,
 				EA72956F1FC83A6C003DCD5F /* QHTableViewCellFactory.h in Headers */,
@@ -1115,6 +1173,7 @@
 		EA3C04E41ECC2B7E00C54472 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = QH;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = TCTONY;
 				TargetAttributes = {
@@ -1140,7 +1199,7 @@
 			};
 			buildConfigurationList = EA3C04E71ECC2B7E00C54472 /* Build configuration list for PBXProject "QHCoreLib" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				English,
@@ -1318,12 +1377,14 @@
 				EA1D437E1ED70CE3002177BF /* QHNetworkRequest.m in Sources */,
 				EA19CC6A1EE99C9600C18853 /* QHNetworkImageApi.m in Sources */,
 				EABCB7821FBB4054009F8EEF /* QHNetworkFileApi.m in Sources */,
+				EA03D1D9225F7B0F0029FF47 /* QHMutex.m in Sources */,
 				EA7295781FC83AB9003DCD5F /* QHTableViewCellContext.m in Sources */,
 				EA1D44361ED95FBC002177BF /* QHClockEntry.m in Sources */,
 				EA1D43771ED70CE3002177BF /* QHLogUtil.m in Sources */,
 				EA1D43791ED70CE3002177BF /* QHNetwork.m in Sources */,
 				EA1D43651ED70CE3002177BF /* Foundation+QHCoreLib.m in Sources */,
 				EA9C46841FB9E10A007E7DB5 /* QHAFHTTPSessionManager.m in Sources */,
+				EA03D1C8225CFCF20029FF47 /* QHBlockQueue.m in Sources */,
 				EA0C78B01F6138F60038CC88 /* QHListGroupData.m in Sources */,
 				EA9EA4A31F6912BE009EF00C /* QHHintBadge.m in Sources */,
 				EA1D436A1ED70CE3002177BF /* QHDefaultValue.m in Sources */,
@@ -1362,6 +1423,7 @@
 				EA1D43981ED70E35002177BF /* QHCoreLibDefinesTests.m in Sources */,
 				EAAA79E91ED9639A008135BE /* QHCoreLibClockEntryTests.m in Sources */,
 				EA1D439F1ED70E4C002177BF /* QHCoreLibLogTests.m in Sources */,
+				EA03D1E1225F8E250029FF47 /* QHCoreLibBlockQueueTests.m in Sources */,
 				EA16937F1F054BEF00BD9A25 /* QHAsyncBlockTaskTests.m in Sources */,
 				EA4FBA711F050ED4004A6FE5 /* QHAsyncTestTasks.m in Sources */,
 				EA1D43991ED70E38002177BF /* QHCoreLibExternCppTests.mm in Sources */,
@@ -1369,6 +1431,7 @@
 				EA1D439E1ED70E49002177BF /* QHCoreLibFoundationTests.m in Sources */,
 				EA0BF99C1F94BED800BC443E /* QHCoreLibWeakWrapperTests.m in Sources */,
 				EA1693791EFABD4300BD9A25 /* QHAsyncTaskTests.m in Sources */,
+				EA03D1DE225F89CB0029FF47 /* QHCoreLibConcurrentTests.m in Sources */,
 				EA5038301F68056100D95D59 /* QHCoreLibUIKitTests.m in Sources */,
 				EAE2FE541F0A9837004354F8 /* QHCoreLibMustOverrideTests.m in Sources */,
 				EA4FBA9D1F07593A004A6FE5 /* QHAsyncLinkedTaskGroupTests.m in Sources */,
@@ -1435,6 +1498,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = QHCoreLib/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = QHCoreLib/QHCoreLib.modulemap;
@@ -1464,6 +1528,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = QHCoreLib/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = QHCoreLib/QHCoreLib.modulemap;
@@ -1608,7 +1673,10 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = "_QHCoreLibFatalAction=1";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_QHCoreLibDebug=0",
+					"_QHCoreLibFatalAction=1",
+				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
