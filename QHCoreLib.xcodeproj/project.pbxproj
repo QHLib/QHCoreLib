@@ -14,8 +14,10 @@
 		EA03D1D8225F7B0F0029FF47 /* QHMutex.h in Headers */ = {isa = PBXBuildFile; fileRef = EA03D1D6225F7B0F0029FF47 /* QHMutex.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA03D1D9225F7B0F0029FF47 /* QHMutex.m in Sources */ = {isa = PBXBuildFile; fileRef = EA03D1D7225F7B0F0029FF47 /* QHMutex.m */; };
 		EA03D1DB225F873D0029FF47 /* QHConcurrent.h in Headers */ = {isa = PBXBuildFile; fileRef = EA03D1DA225F87390029FF47 /* QHConcurrent.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EA03D1DE225F89CB0029FF47 /* QHCoreLibConcurrentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA03D1DD225F89CB0029FF47 /* QHCoreLibConcurrentTests.m */; };
+		EA03D1DE225F89CB0029FF47 /* QHCoreLibConcurrentTests.mm in Sources */ = {isa = PBXBuildFile; fileRef = EA03D1DD225F89CB0029FF47 /* QHCoreLibConcurrentTests.mm */; };
 		EA03D1E1225F8E250029FF47 /* QHCoreLibBlockQueueTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA03D1E0225F8E250029FF47 /* QHCoreLibBlockQueueTests.m */; };
+		EA03D1F322609ED10029FF47 /* QHScopedLock.h in Headers */ = {isa = PBXBuildFile; fileRef = EA03D1F122609ED10029FF47 /* QHScopedLock.h */; };
+		EA03D1F422609ED10029FF47 /* QHScopedLock.mm in Sources */ = {isa = PBXBuildFile; fileRef = EA03D1F222609ED10029FF47 /* QHScopedLock.mm */; };
 		EA0BF9991F94BBD400BC443E /* QHWeakWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = EA0BF9971F94BBD400BC443E /* QHWeakWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA0BF99A1F94BBD400BC443E /* QHWeakWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0BF9981F94BBD400BC443E /* QHWeakWrapper.m */; };
 		EA0BF99C1F94BED800BC443E /* QHCoreLibWeakWrapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0BF99B1F94BED800BC443E /* QHCoreLibWeakWrapperTests.m */; };
@@ -238,8 +240,10 @@
 		EA03D1D6225F7B0F0029FF47 /* QHMutex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHMutex.h; sourceTree = "<group>"; };
 		EA03D1D7225F7B0F0029FF47 /* QHMutex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHMutex.m; sourceTree = "<group>"; };
 		EA03D1DA225F87390029FF47 /* QHConcurrent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHConcurrent.h; sourceTree = "<group>"; };
-		EA03D1DD225F89CB0029FF47 /* QHCoreLibConcurrentTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHCoreLibConcurrentTests.m; sourceTree = "<group>"; };
+		EA03D1DD225F89CB0029FF47 /* QHCoreLibConcurrentTests.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = QHCoreLibConcurrentTests.mm; sourceTree = "<group>"; };
 		EA03D1E0225F8E250029FF47 /* QHCoreLibBlockQueueTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHCoreLibBlockQueueTests.m; sourceTree = "<group>"; };
+		EA03D1F122609ED10029FF47 /* QHScopedLock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHScopedLock.h; sourceTree = "<group>"; };
+		EA03D1F222609ED10029FF47 /* QHScopedLock.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = QHScopedLock.mm; sourceTree = "<group>"; };
 		EA0BF9971F94BBD400BC443E /* QHWeakWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHWeakWrapper.h; sourceTree = "<group>"; };
 		EA0BF9981F94BBD400BC443E /* QHWeakWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHWeakWrapper.m; sourceTree = "<group>"; };
 		EA0BF99B1F94BED800BC443E /* QHCoreLibWeakWrapperTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHCoreLibWeakWrapperTests.m; sourceTree = "<group>"; };
@@ -507,6 +511,8 @@
 				EA03D1DA225F87390029FF47 /* QHConcurrent.h */,
 				EA03D1D6225F7B0F0029FF47 /* QHMutex.h */,
 				EA03D1D7225F7B0F0029FF47 /* QHMutex.m */,
+				EA03D1F122609ED10029FF47 /* QHScopedLock.h */,
+				EA03D1F222609ED10029FF47 /* QHScopedLock.mm */,
 			);
 			path = Concurrent;
 			sourceTree = "<group>";
@@ -514,7 +520,7 @@
 		EA03D1DC225F89A70029FF47 /* Concurrent */ = {
 			isa = PBXGroup;
 			children = (
-				EA03D1DD225F89CB0029FF47 /* QHCoreLibConcurrentTests.m */,
+				EA03D1DD225F89CB0029FF47 /* QHCoreLibConcurrentTests.mm */,
 			);
 			path = Concurrent;
 			sourceTree = "<group>";
@@ -1036,6 +1042,7 @@
 				EA1D43641ED70CE3002177BF /* Foundation+QHCoreLib.h in Headers */,
 				EAE7E7A221462525007909FE /* QHAsyncTaskRetryWrapper.h in Headers */,
 				EA19CC6D1EEA57D900C18853 /* QHNetworkHtmlApi.h in Headers */,
+				EA03D1F322609ED10029FF47 /* QHScopedLock.h in Headers */,
 				EA0C78CA1F613E970038CC88 /* QHListCommonData+internal.h in Headers */,
 				EA1D43691ED70CE3002177BF /* QHDefaultValue.h in Headers */,
 				EA0C78C61F613E6F0038CC88 /* QHListDataLoader+internal.h in Headers */,
@@ -1403,6 +1410,7 @@
 				EA0C78B41F61390C0038CC88 /* QHListDataLoader.m in Sources */,
 				EA90ECA21F9D901D00EF3D32 /* QHNetworkApiManager.m in Sources */,
 				EAFBB2791FCD533F00B9D505 /* QHTableViewPlaceholderCell.m in Sources */,
+				EA03D1F422609ED10029FF47 /* QHScopedLock.mm in Sources */,
 				EAEF5D9C1FDBD77000F27D74 /* UICollectionViewCell+QHCollectionViewCell.m in Sources */,
 				EA9EA4A51F6912BE009EF00C /* QHNumberBadge.m in Sources */,
 			);
@@ -1431,7 +1439,7 @@
 				EA1D439E1ED70E49002177BF /* QHCoreLibFoundationTests.m in Sources */,
 				EA0BF99C1F94BED800BC443E /* QHCoreLibWeakWrapperTests.m in Sources */,
 				EA1693791EFABD4300BD9A25 /* QHAsyncTaskTests.m in Sources */,
-				EA03D1DE225F89CB0029FF47 /* QHCoreLibConcurrentTests.m in Sources */,
+				EA03D1DE225F89CB0029FF47 /* QHCoreLibConcurrentTests.mm in Sources */,
 				EA5038301F68056100D95D59 /* QHCoreLibUIKitTests.m in Sources */,
 				EAE2FE541F0A9837004354F8 /* QHCoreLibMustOverrideTests.m in Sources */,
 				EA4FBA9D1F07593A004A6FE5 /* QHAsyncLinkedTaskGroupTests.m in Sources */,

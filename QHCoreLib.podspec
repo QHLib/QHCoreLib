@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   }
 
   s.subspec 'QHBase' do |ss|
-    ss.source_files = "QHCoreLib/Base/**/*.{h,m}"
+    ss.source_files = "QHCoreLib/Base/**/*.{h,m,mm}"
     ss.public_header_files = "QHCoreLib/Base/**/*.h"
     ss.private_header_files = "QHCoreLib/Base/Internal/**/*.h"
     ss.frameworks = "Foundation", "Security", "MobileCoreServices", "CoreGraphics"

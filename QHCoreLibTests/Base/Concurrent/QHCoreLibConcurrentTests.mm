@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "QHBase.h"
+#import "QHScopedLock.h"
 
 @interface QHCoreLibConcurrentTests : XCTestCase
 
@@ -20,7 +21,7 @@
 {
     QHMutex *lock = [QHMutex new];
     
-    [NSThread detachNewThreadSelector:@selector(otherThread:)
+    [NSThread detachNewThreadSelector:@selector(lockOneSecond:)
                              toTarget:self
                            withObject:lock];
     
@@ -36,12 +37,33 @@
     [lock unlock];
 }
 
-- (void)otherThread:(QHMutex *)lock;
+- (void)lockOneSecond:(QHMutex *)lock;
 {
     [lock lock];
     
     sleep(1);
     
+    [lock unlock];
+}
+
+- (void)testScopedLock
+{
+    QHMutex *lock = [QHMutex new];
+    
+    [NSThread detachNewThreadSelector:@selector(lockOneSecond:)
+                             toTarget:self
+                           withObject:lock];
+    
+    usleep(1000);
+    NSTimeInterval start = QHTimestampInDouble();
+    {
+        QHScopedLock scopedLock(lock);
+    }
+    NSTimeInterval cost = QHTimestampInDouble() - start;
+    NSLog(@"cost %f", cost);
+    QHAssert(cost >= 0.999, @"get lock too early!");
+    
+    XCTAssert([lock tryLock], @"lock should not be locked");
     [lock unlock];
 }
 
