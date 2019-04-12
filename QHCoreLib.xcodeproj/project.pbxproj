@@ -606,8 +606,8 @@
 		EA1D43031ED70BA3002177BF /* QHCoreLibTests */ = {
 			isa = PBXGroup;
 			children = (
-				EA19CC711EEEE12E00C18853 /* Support files */,
 				EA1D430E1ED70C7B002177BF /* Base */,
+				EA19CC711EEEE12E00C18853 /* Support files */,
 				EA1D431A1ED70C7B002177BF /* Log */,
 				EAAA79E71ED9639A008135BE /* Profiler */,
 				EA03D1DF225F8DFF0029FF47 /* BlockQueue */,

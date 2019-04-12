@@ -20,12 +20,11 @@ QH_EXTERN QHBlockId QHBlockIdInvalid;
  */
 @interface QHBlockQueue : NSObject
 
-+ (instancetype)main;           // on main queue
-+ (instancetype)background;     // on default queue
++ (instancetype)blockQueue;
 
-+ (instancetype)fromDispatchQueue:(dispatch_queue_t)queue;
-
-@property (nonatomic, strong, readonly) dispatch_queue_t queue;
+// the dispatch queue which block will be dispatched
+// default to main queue
+@property (nonatomic, strong) dispatch_queue_t dispatchQueue;
 
 - (QHBlockId)pushBlock:(dispatch_block_t)block;
 
@@ -33,6 +32,18 @@ QH_EXTERN QHBlockId QHBlockIdInvalid;
                  delay:(NSTimeInterval)delay;
 
 - (QHBlockId)pushBlock:(dispatch_block_t)block
+                 delay:(NSTimeInterval)delay
+                repeat:(BOOL)repeat;
+
+- (QHBlockId)pushBlock:(dispatch_block_t)block
+         dispatchQueue:(dispatch_queue_t)dispatchQueue;
+
+- (QHBlockId)pushBlock:(dispatch_block_t)block
+         dispatchQueue:(dispatch_queue_t)dispatchQueue
+                 delay:(NSTimeInterval)delay;
+
+- (QHBlockId)pushBlock:(dispatch_block_t)block
+         dispatchQueue:(dispatch_queue_t)dispatchQueue
                  delay:(NSTimeInterval)delay
                 repeat:(BOOL)repeat;
 

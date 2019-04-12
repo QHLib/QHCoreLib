@@ -13,6 +13,7 @@
 
 @property (nonatomic, assign) QHBlockId blockId;
 @property (nonatomic,   copy) dispatch_block_t block;
+@property (nonatomic, strong) dispatch_queue_t queue;
 @property (nonatomic, assign) NSTimeInterval scheduledAt;
 @property (nonatomic, assign) BOOL repeat;
 @property (nonatomic, assign) NSTimeInterval interval;
@@ -23,11 +24,12 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p, %u, %@, %f, %d, %f>",
+    return [NSString stringWithFormat:@"<%@: %p, %u, %@, %@, %f, %d, %f>",
             NSStringFromClass([self class]),
             self,
             self.blockId,
             self.block,
+            self.queue,
             self.scheduledAt - QHTimestampInDouble(),
             self.repeat ? 1 : 0,
             self.interval];
@@ -47,55 +49,19 @@ QHBlockId QHBlockIdInvalid = 0;
     NSMutableArray<NSNumber *> *m_waitingArray;
     NSMutableSet<NSNumber *> *m_cancelledSet;
 
-    BOOL m_isWorkerWaitting;
+    BOOL m_hasSentWorkerWakeUp;
+    BOOL m_workerIsWorking;
     dispatch_semaphore_t m_workerLock;
 }
-
-@property (nonatomic, strong, readwrite) dispatch_queue_t queue;
 
 @end
 
 @implementation QHBlockQueue
 
-+ (instancetype)main
++ (instancetype)blockQueue
 {
-    return [self fromDispatchQueue:dispatch_get_main_queue()];
-}
-
-+ (instancetype)background
-{
-    return [self fromDispatchQueue:dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0)];
-}
-
-static NSMutableDictionary *s_dispatchQueue2BlockQueue = nil;
-static QHMutex *s_lock = nil;
-
-+ (instancetype)fromDispatchQueue:(dispatch_queue_t)queue
-{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        s_dispatchQueue2BlockQueue = [NSMutableDictionary dictionary];
-        s_lock = [[QHMutex alloc] init];
-    });
-    
-    [s_lock lock];
-
-    id ret = [s_dispatchQueue2BlockQueue
-              qh_objectForKey:[self queueLabel:queue] createIfNotExists:^id _Nonnull{
-                  QHBlockQueue *blockQueue = [[QHBlockQueue alloc] init];
-                  blockQueue.queue = queue;
-                  return blockQueue;
-              }];
-
-    [s_lock unlock];
-    
-    return ret;
-}
-
-+ (NSString *)queueLabel:(dispatch_queue_t)queue
-{
-    return (@(dispatch_queue_get_label(queue))
-            ?: [NSString stringWithFormat:@"%@", queue]);
+    QHBlockQueue *blockQueue = [[QHBlockQueue alloc] init];
+    return blockQueue;
 }
 
 - (instancetype)init
@@ -110,11 +76,14 @@ static QHMutex *s_lock = nil;
         m_waitingArray = [NSMutableArray array];
         m_cancelledSet = [NSMutableSet set];
         
-        m_isWorkerWaitting = NO;
+        m_hasSentWorkerWakeUp = NO;
+        m_workerIsWorking = NO;
         m_workerLock = dispatch_semaphore_create(0);
         [NSThread detachNewThreadSelector:@selector(workerThread:)
                                  toTarget:self
                                withObject:nil];
+        
+        self.dispatchQueue = dispatch_get_main_queue();
     }
     return self;
 }
@@ -123,16 +92,52 @@ static QHMutex *s_lock = nil;
 
 - (QHBlockId)pushBlock:(dispatch_block_t)block
 {
-    return [self pushBlock:block delay:0];
+    return [self pushBlock:block
+             dispatchQueue:self.dispatchQueue
+                     delay:0
+                    repeat:NO];
 }
 
 - (QHBlockId)pushBlock:(dispatch_block_t)block
                  delay:(NSTimeInterval)delay
 {
-    return [self pushBlock:block delay:delay repeat:NO];
+    return [self pushBlock:block
+             dispatchQueue:self.dispatchQueue
+                     delay:delay
+                    repeat:NO];
 }
 
 - (QHBlockId)pushBlock:(dispatch_block_t)block
+                 delay:(NSTimeInterval)delay
+                repeat:(BOOL)repeat
+{
+    return [self pushBlock:block
+             dispatchQueue:self.dispatchQueue
+                     delay:delay
+                    repeat:repeat];
+}
+
+- (QHBlockId)pushBlock:(dispatch_block_t)block
+         dispatchQueue:(dispatch_queue_t)dispatchQueue
+{
+    return [self pushBlock:block
+             dispatchQueue:dispatchQueue
+                     delay:0
+                    repeat:NO];
+}
+
+- (QHBlockId)pushBlock:(dispatch_block_t)block
+         dispatchQueue:(dispatch_queue_t)dispatchQueue
+                 delay:(NSTimeInterval)delay
+{
+    return [self pushBlock:block
+             dispatchQueue:dispatchQueue
+                     delay:delay
+                    repeat:NO];
+}
+
+- (QHBlockId)pushBlock:(dispatch_block_t)block
+         dispatchQueue:(nonnull dispatch_queue_t)dispatchQueue
                  delay:(NSTimeInterval)delay
                 repeat:(BOOL)repeat
 {
@@ -158,6 +163,7 @@ static QHMutex *s_lock = nil;
     QHBlockQueueItem *item = [[QHBlockQueueItem alloc] init];
     item.blockId = blockId;
     item.block = block;
+    item.queue = dispatchQueue;
     item.scheduledAt = QHTimestampInDouble() + delay;
     item.repeat = repeat;
     item.interval = delay;
@@ -170,8 +176,8 @@ static QHMutex *s_lock = nil;
     }
     [m_waitingArray insertObject:@(blockId) atIndex:index];
     
-    if (m_isWorkerWaitting) {
-        m_isWorkerWaitting = NO;
+    if (index == 0 && delay == 0 && !m_hasSentWorkerWakeUp) {
+        m_hasSentWorkerWakeUp = NO;
         QHCoreLibInfo(@"singal worker");
         dispatch_semaphore_signal(m_workerLock);
     }
@@ -207,11 +213,14 @@ static QHMutex *s_lock = nil;
 
 - (void)workerThread:(id)object
 {
-    NSString *threadName = [NSString stringWithFormat:@"QHBlockQueue-%@-Worker",
-                            [[self class] queueLabel:self.queue]];
+    NSString *threadName = [NSString stringWithFormat:@"%@-Worker", self];
     [[NSThread currentThread] setName:threadName];
     while (true) {
-        [self->m_lock lock];
+        if (!m_workerIsWorking) {
+            [self->m_lock lock];
+            QHCoreLibInfo(@"worker start");
+            m_workerIsWorking = YES;
+        }
         
         // handle cancelled blocks
         if (m_cancelledSet.count) {
@@ -257,7 +266,7 @@ static QHMutex *s_lock = nil;
             [m_waitingArray removeObjectAtIndex:0];
 
             QHCoreLibInfo(@"dispatch block: %@", current);
-            dispatch_async(self.queue, current.block);
+            dispatch_async(current.queue, current.block);
             
             if (current.repeat == YES) {
                 QHBlockQueueItem *next = current;
@@ -272,10 +281,11 @@ static QHMutex *s_lock = nil;
                 [self->m_waitingArray insertObject:@(next.blockId) atIndex:index];
             }
             
-            [m_lock unlock];
+            // 不做unlock，可能下一个block也需要马上执行
         }
         else {
-            m_isWorkerWaitting = YES;
+            m_hasSentWorkerWakeUp = NO;
+            m_workerIsWorking = NO;
             [m_lock unlock];
             
             if (first) {
