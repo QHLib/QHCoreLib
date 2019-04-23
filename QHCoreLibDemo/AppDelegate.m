@@ -23,6 +23,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    QHProfilerCheck(@"main", @"launch", @"didFinishLaunchingWithOptions-start");
     QH_SUBCLASS_MUST_OVERRIDE_CHECK;
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -76,6 +77,8 @@
                                       toUrl:@"http://hhhh"]);
 
 //    [self p_testHttpsCertTrust];
+
+    QHProfilerCheck(@"main", @"launch", @"didFinishLaunchingWithOptions-end");
 
     return YES;
 }

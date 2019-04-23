@@ -10,5 +10,6 @@
 #define QHProfiler_h
 
 #import <QHCoreLib/QHClockEntry.h>
+#import <QHCoreLib/QHClockChecker.h>
 
 #endif /* QHProfiler_h */

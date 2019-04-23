@@ -172,6 +172,8 @@
 		EABCB7861FCAA39C009F8EEF /* QHTableViewCellTestController.m in Sources */ = {isa = PBXBuildFile; fileRef = EABCB7851FCAA39C009F8EEF /* QHTableViewCellTestController.m */; };
 		EABCB7971FCB05D4009F8EEF /* QHTableViewSeperatorCell.h in Headers */ = {isa = PBXBuildFile; fileRef = EABCB7951FCB05D4009F8EEF /* QHTableViewSeperatorCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EABCB7981FCB05D4009F8EEF /* QHTableViewSeperatorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EABCB7961FCB05D4009F8EEF /* QHTableViewSeperatorCell.m */; };
+		EAC83C9D226DB8E900A71C8E /* QHClockChecker.h in Headers */ = {isa = PBXBuildFile; fileRef = EAC83C9B226DB8E900A71C8E /* QHClockChecker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EAC83C9E226DB8E900A71C8E /* QHClockChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC83C9C226DB8E900A71C8E /* QHClockChecker.m */; };
 		EADE977A1FFC788F0064F2C6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EADE97781FFC786B0064F2C6 /* CFNetwork.framework */; };
 		EADE97BB1FFE1C500064F2C6 /* QHPathUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = EADE97B91FFE1C500064F2C6 /* QHPathUtil.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EADE97BC1FFE1C500064F2C6 /* QHPathUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = EADE97BA1FFE1C500064F2C6 /* QHPathUtil.m */; };
@@ -418,6 +420,8 @@
 		EABCB7871FCAA7E7009F8EEF /* QHCoreLibDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QHCoreLibDemo-Prefix.pch"; sourceTree = "<group>"; };
 		EABCB7951FCB05D4009F8EEF /* QHTableViewSeperatorCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHTableViewSeperatorCell.h; sourceTree = "<group>"; };
 		EABCB7961FCB05D4009F8EEF /* QHTableViewSeperatorCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHTableViewSeperatorCell.m; sourceTree = "<group>"; };
+		EAC83C9B226DB8E900A71C8E /* QHClockChecker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHClockChecker.h; sourceTree = "<group>"; };
+		EAC83C9C226DB8E900A71C8E /* QHClockChecker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHClockChecker.m; sourceTree = "<group>"; };
 		EADE97781FFC786B0064F2C6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		EADE97B91FFE1C500064F2C6 /* QHPathUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHPathUtil.h; sourceTree = "<group>"; };
 		EADE97BA1FFE1C500064F2C6 /* QHPathUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHPathUtil.m; sourceTree = "<group>"; };
@@ -798,6 +802,8 @@
 				EAE3C7A21EE12A0F00A93456 /* QHProfiler.h */,
 				EA1D44331ED95FBC002177BF /* QHClockEntry.h */,
 				EA1D44341ED95FBC002177BF /* QHClockEntry.m */,
+				EAC83C9B226DB8E900A71C8E /* QHClockChecker.h */,
+				EAC83C9C226DB8E900A71C8E /* QHClockChecker.m */,
 			);
 			path = Profiler;
 			sourceTree = "<group>";
@@ -1108,6 +1114,7 @@
 				EA9C46861FB9E10A007E7DB5 /* QHAFNetworkReachabilityManager.h in Headers */,
 				EA4FBA961F05FD48004A6FE5 /* QHAsyncParallelTaskGroup+internal.h in Headers */,
 				EA0BF9991F94BBD400BC443E /* QHWeakWrapper.h in Headers */,
+				EAC83C9D226DB8E900A71C8E /* QHClockChecker.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1404,6 +1411,7 @@
 				EA1D43821ED70CE3002177BF /* QHNetworkUtil.m in Sources */,
 				EAE2FE521F0A9548004354F8 /* QHMustOverride.m in Sources */,
 				EA19CC6E1EEA57D900C18853 /* QHNetworkHtmlApi.m in Sources */,
+				EAC83C9E226DB8E900A71C8E /* QHClockChecker.m in Sources */,
 				EA4FBA9B1F074E64004A6FE5 /* QHAsyncLinkedTaskGroup.m in Sources */,
 				EA9C468D1FB9E10A007E7DB5 /* QHAFURLResponseSerialization.m in Sources */,
 				EA0BF99A1F94BBD400BC443E /* QHWeakWrapper.m in Sources */,

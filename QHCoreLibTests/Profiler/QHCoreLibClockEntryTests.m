@@ -10,6 +10,7 @@
 
 #import "QHAsserts.h"
 #import "QHClockEntry.h"
+#import "QHClockChecker.h"
 
 
 @interface QHCoreLibClockEntryTests : XCTestCase
@@ -78,6 +79,31 @@
     });
 
     [self waitForExpectationsWithTimeout:1.1 handler:nil];
+}
+
+- (void)testProfiler {
+    static int count = 0;
+    [QHClockChecker setCollector:^(QHClockCheckItem * _Nonnull item) {
+        ++count;
+        NSLog(@"QHProfiler check: %@-%@-%@, since last check: %dms, total: %.dms",
+              item.module, item.event, item.point, item.interval, item.total);
+    }];
+
+    NSString *module = @"test";
+    NSString *event = @"test";
+    QHProfilerStart(module, event);
+    sleep(1);
+    QHProfilerCheck(module, event, @"1");
+    sleep(1);
+    QHProfilerCheck(module, event, @"2");
+    sleep(1);
+    QHProfilerCheck(module, event, @"3");
+    sleep(1);
+    QHProfilerCheck(module, event, @"4");
+    sleep(1);
+    QHProfilerEnd(module, event);
+
+    XCTAssert(count == 5);
 }
 
 
