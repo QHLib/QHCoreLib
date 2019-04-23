@@ -11,6 +11,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#ifdef __cplusplus
+
 @class QHMutex;
 
 class QHScopedLock {
@@ -21,5 +23,7 @@ public:
 private:
     QHMutex *m_mutex;
 };
+
+#endif
 
 NS_ASSUME_NONNULL_END
