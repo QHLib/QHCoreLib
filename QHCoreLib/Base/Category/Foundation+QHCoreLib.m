@@ -141,6 +141,79 @@ static const void *kNSObjectWeakCarry3ASOKey = &kNSObjectWeakCarry3ASOKey;
 @end
 
 
+@implementation NSString (QHCoreLib)
+
+- (NSString *)qh_urlDecodedString {
+    return [self stringByRemovingPercentEncoding];
+}
+
+- (NSString *)qh_urlEncodedString {
+    static NSCharacterSet *allowedCharacterSet = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        allowedCharacterSet = [[NSCharacterSet characterSetWithCharactersInString:@"!*'\"();:@&=+$,/?%#[]% "]
+                               invertedSet];
+    });
+
+    return [self stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacterSet];
+}
+
+- (NSRange)qh_p_rangeOfUrlQuery {
+    NSRange queryRange = NSMakeRange(0, [self length]);
+    NSRange fragmentStart = [self rangeOfString:@"#"];
+    if (fragmentStart.length) {
+        queryRange.length -= (queryRange.length - fragmentStart.location);
+    }
+    NSRange queryStart = [self rangeOfString:@"?"];
+    if (queryStart.length) {
+        queryRange.location = queryStart.location;
+        queryRange.length -= queryRange.location;
+    }
+    NSString *queryString = [self substringWithRange:queryRange];
+    if (queryStart.length || [queryString rangeOfString:@"="].length) {
+        return queryRange;
+    }
+    return NSMakeRange(NSNotFound, 0);
+}
+
+- (NSString *)qh_p_urlQuery {
+    NSRange queryRange = [self qh_p_rangeOfUrlQuery];
+    if (queryRange.location == NSNotFound) {
+        return nil;
+    }
+    NSString *queryString = [self substringWithRange:queryRange];
+    if ([queryString hasPrefix:@"?"]) {
+        queryString = [queryString substringFromIndex:1];
+    }
+    return queryString;
+}
+- (NSDictionary *)qh_urlQueryParams {
+    NSString *queryString = [self qh_p_urlQuery];
+
+    NSMutableDictionary *result = [NSMutableDictionary dictionary];
+    NSArray *parameters = [queryString componentsSeparatedByString:@"&"];
+    for (NSString *parameter in parameters) {
+        NSArray *parts = [parameter componentsSeparatedByString:@"="];
+        NSString *key = [parts[0] qh_urlDecodedString];
+        if ([parts count] > 1) {
+            id value = [parts[1] qh_urlEncodedString];
+            BOOL arrayValue = [key hasSuffix:@"[]"];
+            if (arrayValue) {
+                key = [key substringToIndex:[key length] - 2];
+            }
+            id existingValue = result[key];
+            if ([existingValue isKindOfClass:[NSArray class]]) {
+                value = [existingValue arrayByAddingObject:value];
+            }
+            result[key] = value;
+        }
+    }
+    return result;
+}
+
+@end
+
+
 @implementation NSArray (QHCoreLib)
 
 - (NSArray *)qh_sliceFromStart:(NSUInteger)start length:(NSUInteger)length

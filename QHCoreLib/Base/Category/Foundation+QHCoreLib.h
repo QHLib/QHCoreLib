@@ -30,6 +30,16 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
+@interface NSString (QHCoreLib)
+
+- (NSString *)qh_urlDecodedString;
+- (NSString *)qh_urlEncodedString;
+
+- (NSDictionary *)qh_urlQueryParams;
+
+@end
+
+
 @interface NSArray<ObjectType> (QHCoreLib)
 
 - (NSArray<ObjectType> *)qh_sliceFromStart:(NSUInteger)start length:(NSUInteger)length;
