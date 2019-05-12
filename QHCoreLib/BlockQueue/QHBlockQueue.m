@@ -58,6 +58,16 @@ QHBlockId QHBlockIdInvalid = 0;
 
 @implementation QHBlockQueue
 
++ (instancetype)sharedMainQueue
+{
+    static QHBlockQueue *blockQueue = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        blockQueue = [[QHBlockQueue alloc] init];
+    });
+    return blockQueue;
+}
+
 + (instancetype)blockQueue
 {
     QHBlockQueue *blockQueue = [[QHBlockQueue alloc] init];
@@ -176,7 +186,7 @@ QHBlockId QHBlockIdInvalid = 0;
     }
     [m_waitingArray insertObject:@(blockId) atIndex:index];
     
-    if (index == 0 && delay == 0 && !m_hasSentWorkerWakeUp) {
+    if (index == 0 && !m_hasSentWorkerWakeUp) {
         m_hasSentWorkerWakeUp = NO;
         QHCoreLibInfo(@"singal worker");
         dispatch_semaphore_signal(m_workerLock);

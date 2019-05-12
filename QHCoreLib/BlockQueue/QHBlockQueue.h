@@ -20,6 +20,8 @@ QH_EXTERN QHBlockId QHBlockIdInvalid;
  */
 @interface QHBlockQueue : NSObject
 
++ (instancetype)sharedMainQueue;
+
 + (instancetype)blockQueue;
 
 // the dispatch queue which block will be dispatched
@@ -52,5 +54,7 @@ QH_EXTERN QHBlockId QHBlockIdInvalid;
 - (void)cancelAllBlocks;
 
 @end
+
+#define QHBlockMainQueue [QHBlockQueue sharedMainQueue]
 
 NS_ASSUME_NONNULL_END
