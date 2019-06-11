@@ -75,6 +75,17 @@ static QHAFHTTPSessionManager *imageManager;
     imageManager.securityPolicy = policy;
 }
 
++ (void)setAllowArbitraryHttps {
+    QHAFSecurityPolicy *policy = [QHAFSecurityPolicy defaultPolicy];
+    policy.allowInvalidCertificates = YES;
+    policy.validatesDomainName = NO;
+
+    httpManager.securityPolicy = policy;
+    htmlManager.securityPolicy = policy;
+    jsonManager.securityPolicy = policy;
+    imageManager.securityPolicy = policy;
+}
+
 - (instancetype)initWithRequest:(QHNetworkRequest *)request
 {
     self = [super initWithRequest:request];

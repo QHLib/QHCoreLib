@@ -77,6 +77,7 @@
                                       toUrl:@"http://hhhh"]);
 
 //    [self p_testHttpsCertTrust];
+//    [self p_testAllowArbitrayHttps];
 
     QHProfilerCheck(@"main", @"launch", @"didFinishLaunchingWithOptions-end");
 
@@ -149,6 +150,22 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://server-domain"]
                                              cachePolicy:NSURLRequestReloadIgnoringCacheData
                                          timeoutInterval:15];
+    api = [[QHNetworkHtmlApi alloc] initWithUrlRequest:request];
+    [api startWithSuccess:^(QHNetworkHtmlApi * _Nonnull api, QHNetworkHtmlApiResult * _Nonnull result) {
+        NSLog(@"html: %@", result.html);
+    } fail:^(QHNetworkHttpApi * _Nonnull api, NSError * _Nonnull error) {
+        NSLog(@"error: %@", error);
+    }];
+}
+
+- (void)p_testAllowArbitrayHttps {
+    [[QHNetwork sharedInstance] setAllowArbitraryHttps];
+    static QHNetworkHtmlApi *api = nil;
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://1.1.1.1/some/path"]
+                                             cachePolicy:NSURLRequestReloadIgnoringCacheData
+                                         timeoutInterval:15];
+    [request setHTTPMethod:@"POST"];
+    api = [[QHNetworkHtmlApi alloc] initWithUrlRequest:request];
     api = [[QHNetworkHtmlApi alloc] initWithUrlRequest:request];
     [api startWithSuccess:^(QHNetworkHtmlApi * _Nonnull api, QHNetworkHtmlApiResult * _Nonnull result) {
         NSLog(@"html: %@", result.html);

@@ -51,6 +51,8 @@ QH_SINGLETON_DEF
 
 - (void)setTrustCerts:(NSArray<NSString *> *)certFiles;
 
+- (void)setAllowArbitraryHttps;
+
 @end
 
 NS_ASSUME_NONNULL_END

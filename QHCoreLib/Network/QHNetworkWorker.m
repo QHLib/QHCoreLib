@@ -56,6 +56,10 @@ typedef NS_ENUM(NSUInteger, QHNetworkWorkerState) {
     [QHNetworkWorkerAFHTTPRequestOperation setTrustCerts:certFiles];
 }
 
++ (void)setAllowArbitraryHttps {
+    [QHNetworkWorkerAFHTTPRequestOperation setAllowArbitraryHttps];
+}
+
 + (QHNetworkWorker *)workerFromRequest:(QHNetworkRequest *)request
 {
     return [[QHNetworkWorkerAFHTTPRequestOperation alloc] initWithRequest:request];

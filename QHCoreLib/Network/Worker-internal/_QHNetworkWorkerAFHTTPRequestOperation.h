@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)setTrustCerts:(NSArray<NSString *> *)certFiles;
 
++ (void)setAllowArbitraryHttps;
+
 @end
 
 NS_ASSUME_NONNULL_END

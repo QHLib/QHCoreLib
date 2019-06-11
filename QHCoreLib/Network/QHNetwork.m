@@ -218,6 +218,10 @@ QH_SINGLETON_IMP
     [QHNetworkWorker setTrustCerts:certFiles];
 }
 
+- (void)setAllowArbitraryHttps {
+    [QHNetworkWorker setAllowArbitraryHttps];
+}
+
 @end
 
 NS_ASSUME_NONNULL_END
