@@ -29,7 +29,7 @@ NSString * const QHNetWorkHttpMethodPost =  @"POST";
     static NSCharacterSet *allowedCharacterSet = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        allowedCharacterSet = [[NSCharacterSet characterSetWithCharactersInString:@"!*'\"();:@&=+$,/?%#[]% "]
+        allowedCharacterSet = [[NSCharacterSet characterSetWithCharactersInString:@"!*'\"();:@&=+$,/?%#[]% {}"]
                                invertedSet];
     });
 
