@@ -153,6 +153,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSError (QHCoreLib)
 
+@property (nonatomic, copy) NSString *qh_message;
+
++ (instancetype)qh_errorWithDomain:(NSErrorDomain)domain
+                              code:(NSInteger)code
+                           message:(NSString * _Nullable)message;
+
 + (instancetype)qh_errorWithDomain:(NSErrorDomain)domain
                               code:(NSInteger)code
                            message:(NSString * _Nullable)message
@@ -160,6 +166,9 @@ NS_ASSUME_NONNULL_BEGIN
                               file:(const char *)file
                               line:(int)line;
 @end
+
+#define QHError(_domain, _code, _message) \
+[NSError qh_errorWithDomain:(_domain) code:(_code) message:(_message)]
 
 #define QH_ERROR(_domain, _code, _message, _info) \
 [NSError qh_errorWithDomain:(_domain) code:(_code) message:(_message) info:(_info) file:__FILE__ line:__LINE__]

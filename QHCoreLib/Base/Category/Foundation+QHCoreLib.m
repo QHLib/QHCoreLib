@@ -548,6 +548,31 @@ static const void *kNSObjectWeakCarry3ASOKey = &kNSObjectWeakCarry3ASOKey;
 
 @implementation NSError (QHCoreLib)
 
+static char kAssociatedObjectKey_NSERROR_QHMESSAGE;
+- (void)setQh_message:(NSString *)qh_message {
+    objc_setAssociatedObject(self, &kAssociatedObjectKey_NSERROR_QHMESSAGE, qh_message, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+- (NSString *)qh_message {
+    return (NSString *)objc_getAssociatedObject(self, &kAssociatedObjectKey_NSERROR_QHMESSAGE);
+}
+
++ (instancetype)qh_errorWithDomain:(NSErrorDomain)domain
+                              code:(NSInteger)code
+                           message:(NSString * _Nullable)message
+{
+    NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+    if (userInfo[NSLocalizedDescriptionKey] == nil) {
+        userInfo[NSLocalizedDescriptionKey] = message ?: @"";
+    }
+
+    NSError *error = [_QHError errorWithDomain:domain
+                                          code:code
+                                      userInfo:userInfo];
+    error.qh_message = message;
+    return error;
+}
+
 + (instancetype)qh_errorWithDomain:(NSErrorDomain)domain
                               code:(NSInteger)code
                            message:(NSString * _Nullable)message
@@ -566,9 +591,11 @@ static const void *kNSObjectWeakCarry3ASOKey = &kNSObjectWeakCarry3ASOKey;
         userInfo[NSLocalizedDescriptionKey] = $(@"*%@:%d, %@", fileName, line, message);
     }
     
-    return [_QHError errorWithDomain:domain
-                                code:code
-                            userInfo:userInfo];
+    NSError *error = [_QHError errorWithDomain:domain
+                                          code:code
+                                      userInfo:userInfo];
+    error.qh_message = message;
+    return error;
 }
 
 @end

@@ -321,4 +321,9 @@
     }
 }
 
+- (void)testQHError {
+    NSLog(@"%@", QHError(@"domain", 999, @"error message"));
+    NSLog(@"%@", QH_ERROR(@"domain", 999, @"error message", nil));
+}
+
 @end
