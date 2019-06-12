@@ -54,6 +54,9 @@ NSString * const QHNetWorkHttpMethodPost =  @"POST";
     
     [sortedKeys enumerateObjectsUsingBlock:^(id  _Nonnull key, NSUInteger idx, BOOL * _Nonnull stop) {
         id obj = dict[key];
+        if ([obj isKindOfClass:[NSNumber class]]) {
+            obj = [obj stringValue];
+        }
         QHAssertReturnVoidOnFailure(QH_IS(key, NSString) && QH_IS(obj, NSString),
                                     @"key and value both should be string: %@ %@",
                                     key, obj);
