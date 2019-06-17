@@ -58,7 +58,14 @@ NSString * const QHNetworkApiErrorDomain = @"QHNetworkApiErrorDomain";
                       request.HTTPBody ? [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding] :
                       @"");
     [str appendFormat:@"\n    body  : %@", body];
-
+    [str appendFormat:@"\n    header:%@", ({
+        NSMutableString *header = [NSMutableString string];
+        [[request allHTTPHeaderFields] enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSString * _Nonnull obj, BOOL * _Nonnull stop) {
+            [header appendFormat:@" %@:%@", key, obj];
+        }];
+        header;
+    })];
+    
     return str;
 }
 
