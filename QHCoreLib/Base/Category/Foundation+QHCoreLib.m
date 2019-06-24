@@ -196,7 +196,7 @@ static const void *kNSObjectWeakCarry3ASOKey = &kNSObjectWeakCarry3ASOKey;
         NSArray *parts = [parameter componentsSeparatedByString:@"="];
         NSString *key = [parts[0] qh_urlDecodedString];
         if ([parts count] > 1) {
-            id value = [parts[1] qh_urlEncodedString];
+            id value = [parts[1] qh_urlDecodedString];
             BOOL arrayValue = [key hasSuffix:@"[]"];
             if (arrayValue) {
                 key = [key substringToIndex:[key length] - 2];
