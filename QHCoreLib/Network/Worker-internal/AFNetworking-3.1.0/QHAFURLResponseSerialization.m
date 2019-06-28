@@ -280,7 +280,8 @@ static id QHAFJSONObjectByRemovingKeysWithNullValues(id JSONObject, NSJSONReadin
         return nil;
     }
 
-    self.acceptableContentTypes = [NSSet setWithObjects:@"text/html", @"application/json", @"text/json", @"text/javascript", @"text/plain", nil];
+//    self.acceptableContentTypes = [NSSet setWithObjects:@"text/html", @"application/json", @"text/json", @"text/javascript", @"text/plain", nil];
+    self.acceptableContentTypes = nil;
 
     return self;
 }
