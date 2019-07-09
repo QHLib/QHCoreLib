@@ -79,6 +79,28 @@ NS_ASSUME_NONNULL_BEGIN
     return [self._list qh_objectAtIndex:index];
 }
 
+- (NSIndexSet *)indexSetForItem:(id)item
+{
+    return [self indexSetForItem:item matchBlock:^BOOL(id  _Nonnull targetItem, id  _Nonnull listItem) {
+        return [targetItem initWithUnsignedShort:listItem];
+    }];
+}
+
+- (NSIndexSet *)indexSetForItem:(id)item
+                     matchBlock:(nonnull BOOL (^)(id _Nonnull targetItem, id _Nonnull listItem))matchBlock
+{
+    QHAssert(item != nil, @"item must not be nil");
+    QHAssert(matchBlock != nil, @"match block must not be nil");
+
+    NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSet];
+    [self._list enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (matchBlock(item, obj)) {
+            [indexSet addIndex:idx];
+        }
+    }];
+    return indexSet;
+}
+
 - (id _Nullable)headItem
 {
     return self._head;

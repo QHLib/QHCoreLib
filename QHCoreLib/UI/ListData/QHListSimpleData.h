@@ -31,6 +31,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (ListItemType _Nullable)listItemAtIndex:(NSUInteger)index;
 
+- (NSIndexSet *)indexSetForItem:(ListItemType)item;
+- (NSIndexSet *)indexSetForItem:(ListItemType)item
+                     matchBlock:(BOOL(^)(ListItemType targetItem, ListItemType listItem))matchBlock;
+
 #pragma mark -
 
 - (void)setListData:(NSArray<ListItemType> *)listData;
