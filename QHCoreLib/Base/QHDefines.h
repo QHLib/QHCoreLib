@@ -134,6 +134,9 @@ _returnType(*_name)(id, SEL, __VA_ARGS__) = (_returnType(*)(id, SEL, __VA_ARGS__
 #define QH_NSCODING_ENCODE(_coder, _object, _key) \
 [_coder encodeObject:_object forKey:(_key)]
 
+#define QH_CLASS_NAME QH_CLASS_NAME_OF(self)
+#define QH_CLASS_NAME_OF(_target) NSStringFromClass([_target class])
+
 NS_ASSUME_NONNULL_END
 
 #endif /* QHDefines_h */

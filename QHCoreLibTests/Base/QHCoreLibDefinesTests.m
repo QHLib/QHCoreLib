@@ -188,4 +188,9 @@ QH_SINGLETON_IMP
 }
 
 
+- (void)testQHClassName {
+    NSLog(@"%@ %@", QH_CLASS_NAME, NSStringFromClass([self class]));
+    XCTAssertEqualObjects(QH_CLASS_NAME, NSStringFromClass([self class]));
+}
+
 @end
