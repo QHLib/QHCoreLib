@@ -431,13 +431,13 @@ static const void *kNSObjectWeakCarry3ASOKey = &kNSObjectWeakCarry3ASOKey;
 - (int32_t)qh_int32ForKey:(id<NSCopying>)key
              defaultValue:(int32_t)defaultValue
 {
-    return [[self qh_stringForKey:key defaultValue:@"0"] intValue];
+    return [[self qh_stringForKey:key defaultValue:$(@"%d", defaultValue)] intValue];
 }
 
 - (int64_t)qh_int64ForKey:(id<NSCopying>)key
              defaultValue:(int64_t)defaultValue
 {
-    return [[self qh_stringForKey:key defaultValue:@"0"] longLongValue];
+    return [[self qh_stringForKey:key defaultValue:$(@"%lld", defaultValue)] longLongValue];
 }
 
 - (double)qh_doubleForKey:(id<NSCopying>)key
