@@ -135,6 +135,10 @@
 		EA7295781FC83AB9003DCD5F /* QHTableViewCellContext.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7295761FC83AB9003DCD5F /* QHTableViewCellContext.m */; };
 		EA72957B1FC83B1E003DCD5F /* UITableViewCell+QHTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7295791FC83B1E003DCD5F /* UITableViewCell+QHTableViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA72957C1FC83B1E003DCD5F /* UITableViewCell+QHTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EA72957A1FC83B1E003DCD5F /* UITableViewCell+QHTableViewCell.m */; };
+		EA80FAF922E17ABE008E628B /* QHDebouncer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA80FAF722E17ABE008E628B /* QHDebouncer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA80FAFA22E17ABE008E628B /* QHDebouncer.m in Sources */ = {isa = PBXBuildFile; fileRef = EA80FAF822E17ABE008E628B /* QHDebouncer.m */; };
+		EA80FAFC22E17DA3008E628B /* QHCoreLibDebouncerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA80FAFB22E17DA3008E628B /* QHCoreLibDebouncerTests.m */; };
+		EA80FAFE22E17E9D008E628B /* QHTaskQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = EA80FAFD22E17E74008E628B /* QHTaskQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA90ECA11F9D901D00EF3D32 /* QHNetworkApiManager.h in Headers */ = {isa = PBXBuildFile; fileRef = EA90EC9F1F9D901D00EF3D32 /* QHNetworkApiManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA90ECA21F9D901D00EF3D32 /* QHNetworkApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EA90ECA01F9D901D00EF3D32 /* QHNetworkApiManager.m */; };
 		EA96875A1F721059003020BE /* QHUIDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = EA9687591F720FDE003020BE /* QHUIDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -380,6 +384,10 @@
 		EA7295761FC83AB9003DCD5F /* QHTableViewCellContext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHTableViewCellContext.m; sourceTree = "<group>"; };
 		EA7295791FC83B1E003DCD5F /* UITableViewCell+QHTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+QHTableViewCell.h"; sourceTree = "<group>"; };
 		EA72957A1FC83B1E003DCD5F /* UITableViewCell+QHTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+QHTableViewCell.m"; sourceTree = "<group>"; };
+		EA80FAF722E17ABE008E628B /* QHDebouncer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHDebouncer.h; sourceTree = "<group>"; };
+		EA80FAF822E17ABE008E628B /* QHDebouncer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHDebouncer.m; sourceTree = "<group>"; };
+		EA80FAFB22E17DA3008E628B /* QHCoreLibDebouncerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHCoreLibDebouncerTests.m; sourceTree = "<group>"; };
+		EA80FAFD22E17E74008E628B /* QHTaskQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHTaskQueue.h; sourceTree = "<group>"; };
 		EA90EC9F1F9D901D00EF3D32 /* QHNetworkApiManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHNetworkApiManager.h; sourceTree = "<group>"; };
 		EA90ECA01F9D901D00EF3D32 /* QHNetworkApiManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHNetworkApiManager.m; sourceTree = "<group>"; };
 		EA9687591F720FDE003020BE /* QHUIDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHUIDefines.h; sourceTree = "<group>"; };
@@ -500,13 +508,16 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		EA03D1C4225CFCB10029FF47 /* BlockQueue */ = {
+		EA03D1C4225CFCB10029FF47 /* TaskQueue */ = {
 			isa = PBXGroup;
 			children = (
+				EA80FAFD22E17E74008E628B /* QHTaskQueue.h */,
 				EA03D1C5225CFCF20029FF47 /* QHBlockQueue.h */,
 				EA03D1C6225CFCF20029FF47 /* QHBlockQueue.m */,
+				EA80FAF722E17ABE008E628B /* QHDebouncer.h */,
+				EA80FAF822E17ABE008E628B /* QHDebouncer.m */,
 			);
-			path = BlockQueue;
+			path = TaskQueue;
 			sourceTree = "<group>";
 		};
 		EA03D1D1225F76E60029FF47 /* Concurrent */ = {
@@ -529,12 +540,13 @@
 			path = Concurrent;
 			sourceTree = "<group>";
 		};
-		EA03D1DF225F8DFF0029FF47 /* BlockQueue */ = {
+		EA03D1DF225F8DFF0029FF47 /* TaskQueue */ = {
 			isa = PBXGroup;
 			children = (
 				EA03D1E0225F8E250029FF47 /* QHCoreLibBlockQueueTests.m */,
+				EA80FAFB22E17DA3008E628B /* QHCoreLibDebouncerTests.m */,
 			);
-			path = BlockQueue;
+			path = TaskQueue;
 			sourceTree = "<group>";
 		};
 		EA0C78DB1F626F400038CC88 /* ListData */ = {
@@ -605,7 +617,7 @@
 				EA1D43291ED70CE3002177BF /* Base */,
 				EA1D43381ED70CE3002177BF /* Log */,
 				EA1D44321ED95FBC002177BF /* Profiler */,
-				EA03D1C4225CFCB10029FF47 /* BlockQueue */,
+				EA03D1C4225CFCB10029FF47 /* TaskQueue */,
 				EA19CC6F1EEEE10E00C18853 /* Async */,
 				EA1D43421ED70CE3002177BF /* Network */,
 				EA5F5A681F5D406700013F8F /* UI */,
@@ -620,7 +632,7 @@
 				EA19CC711EEEE12E00C18853 /* Support files */,
 				EA1D431A1ED70C7B002177BF /* Log */,
 				EAAA79E71ED9639A008135BE /* Profiler */,
-				EA03D1DF225F8DFF0029FF47 /* BlockQueue */,
+				EA03D1DF225F8DFF0029FF47 /* TaskQueue */,
 				EA19CC701EEEE12000C18853 /* Async */,
 				EA1D431C1ED70C7B002177BF /* Network */,
 				EA50382E1F68051F00D95D59 /* UI */,
@@ -1075,6 +1087,7 @@
 				EA1D43701ED70CE3002177BF /* QHDDFileLogger.h in Headers */,
 				EAE3C7A51EE12A9000A93456 /* QHProfiler.h in Headers */,
 				EA19CC691EE99C9600C18853 /* QHNetworkImageApi.h in Headers */,
+				EA80FAF922E17ABE008E628B /* QHDebouncer.h in Headers */,
 				EA6D30041F61259300B5B6AA /* QHListDataProtocol.h in Headers */,
 				EAB2EC921EF7B83400CDDF6D /* QHNetworkMultipart.h in Headers */,
 				EAE690F91F7796AD00A097D4 /* CGFunctions.h in Headers */,
@@ -1096,6 +1109,7 @@
 				EA0C78B31F61390C0038CC88 /* QHListDataLoader.h in Headers */,
 				EA5F5A6D1F5D426100013F8F /* UIKit+QHCoreLib.h in Headers */,
 				EA72957B1FC83B1E003DCD5F /* UITableViewCell+QHTableViewCell.h in Headers */,
+				EA80FAFE22E17E9D008E628B /* QHTaskQueue.h in Headers */,
 				EA1D43741ED70CE3002177BF /* QHDDTTYLogger.h in Headers */,
 				EA19CC5B1EE24F5C00C18853 /* QHLog.h in Headers */,
 				EA1D44311ED9332F002177BF /* QHBase.h in Headers */,
@@ -1364,6 +1378,7 @@
 				EA1D43731ED70CE3002177BF /* QHDDLog.m in Sources */,
 				EABCB7981FCB05D4009F8EEF /* QHTableViewSeperatorCell.m in Sources */,
 				EADE97BC1FFE1C500064F2C6 /* QHPathUtil.m in Sources */,
+				EA80FAFA22E17ABE008E628B /* QHDebouncer.m in Sources */,
 				EAAE59151EE7DD940084FA69 /* NSObject+QHUserDefaultsProperty.m in Sources */,
 				EA1D43841ED70CE3002177BF /* QHNetworkWorker.m in Sources */,
 				EA9EC84E1F5BA15B00B91430 /* QHNetworkReachabilityManager.m in Sources */,
@@ -1451,6 +1466,7 @@
 				EA5038301F68056100D95D59 /* QHCoreLibUIKitTests.m in Sources */,
 				EAE2FE541F0A9837004354F8 /* QHCoreLibMustOverrideTests.m in Sources */,
 				EA4FBA9D1F07593A004A6FE5 /* QHAsyncLinkedTaskGroupTests.m in Sources */,
+				EA80FAFC22E17DA3008E628B /* QHCoreLibDebouncerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
