@@ -44,9 +44,9 @@ Pod::Spec.new do |s|
     ss.dependency "QHCoreLib/QHBase"
   end
 
-  s.subspec 'QHBlockQueue' do |ss|
-    ss.source_files = "QHCoreLib/BlockQueue/**/*.{h,m}"
-    ss.public_header_files = "QHCoreLib/BlockQueue/**/*.h"
+  s.subspec 'QHTaskQueue' do |ss|
+    ss.source_files = "QHCoreLib/TaskQueue/**/*.{h,m}"
+    ss.public_header_files = "QHCoreLib/TaskQueue/**/*.h"
     ss.frameworks = "Foundation"
     ss.dependency "QHCoreLib/QHBase"
   end
