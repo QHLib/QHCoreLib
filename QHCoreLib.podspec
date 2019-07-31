@@ -26,7 +26,8 @@ Pod::Spec.new do |s|
     ss.public_header_files = "QHCoreLib/Base/**/*.h"
     ss.private_header_files = "QHCoreLib/Base/Internal/**/*.h"
     ss.frameworks = "Foundation", "Security", "MobileCoreServices", "CoreGraphics"
-    ss.dependency "libextobjc", '0.4.1'
+    # pod these dependency with local pod in submodules
+    # ss.dependency "libextobjc", '0.4.1'
   end
 
   s.subspec 'QHLog' do |ss|
@@ -76,7 +77,8 @@ Pod::Spec.new do |s|
     ss.public_header_files = "QHCoreLib/UI/**/*.h"
     ss.frameworks = "Foundation", "CoreGraphics"
     ss.dependency "QHCoreLib/QHBase"
-    ss.dependency "UIDevice-Hardware"
+    # pod these dependency with local pod in submodules
+    # ss.dependency "UIDevice-Hardware"
   end
 
 end
