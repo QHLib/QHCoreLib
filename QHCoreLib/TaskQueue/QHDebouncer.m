@@ -38,10 +38,7 @@
 }
 
 - (void)reschedule {
-    if (m_token != QHBlockIdInvalid) {
-        [m_queue cancelBlock:m_token];
-        m_token = QHBlockIdInvalid;
-    }
+    [self cancel];
 
     @weakify(self);
     m_token = [m_queue pushBlock:^{
@@ -50,6 +47,17 @@
             self->m_action();
         }
     } delay:m_delay];
+}
+
+- (void)cancel {
+    if (m_token != QHBlockIdInvalid) {
+        [m_queue cancelBlock:m_token];
+        m_token = QHBlockIdInvalid;
+    }
+}
+
+- (void)dealloc {
+    [self cancel];
 }
 
 @end
