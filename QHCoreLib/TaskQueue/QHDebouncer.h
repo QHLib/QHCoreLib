@@ -14,11 +14,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface QHDebouncer : NSObject
 
+- (instancetype)initWithDelay:(NSTimeInterval)delay;
 - (instancetype)initWithDelay:(NSTimeInterval)delay
                        action:(dispatch_block_t)action;
 
 - (void)setBlockQueue:(QHBlockQueue *)queue;
 
+- (void)rescheduleWithAction:(dispatch_block_t)action;
 - (void)reschedule;
 
 @end

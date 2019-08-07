@@ -18,10 +18,14 @@
     QHBlockId m_token;
 }
 
+- (instancetype)initWithDelay:(NSTimeInterval)delay {
+    return [self initWithDelay:0.1 action:nil];
+}
+
 - (instancetype)initWithDelay:(NSTimeInterval)delay action:(dispatch_block_t)action {
     self = [super init];
     if (self) {
-        QHAssert(delay > 0 && action != nil , @"invalid params");
+        QHAssert(delay > 0, @"invalid params");
 
         m_delay = delay;
         m_action = action;
@@ -37,6 +41,11 @@
     m_queue = queue;
 }
 
+- (void)rescheduleWithAction:(dispatch_block_t)action {
+    m_action = action;
+    [self reschedule];
+}
+
 - (void)reschedule {
     [self cancel];
 
@@ -46,6 +55,7 @@
         if (self->m_action) {
             self->m_action();
         }
+        self->m_token = QHBlockIdInvalid;
     } delay:m_delay];
 }
 
