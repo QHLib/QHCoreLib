@@ -52,6 +52,8 @@
     @weakify(self);
     m_token = [m_queue pushBlock:^{
         @strongify(self);
+        QHBlockQueueAssertSelfNotNil;
+        
         if (self->m_action) {
             self->m_action();
         }

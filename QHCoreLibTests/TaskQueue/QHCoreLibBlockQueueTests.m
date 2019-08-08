@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 
+#import "QHBase.h"
 #import "QHBlockQueue.h"
 
 @interface QHCoreLibBlockQueueTests : XCTestCase
@@ -112,6 +113,19 @@
         [expect fulfill];
     });
     [self waitForExpectations:@[ expect ] timeout:0.215];
+}
+
+- (void)testContextReleasedOnAsyncCallback {
+    @autoreleasepool {
+        id obj = [NSObject new];
+        @weakify(obj);
+        QHBlockId blockId = [m_blockQueue pushBlock:^{
+            @strongify(obj);
+            assert(obj == nil);
+            XCTAssert(NO, @"should not be here");
+        }];
+        [m_blockQueue cancelBlock:blockId];
+    }
 }
 
 @end

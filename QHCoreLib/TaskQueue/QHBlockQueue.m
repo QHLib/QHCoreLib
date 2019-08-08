@@ -47,6 +47,7 @@ QHBlockId QHBlockIdInvalid = 0;
     uint32_t m_nextBlockId;
     NSMutableDictionary<NSNumber *, QHBlockQueueItem *> *m_map;
     NSMutableArray<NSNumber *> *m_waitingArray;
+    NSMutableSet<NSNumber *> *m_pendingSet;
     NSMutableSet<NSNumber *> *m_cancelledSet;
 
     BOOL m_hasSentWorkerWakeUp;
@@ -84,6 +85,7 @@ QHBlockId QHBlockIdInvalid = 0;
         m_map = [NSMutableDictionary dictionary];
         m_map[@(QHBlockIdInvalid)] = [QHBlockQueueItem new]; // 占位
         m_waitingArray = [NSMutableArray array];
+        m_pendingSet = [NSMutableSet set];
         m_cancelledSet = [NSMutableSet set];
         
         m_hasSentWorkerWakeUp = NO;
@@ -203,8 +205,10 @@ QHBlockId QHBlockIdInvalid = 0;
     
     if (m_map[@(blockId)] != nil) {
         [m_cancelledSet addObject:@(blockId)];
+    } else if ([m_pendingSet containsObject:@(blockId)]) {
+        [m_pendingSet removeObject:@(blockId)];
     } else {
-        QHCoreLibWarn(@"invalid blockId %u to cancel", blockId);
+        QHCoreLibWarn(@"invalid blockId %u to cancel: %@", blockId, QHCallStackShort());
     }
     
     [m_lock unlock];
@@ -215,6 +219,7 @@ QHBlockId QHBlockIdInvalid = 0;
     [m_lock lock];
     
     [m_cancelledSet addObjectsFromArray:m_waitingArray];
+    [m_pendingSet removeAllObjects];
     
     [m_lock unlock];
 }
@@ -274,9 +279,31 @@ QHBlockId QHBlockIdInvalid = 0;
         if (current) {
             [m_map removeObjectForKey:@(current.blockId)];
             [m_waitingArray removeObjectAtIndex:0];
+            [m_pendingSet addObject:@(current.blockId)];
 
             QHCoreLibInfo(@"dispatch block: %@", current);
-            dispatch_async(current.queue, current.block);
+            @weakify(self);
+            dispatch_async(current.queue, ^{
+                @strongify(self);
+                if (!self) {
+                    return;
+                }
+
+                BOOL isCanceled = YES;
+                [self->m_lock lock];
+                if ([self->m_pendingSet containsObject:@(current.blockId)]) {
+                    isCanceled = NO;
+                    [self->m_pendingSet removeObject:@(current.blockId)];
+                }
+                [self->m_lock unlock];
+                if (isCanceled) {
+                    QHCoreLibInfo(@"not exec block: %@", current);
+                    return;
+                }
+
+                QHCoreLibInfo(@"exec block: %@", current);
+                current.block();
+            });
             
             if (current.repeat == YES) {
                 QHBlockQueueItem *next = current;

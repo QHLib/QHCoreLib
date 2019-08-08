@@ -56,5 +56,6 @@ QH_EXTERN QHBlockId QHBlockIdInvalid;
 @end
 
 #define QHBlockMainQueue [QHBlockQueue sharedMainQueue]
+#define QHBlockQueueAssertSelfNotNil QHAssertReturnVoidOnFailure(self != nil, @"self is nil, and block is executed some how, maybe you forgot to cancel block on dealloc?")
 
 NS_ASSUME_NONNULL_END
