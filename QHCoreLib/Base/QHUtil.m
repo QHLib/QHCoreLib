@@ -8,6 +8,7 @@
 
 #import "QHUtil.h"
 
+#import <CommonCrypto/CommonDigest.h>
 #import <Security/Security.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 
@@ -183,6 +184,17 @@ NSString *QHHexStringFromBytes(const uint8_t *p, int length)
                                           length:length * 2
                                         encoding:NSASCIIStringEncoding
                                     freeWhenDone:YES];
+}
+
+NSString *QHMD5String(NSString *input) {
+    if (input == nil) {
+        return nil;
+    }
+    char buf[CC_MD5_DIGEST_LENGTH];
+    CC_MD5([input UTF8String],
+           (unsigned)[input lengthOfBytesUsingEncoding:NSUTF8StringEncoding],
+           (unsigned char *)buf);
+    return QHHexStringFromBytes((unsigned char *)buf, CC_MD5_DIGEST_LENGTH);
 }
 
 NSString *QHContentTypeOfExtension(NSString *ext)
