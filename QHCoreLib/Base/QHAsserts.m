@@ -23,6 +23,7 @@ void _QHAssertFormat(const char *condition,
     NSString *message = [[NSString alloc] initWithFormat:format arguments:args];
     va_end(args);
 
+    NSLog(@"***QHAssert call stack: %@", [NSThread callStackSymbols]);
     QHAssertFunction assertFunction = QHGetAssertFunction();
     if (assertFunction == nil) {
         [[NSAssertionHandler currentHandler] handleFailureInFunction:@(function)
