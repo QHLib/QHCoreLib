@@ -41,6 +41,7 @@ Pod::Spec.new do |s|
   s.subspec 'QHProfiler' do |ss|
     ss.source_files = "QHCoreLib/Profiler/**/*.{h,m}"
     ss.public_header_files = "QHCoreLib/Profiler/**/*.h"
+    ss.private_header_files = "QHCoreLib/Profiler/QHProfiler+internal.h"
     ss.frameworks = "Foundation", "QuartzCore"
     ss.dependency "QHCoreLib/QHBase"
   end
@@ -50,6 +51,7 @@ Pod::Spec.new do |s|
     ss.public_header_files = "QHCoreLib/TaskQueue/**/*.h"
     ss.frameworks = "Foundation"
     ss.dependency "QHCoreLib/QHBase"
+    ss.dependency "QHCoreLib/QHProfiler"
   end
 
   s.subspec 'QHAsync' do |ss|

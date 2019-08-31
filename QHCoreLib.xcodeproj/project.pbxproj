@@ -102,6 +102,9 @@
 		EA1D44351ED95FBC002177BF /* QHClockEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = EA1D44331ED95FBC002177BF /* QHClockEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA1D44361ED95FBC002177BF /* QHClockEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = EA1D44341ED95FBC002177BF /* QHClockEntry.m */; };
 		EA38F8921EF76CD6000B566F /* QHAsyncTask+internal.h in Headers */ = {isa = PBXBuildFile; fileRef = EAAC480F1EF527B80091759D /* QHAsyncTask+internal.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA43B08823196D5300158CF4 /* QHTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA43B08623196D5300158CF4 /* QHTimer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA43B08923196D5300158CF4 /* QHTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = EA43B08723196D5300158CF4 /* QHTimer.m */; };
+		EA43B08C2319782700158CF4 /* QHTaskQueueController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA43B08B2319782700158CF4 /* QHTaskQueueController.m */; };
 		EA4709A81FE901E300EF6DF6 /* QHCollectionViewCellContext.h in Headers */ = {isa = PBXBuildFile; fileRef = EA4709A61FE901E300EF6DF6 /* QHCollectionViewCellContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA4709A91FE901E300EF6DF6 /* QHCollectionViewCellContext.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4709A71FE901E300EF6DF6 /* QHCollectionViewCellContext.m */; };
 		EA4DC7A31F147BAE00A28C61 /* QHNetworkMultipartBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = EA4DC7A21F147B6200A28C61 /* QHNetworkMultipartBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -161,6 +164,7 @@
 		EA9EA4A81F69149B009EF00C /* QHUIWidgetsController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9EA4A71F69149B009EF00C /* QHUIWidgetsController.m */; };
 		EA9EC84D1F5BA15B00B91430 /* QHNetworkReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = EA9EC84B1F5BA15A00B91430 /* QHNetworkReachabilityManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EA9EC84E1F5BA15B00B91430 /* QHNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9EC84C1F5BA15B00B91430 /* QHNetworkReachabilityManager.m */; };
+		EAA112DB231A46D500B16B86 /* QHCoreLibTimerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA112DA231A46D500B16B86 /* QHCoreLibTimerTests.m */; };
 		EAAA79E91ED9639A008135BE /* QHCoreLibClockEntryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAAA79E81ED9639A008135BE /* QHCoreLibClockEntryTests.m */; };
 		EAAA79EB1ED96871008135BE /* QHAsserts.m in Sources */ = {isa = PBXBuildFile; fileRef = EA1D43341ED70CE3002177BF /* QHAsserts.m */; };
 		EAAE57671ED973850084FA69 /* QHCoreLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA1D42F71ED70BA2002177BF /* QHCoreLib.framework */; };
@@ -240,7 +244,7 @@
 		A4FB93821E521314C7F610C2 /* Pods-QHCoreLibTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QHCoreLibTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-QHCoreLibTests/Pods-QHCoreLibTests.release.xcconfig"; sourceTree = "<group>"; };
 		AA072A9E1A6E88CFE69846DB /* Pods-QHCoreLibDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QHCoreLibDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-QHCoreLibDemo/Pods-QHCoreLibDemo.release.xcconfig"; sourceTree = "<group>"; };
 		C8FA84D154630817925AAC5A /* Pods_QHCoreLibDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QHCoreLibDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EA03D1C2225CF9690029FF47 /* QHCoreLib.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = QHCoreLib.podspec; sourceTree = "<group>"; };
+		EA03D1C2225CF9690029FF47 /* QHCoreLib.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = QHCoreLib.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		EA03D1C5225CFCF20029FF47 /* QHBlockQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHBlockQueue.h; sourceTree = "<group>"; };
 		EA03D1C6225CFCF20029FF47 /* QHBlockQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHBlockQueue.m; sourceTree = "<group>"; };
 		EA03D1D6225F7B0F0029FF47 /* QHMutex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHMutex.h; sourceTree = "<group>"; };
@@ -349,6 +353,10 @@
 		EA1D442C1ED92EE7002177BF /* QHBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHBase.h; sourceTree = "<group>"; };
 		EA1D44331ED95FBC002177BF /* QHClockEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHClockEntry.h; sourceTree = "<group>"; };
 		EA1D44341ED95FBC002177BF /* QHClockEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHClockEntry.m; sourceTree = "<group>"; };
+		EA43B08623196D5300158CF4 /* QHTimer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHTimer.h; sourceTree = "<group>"; };
+		EA43B08723196D5300158CF4 /* QHTimer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHTimer.m; sourceTree = "<group>"; };
+		EA43B08A2319782700158CF4 /* QHTaskQueueController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHTaskQueueController.h; sourceTree = "<group>"; };
+		EA43B08B2319782700158CF4 /* QHTaskQueueController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHTaskQueueController.m; sourceTree = "<group>"; };
 		EA4709A61FE901E300EF6DF6 /* QHCollectionViewCellContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHCollectionViewCellContext.h; sourceTree = "<group>"; };
 		EA4709A71FE901E300EF6DF6 /* QHCollectionViewCellContext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHCollectionViewCellContext.m; sourceTree = "<group>"; };
 		EA4DC7A21F147B6200A28C61 /* QHNetworkMultipartBuilder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHNetworkMultipartBuilder.h; sourceTree = "<group>"; };
@@ -411,6 +419,8 @@
 		EA9EA4A71F69149B009EF00C /* QHUIWidgetsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = QHUIWidgetsController.m; path = QHCoreLibDemo/QHUIWidgetsController.m; sourceTree = SOURCE_ROOT; };
 		EA9EC84B1F5BA15A00B91430 /* QHNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHNetworkReachabilityManager.h; sourceTree = "<group>"; };
 		EA9EC84C1F5BA15B00B91430 /* QHNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHNetworkReachabilityManager.m; sourceTree = "<group>"; };
+		EAA112D423198B3A00B16B86 /* QHProfiler+internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QHProfiler+internal.h"; sourceTree = "<group>"; };
+		EAA112DA231A46D500B16B86 /* QHCoreLibTimerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHCoreLibTimerTests.m; sourceTree = "<group>"; };
 		EAAA79E81ED9639A008135BE /* QHCoreLibClockEntryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHCoreLibClockEntryTests.m; sourceTree = "<group>"; };
 		EAAC480F1EF527B80091759D /* QHAsyncTask+internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QHAsyncTask+internal.h"; sourceTree = "<group>"; };
 		EAAE58E21EE6B5780084FA69 /* QHCoreLibTests.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHCoreLibTests.pch; sourceTree = "<group>"; };
@@ -516,6 +526,8 @@
 				EA03D1C6225CFCF20029FF47 /* QHBlockQueue.m */,
 				EA80FAF722E17ABE008E628B /* QHDebouncer.h */,
 				EA80FAF822E17ABE008E628B /* QHDebouncer.m */,
+				EA43B08623196D5300158CF4 /* QHTimer.h */,
+				EA43B08723196D5300158CF4 /* QHTimer.m */,
 			);
 			path = TaskQueue;
 			sourceTree = "<group>";
@@ -545,6 +557,7 @@
 			children = (
 				EA03D1E0225F8E250029FF47 /* QHCoreLibBlockQueueTests.m */,
 				EA80FAFB22E17DA3008E628B /* QHCoreLibDebouncerTests.m */,
+				EAA112DA231A46D500B16B86 /* QHCoreLibTimerTests.m */,
 			);
 			path = TaskQueue;
 			sourceTree = "<group>";
@@ -812,6 +825,7 @@
 			isa = PBXGroup;
 			children = (
 				EAE3C7A21EE12A0F00A93456 /* QHProfiler.h */,
+				EAA112D423198B3A00B16B86 /* QHProfiler+internal.h */,
 				EA1D44331ED95FBC002177BF /* QHClockEntry.h */,
 				EA1D44341ED95FBC002177BF /* QHClockEntry.m */,
 				EAC83C9B226DB8E900A71C8E /* QHClockChecker.h */,
@@ -892,6 +906,8 @@
 				EA0C78DB1F626F400038CC88 /* ListData */,
 				EA9EA4A61F69149B009EF00C /* QHUIWidgetsController.h */,
 				EA9EA4A71F69149B009EF00C /* QHUIWidgetsController.m */,
+				EA43B08A2319782700158CF4 /* QHTaskQueueController.h */,
+				EA43B08B2319782700158CF4 /* QHTaskQueueController.m */,
 				EABCB7831FCAA370009F8EEF /* TableViewCell */,
 				EA5F5AB91F5D519E00013F8F /* Assets.xcassets */,
 				EA5F5AAA1F5D519E00013F8F /* Supporting Files */,
@@ -1075,6 +1091,7 @@
 				EA90ECA11F9D901D00EF3D32 /* QHNetworkApiManager.h in Headers */,
 				EABCB7971FCB05D4009F8EEF /* QHTableViewSeperatorCell.h in Headers */,
 				EABCB7811FBB4054009F8EEF /* QHNetworkFileApi.h in Headers */,
+				EA43B08823196D5300158CF4 /* QHTimer.h in Headers */,
 				EA1D43761ED70CE3002177BF /* QHLogUtil.h in Headers */,
 				EA1693741EFA9E2900BD9A25 /* QHMisc.h in Headers */,
 				EA51459D1F7398C5000988C2 /* QHStackView.h in Headers */,
@@ -1207,7 +1224,7 @@
 				TargetAttributes = {
 					EA1D42F61ED70BA2002177BF = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = XD4G683TDY;
+						DevelopmentTeam = NSWMLDGCEZ;
 						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 					};
@@ -1436,6 +1453,7 @@
 				EA03D1F422609ED10029FF47 /* QHScopedLock.mm in Sources */,
 				EAEF5D9C1FDBD77000F27D74 /* UICollectionViewCell+QHCollectionViewCell.m in Sources */,
 				EA9EA4A51F6912BE009EF00C /* QHNumberBadge.m in Sources */,
+				EA43B08923196D5300158CF4 /* QHTimer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1451,6 +1469,7 @@
 				EA1D43971ED70E32002177BF /* QHCoreLibAssertsTests.m in Sources */,
 				EA1D439B1ED70E40002177BF /* QHCoreLibUtilTests.m in Sources */,
 				EA1D439C1ED70E44002177BF /* QHCoreLibDefaultValueTests.m in Sources */,
+				EAA112DB231A46D500B16B86 /* QHCoreLibTimerTests.m in Sources */,
 				EA1D43981ED70E35002177BF /* QHCoreLibDefinesTests.m in Sources */,
 				EAAA79E91ED9639A008135BE /* QHCoreLibClockEntryTests.m in Sources */,
 				EA1D439F1ED70E4C002177BF /* QHCoreLibLogTests.m in Sources */,
@@ -1477,6 +1496,7 @@
 				EA0C78E61F626F8C0038CC88 /* QHListDataEntranceController.m in Sources */,
 				EA5F5AAF1F5D519E00013F8F /* AppDelegate.m in Sources */,
 				EA0C78E91F62708C0038CC88 /* QHListDataLoaderTestController.m in Sources */,
+				EA43B08C2319782700158CF4 /* QHTaskQueueController.m in Sources */,
 				EA0C78CE1F614F310038CC88 /* EntranceViewController.m in Sources */,
 				EA0C78EC1F6271B50038CC88 /* QHListSimpleDataTestController.m in Sources */,
 				EA0C78ED1F6272280038CC88 /* QHListTestTableViewController.m in Sources */,
@@ -1524,7 +1544,7 @@
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = XD4G683TDY;
+				DEVELOPMENT_TEAM = NSWMLDGCEZ;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1554,7 +1574,7 @@
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = XD4G683TDY;
+				DEVELOPMENT_TEAM = NSWMLDGCEZ;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";

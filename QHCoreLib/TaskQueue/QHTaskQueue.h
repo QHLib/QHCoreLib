@@ -11,5 +11,6 @@
 
 #import <QHCoreLib/QHBlockQueue.h>
 #import <QHCoreLib/QHDebouncer.h>
+#import <QHCoreLib/QHTimer.h>
 
 #endif /* QHTaskQueue_h */

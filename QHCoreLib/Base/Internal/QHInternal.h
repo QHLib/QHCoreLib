@@ -42,17 +42,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 #define QHCoreLibWarn(...)          NSLog(@"QHCoreLibWarn: " __VA_ARGS__)
 
-
-#if DEBUG
-#   define QHCoreLibDebug(...)      NSLog(@"QHCoreLibDebug: " __VA_ARGS__)
-#else
-#   define QHCoreLibDebug(...)
-#endif
-
 #if _QHCoreLibDebug
 #   define QHCoreLibInfo(...)      NSLog(@"QHCoreLibInfo: " __VA_ARGS__)
 #else
 #   define QHCoreLibInfo(...)
+#endif
+
+#if _QHCoreLibDebug && DEBUG
+#   define QHCoreLibDebug(...)      NSLog(@"QHCoreLibDebug: " __VA_ARGS__)
+#else
+#   define QHCoreLibDebug(...)
 #endif
 
 NS_ASSUME_NONNULL_END

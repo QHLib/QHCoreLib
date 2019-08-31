@@ -82,7 +82,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSIndexSet *)indexSetForItem:(id)item
 {
     return [self indexSetForItem:item matchBlock:^BOOL(id  _Nonnull targetItem, id  _Nonnull listItem) {
-        return [targetItem initWithUnsignedShort:listItem];
+        return [targetItem isEqual:listItem];
     }];
 }
 

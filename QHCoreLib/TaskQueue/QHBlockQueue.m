@@ -8,6 +8,7 @@
 
 #import "QHBlockQueue.h"
 #import "QHBase+internal.h"
+#import "QHProfiler+internal.h"
 
 @interface QHBlockQueueItem : NSObject
 
@@ -189,7 +190,7 @@ QHBlockId QHBlockIdInvalid = 0;
     [m_waitingArray insertObject:@(blockId) atIndex:index];
     
     if (index == 0 && !m_hasSentWorkerWakeUp) {
-        m_hasSentWorkerWakeUp = NO;
+        m_hasSentWorkerWakeUp = YES;
         QHCoreLibInfo(@"singal worker");
         dispatch_semaphore_signal(m_workerLock);
     }
@@ -226,15 +227,21 @@ QHBlockId QHBlockIdInvalid = 0;
 
 #pragma mark -
 
+#define kProfilerEventWorker @"worker"
+
 - (void)workerThread:(id)object
 {
     NSString *threadName = [NSString stringWithFormat:@"%@-Worker", self];
     [[NSThread currentThread] setName:threadName];
     while (true) {
         if (!m_workerIsWorking) {
+            QHDebugProfilerStart(QH_CLASS_NAME, kProfilerEventWorker);
+
             [self->m_lock lock];
             QHCoreLibInfo(@"worker start");
             m_workerIsWorking = YES;
+
+            QHDebugProfilerCheck(QH_CLASS_NAME, kProfilerEventWorker, @"get_lock");
         }
         
         // handle cancelled blocks
@@ -263,6 +270,8 @@ QHBlockId QHBlockIdInvalid = 0;
             
             [self->m_cancelledSet removeAllObjects];
         }
+
+        QHDebugProfilerCheck(QH_CLASS_NAME, kProfilerEventWorker, @"handle-cancel");
         
         // handle waiting blocks
         QHBlockQueueItem *first = ({
@@ -317,6 +326,8 @@ QHBlockId QHBlockIdInvalid = 0;
                 }
                 [self->m_waitingArray insertObject:@(next.blockId) atIndex:index];
             }
+
+            QHDebugProfilerCheck(QH_CLASS_NAME, kProfilerEventWorker, @"handle-current");
             
             // 不做unlock，可能下一个block也需要马上执行
         }
@@ -324,14 +335,23 @@ QHBlockId QHBlockIdInvalid = 0;
             m_hasSentWorkerWakeUp = NO;
             m_workerIsWorking = NO;
             [m_lock unlock];
+
+            QHDebugProfilerEnd(QH_CLASS_NAME, kProfilerEventWorker);
             
             if (first) {
                 QHCoreLibInfo(@"wait for next block: %@", first);
+
+                QHDebugProfilerStart(QH_CLASS_NAME, @"wait");
+
+                // iphone xr：一个work loop约delay 5-10ms, 一个work大约耗时1ms
                 NSTimeInterval delay = MAX(0, first.scheduledAt - QHTimestampInDouble());
                 dispatch_time_t waitTime = dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC);
                 long ret = dispatch_semaphore_wait(m_workerLock, waitTime);
-                QHCoreLibInfo(@"awake: %ld", ret);
                 QH_UNUSED_VAR(ret);
+
+                QHDebugProfilerEnd(QH_CLASS_NAME, @"wait");
+
+                QHCoreLibInfo(@"after %f awake(%ld), next block: %@", delay, ret, first);
             }
             else  {
                 QHCoreLibInfo(@"wait for blocks");

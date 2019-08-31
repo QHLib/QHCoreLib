@@ -19,7 +19,7 @@
 }
 
 - (instancetype)initWithDelay:(NSTimeInterval)delay {
-    return [self initWithDelay:0.1 action:nil];
+    return [self initWithDelay:0.1 action:^{}];
 }
 
 - (instancetype)initWithDelay:(NSTimeInterval)delay action:(dispatch_block_t)action {

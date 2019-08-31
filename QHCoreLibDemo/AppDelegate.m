@@ -14,6 +14,7 @@
 #import "QHListDataEntranceController.h"
 #import "QHUIWidgetsController.h"
 #import "QHTableViewCellTestController.h"
+#import "QHTaskQueueController.h"
 
 @interface AppDelegate ()
 
@@ -34,11 +35,13 @@
                                                @"QHList",
                                                @"QHUIWidgets",
                                                @"QHTableViewCell",
+                                               @"QHTaskQueue",
                                                nil];
         entranceController.controllerClasses = [NSArray arrayWithObjects:
                                                 [QHListDataEntranceController class],
                                                 [QHUIWidgetsController class],
                                                 [QHTableViewCellTestController class],
+                                                [QHTaskQueueController class],
                                                 nil];
         
         [[UINavigationController alloc] initWithRootViewController:entranceController];

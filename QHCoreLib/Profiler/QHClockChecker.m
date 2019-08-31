@@ -47,8 +47,8 @@ static NSMutableDictionary<NSString *, QHClockCheckItem *> *sItems = nil;
 + (void)yieldItem:(QHClockCheckItem *)item {
     if (!sCollector) {
         sCollector = ^(QHClockCheckItem *item) {
-            NSLog(@"QHProfiler check: %@-%@-%@, since last check: %dms, total: %.dms",
-                  item.module, item.event, item.point, item.interval, item.total);
+            QHCoreLibInfo(@"QHProfiler check: %@-%@-%@, since last check: %dms, total: %dms",
+                          item.module, item.event, item.point, item.interval, item.total);
         };
     }
 

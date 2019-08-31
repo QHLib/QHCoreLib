@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 #define QHProfilerCheck(_module, _event, _point)    [QHClockChecker check:_point onEvent:_event inModule:_module]
 #define QHProfilerEnd(_module, _event)              [QHClockChecker end:_event inModule:_module]
 
+
 @class QHClockEntry;
 
 @interface QHClockCheckItem : NSObject

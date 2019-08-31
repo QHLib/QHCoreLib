@@ -21,7 +21,7 @@
 
 - (void)setUp
 {
-    m_blockQueue = [QHBlockQueue blockQueue];
+    m_blockQueue = [QHBlockQueue sharedMainQueue];
 }
 
 - (void)testNoDelay
@@ -108,11 +108,11 @@
     [m_blockQueue pushBlock:^{
         ++count;
     } delay:0.2];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.21 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        XCTAssert(count == 5);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.22 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        XCTAssert(count == 5, @"count is %d", count);
         [expect fulfill];
     });
-    [self waitForExpectations:@[ expect ] timeout:0.215];
+    [self waitForExpectations:@[ expect ] timeout:0.22];
 }
 
 - (void)testContextReleasedOnAsyncCallback {
