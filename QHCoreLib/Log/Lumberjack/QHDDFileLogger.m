@@ -664,8 +664,8 @@ unsigned long long const kQHDDDefaultLogFilesDiskQuota   = 20 * 1024 * 1024; // 
         result = self->_maximumFileSize;
     };
 
-    // The design of this method is taken from the QJDDAbstractLogger implementation.
-    // For extensive documentation please refer to the QJDDAbstractLogger implementation.
+    // The design of this method is taken from the QHDDAbstractLogger implementation.
+    // For extensive documentation please refer to the QHDDAbstractLogger implementation.
 
     // Note: The internal implementation MUST access the maximumFileSize variable directly,
     // This method is designed explicitly for external access.
@@ -694,8 +694,8 @@ unsigned long long const kQHDDDefaultLogFilesDiskQuota   = 20 * 1024 * 1024; // 
         }
     };
 
-    // The design of this method is taken from the QJDDAbstractLogger implementation.
-    // For extensive documentation please refer to the QJDDAbstractLogger implementation.
+    // The design of this method is taken from the QHDDAbstractLogger implementation.
+    // For extensive documentation please refer to the QHDDAbstractLogger implementation.
 
     // Note: The internal implementation MUST access the maximumFileSize variable directly,
     // This method is designed explicitly for external access.
@@ -721,8 +721,8 @@ unsigned long long const kQHDDDefaultLogFilesDiskQuota   = 20 * 1024 * 1024; // 
         result = self->_rollingFrequency;
     };
 
-    // The design of this method is taken from the QJDDAbstractLogger implementation.
-    // For extensive documentation please refer to the QJDDAbstractLogger implementation.
+    // The design of this method is taken from the QHDDAbstractLogger implementation.
+    // For extensive documentation please refer to the QHDDAbstractLogger implementation.
 
     // Note: The internal implementation should access the rollingFrequency variable directly,
     // This method is designed explicitly for external access.
@@ -751,8 +751,8 @@ unsigned long long const kQHDDDefaultLogFilesDiskQuota   = 20 * 1024 * 1024; // 
         }
     };
 
-    // The design of this method is taken from the QJDDAbstractLogger implementation.
-    // For extensive documentation please refer to the QJDDAbstractLogger implementation.
+    // The design of this method is taken from the QHDDAbstractLogger implementation.
+    // For extensive documentation please refer to the QHDDAbstractLogger implementation.
 
     // Note: The internal implementation should access the rollingFrequency variable directly,
     // This method is designed explicitly for external access.
@@ -837,8 +837,8 @@ unsigned long long const kQHDDDefaultLogFilesDiskQuota   = 20 * 1024 * 1024; // 
         }
     };
 
-    // The design of this method is taken from the QJDDAbstractLogger implementation.
-    // For extensive documentation please refer to the QJDDAbstractLogger implementation.
+    // The design of this method is taken from the QHDDAbstractLogger implementation.
+    // For extensive documentation please refer to the QHDDAbstractLogger implementation.
 
     if ([self isOnInternalLoggerQueue]) {
         block();

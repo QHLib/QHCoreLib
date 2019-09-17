@@ -219,7 +219,7 @@ extern unsigned long long const kQHDDDefaultLogFilesDiskQuota;
 #pragma mark -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@interface QHDDFileLogger : QJDDAbstractLogger <QHDDLogger>
+@interface QHDDFileLogger : QHDDAbstractLogger <QHDDLogger>
 
 - (instancetype)init;
 - (instancetype)initWithLogFileManager:(id <QHDDLogFileManager>)logFileManager NS_DESIGNATED_INITIALIZER;
@@ -284,7 +284,7 @@ extern unsigned long long const kQHDDDefaultLogFilesDiskQuota;
 
 - (void)rollLogFile __attribute((deprecated));
 
-// Inherited from QJDDAbstractLogger
+// Inherited from QHDDAbstractLogger
 
 // - (id <QHDDLogFormatter>)logFormatter;
 // - (void)setLogFormatter:(id <QHDDLogFormatter>)formatter;

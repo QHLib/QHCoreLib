@@ -971,7 +971,7 @@ NSString * QHDDExtractFileNameWithoutExtension(const char *filePath, BOOL copy) 
 #pragma mark -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@implementation QJDDAbstractLogger
+@implementation QHDDAbstractLogger
 
 - (instancetype)init {
     if ((self = [super init])) {

@@ -519,7 +519,7 @@ typedef NS_OPTIONS(NSInteger, QHDDLogMessageOptions) {
  * and they can ACCESS THE FORMATTER VARIABLE DIRECTLY from within their logMessage method!
  **/
 
-@interface QJDDAbstractLogger : NSObject <QHDDLogger>
+@interface QHDDAbstractLogger : NSObject <QHDDLogger>
 {
     // Direct accessors to be used only for performance
     @public

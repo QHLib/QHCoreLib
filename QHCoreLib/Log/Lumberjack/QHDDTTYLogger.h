@@ -49,7 +49,7 @@
     #define DDMakeColor(r, g, b) [CLIColor colorWithCalibratedRed:(r/255.0f) green:(g/255.0f) blue:(b/255.0f) alpha:1.0f]
 #endif
 
-@interface QHDDTTYLogger : QJDDAbstractLogger <QHDDLogger>
+@interface QHDDTTYLogger : QHDDAbstractLogger <QHDDLogger>
 
 + (instancetype)sharedInstance;
 
@@ -63,7 +63,7 @@
  * More information about formatters can be found here:
  * Documentation/CustomFormatters.md
  *
- * The actual implementation of these methods is inherited from QJDDAbstractLogger.
+ * The actual implementation of these methods is inherited from QHDDAbstractLogger.
 
    - (id <QHDDLogFormatter>)logFormatter;
    - (void)setLogFormatter:(id <QHDDLogFormatter>)formatter;
