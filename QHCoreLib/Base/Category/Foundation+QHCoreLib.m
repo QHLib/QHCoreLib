@@ -187,6 +187,7 @@ static const void *kNSObjectWeakCarry3ASOKey = &kNSObjectWeakCarry3ASOKey;
     }
     return queryString;
 }
+
 - (NSDictionary *)qh_urlQueryParams {
     NSString *queryString = [self qh_p_urlQuery];
 
@@ -209,6 +210,17 @@ static const void *kNSObjectWeakCarry3ASOKey = &kNSObjectWeakCarry3ASOKey;
         }
     }
     return result;
+}
+
+- (NSString *)qh_reversedString {
+    NSMutableString *reversedString = [[NSMutableString alloc] initWithCapacity:[self length]];
+    NSInteger charIndex = [self length];
+    while (charIndex > 0) {
+        charIndex--;
+        NSRange subStrRange = NSMakeRange(charIndex, 1);
+        [reversedString appendString:[self substringWithRange:subStrRange]];
+    }
+    return reversedString;
 }
 
 @end

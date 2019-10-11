@@ -37,6 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSDictionary *)qh_urlQueryParams;
 
+- (NSString *)qh_reversedString;
+
 @end
 
 
