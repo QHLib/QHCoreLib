@@ -186,6 +186,31 @@ NSString *QHHexStringFromBytes(const uint8_t *p, int length)
                                     freeWhenDone:YES];
 }
 
+uint8_t QHHexCharToHexValue(char c) {
+    if (c >= '0' &&  c <= '9') {
+        return c - '0';
+    } else if (c >= 'a' &&  c <= 'f') {
+        return c - 'a' + 10;
+    } else if (c >= 'A' && c <= 'F') {
+        return c - 'A' + 10;
+    } else {
+        return 0;
+    }
+}
+
+NSData *QHHexStringToData(NSString *hexStr) {
+    NSMutableData *data = [NSMutableData data];
+    if (hexStr) {
+        NSData *hexData = [hexStr dataUsingEncoding:NSUTF8StringEncoding];
+        char *bytes = (char *)[hexData bytes];
+        for (int i = 0; i+1 < hexData.length; i += 2) {
+            uint8_t value = (QHHexCharToHexValue(bytes[i]) << 4) + QHHexCharToHexValue(bytes[i+1]);
+            [data appendBytes:&value length:1];
+        }
+    }
+    return  data;
+}
+
 NSString *QHMD5String(NSString *input) {
     if (input == nil) {
         return nil;
