@@ -56,8 +56,11 @@ _LOG_MAYBE(YES, QHLogLevel, QHDDLogFlagDebug,   0, nil, __PRETTY_FUNCTION__, frm
 #define QHLogVerbose(frmt, ...) \
 _LOG_MAYBE(YES, QHLogLevel, QHDDLogFlagVerbose, 0, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
 
+typedef void (QHLogCallback)(int level, const char *tag, const char *func, const char *file, int line, NSString *message);
 
 @interface QHLogUtil : NSObject
+
++ (void)setUpWithCallback:(QHLogCallback)callback;
 
 + (NSData *)getLogFileData;
 

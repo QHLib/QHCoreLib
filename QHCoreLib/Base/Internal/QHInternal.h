@@ -9,6 +9,8 @@
 #ifndef QHInternal_h
 #define QHInternal_h
 
+#import "QHLog.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 #define _QHCoreLibFatalActionAbort      0
@@ -26,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 #   define _QHCoreLibFatalAction _QHCoreLibFatalActionContinue
 #endif
 
-#define _QHCoreLibFatal(...)        NSLog(@"QHCoreLibFatal: " __VA_ARGS__); NSLog(@"FATAL ERROR OCCURS, SEE ABOVE!!!\n\n\n")
+#define _QHCoreLibFatal(...)        QHLogError(@"QHCoreLibFatal: " __VA_ARGS__); QHLogError(@"FATAL ERROR OCCURS, SEE ABOVE!!!\n\n\n")
 
 #if   _QHCoreLibFatalAction == _QHCoreLibFatalActionAbort
 #   define QHCoreLibFatal(...)      _QHCoreLibFatal(__VA_ARGS__); abort()
@@ -40,16 +42,16 @@ NS_ASSUME_NONNULL_BEGIN
 #endif
 
 
-#define QHCoreLibWarn(...)          NSLog(@"QHCoreLibWarn: " __VA_ARGS__)
+#define QHCoreLibWarn(...)          QHLogWarn(@"QHCoreLibWarn: " __VA_ARGS__)
 
 #if _QHCoreLibDebug
-#   define QHCoreLibInfo(...)      NSLog(@"QHCoreLibInfo: " __VA_ARGS__)
+#   define QHCoreLibInfo(...)      QHLogInfo(@"QHCoreLibInfo: " __VA_ARGS__)
 #else
 #   define QHCoreLibInfo(...)
 #endif
 
 #if _QHCoreLibDebug && DEBUG
-#   define QHCoreLibDebug(...)      NSLog(@"QHCoreLibDebug: " __VA_ARGS__)
+#   define QHCoreLibDebug(...)      QHLogDebug(@"QHCoreLibDebug: " __VA_ARGS__)
 #else
 #   define QHCoreLibDebug(...)
 #endif

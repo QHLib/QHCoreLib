@@ -75,46 +75,58 @@ CF_INLINE NSString *QHLogFlagString(QHDDLogFlag flag) {
 
 static QHDDFileLogger *fileLogger = nil;
 
+static QHLogCallback *sLogCallback;
+
+@interface QHDDLogCallbackLogger : QHDDAbstractLogger
+
+@end
+
+@implementation QHDDLogCallbackLogger
+
+- (void)logMessage:(QHDDLogMessage *)logMessage {
+    if (sLogCallback) {
+        NSString *tag  = @"QHCoreLib";
+        if (logMessage.tag) {
+            tag = [tag stringByAppendingFormat:@"-%@", logMessage.tag];
+        }
+        sLogCallback(logMessage.flag,
+                     [tag cStringUsingEncoding:NSUTF8StringEncoding],
+                     [logMessage.function cStringUsingEncoding:NSUTF8StringEncoding],
+                     [logMessage.file cStringUsingEncoding:NSUTF8StringEncoding],
+                     logMessage.line,
+                     logMessage.message);
+    }
+}
+
+@end
+
 @implementation QHLogUtil
 
 + (void)load
 {
-    [self doSetup];
+    [self setUpWithCallback:nil];
 }
 
-+ (void)doSetup
++ (void)setUpWithCallback:(QHLogCallback)callback
 {
-    // console log
-#if QH_DEBUG && 0
-    // not used any more since Xcode does not support
-    setenv("XcodeColors", "YES", 1);
-    [[QHDDTTYLogger sharedInstance] setColorsEnabled:YES];
-    [[QHDDTTYLogger sharedInstance] setForegroundColor:[UIColor colorWithWhite:0.667 alpha:1]
-                                     backgroundColor:nil
-                                             forFlag:QHDDLogFlagVerbose];
-    [[QHDDTTYLogger sharedInstance] setForegroundColor:[UIColor colorWithWhite:0.333 alpha:1]
-                                     backgroundColor:nil
-                                             forFlag:QHDDLogFlagDebug];
-    [[QHDDTTYLogger sharedInstance] setForegroundColor:[UIColor orangeColor]
-                                     backgroundColor:nil
-                                             forFlag:QHDDLogFlagInfo];
-    [[QHDDTTYLogger sharedInstance] setForegroundColor:[UIColor purpleColor]
-                                     backgroundColor:nil
-                                             forFlag:QHDDLogFlagWarning];
-    [[QHDDTTYLogger sharedInstance] setForegroundColor:[UIColor redColor]
-                                     backgroundColor:nil
-                                             forFlag:QHDDLogFlagError];
-#endif
-    [[QHDDTTYLogger sharedInstance] setLogFormatter:[[QHLogFormatter alloc] init]];
-    [QHDDLog addLogger:[QHDDTTYLogger sharedInstance] withLevel:QHDDLogLevelAll];
-    
-    // file log
-    fileLogger = [[QHDDFileLogger alloc] init];
-    fileLogger.logFormatter = [[QHLogFormatter alloc] init];
-    fileLogger.rollingFrequency = 0;
-    fileLogger.maximumFileSize = 1024 * 1024;
-    [QHDDLog addLogger:fileLogger withLevel:QHDDLogLevelInfo];
+    [QHDDLog removeAllLoggers];
+    sLogCallback = NULL;
 
+    if (callback == nil) {
+        // console log
+        [[QHDDTTYLogger sharedInstance] setLogFormatter:[[QHLogFormatter alloc] init]];
+        [QHDDLog addLogger:[QHDDTTYLogger sharedInstance] withLevel:QHDDLogLevelAll];
+
+        // file log
+        fileLogger = [[QHDDFileLogger alloc] init];
+        fileLogger.logFormatter = [[QHLogFormatter alloc] init];
+        fileLogger.rollingFrequency = 0;
+        fileLogger.maximumFileSize = 1024 * 1024;
+        [QHDDLog addLogger:fileLogger withLevel:QHDDLogLevelInfo];
+    } else {
+        sLogCallback = callback;
+        [QHDDLog addLogger:[QHDDLogCallbackLogger new]];
+    }
 #if QH_DEBUG
     QHLogLevel = QHDDLogLevelVerbose;
 #else
