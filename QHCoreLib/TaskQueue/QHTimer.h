@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)timerWithDelay:(NSTimeInterval)delay action:(dispatch_block_t)action onQueue:(dispatch_queue_t)queue;
 + (instancetype)timerWithDelay:(NSTimeInterval)delay repeat:(BOOL)repeat action:(dispatch_block_t)action onQueue:(dispatch_queue_t)queue;
 
+- (void)cancel;
+
 @end
 
 NS_ASSUME_NONNULL_END
