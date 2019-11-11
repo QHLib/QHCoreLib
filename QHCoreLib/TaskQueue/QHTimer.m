@@ -55,6 +55,7 @@
 - (void)cancel {
     if (m_timerId != QHBlockIdInvalid) {
         [QHBlockMainQueue cancelBlock:m_timerId];
+        m_timerId = QHBlockIdInvalid;
     }
 }
 
