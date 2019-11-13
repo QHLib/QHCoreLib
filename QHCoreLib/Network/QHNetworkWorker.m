@@ -200,6 +200,7 @@ typedef NS_ENUM(NSUInteger, QHNetworkWorkerState) {
     });
 }
 
+void QHNetworkReportNetworkMetric(QHNetworkMetrics *metric);
 - (void)p_fireCompletionWithResponse:(QHNetworkResponse * _Nullable)response
                                error:(NSError * _Nullable)error
 {
@@ -215,6 +216,10 @@ typedef NS_ENUM(NSUInteger, QHNetworkWorkerState) {
                 self.uploadProgressHandler = nil;
                 self.downloadProgressHandler = nil;
                 self.completionHandler = nil;
+            }
+
+            if (response.metrics) {
+                QHNetworkReportNetworkMetric(response.metrics);
             }
 
             [[NSNotificationCenter defaultCenter] postNotificationName:QHNetworkWorkerDidFinishNotification

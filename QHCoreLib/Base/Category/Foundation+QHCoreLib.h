@@ -27,6 +27,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id _Nullable qh_handy_weakCarry2;
 @property (nonatomic, weak) id _Nullable qh_handy_weakCarry3;
 
+- (NSString *)qh_description;
+- (NSMutableArray<NSString *> *)qh_propertyPairs;
+
 @end
 
 

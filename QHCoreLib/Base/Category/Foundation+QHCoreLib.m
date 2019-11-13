@@ -138,6 +138,21 @@ static const void *kNSObjectWeakCarry3ASOKey = &kNSObjectWeakCarry3ASOKey;
     return QHWeakUnwrap(objc_getAssociatedObject(self, kNSObjectWeakCarry3ASOKey));
 }
 
+- (NSString *)qh_description {
+    NSArray<NSString *> *pairs = [self qh_propertyPairs];
+    if (pairs.count) {
+        return [NSString stringWithFormat:@"<%@ %p: %@>", NSStringFromClass([self class]), self,
+                                          [pairs componentsJoinedByString:@", "]];
+    } else {
+        return [NSString stringWithFormat:@"<%@ %p>", NSStringFromClass([self class]), self];
+    }
+}
+
+- (NSMutableArray<NSString *> *)qh_propertyPairs {
+    NSMutableArray *pairs = [NSMutableArray array];
+    return pairs;
+}
+
 @end
 
 

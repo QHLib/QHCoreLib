@@ -28,7 +28,6 @@ NSString * const kQHNetworkStatusStringWWAN2G       = @"2G";
 NSString * const kQHNetworkStatusStringWWAN3G       = @"3G";
 NSString * const kQHNetworkStatusStringWWAN4G       = @"4G";
 
-
 @interface QHNetwork ()
 
 @property (nonatomic, assign) QHNetworkStatus networkStatus;
@@ -220,6 +219,16 @@ QH_SINGLETON_IMP
 
 - (void)setAllowArbitraryHttps {
     [QHNetworkWorker setAllowArbitraryHttps];
+}
+
+static QHNetworkMetricCollector gMetricCollector;
+void QHNetworkReportNetworkMetric(QHNetworkMetrics *metric) {
+    if (gMetricCollector) {
+        gMetricCollector(metric);
+    }
+}
+- (void)setMetricCollector:(QHNetworkMetricCollector)metricCollector {
+    gMetricCollector = metricCollector;
 }
 
 @end

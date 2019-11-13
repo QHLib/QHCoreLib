@@ -13,6 +13,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class QHNetworkMetrics;
+typedef void (^QHNetworkMetricCollector)(QHNetworkMetrics *metrics) ;
+
 QH_EXTERN NSString * const QHNetworkStatusChangedNotification;
 
 typedef NS_ENUM(NSInteger, QHNetworkStatus) {
@@ -52,6 +55,8 @@ QH_SINGLETON_DEF
 - (void)setTrustCerts:(NSArray<NSString *> *)certFiles;
 
 - (void)setAllowArbitraryHttps;
+
+- (void)setMetricCollector:(QHNetworkMetricCollector)metricCollector;
 
 @end
 

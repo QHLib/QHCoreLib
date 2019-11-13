@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
     self = [super init];
     if (self) {
         self.priority = QHNetworkRequestPriorityDeafult;
-        self.cachePolicy = NSURLRequestUseProtocolCachePolicy;
+        self.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
         self.resourceType = QHNetworkResourceHTTP;
     }
     return self;

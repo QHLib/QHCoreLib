@@ -29,6 +29,12 @@
 #import "QHAFNetworkReachabilityManager.h"
 #endif
 
+@interface NSURLSessionTask (metric)
+
+@property (nonatomic, strong) NSURLSessionTaskMetrics *qh_metrics NS_AVAILABLE_IOS(10_0);
+
+@end
+
 /**
  `AFURLSessionManager` creates and manages an `NSURLSession` object based on a specified `NSURLSessionConfiguration` object, which conforms to `<NSURLSessionTaskDelegate>`, `<NSURLSessionDataDelegate>`, `<NSURLSessionDownloadDelegate>`, and `<NSURLSessionDelegate>`.
 

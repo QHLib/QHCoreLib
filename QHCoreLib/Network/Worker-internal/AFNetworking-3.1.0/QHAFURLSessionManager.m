@@ -28,6 +28,19 @@
 #define NSFoundationVersionNumber_With_Fixed_5871104061079552_bug NSFoundationVersionNumber_iOS_8_0
 #endif
 
+@implementation NSURLSessionTask (metric)
+
+static char kAssociatedObjectKey_qh_metrics;
+- (void)setQh_metrics:(NSURLSessionTaskMetrics *)metrics {
+    objc_setAssociatedObject(self, &kAssociatedObjectKey_qh_metrics, metrics, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSURLSessionTaskMetrics *)qh_metrics {
+    return (NSURLSessionTaskMetrics *)objc_getAssociatedObject(self, &kAssociatedObjectKey_qh_metrics);
+}
+
+@end
+
 static dispatch_queue_t url_session_manager_creation_queue() {
     static dispatch_queue_t af_url_session_manager_creation_queue;
     static dispatch_once_t onceToken;
@@ -1077,6 +1090,12 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     if (self.taskDidSendBodyData) {
         self.taskDidSendBodyData(session, task, bytesSent, totalBytesSent, totalUnitCount);
     }
+}
+
+- (void)URLSession:(NSURLSession *)session
+              task:(NSURLSessionTask *)task
+didFinishCollectingMetrics:(NSURLSessionTaskMetrics *)metrics {
+    task.qh_metrics = metrics;
 }
 
 - (void)URLSession:(NSURLSession *)session

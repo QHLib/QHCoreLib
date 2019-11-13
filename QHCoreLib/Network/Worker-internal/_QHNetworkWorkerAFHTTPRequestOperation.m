@@ -12,6 +12,7 @@
 
 #import "QHBase+internal.h"
 #import "QHProfiler.h"
+#import "QHNetwork.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -212,11 +213,87 @@ static QHAFHTTPSessionManager *imageManager;
                                                                    responseHeaders:httpResponse.allHeaderFields
                                                                      reponseLength:httpResponse.expectedContentLength
                                                                     responseObject:responseObject];
-            
+            workerResponse.metrics = [self p_getTaskMetrics];
+
             [self p_fireCompletionWithResponse:workerResponse
                                          error:error];
         };
     })];
+}
+
+- (QHNetworkMetrics * _Nullable)p_getTaskMetrics {
+    if (!@available(iOS 10.0, *)) return nil;
+
+    if (!self.task.qh_metrics) return nil;
+
+    NSURLSessionTaskTransactionMetrics *theMetrics = [[self.task.qh_metrics transactionMetrics] lastObject];
+    if (!theMetrics) return nil;
+
+    QHNetworkMetrics *metrics = [QHNetworkMetrics new];
+
+    metrics.host = ({
+        NSString *host = [[theMetrics.request URL] host];
+        NSDictionary *headers = [theMetrics.request allHTTPHeaderFields];
+        if ([headers objectForKey:@"Host"]) {
+            host = [headers objectForKey:@"Host"];
+        }
+        host;
+    });
+    metrics.path = [theMetrics.request.URL path];
+    metrics.network = [QHNetwork sharedInstance].statusString;
+
+    metrics.hasMetrics = YES;
+
+#define Cost(_from, _to) (uint64_t)(([_to timeIntervalSince1970] - [_from timeIntervalSince1970]) * 1000)
+
+    if  (!theMetrics.fetchStartDate && !theMetrics.responseEndDate) return nil;
+    metrics.cost = Cost(theMetrics.fetchStartDate, theMetrics.responseEndDate);
+
+    if (theMetrics.isReusedConnection) {
+        metrics.isReuseConnection = YES;
+    } else {
+        metrics.isReuseConnection = NO;
+
+        if (theMetrics.domainLookupStartDate && theMetrics.domainLookupEndDate) {
+            metrics.dnsCost = Cost(theMetrics.domainLookupStartDate, theMetrics.domainLookupEndDate);
+        }
+        if (theMetrics.connectStartDate && theMetrics.connectEndDate) {
+            metrics.connectCost = Cost(theMetrics.connectStartDate, theMetrics.connectEndDate);
+        }
+        if (theMetrics.secureConnectionStartDate && theMetrics.secureConnectionEndDate) {
+            metrics.isHTTPS = YES;
+            metrics.tlsCost = Cost(theMetrics.secureConnectionStartDate, theMetrics.secureConnectionEndDate);
+        } else {
+            metrics.tlsCost = 0;
+        }
+        metrics.tcpCost = metrics.connectCost - metrics.dnsCost - metrics.tlsCost;
+    }
+    if (theMetrics.isProxyConnection) {
+        metrics.isBehindProxy = YES;
+    }
+
+    if (theMetrics.requestStartDate && theMetrics.requestEndDate) {
+        metrics.writeCost = Cost(theMetrics.requestStartDate, theMetrics.requestEndDate);
+    }
+    if (theMetrics.responseEndDate && theMetrics.responseEndDate) {
+        metrics.readCost = Cost(theMetrics.responseStartDate, theMetrics.responseEndDate);
+    }
+
+    if (@available(iOS 13.0, *)) {
+        metrics.hasDataSize = YES;
+
+        metrics.requestSize = theMetrics.countOfRequestHeaderBytesSent + theMetrics.countOfRequestBodyBytesSent;
+        metrics.requestHeaderSize = theMetrics.countOfRequestHeaderBytesSent;
+        metrics.requestBodySize = theMetrics.countOfRequestBodyBytesSent;
+
+        metrics.responseSize = theMetrics.countOfResponseHeaderBytesReceived + theMetrics.countOfResponseBodyBytesReceived;
+        metrics.responseHeaderSize = theMetrics.countOfResponseHeaderBytesReceived;
+        metrics.responseBodySize = theMetrics.countOfResponseBodyBytesReceived;
+
+        metrics.ip = theMetrics.remoteAddress;
+    }
+
+    return metrics;
 }
 
 #pragma mark - download task
