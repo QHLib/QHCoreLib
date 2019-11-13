@@ -258,15 +258,17 @@ static QHAFHTTPSessionManager *imageManager;
             metrics.dnsCost = Cost(theMetrics.domainLookupStartDate, theMetrics.domainLookupEndDate);
         }
         if (theMetrics.connectStartDate && theMetrics.connectEndDate) {
-            metrics.connectCost = Cost(theMetrics.connectStartDate, theMetrics.connectEndDate);
+            metrics.tcpCost = Cost(theMetrics.connectStartDate, theMetrics.connectEndDate);
         }
         if (theMetrics.secureConnectionStartDate && theMetrics.secureConnectionEndDate) {
             metrics.isHTTPS = YES;
             metrics.tlsCost = Cost(theMetrics.secureConnectionStartDate, theMetrics.secureConnectionEndDate);
+            metrics.tcpCost -= metrics.tlsCost;
+            QHAssert(metrics.tcpCost > 0, @"invalid tcp cost");
         } else {
             metrics.tlsCost = 0;
         }
-        metrics.tcpCost = metrics.connectCost - metrics.dnsCost - metrics.tlsCost;
+        metrics.connectCost = metrics.dnsCost + metrics.tcpCost + metrics.tlsCost;
     }
     if (theMetrics.isProxyConnection) {
         metrics.isBehindProxy = YES;
@@ -275,7 +277,10 @@ static QHAFHTTPSessionManager *imageManager;
     if (theMetrics.requestStartDate && theMetrics.requestEndDate) {
         metrics.writeCost = Cost(theMetrics.requestStartDate, theMetrics.requestEndDate);
     }
-    if (theMetrics.responseEndDate && theMetrics.responseEndDate) {
+    if (theMetrics.requestEndDate && theMetrics.responseStartDate) {
+        metrics.waitCost = Cost(theMetrics.requestEndDate, theMetrics.responseStartDate);
+    }
+    if (theMetrics.responseStartDate && theMetrics.responseEndDate) {
         metrics.readCost = Cost(theMetrics.responseStartDate, theMetrics.responseEndDate);
     }
 

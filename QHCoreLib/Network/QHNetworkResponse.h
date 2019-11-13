@@ -21,29 +21,31 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *network;
 
 @property (nonatomic, assign) BOOL hasMetrics;
-@property (nonatomic, assign) uint64_t cost;
+@property (nonatomic, assign) int64_t cost;
 
 @property (nonatomic, assign) BOOL isReuseConnection; // if YES, connection metrics would be 0
-@property (nonatomic, assign) uint64_t connectCost;
-@property (nonatomic, assign) uint64_t dnsCost;
-@property (nonatomic, assign) uint64_t tcpCost;
+@property (nonatomic, assign) int64_t connectCost;
+@property (nonatomic, assign) int64_t dnsCost;
+@property (nonatomic, assign) int64_t tcpCost;
 
 @property (nonatomic, assign) BOOL isHTTPS; // if YES, tlsCost would be 0
-@property (nonatomic, assign) uint64_t tlsCost;
+@property (nonatomic, assign) int64_t tlsCost;
 
 @property (nonatomic, assign) BOOL isBehindProxy;
 
-@property (nonatomic, assign) uint64_t writeCost;
+@property (nonatomic, assign) int64_t writeCost;
 
-@property (nonatomic, assign) uint64_t readCost;
+@property (nonatomic, assign) int64_t waitCost;
+
+@property (nonatomic, assign) int64_t readCost;
 
 @property (nonatomic, assign) BOOL hasDataSize;
-@property (nonatomic, assign) uint64_t requestSize; // header + body
-@property (nonatomic, assign) uint64_t requestHeaderSize;
-@property (nonatomic, assign) uint64_t requestBodySize;
-@property (nonatomic, assign) uint64_t responseSize; // header + body
-@property (nonatomic, assign) uint64_t responseHeaderSize;
-@property (nonatomic, assign) uint64_t responseBodySize;
+@property (nonatomic, assign) int64_t requestSize; // header + body
+@property (nonatomic, assign) int64_t requestHeaderSize;
+@property (nonatomic, assign) int64_t requestBodySize;
+@property (nonatomic, assign) int64_t responseSize; // header + body
+@property (nonatomic, assign) int64_t responseHeaderSize;
+@property (nonatomic, assign) int64_t responseBodySize;
 
 @end
 

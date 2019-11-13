@@ -33,6 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
     [pairs addObject:[NSString stringWithFormat:@"tlsCost %lld", self.tlsCost]];
     [pairs addObject:[NSString stringWithFormat:@"isBehindProxy %@", self.isBehindProxy ? @"YES" : @"NO"]];
     [pairs addObject:[NSString stringWithFormat:@"writeCost %lld", self.writeCost]];
+    [pairs addObject:[NSString stringWithFormat:@"waitCost %lld", self.waitCost]];
     [pairs addObject:[NSString stringWithFormat:@"readCost %lld", self.readCost]];
     [pairs addObject:[NSString stringWithFormat:@"hasDataSize %@", self.hasDataSize ? @"YES" : @"NO"]];
     [pairs addObject:[NSString stringWithFormat:@"requestSize %lld", self.requestSize]];
