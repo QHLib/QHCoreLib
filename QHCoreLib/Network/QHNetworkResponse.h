@@ -11,9 +11,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class NSURLSessionTaskTransactionMetrics;
+
 // all cost are in ms
 // all data size are in byte
 @interface QHNetworkMetrics : NSObject
+
++ (instancetype)fromURLSessionTaskTransactionMetrics:(NSURLSessionTaskTransactionMetrics *)metrics;
 
 @property (nonatomic, copy) NSString *host;
 @property (nonatomic, copy) NSString *ip;
