@@ -32,9 +32,11 @@ NS_ASSUME_NONNULL_BEGIN
     metrics.hasMetrics = YES;
 
 #define Cost(_from, _to) (uint64_t)(([_to timeIntervalSince1970] - [_from timeIntervalSince1970]) * 1000)
+#define AssertCostAndReturn(_cost) { if (_cost < 0) return nil; }
 
     if  (!theMetrics.fetchStartDate && !theMetrics.responseEndDate) return nil;
     metrics.cost = Cost(theMetrics.fetchStartDate, theMetrics.responseEndDate);
+    AssertCostAndReturn(metrics.cost);
 
     if (theMetrics.isReusedConnection) {
         metrics.isReuseConnection = YES;
@@ -43,15 +45,17 @@ NS_ASSUME_NONNULL_BEGIN
 
         if (theMetrics.domainLookupStartDate && theMetrics.domainLookupEndDate) {
             metrics.dnsCost = Cost(theMetrics.domainLookupStartDate, theMetrics.domainLookupEndDate);
+            AssertCostAndReturn(metrics.dnsCost);
         }
         if (theMetrics.connectStartDate && theMetrics.connectEndDate) {
             metrics.tcpCost = Cost(theMetrics.connectStartDate, theMetrics.connectEndDate);
+            AssertCostAndReturn(metrics.tcpCost);
         }
         if (theMetrics.secureConnectionStartDate && theMetrics.secureConnectionEndDate) {
             metrics.isHTTPS = YES;
             metrics.tlsCost = Cost(theMetrics.secureConnectionStartDate, theMetrics.secureConnectionEndDate);
             metrics.tcpCost -= metrics.tlsCost;
-            QHAssert(metrics.tcpCost > 0, @"invalid tcp cost");
+            AssertCostAndReturn(metrics.tcpCost);
         } else {
             metrics.tlsCost = 0;
         }
@@ -63,12 +67,15 @@ NS_ASSUME_NONNULL_BEGIN
 
     if (theMetrics.requestStartDate && theMetrics.requestEndDate) {
         metrics.writeCost = Cost(theMetrics.requestStartDate, theMetrics.requestEndDate);
+        AssertCostAndReturn(metrics.writeCost);
     }
     if (theMetrics.requestEndDate && theMetrics.responseStartDate) {
         metrics.waitCost = Cost(theMetrics.requestEndDate, theMetrics.responseStartDate);
+        AssertCostAndReturn(metrics.waitCost);
     }
     if (theMetrics.responseStartDate && theMetrics.responseEndDate) {
         metrics.readCost = Cost(theMetrics.responseStartDate, theMetrics.responseEndDate);
+        AssertCostAndReturn(metrics.readCost);
     }
 
     if (@available(iOS 13.0, *)) {
