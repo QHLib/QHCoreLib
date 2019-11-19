@@ -123,6 +123,8 @@ _returnType(*_name)(id, SEL, __VA_ARGS__) = (_returnType(*)(id, SEL, __VA_ARGS__
 
 
 #define QH_PROPETY_NAME(_property) NSStringFromSelector(@selector(_property))
+// fix macro name
+#define QH_PROPERTY_NAME(_property) NSStringFromSelector(@selector(_property))
 
 #define stringify(_name) @#_name
 
