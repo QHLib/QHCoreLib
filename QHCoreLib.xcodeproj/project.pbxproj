@@ -195,6 +195,8 @@
 		EAE7E7A221462525007909FE /* QHAsyncTaskRetryWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = EAE7E7A021462525007909FE /* QHAsyncTaskRetryWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAE7E7A321462525007909FE /* QHAsyncTaskRetryWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE7E7A121462525007909FE /* QHAsyncTaskRetryWrapper.m */; };
 		EAE7E7A5214636B7007909FE /* QHAsyncTaskRetryWrapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE7E7A4214636B7007909FE /* QHAsyncTaskRetryWrapperTests.m */; };
+		EAED6ECD2382B08E00E4FB36 /* QHAsyncTaskEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = EAED6ECB2382B08E00E4FB36 /* QHAsyncTaskEngine.h */; };
+		EAED6ECE2382B08E00E4FB36 /* QHAsyncTaskEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = EAED6ECC2382B08E00E4FB36 /* QHAsyncTaskEngine.m */; };
 		EAEF5D9B1FDBD77000F27D74 /* UICollectionViewCell+QHCollectionViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = EAEF5D991FDBD77000F27D74 /* UICollectionViewCell+QHCollectionViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAEF5D9C1FDBD77000F27D74 /* UICollectionViewCell+QHCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EAEF5D9A1FDBD77000F27D74 /* UICollectionViewCell+QHCollectionViewCell.m */; };
 		EAFBB2781FCD533F00B9D505 /* QHTableViewPlaceholderCell.h in Headers */ = {isa = PBXBuildFile; fileRef = EAFBB2761FCD533F00B9D505 /* QHTableViewPlaceholderCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -453,6 +455,8 @@
 		EAE7E7A021462525007909FE /* QHAsyncTaskRetryWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHAsyncTaskRetryWrapper.h; sourceTree = "<group>"; };
 		EAE7E7A121462525007909FE /* QHAsyncTaskRetryWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHAsyncTaskRetryWrapper.m; sourceTree = "<group>"; };
 		EAE7E7A4214636B7007909FE /* QHAsyncTaskRetryWrapperTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHAsyncTaskRetryWrapperTests.m; sourceTree = "<group>"; };
+		EAED6ECB2382B08E00E4FB36 /* QHAsyncTaskEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHAsyncTaskEngine.h; sourceTree = "<group>"; };
+		EAED6ECC2382B08E00E4FB36 /* QHAsyncTaskEngine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QHAsyncTaskEngine.m; sourceTree = "<group>"; };
 		EAEF5D991FDBD77000F27D74 /* UICollectionViewCell+QHCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UICollectionViewCell+QHCollectionViewCell.h"; sourceTree = "<group>"; };
 		EAEF5D9A1FDBD77000F27D74 /* UICollectionViewCell+QHCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UICollectionViewCell+QHCollectionViewCell.m"; sourceTree = "<group>"; };
 		EAFBB2761FCD533F00B9D505 /* QHTableViewPlaceholderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QHTableViewPlaceholderCell.h; sourceTree = "<group>"; };
@@ -595,6 +599,8 @@
 				EA4FBA991F074E64004A6FE5 /* QHAsyncLinkedTaskGroup.m */,
 				EAE7E7A021462525007909FE /* QHAsyncTaskRetryWrapper.h */,
 				EAE7E7A121462525007909FE /* QHAsyncTaskRetryWrapper.m */,
+				EAED6ECB2382B08E00E4FB36 /* QHAsyncTaskEngine.h */,
+				EAED6ECC2382B08E00E4FB36 /* QHAsyncTaskEngine.m */,
 			);
 			path = Async;
 			sourceTree = "<group>";
@@ -1129,6 +1135,7 @@
 				EA80FAFE22E17E9D008E628B /* QHTaskQueue.h in Headers */,
 				EA1D43741ED70CE3002177BF /* QHDDTTYLogger.h in Headers */,
 				EA19CC5B1EE24F5C00C18853 /* QHLog.h in Headers */,
+				EAED6ECD2382B08E00E4FB36 /* QHAsyncTaskEngine.h in Headers */,
 				EA1D44311ED9332F002177BF /* QHBase.h in Headers */,
 				EA9EC84D1F5BA15B00B91430 /* QHNetworkReachabilityManager.h in Headers */,
 				EA9C468E1FB9E10A007E7DB5 /* QHAFURLSessionManager.h in Headers */,
@@ -1437,6 +1444,7 @@
 				EA9C468F1FB9E10A007E7DB5 /* QHAFURLSessionManager.m in Sources */,
 				EA19CC621EE9969000C18853 /* QHNetworkHttpApi.m in Sources */,
 				EAFC30D91FD7F3170050CBA8 /* QHFlowView.m in Sources */,
+				EAED6ECE2382B08E00E4FB36 /* QHAsyncTaskEngine.m in Sources */,
 				EAE7E7A321462525007909FE /* QHAsyncTaskRetryWrapper.m in Sources */,
 				EA5F5A721F5D4C1000013F8F /* QHNetworkActivityIndicator.m in Sources */,
 				EA5F5A6E1F5D426100013F8F /* UIKit+QHCoreLib.m in Sources */,

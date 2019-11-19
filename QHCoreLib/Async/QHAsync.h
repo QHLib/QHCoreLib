@@ -14,5 +14,6 @@
 #import <QHCoreLib/QHAsyncParallelTaskGroup+internal.h>
 #import <QHCoreLib/QHAsyncLinkedTaskGroup.h>
 #import <QHCoreLib/QHAsyncTaskRetryWrapper.h>
+#import <QHCoreLib/QHAsyncTaskEngine.h>
 
 #endif /* QHAsync_h */
