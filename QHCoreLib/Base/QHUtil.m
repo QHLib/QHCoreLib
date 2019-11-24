@@ -186,6 +186,11 @@ NSString *QHHexStringFromBytes(const uint8_t *p, int length)
                                     freeWhenDone:YES];
 }
 
+NSString *QHHexStringFromData(NSData *data) {
+    if (data == nil) return nil;
+    return QHHexStringFromBytes(data.bytes, (int)data.length);
+}
+
 uint8_t QHHexCharToHexValue(char c) {
     if (c >= '0' &&  c <= '9') {
         return c - '0';
