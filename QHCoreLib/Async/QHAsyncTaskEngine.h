@@ -11,11 +11,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface QHAsyncTaskEngine : NSObject
+@interface QHAsyncTaskEngine<__covariant TASK_TYPE_P, RESULT_TYPE_P> : NSObject
 
 + (QHAsyncTaskId)runTask:(QHAsyncTask *)task
                  success:(void (^ _Nullable)(QHAsyncTask *task, id result))success
                     fail:(void (^ _Nullable)(QHAsyncTask *task, NSError *error))fail;
+
++ (QHAsyncTaskId)runTypedTask:(TASK_TYPE_P)task
+                      success:(void (^ _Nullable)(TASK_TYPE_P task, RESULT_TYPE_P result))success
+                         fail:(void (^ _Nullable)(TASK_TYPE_P task, NSError *error))fail;
 
 + (void)cancelTask:(QHAsyncTaskId)taskId;
 

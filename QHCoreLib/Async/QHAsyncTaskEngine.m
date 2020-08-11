@@ -41,6 +41,12 @@ static NSMutableDictionary *taskMap = nil;
     return @(taskId);
 }
 
++ (QHAsyncTaskId)runTypedTask:(id)task
+                      success:(void (^)(id _Nonnull, id _Nonnull))success
+                         fail:(void (^)(id _Nonnull, NSError * _Nonnull))fail {
+    return [self runTask:task success:success fail:fail];
+}
+
 + (void)cancelTask:(QHAsyncTaskId)taskId {
     QHAssertMainThread();
     QHAssertParam(taskId);
