@@ -28,6 +28,10 @@ NS_ASSUME_NONNULL_BEGIN
     });
     metrics.path = [theMetrics.request.URL path];
     metrics.network = [QHNetwork sharedInstance].statusString;
+    if ([metrics.network isEqualToString:@"NotReachable"]) {
+        metrics.hasMetrics = NO;
+        return metrics;
+    }
 
     metrics.hasMetrics = YES;
 
