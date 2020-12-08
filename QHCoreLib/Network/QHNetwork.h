@@ -35,6 +35,8 @@ QH_EXTERN NSString * const kQHNetworkStatusStringWWAN3G;
 QH_EXTERN NSString * const kQHNetworkStatusStringWWAN4G;
 
 
+@class QHNetworkWorker, QHNetworkRequest;
+
 @interface QHNetwork : NSObject
 
 QH_SINGLETON_DEF
@@ -55,6 +57,8 @@ QH_SINGLETON_DEF
 - (void)setTrustCerts:(NSArray<NSString *> *)certFiles;
 
 - (void)setAllowArbitraryHttps;
+
+- (void)setWorkerFactory:(QHNetworkWorker * _Nullable (^)(QHNetworkRequest *))factory;
 
 - (void)setMetricCollector:(QHNetworkMetricCollector)metricCollector;
 

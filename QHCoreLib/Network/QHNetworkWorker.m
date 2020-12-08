@@ -18,6 +18,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+static QHNetworkWorker * _Nullable (^sQHNetworkWorkerFactory)(QHNetworkRequest * _Nonnull);
+
 NSString * const QHNetworkWorkerDidStartNotification = @"QHNetworkWorkerDidStartNotification";
 NSString * const QHNetworkWorkerDidFinishNotification = @"QHNetworkWorkerDidFinishNotification";
 
@@ -60,8 +62,20 @@ typedef NS_ENUM(NSUInteger, QHNetworkWorkerState) {
     [QHNetworkWorkerAFHTTPRequestOperation setAllowArbitraryHttps];
 }
 
++ (void)setWorkerFactory:(QHNetworkWorker * _Nullable (^)(QHNetworkRequest * _Nonnull))factory
+{
+    QHAssert(sQHNetworkWorkerFactory == nil, @"factory already set");
+    QHAssert(factory != nil, @"factory must not be nil");
+
+    sQHNetworkWorkerFactory = factory;
+}
+
 + (QHNetworkWorker *)workerFromRequest:(QHNetworkRequest *)request
 {
+    if (sQHNetworkWorkerFactory != nil) {
+        id worker = sQHNetworkWorkerFactory(request);
+        if (worker) return worker;
+    }
     return [[QHNetworkWorkerAFHTTPRequestOperation alloc] initWithRequest:request];
 }
 

@@ -221,6 +221,10 @@ QH_SINGLETON_IMP
     [QHNetworkWorker setAllowArbitraryHttps];
 }
 
+- (void)setWorkerFactory:(QHNetworkWorker * _Nullable (^)(QHNetworkRequest *))factory {
+    [QHNetworkWorker setWorkerFactory:factory];
+}
+
 static QHNetworkMetricCollector gMetricCollector;
 void QHNetworkReportNetworkMetric(QHNetworkMetrics *metric) {
     if (gMetricCollector) {

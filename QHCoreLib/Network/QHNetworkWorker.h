@@ -28,6 +28,8 @@ typedef void(^QHNetworkWorkerCompletionHandler)(QHNetworkWorker *worker, QHNetwo
 
 + (void)setAllowArbitraryHttps;
 
++ (void)setWorkerFactory:(QHNetworkWorker * _Nullable (^)(QHNetworkRequest *))factory;
+
 + (QHNetworkWorker *)workerFromRequest:(QHNetworkRequest *)request;
 
 - (instancetype)init NS_UNAVAILABLE;    // use factory method `workerFromRequest:`
