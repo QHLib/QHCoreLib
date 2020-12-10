@@ -41,6 +41,7 @@ typedef void(^QHNetworkWorkerCompletionHandler)(QHNetworkWorker *worker, QHNetwo
 
 - (void)setUploadProgressHandler:(void(^ _Nullable)(NSProgress *progress))uploadProgressHandler;
 - (void)setDownloadProgressHandler:(void(^ _Nullable)(NSProgress *progress))downloadProgressHandler;
+- (void)setStreamDataHandler:(void(^ _Nullable)(NSData *data))streamDataHandler;
 
 - (void)startWithCompletionHandler:(QHNetworkWorkerCompletionHandler)completionHandler;
 

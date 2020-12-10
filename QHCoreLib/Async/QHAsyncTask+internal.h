@@ -79,6 +79,8 @@ typedef NS_ENUM(NSUInteger, QHAsyncTaskState) {
 
 - (void)p_fireProgress:(id<QHAsyncTaskProgress>)progress;
 
+- (void)p_fireStreamData:(NSData *)data;
+
 - (void)p_fireSuccess:(NSObject *)result;
 - (void)p_fireFail:(NSError *)error;
                    

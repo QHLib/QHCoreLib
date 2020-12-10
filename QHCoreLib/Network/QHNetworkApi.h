@@ -38,6 +38,7 @@ typedef void (^QHNetworkApiFailBlock)(QHNetworkApi *api, NSError *error);
 
 #define QH_NETWORK_API_DECL(API_TYPE, RESULT_TYPE) \
 - (void)setProgressBlock:(void (^ _Nullable)(API_TYPE *api, QHNetworkProgress * progress))progressBlock; \
+- (void)setStreamDataBlock:(void (^ _Nullable)(API_TYPE *api, NSData *data))streamDataBlock; \
 - (void)startWithSuccess:(void (^ _Nullable)(API_TYPE *api, RESULT_TYPE *result))success \
                     fail:(void (^ _Nullable)(API_TYPE *api, NSError *error))fail; \
 - (Class)resultClass;
@@ -55,10 +56,12 @@ QH_NETWORK_API_DECL(QHNetworkApi, QHNetworkApiResult);
 
 #define QH_NETWORK_API_IMPL_DIRECT(API_TYPE, RESULT_TYPE) \
 QH_ASYNC_TASK_PROGRESS_IMPL(API_TYPE, QHNetworkProgress); \
+QH_ASYNC_TASK_STREAM_DATA_IMPL(API_TYPE) \
 QH_ASYNC_TASK_IMPL_INDIRECT(API_TYPE, RESULT_TYPE, QHNetworkApi, QHNetworkApiResult);
 
 #define QH_NETWORK_API_IMPL_INDIRECT(API_TYPE, RESULT_TYPE, SUPER_API_TYPE, SUPER_RESULT_TYPE) \
 QH_ASYNC_TASK_PROGRESS_IMPL(API_TYPE, QHNetworkProgress); \
+QH_ASYNC_TASK_STREAM_DATA_IMPL(API_TYPE) \
 QH_ASYNC_TASK_IMPL_INDIRECT(API_TYPE, RESULT_TYPE, SUPER_API_TYPE, SUPER_RESULT_TYPE);
 
 #pragma mark -

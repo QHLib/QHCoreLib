@@ -15,6 +15,7 @@
 #import "QHUIWidgetsController.h"
 #import "QHTableViewCellTestController.h"
 #import "QHTaskQueueController.h"
+#import "QHNetworkStreamController.h"
 
 @interface AppDelegate ()
 
@@ -36,12 +37,14 @@
                                                @"QHUIWidgets",
                                                @"QHTableViewCell",
                                                @"QHTaskQueue",
+                                               @"QHNetworkStream",
                                                nil];
         entranceController.controllerClasses = [NSArray arrayWithObjects:
                                                 [QHListDataEntranceController class],
                                                 [QHUIWidgetsController class],
                                                 [QHTableViewCellTestController class],
                                                 [QHTaskQueueController class],
+                                                [QHNetworkStreamController class],
                                                 nil];
         
         [[UINavigationController alloc] initWithRootViewController:entranceController];

@@ -42,6 +42,7 @@ typedef NS_ENUM(NSUInteger, QHNetworkWorkerState) {
 
 @property (nonatomic, copy) void(^ _Nullable uploadProgressHandler)(NSProgress *) ;
 @property (nonatomic, copy) void(^ _Nullable downloadProgressHandler)(NSProgress *);
+@property (nonatomic, copy) void(^ _Nullable streamDataHandler)(NSData *);
 @property (nonatomic, copy) QHNetworkWorkerCompletionHandler _Nullable completionHandler;
 
 @end
@@ -209,6 +210,19 @@ typedef NS_ENUM(NSUInteger, QHNetworkWorkerState) {
         QHNSLock(self.lock, ^{
             if (self.downloadProgressHandler) {
                 self.downloadProgressHandler(progress);
+            }
+        });
+    });
+}
+
+- (void)p_fireStreamData:(NSData *)data
+{
+    dispatch_async(self.completionQueue ?: dispatch_get_main_queue(), ^{
+        @retainify(self);
+
+        QHNSLock(self.lock, ^{
+            if (self.streamDataHandler) {
+                self.streamDataHandler(data);
             }
         });
     });

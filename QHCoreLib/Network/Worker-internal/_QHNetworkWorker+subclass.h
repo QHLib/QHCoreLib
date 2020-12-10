@@ -29,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)p_fireDownloadProgress:(NSProgress *)progress;
 
+- (void)p_fireStreamData:(NSData *)data;
+
 - (void)p_fireCompletionWithResponse:(QHNetworkResponse * _Nullable)response
                                error:(NSError * _Nullable)error;
 

@@ -22,6 +22,8 @@ static QHAFHTTPSessionManager *htmlManager;
 static QHAFHTTPSessionManager *jsonManager;
 static QHAFHTTPSessionManager *imageManager;
 
+NSString * const QHNetworkWorkerAFHTTPRequestOperationDidReceiveDataNotification
+    = @"QHNetworkWorkerAFHTTPRequestOperationDidReceiveDataNotification";
 
 @interface QHNetworkWorkerAFHTTPRequestOperation ()
 
@@ -39,12 +41,24 @@ static QHAFHTTPSessionManager *imageManager;
 
         httpManager = [QHAFHTTPSessionManager manager];
         httpManager.responseSerializer = [QHAFHTTPResponseSerializer serializer];
-        
+
         htmlManager = [QHAFHTTPSessionManager manager];
         htmlManager.responseSerializer = [QHAFHTMLResponseSerializer serializer];
 
         jsonManager = [QHAFHTTPSessionManager manager];
-        jsonManager.responseSerializer = [QHAFJSONResponseSerializer serializer];
+        [jsonManager setDataTaskDidReceiveDataBlock:^(NSURLSession * _Nonnull session, NSURLSessionDataTask * _Nonnull dataTask, NSData * _Nonnull data) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:QHNetworkWorkerAFHTTPRequestOperationDidReceiveDataNotification
+                                                                object:dataTask.qh_handy_weakCarry
+                                                              userInfo:@{ @"data": data, }];
+        }];
+        jsonManager.responseSerializer = ({
+            // QHAFCompoundResponseSerializer会兜底到QHAFHTTPResponseSerializer
+            // 只要返回2xx都算成功，让stream最后能往下走
+            // tts stream和json要走同一个session，复用tls连接
+            [QHAFCompoundResponseSerializer compoundSerializerWithResponseSerializers:@[
+                [QHAFJSONResponseSerializer serializer],
+            ]];
+        });
 
         imageManager = [QHAFHTTPSessionManager manager];
         imageManager.responseSerializer = [[QHAFImageResponseSerializer alloc] init];
@@ -91,8 +105,16 @@ static QHAFHTTPSessionManager *imageManager;
 {
     self = [super initWithRequest:request];
     if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(p_didReceiveData:)
+                                                     name:QHNetworkWorkerAFHTTPRequestOperationDidReceiveDataNotification
+                                                   object:self];
     }
     return self;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (NSString *)description
@@ -132,6 +154,7 @@ static QHAFHTTPSessionManager *imageManager;
     } else {
         [self p_createDownloadTask];
     }
+    self.task.qh_handy_weakCarry = self;
 
     QHAssertReturnVoidOnFailure(self.task, @"create task failed");
 
@@ -269,6 +292,15 @@ static QHAFHTTPSessionManager *imageManager;
                                          error:error];
         };
     })];
+}
+
+#pragma mark -
+
+- (void)p_didReceiveData:(NSNotification *)noti {
+    NSData *data = [noti.userInfo objectForKey:@"data"];
+    QHAssertReturnVoidOnFailure(data != nil, @"data is nil");
+
+    [self p_fireStreamData:data];
 }
 
 @end

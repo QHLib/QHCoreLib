@@ -70,6 +70,7 @@ NSString * const QHNetworkApiErrorDomain = @"QHNetworkApiErrorDomain";
 }
 
 QH_ASYNC_TASK_PROGRESS_IMPL(QHNetworkApi, QHNetworkProgress);
+QH_ASYNC_TASK_STREAM_DATA_IMPL(QHNetworkApi);
 
 - (void)startWithSuccess:(void (^ _Nullable)(QHNetworkApi *, QHNetworkApiResult *))success
                     fail:(void (^ _Nullable)(QHNetworkApi *, NSError *))fail
@@ -90,6 +91,10 @@ QH_ASYNC_TASK_PROGRESS_IMPL(QHNetworkApi, QHNetworkProgress);
         @strongify(self);
         self.downloadProgress = progress;
         [self p_updateWorkerProgress];
+    }];
+    [self.worker setStreamDataHandler:^(NSData * _Nonnull data) {
+        @strongify(self);
+        [self p_fireStreamData:data];
     }];
 
     [super startWithSuccess:(QHAsyncTaskSuccessBlock)success

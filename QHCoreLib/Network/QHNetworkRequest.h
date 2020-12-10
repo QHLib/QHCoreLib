@@ -23,6 +23,9 @@ typedef NS_ENUM(NSUInteger, QHNetworkResourceType) {
     QHNetworkResourceJSON,
     QHNetworkResourceImage,
     QHNetworkResourceFile,
+    
+    // tts stream与json共享url session
+    QHNetworkResourceTTSStream = QHNetworkResourceJSON,
 };
 
 @interface QHNetworkRequest : NSObject

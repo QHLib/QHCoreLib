@@ -63,6 +63,8 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 
 @property (nonatomic, copy, setter=_setProgressBlock:) QHAsyncTaskProgressBlock _Nullable progressBlock;
 
+@property (nonatomic, copy, setter=_setStreamDataBlock:) QHAsyncTaskStreamDataBlock _Nullable streamDataBlock;
+
 @property (nonatomic, copy) QHAsyncTaskSuccessBlock _Nullable successBlock;
 @property (nonatomic, copy) QHAsyncTaskFailBlock _Nullable failBlock;
 
@@ -129,6 +131,14 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
              @"progress block should be set before task started: %@", self);
 
     self.progressBlock = progressBlock;
+}
+
+- (void)setStreamDataBlock:(QHAsyncTaskStreamDataBlock _Nullable)streamDataBlock
+{
+    QHAssert(self.state == QHAsyncTaskStateInit,
+             @"stream data block should be set before task started: %@", self);
+
+    self.streamDataBlock = streamDataBlock;
 }
 
 - (void)startWithSuccess:(void (^ _Nullable)(QHAsyncTask *, id))success
@@ -326,6 +336,24 @@ NSString * const QHAsyncTaskErrorDomain = @"QHAsyncTaskErrorDomain";
 
             [self p_asyncOnDisposeQueue:^{
                 progressBlockRef = nil;
+            }];
+        }];
+    }
+}
+
+- (void)p_fireStreamData:(NSData *)data {
+    __block QHAsyncTaskStreamDataBlock streamDataBlockRef = self.streamDataBlock;
+
+    if (streamDataBlockRef) {
+        [self p_asyncOnCompletionQueue:^{
+            @retainify(self);
+
+            if (streamDataBlockRef) {
+                streamDataBlockRef(self, data);
+            }
+
+            [self p_asyncOnDisposeQueue:^{
+                streamDataBlockRef = nil;
             }];
         }];
     }

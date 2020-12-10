@@ -59,6 +59,8 @@ typedef void (^QHAsyncBlockTaskBody)(QHAsyncTask *task, QHAsyncBlockTaskReporter
 
 typedef void (^QHAsyncTaskProgressBlock)(QHAsyncTask *task, id<QHAsyncTaskProgress> progress);
 
+typedef void (^QHAsyncTaskStreamDataBlock)(QHAsyncTask *task, NSData *data);
+
 typedef void (^QHAsyncTaskSuccessBlock)(QHAsyncTask *task, id result);
 typedef void (^QHAsyncTaskFailBlock)(QHAsyncTask *task, NSError *error);
 
@@ -95,6 +97,13 @@ typedef void (^QHAsyncTaskFailBlock)(QHAsyncTask *task, NSError *error);
  * This method will be called on `completionQueue`.
  */
 - (void)setProgressBlock:(QHAsyncTaskProgressBlock _Nullable)progressBlock;
+
+/**
+ * Opiontal stream data callback.
+ * This method will be called on `completionQueue`.
+ */
+- (void)setStreamDataBlock:(QHAsyncTaskStreamDataBlock _Nullable)streamDataBlock;
+
 
 - (void)startWithSuccess:(void (^ _Nullable)(QHAsyncTask *task, ResultType result))success
                     fail:(void (^ _Nullable)(QHAsyncTask *task, NSError *error))fail;
@@ -140,6 +149,15 @@ typedef void (^QHAsyncTaskFailBlock)(QHAsyncTask *task, NSError *error);
 - (void)setProgressBlock:(void (^ _Nullable)(TASK_TYPE *task, PROGRESS_TYPE * progress))progressBlock \
 { \
     [super setProgressBlock:(id)progressBlock]; \
+}
+
+#define QH_ASYNC_TASK_STREAM_DATA_DECL(TASK_TYPE) \
+- (void)setStreamDataBlock:(void (^ _Nullable)(TASK_TYPE *task, NSData *data))streamDataBlock;
+
+#define QH_ASYNC_TASK_STREAM_DATA_IMPL(TASK_TYPE) \
+- (void)setStreamDataBlock:(void (^ _Nullable)(TASK_TYPE *task, NSData *data))streamDataBlock \
+{ \
+    [super setStreamDataBlock:(id)streamDataBlock]; \
 }
 
 #define QH_ASYNC_TASK_DECL(TASK_TYPE, RESULT_TYPE) \
